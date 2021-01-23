@@ -18,6 +18,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/user', 'Auth\UserController@current');
 
+    Route::get('/books/isbn/{isbn}', 'Books\InfoController@byIsbn');
+
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
 });

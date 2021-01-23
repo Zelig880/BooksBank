@@ -8,3 +8,6 @@ export const UPDATE_USER = 'UPDATE_USER'
 
 // lang.js
 export const SET_LOCALE = 'SET_LOCALE'
+
+// books.js
+export const FETCH_BOOKS_BY_ISBN = 'FETCH_BOOKS_BY_ISBN'

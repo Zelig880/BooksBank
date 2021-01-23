@@ -10,6 +10,9 @@ app/storage/
 # Laravel 5 & Lumen specific
 public/storage
 public/hot
+public/dist
+public/build
+public/mix-manifest.json
 
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
@@ -21,3 +24,6 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+phpunit.dusk.xml
+*.code-workspace

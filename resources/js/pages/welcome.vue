@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   layout: 'basic',
@@ -44,7 +44,16 @@ export default {
 
   computed: mapGetters({
     authenticated: 'auth/check'
+  }),
+
+  mounted () {
+    this.fetchBooksByISBN(8020409262)
+  },
+
+  methods: mapActions({
+    fetchBooksByISBN: 'books/fetchBooksByISBN'
   })
+
 }
 </script>
 
