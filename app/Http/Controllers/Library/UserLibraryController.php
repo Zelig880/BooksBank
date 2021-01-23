@@ -6,6 +6,7 @@ use App\Models\UserLibrary;
 use Illuminate\Http\Request;
 use App\Enums\BookCondition;
 use App\Enums\BookStatus;
+use BenSampo\Enum\Rules\EnumValue;
 
 class UserLibraryController extends Controller
 {

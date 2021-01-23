@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Api\OpenLibrary\OpenLibraryClient;
+use App\Api\OpenLibrary\OpenLibraryClient;#
+use google\apiclient;
+use App\Enums\BookSearchType;
+use BenSampo\Enum\Rules\EnumValue;
+
+use Google_Client;
+use Google_Service_Books;
+use Validator;
+
 
 class InfoController extends Controller
 {
 
-    private $API;
+    private $CLIENT;
     /**
      * Create a new controller instance.
      *
@@ -17,32 +25,67 @@ class InfoController extends Controller
      */
     public function __construct()
     {
-        $this->API = new OpenLibraryClient();
+        
+        $client = new Google_Client();
+        $apiKey = config('services.google.api');
+        $client->setDeveloperKey($apiKey);
+        $this->API = new Google_Service_Books($client);
     }
 
     /**
-     * Get Book by ISBN code.
+     * Get Book by type and text.
      *
-     * @param  String $isbn
+     * @param  String $type
+     * @param  String $text
      * @return \Illuminate\Http\JsonResponse
      */
-    public function byIsbn($isbn)
+    public function byIsbn($type, $text, request $request)
     {
-        // $result = $this->API->queryEditionsByISBN($isbn);
-        // return response()->json($result);
+        Validator::make($request->all(), [
+            'text' => 'required',
+            'type' => ['required', new EnumValue(BookSearchType::class)]
+        ]);
 
-        $client = new Google\Client();
-        $client->setApplicationName("BookSwap");
-        $client->setDeveloperKey("AIzaSyBEFgiN5vKr8_qKDZTJjWs9EQwlEgUDGhk");
+        switch ($request['type']) {
+            case BookSearchType::ISBN:
+                $result = $this->findByISBN($request['text']);
+                break;
+            case BookSearchType::Author:
+                $result = $this->findByAuthor($request['text']);
+                break;
+            default:
+                $result = $this->findByTitle($request['text']);
+                break;
+        }
 
-        $service = new Google_Service_Books($client);
+        return response()->json($result->getItems());
+    }
+
+    private function findByISBN($isbn){
+        
         $optParams = array(
-        'filter' => 'free-ebooks',
-        'q' => 'Henry David Thoreau'
+            'q' => "isbn:{$isbn}"
         );
-        $results = $service->volumes->listVolumes($optParams);
 
-        return response()->json($results->getItems());
+        return $this->API->volumes->listVolumes($optParams);
+    }
+
+    private function findByTitle($title){
+        
+        $optParams = array(
+            'q' => "intitle:{$title}"
+        );
+
+        return $this->API->volumes->listVolumes($optParams);
+    }
+
+    private function findByAuthor($author){
+        
+        $optParams = array(
+            'q' => "inauthor:{$author}"
+        );
+
+        return $this->API->volumes->listVolumes($optParams);
     }
 
 }
