@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/user', 'Auth\UserController@current');
 
+    //Search Books
     Route::get('/books/isbn/{isbn}', 'Books\InfoController@byIsbn');
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
