@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Library;
+namespace App\Http\Controllers\Bookshelf;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Api\OpenLibrary\OpenLibraryClient;#
+use App\Api\OpenLibrary\OpenLibraryClient;
 use google\apiclient;
 use App\Enums\BookSearchType;
 use BenSampo\Enum\Rules\EnumValue;
@@ -14,7 +14,7 @@ use Google_Service_Books;
 use Validator;
 
 
-class InfoController extends Controller
+class ManagementController extends Controller
 {
 
     private $CLIENT;

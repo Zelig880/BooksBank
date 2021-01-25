@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d16ad09ffdcdb6801203ac1ff803afb",
+    "content-hash": "4a96223a01fd9734a0904ae0a58b4342",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1242,6 +1242,66 @@
                 "source": "https://github.com/hanneskod/classtools/tree/1.0"
             },
             "time": "2020-03-05T20:41:28+00:00"
+        },
+        {
+            "name": "jbohme/nominatim-laravel",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbohme/nominatim-laravel.git",
+                "reference": "1f63213517a07f246a65b8a4f19bdaa1c7916c61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jbohme/nominatim-laravel/zipball/1f63213517a07f246a65b8a4f19bdaa1c7916c61",
+                "reference": "1f63213517a07f246a65b8a4f19bdaa1c7916c61",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "@stable",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NominatimLaravel\\Providers\\NominatimLaravelProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NominatimLaravel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "José Bohme",
+                    "email": "jose_berna_dino@hotmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Wrapper for Nominatim API to Laravel",
+            "homepage": "https://github.com/jbohme/php-nominatim",
+            "keywords": [
+                "geo",
+                "geolocation",
+                "laravel",
+                "nominatim",
+                "open street map",
+                "osm",
+                "web service"
+            ],
+            "support": {
+                "issues": "https://github.com/jbohme/nominatim-laravel/issues",
+                "source": "https://github.com/jbohme/nominatim-laravel/tree/v1.0.2"
+            },
+            "time": "2020-11-16T20:39:08+00:00"
         },
         {
             "name": "laminas/laminas-code",

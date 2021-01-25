@@ -11,6 +11,7 @@
         "fruitcake/laravel-cors": "^1.0",
         "google/apiclient": "2.7",
         "guzzlehttp/guzzle": "^7.2",
+        "jbohme/nominatim-laravel": "^1.0",
         "laravel/framework": "^8.0",
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.0",

@@ -3,24 +3,6 @@
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('info_updated')" />
 
-      <!-- Name -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-          <has-error :form="form" field="name" />
-        </div>
-      </div>
-
-      <!-- Email -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-          <has-error :form="form" field="email" />
-        </div>
-      </div>
-
       <!-- Address Line 1 -->
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">{{ $t('address_line_1') }}</label>
@@ -90,8 +72,6 @@ export default {
 
   data: () => ({
     form: new Form({
-      name: '',
-      email: '',
       address_line_1: '',
       address_country: '',
       address_city: '',
@@ -104,18 +84,11 @@ export default {
     user: 'auth/user'
   }),
 
-  created () {
-    // Fill the form with user data.
-    this.form.keys().forEach(key => {
-      this.form[key] = this.user[key]
-    })
-  },
-
   methods: {
     async update () {
-      const { data } = await this.form.patch('/api/settings/profile')
+      const { data } = await this.form.post('/api/settings/geolocation')
 
-      this.$store.dispatch('auth/updateUser', { user: data })
+      console.log(data)
     }
   }
 }

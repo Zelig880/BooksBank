@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
+    Route::post('settings/address', 'Bookshelf\SettingsController@getAddress');
+    Route::post('settings/geolocation', 'Bookshelf\SettingsController@getGeolocation');
 
     Route::get('/user', 'Auth\UserController@current');
 
     //Search Books
-    Route::get('/books/{type}/{text}', 'Library\InfoController@byIsbn');
+    Route::get('/books/{type}/{text}', 'Bookshelf\ManagementController@byIsbn');
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');

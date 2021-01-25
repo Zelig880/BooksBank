@@ -20,6 +20,14 @@ export default [
       { path: 'profile', name: 'settings.profile', component: page('settings/profile.vue') },
       { path: 'password', name: 'settings.password', component: page('settings/password.vue') }
     ] },
+    
+  { path: '/bookshelf',
+    component: page('bookshelf/index.vue'),
+    children: [
+      { path: '', redirect: { name: 'bookshelf.settings' } },
+      { path: 'settings', name: 'bookshelf.settings', component: page('bookshelf/settings.vue') },
+      { path: 'search', name: 'bookshelf.search', component: page('bookshelf/search.vue') }
+    ] },
 
   { path: '*', component: page('errors/404.vue') }
 ]

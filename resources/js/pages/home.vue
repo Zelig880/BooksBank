@@ -1,5 +1,5 @@
 <template>
-  <Search />
+  <router-link to="bookshelf">BookShelf</router-link>
 </template>
 
 <script>
