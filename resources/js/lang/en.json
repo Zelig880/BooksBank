@@ -27,6 +27,8 @@
   "send_password_reset_link": "Send Password Reset Link",
   "settings": "Settings",
   "profile": "Profile",
+  "add_books": "Add your books",
+  "search_book": "Search for a book to add",
   "your_info": "Your Info",
   "info_updated": "Your info has been updated!",
   "update": "Update",

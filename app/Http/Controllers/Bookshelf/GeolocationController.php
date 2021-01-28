@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use NominatimLaravel\Content\Nominatim;
 
-class SettingsController extends Controller
+class GeolocationController extends Controller
 {
     private $nominatim;
     

@@ -35,7 +35,7 @@ export default {
         },
         {
           icon: 'magnifier',
-          name: this.$t('profile'),
+          name: this.$t('add_books'),
           route: 'bookshelf.search'
         }
       ]

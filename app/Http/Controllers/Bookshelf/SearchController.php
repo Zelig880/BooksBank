@@ -14,7 +14,7 @@ use Google_Service_Books;
 use Validator;
 
 
-class ManagementController extends Controller
+class SearchController extends Controller
 {
 
     private $CLIENT;
@@ -32,14 +32,7 @@ class ManagementController extends Controller
         $this->API = new Google_Service_Books($client);
     }
 
-    /**
-     * Get Book by type and text.
-     *
-     * @param  String $type
-     * @param  String $text
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function byIsbn($type, $text, request $request)
+    public function index($type, $text, request $request)
     {
         Validator::make($request->all(), [
             'text' => 'required',
