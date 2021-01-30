@@ -33,7 +33,7 @@
     </div>
     <div v-show="showLend">
       <label for="condition">{{ $t('condition') }}</label>
-      <select id="condition" v-model="condition">
+      <select id="condition" v-model="selectedBook.condition">
         <option value="0">
           Very good
         </option>
@@ -48,7 +48,7 @@
         </option>
       </select>
       <label for="status">{{ $t('book_status') }}</label>
-      <select id="status" v-model="status">
+      <select id="status" v-model="selectedBook.status">
         <option value="0">
           Available
         </option>
@@ -79,7 +79,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('books', ['searchedBooks'])
+    ...mapGetters('bookshelf', ['searchedBooks'])
   },
   methods: {
     ...mapActions({

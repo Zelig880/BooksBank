@@ -9,7 +9,8 @@ class Bookshelf extends Model
 {
     use HasFactory;
 
-    
+    protected $fillable = ['condition', 'status', 'user_id'];
+
     /**
      * Get user that belong to the Bookshelf
      */

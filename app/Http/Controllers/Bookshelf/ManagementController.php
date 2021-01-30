@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Bookshelf;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Enums\BookSearchType;
 use App\Enums\BookCondition;
@@ -14,7 +15,7 @@ use App\Models\Book;
 use App\Models\Bookshelf;
 
 
-class LibraryController extends Controller
+class ManagementController extends Controller
 {
     public function store(Request $request)
     {
@@ -36,20 +37,25 @@ class LibraryController extends Controller
             ]);
 
             if(is_array($request->categories) && count($request->categories) > 0){
-                $book->categories()->firstOrCreate([
-                    'name' => $request->categories
-                ]);
+                foreach ($request->categories as $key => $value) {
+                    $book->categories()->firstOrCreate([
+                        'name' => $value
+                    ]);
+                }
             }
 
             if(is_array($request->authors) && count($request->authors) > 0){
-                $book->authors()->firstOrCreate([
-                    'name' => $request->authors
-                ]);
+                foreach ($request->authors as $key => $value) {
+                    $book->authors()->firstOrCreate([
+                        'name' => $value
+                    ]);
+                }
             }
 
             $book->bookshelves()->create([
                 'condition' => $request->condition, 
                 'status' => $request->status, 
+                'user_id' => Auth::id(),
             ]);
 
             return response()->json([ "success" => true]);

@@ -15,10 +15,9 @@ class CreateBookshelfTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookshelf', function (Blueprint $table) {
+        Schema::create('bookshelves', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id");
-            $table->integer("book_id");
             $table->tinyInteger('condition')->unsigned()->default(BookCondition::Good);
             $table->tinyInteger('status')->unsigned()->default(BookStatus::Available);
             $table->timestamps();

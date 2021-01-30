@@ -18,7 +18,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/bookshelf/address', 'Bookshelf\GeolocationController@getAddress');
     Route::post('/bookshelf/geolocation', 'Bookshelf\GeolocationController@getGeolocation');
     Route::get('/bookshelf/{type}/{text}', 'Bookshelf\SearchController@index');
-    Route::post('/bookshelf/store', 'Bookshelf\LibraryController@store');
+    Route::post('/bookshelf/store', 'Bookshelf\ManagementController@store');
     Route::delete('/bookshelf/remove/{id}', 'Bookshelf\LibraryController@remove');
 
     Route::get('/user', 'Auth\UserController@current');

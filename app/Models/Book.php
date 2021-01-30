@@ -22,7 +22,7 @@ class Book extends Model
     /**
      * The authors that belong to the book.
      */
-    public function roles()
+    public function authors()
     {
         return $this->belongsToMany(Author::class);
     }
