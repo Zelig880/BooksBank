@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Enums\BookCondition;
 use App\Enums\BookStatus;
 
-class CreateUserLibraryTable extends Migration
+class CreateBookshelfTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateUserLibraryTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_library', function (Blueprint $table) {
+        Schema::create('bookshelf', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id");
             $table->integer("book_id");
