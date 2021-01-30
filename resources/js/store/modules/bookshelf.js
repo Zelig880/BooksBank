@@ -54,9 +54,9 @@ export const actions = {
 
     commit('UPDATE_SEARCH_RESULT', books)
   },
-  async add_book ({ commit, state }, id) {
-    const book = state.searchResult[id]
-    await axios.post(`/api/bookshelf/add/`, book)
+  async add_book ({ commit, state }, { bookIndex, condition, status }) {
+    const book = state.searchResult[bookIndex]
+    await axios.post(`/api/bookshelf/store/`, { ...book, condition, status })
     commit('ADD', book)
   }
 }

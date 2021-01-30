@@ -11,7 +11,7 @@ use App\Enums\BookStatus;
 use BenSampo\Enum\Rules\EnumValue;
 
 use App\Models\Book;
-use App\Models\UserLibrary;
+use App\Models\Bookshelf;
 
 
 class LibraryController extends Controller
@@ -26,17 +26,32 @@ class LibraryController extends Controller
         ]);
 
         try {
-            Book::create([
+            $book = Book::firstOrCreate([
                 'title' => $request->title, 
-                'description' => $request->description, 
                 'ISBN' => $request->ISBN, 
+            ],
+            [
+                'description' => $request->description, 
                 'thumbnail' => $request->thumbnail,  
             ]);
-            UserLibrary::create($request->all());
-    
-            $user = User::create($user_inputs);
 
-$xyz = $user->xyz()->create($xyz_inputs);
+            if(is_array($request->categories) && count($request->categories) > 0){
+                $book->categories()->firstOrCreate([
+                    'name' => $request->categories
+                ]);
+            }
+
+            if(is_array($request->authors) && count($request->authors) > 0){
+                $book->authors()->firstOrCreate([
+                    'name' => $request->authors
+                ]);
+            }
+
+            $book->bookshelves()->create([
+                'condition' => $request->condition, 
+                'status' => $request->status, 
+            ]);
+
             return response()->json([ "success" => true]);
         } catch (\Throwable $th) {
             return response()->json([ "success" => false, "message" => $th]);

@@ -29,6 +29,8 @@
   "profile": "Profile",
   "add_books": "Add your books",
   "search_book": "Search for a book to add",
+  "book_status": "Book availability",
+  "condition": "Condition",
   "your_info": "Your Info",
   "info_updated": "Your info has been updated!",
   "update": "Update",

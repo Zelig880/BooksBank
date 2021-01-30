@@ -27,9 +27,36 @@
           <p class="card-text short_text">
             {{ book.description }}
           </p>
-          <a href="#" class="btn btn-primary">Lend book</a>
+          <button class="btn btn-primary" @click="showLendForm(index)">Lend book</button>
         </div>
       </div>
+    </div>
+    <div v-show="showLend">
+      <label for="condition">{{ $t('condition') }}</label>
+      <select id="condition" v-model="condition">
+        <option value="0">
+          Very good
+        </option>
+        <option value="1">
+          Good
+        </option>
+        <option value="2">
+          Acceptable
+        </option>
+        <option value="3">
+          Poor
+        </option>
+      </select>
+      <label for="status">{{ $t('book_status') }}</label>
+      <select id="status" v-model="status">
+        <option value="0">
+          Available
+        </option>
+        <option value="1">
+          Not Available
+        </option>
+      </select>
+      <button class="btn btn-primary" @click="addToBookshelf">Add to bookshelf</button>
     </div>
   </div>
 </template>
@@ -42,7 +69,13 @@ export default {
   data () {
     return {
       text: '',
-      type: 'ISBN'
+      type: 'ISBN',
+      showLend: false,
+      selectedBook: {
+        status: '',
+        condition: '',
+        bookIndex: 0
+      }
     }
   },
   computed: {
@@ -51,9 +84,15 @@ export default {
   methods: {
     ...mapActions({
       find: 'bookshelf/find',
+      addBook: 'bookshelf/add_book'
     }),
-    shortText (text) {
-
+    async addToBookshelf () {
+      await this.addBook(this.selectedBook)
+      this.showLend = true
+    },
+    showLendForm (index) {
+      this.selectedBook.bookIndex = index
+      this.showLend = true
     }
   }
 }
