@@ -10,5 +10,29 @@ class Book extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'description', 'thumbnail', 'ISBN'];
+
+    /**
+     * The categories that belong to the book.
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+    
+    /**
+     * The authors that belong to the book.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Author::class);
+    }
+    
+    /**
+     * The bookshelves that belong to the book.
+     */
+    public function bookshelves()
+    {
+        return $this->belongsToMany(Bookshelf::class);
+    }
     
 }

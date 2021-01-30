@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Library;
 
-use App\Models\UserLibrary;
+use App\Models\Bookshelf;
 use Illuminate\Http\Request;
 use App\Enums\BookCondition;
 use App\Enums\BookStatus;
 use BenSampo\Enum\Rules\EnumValue;
 
-class UserLibraryController extends Controller
+class BookshelfController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class UserLibraryController extends Controller
         ]);
 
         try {
-            UserLibrary::create($request->all());
+            Bookshelf::create($request->all());
     
             return response()->json([ "success" => true]);
         } catch (\Throwable $th) {
@@ -47,10 +47,10 @@ class UserLibraryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserLibrary  $userLibrary
+     * @param  \App\Models\Bookshelf  $userLibrary
      * @return \Illuminate\Http\Response
      */
-    public function show(UserLibrary $userLibrary)
+    public function show(Bookshelf $userLibrary)
     {
         //
     }
@@ -58,10 +58,10 @@ class UserLibraryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserLibrary  $userLibrary
+     * @param  \App\Models\Bookshelf  $userLibrary
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserLibrary $userLibrary)
+    public function edit(Bookshelf $userLibrary)
     {
         //
     }
@@ -70,10 +70,10 @@ class UserLibraryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserLibrary  $userLibrary
+     * @param  \App\Models\Bookshelf  $userLibrary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserLibrary $userLibrary)
+    public function update(Request $request, Bookshelf $userLibrary)
     {
         //
     }
@@ -81,10 +81,10 @@ class UserLibraryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserLibrary  $userLibrary
+     * @param  \App\Models\Bookshelf  $userLibrary
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserLibrary $userLibrary)
+    public function destroy(Bookshelf $userLibrary)
     {
         //
     }
