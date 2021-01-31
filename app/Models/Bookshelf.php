@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Malhal\Geographical\Geographical;
 
 class Bookshelf extends Model
 {
     use HasFactory;
+    use Geographical;
 
-    protected $fillable = ['condition', 'status', 'user_id'];
-
+    protected $fillable = ['longitude', 'latitude'];
+    
     /**
      * Get user that belong to the Bookshelf
      */
@@ -20,18 +22,10 @@ class Bookshelf extends Model
     }
 
     /**
-     * Get book that belong to the Bookshelf
+     * The bookshelves that belong to the setting.
      */
-    public function book()
+    public function bookshelf_items()
     {
-        return $this->belongsTo(Book::class);
-    }
-    
-    /**
-     * The books that belong to the Bookshelf.
-     */
-    public function books()
-    {
-        return $this->belongsToMany(Book::class);
+        return $this->belongsToMany(Bookshelf_item::class);
     }
 }

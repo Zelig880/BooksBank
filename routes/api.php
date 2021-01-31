@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
-    Route::post('/bookshelf/address', 'Bookshelf\GeolocationController@getAddress');
-    Route::post('/bookshelf/geolocation', 'Bookshelf\GeolocationController@getGeolocation');
+    Route::post('/bookshelf/address', 'Bookshelf\GeolocationController@getAddress');//sc88: this need to be changed, Bookshelf is the wrong api
+    Route::post('/bookshelf/geolocation', 'Bookshelf\GeolocationController@getGeolocation');//sc88: this need to be changed, Bookshelf is the wrong api
     Route::get('/bookshelf/{type}/{text}', 'Bookshelf\SearchController@index');
     Route::post('/bookshelf/store', 'Bookshelf\ManagementController@store');
     Route::delete('/bookshelf/remove/{id}', 'Bookshelf\LibraryController@remove');
+
+    Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
 
     Route::get('/user', 'Auth\UserController@current');
 
