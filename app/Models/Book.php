@@ -30,7 +30,7 @@ class Book extends Model
     /**
      * The bookshelves that belong to the book.
      */
-    public function bookshelf_items()
+    public function Bookshelf_item()
     {
         return $this->belongsToMany(Bookshelf_item::class);
     }

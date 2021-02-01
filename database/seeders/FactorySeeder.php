@@ -24,8 +24,10 @@ class FactorySeeder extends Seeder
             $category = Category::factory()->make();
             $book->categories()->save($category);
 
-            $bookshelf_item = Bookshelf_item::factory()->make();
-            $book->bookshelf_items()->save($bookshelf_item);
+            $bookshelf_item = Bookshelf_item::factory()->make([
+                'book_id' => $book->id
+            ]);
+            $book->Bookshelf_item()->save($bookshelf_item);
 
         });
     }

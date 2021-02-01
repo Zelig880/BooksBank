@@ -15,10 +15,11 @@ class CreateBookshelfItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookshelf_items', function (Blueprint $table) {
+        Schema::create('Bookshelf_items', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id");
             $table->integer("bookshelf_id");
+            $table->integer("book_id");
             $table->tinyInteger('condition')->unsigned()->default(BookCondition::Good);
             $table->tinyInteger('status')->unsigned()->default(BookStatus::Available);
             $table->timestamps();
@@ -32,6 +33,6 @@ class CreateBookshelfItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookshelf_items');
+        Schema::dropIfExists('Bookshelf_item');
     }
 }

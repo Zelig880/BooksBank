@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bookshelf;
+use App\Models\Bookshelf_item;
 use Illuminate\Http\Request;
 use Geographical;
 
@@ -16,10 +17,18 @@ class SearchController extends Controller
      */
     public function index($latitude, $longitude, $radius)
     {
-        $query = Bookshelf::distance($latitude, $longitude);
-        $asc = $query->orderBy('distance', 'ASC')->get();
+        $query = Bookshelf_item::with(
+            [
+                'bookshelf' => function ($query) use ($latitude, $longitude) {
+                    $query->distance($latitude, $longitude);
+                },
+                'book'
+            ])
+            // ->select('books.*', 'bookshelf_items.*', 'bookshelves.distance')
+            // ->orderBy('bookshelves.distance', 'ASC')
+            ->get();
 
-        return $asc;
+        return $query;
     }
 
     /**

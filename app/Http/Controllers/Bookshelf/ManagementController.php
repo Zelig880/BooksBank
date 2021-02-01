@@ -12,7 +12,7 @@ use App\Enums\BookStatus;
 use BenSampo\Enum\Rules\EnumValue;
 
 use App\Models\Book;
-use App\Models\User_Bookshelf_items;
+use App\Models\Bookshelf_item;
 
 
 class ManagementController extends Controller

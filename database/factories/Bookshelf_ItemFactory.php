@@ -23,6 +23,7 @@ class Bookshelf_itemFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween($min = 1, $max = 2),
+            'book_id' => $this->faker->numberBetween($min = 1, $max = 20),
             'bookshelf_id' => $this->faker->numberBetween($min = 1, $max = 2),
             'condition' => $this->faker->randomElement($array = array (0,1,2)),
             'status' => $this->faker->randomElement($array = array (0,1,2))

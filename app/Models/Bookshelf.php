@@ -24,7 +24,7 @@ class Bookshelf extends Model
     /**
      * The bookshelves that belong to the setting.
      */
-    public function bookshelf_items()
+    public function Bookshelf_item()
     {
         return $this->belongsToMany(Bookshelf_item::class);
     }
