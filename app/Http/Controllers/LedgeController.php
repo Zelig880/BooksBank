@@ -1,34 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Library;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Bookshelf;
-use App\Models\Bookshelf_item;
+use App\Models\Ledge;
 use Illuminate\Http\Request;
-use Geographical;
 
-class SearchController extends Controller
+class LedgeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($latitude, $longitude, $radius)
+    public function index()
     {
-        $query = Bookshelf_item::with(
-            [
-                'bookshelf' => function ($query) use ($latitude, $longitude) {
-                    $query
-                        ->distance($latitude, $longitude)
-                        ->orderBy('distance', 'ASC');
-                },
-                'book'
-            ])
-            ->get();
-
-        return $query;
+        //
     }
 
     /**
@@ -55,10 +41,10 @@ class SearchController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Book  $book
+     * @param  \App\Models\Ledge  $ledge
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show(Ledge $ledge)
     {
         //
     }
@@ -66,10 +52,10 @@ class SearchController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Book  $book
+     * @param  \App\Models\Ledge  $ledge
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Ledge $ledge)
     {
         //
     }
@@ -78,20 +64,21 @@ class SearchController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Book  $book
+     * @param  \App\Models\Ledge  $ledge
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Ledge $ledge)
     {
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Book  $book
+     * @param  \App\Models\Ledge  $ledge
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Ledge $ledge)
     {
         //
     }

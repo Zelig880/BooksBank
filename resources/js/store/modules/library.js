@@ -29,5 +29,5 @@ export const actions = {
     if (!data) return
 
     commit('UPDATE_SEARCH_RESULT', data)
-  }
+  },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <card :title="$t('your_password')">
     <button @click="search({latitude: 51.67139816, longitude: -4.00746388, radius: 3000})">
       Search with hardcoded location
     </button>
@@ -16,29 +16,35 @@
           <p class="card-text short_text">
             {{ result.book.description }}
           </p>
-          <button class="btn btn-primary" @click="showLendForm(index)">
+          <button class="btn btn-primary" @click="goToLendPage(result.id)">
             Lend book
           </button>
         </div>
       </div>
     </div>
-  </div>
+  </card>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'LibrarySearch',
+  scrollToTop: true,
+  middleware: 'auth',
+  metaInfo () {
+    return { title: this.$t('library') }
+  },
+
+  data: () => ({
+  }),
   computed: {
     ...mapGetters('library', ['searchedBooks'])
   },
   methods: {
-    ...mapActions('library', ['search'])
+    ...mapActions('library', ['search']),
+    goToLendPage (bookshelfItemId) {
+      this.$router.push({ name: 'library.borrow', params: { bookshelfItemId } })
+    }
   }
 }
 </script>
-
-<style>
-
-</style>

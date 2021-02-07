@@ -32,3 +32,18 @@ The project has been build on top of the laravel-vue-spa starter pack (https://g
 - Run "php artisan migrate"
 - Run "npm install" or "yarn install"
 - Run "npm run watch"
+
+# Required
+
+- Laravel
+- Node
+
+# To get started
+
+- composer install
+- npm install
+- php artisan migrate
+- php artisan db:seed --class=UserSeeder
+- php artisan db:seed --class=BookshelfSeeder
+- php artisan db:seed --class=FactorySeeder
+- npm run watch

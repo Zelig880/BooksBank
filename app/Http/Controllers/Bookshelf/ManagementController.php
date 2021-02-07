@@ -17,6 +17,18 @@ use App\Models\Bookshelf_item;
 
 class ManagementController extends Controller
 {
+    public function getByBookshelfItemId($id){
+        try {
+            $book = Bookshelf_Item::with('book')
+                ->where('bookshelf_items.id', $id)
+                ->first();
+
+            return response()->json([ "success" => true, "result" => $book]);
+        } catch (\Throwable $th) {
+            return response()->json([ "success" => false, "message" => $th]);
+        }
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
