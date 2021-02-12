@@ -24,13 +24,14 @@ const createBookObject = function (book) {
 // state
 export const state = {
   searchResult: [],
-  bookshelf: []
+  bookshelf: [],
+  items: []
 }
 
 // getters
 export const getters = {
   searchedBooks: state => state.searchResult,
-  bookshelf: state => state.bookshelf
+  items: state => state.items
 }
 
 // mutations
@@ -38,8 +39,11 @@ export const mutations = {
   UPDATE_SEARCH_RESULT (state, result) {
     state.searchResult = result
   },
-  ADD (state, book) {
-    state.bookshelf = [...state.bookshelf, book]
+  ADD_ITEMS (state, book) {
+    state.items = [...state.items, book]
+  },
+  SET_ITEMS (state, items) {
+    state.items = items
   }
 }
 
@@ -57,11 +61,16 @@ export const actions = {
   async add_book ({ commit, state }, { bookIndex, condition, status }) {
     const book = state.searchResult[bookIndex]
     await axios.post(`/api/bookshelf/store`, { ...book, condition, status })
-    commit('ADD', book)
+    commit('ADD_ITEM', book)
   },
   async fetchByBookshelfItemId ({ commit }, bookshelfItemId) {
     const { data } = await axios.get(`/api/bookshelf/bookshelf_item/${bookshelfItemId}`)
 
     return data
+  },
+  async getAll ({ commit }) {
+    const { data } = await axios.get(`/api/bookshelf`)
+
+    commit('SET_ITEMS', data)
   }
 }

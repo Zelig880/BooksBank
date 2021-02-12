@@ -16,10 +16,12 @@ class CreateLedgeTable extends Migration
     {
         Schema::create('ledge', function (Blueprint $table) {
             $table->id();
-            $table->integer('lender');
-            $table->integer('borrower');
+            $table->integer('lender_id');
+            $table->integer('borrower_id');
+            $table->integer('book_id');
             $table->tinyInteger('status')->unsigned()->default(LedgeStatus::WaitingApproval);
-            $table->dateTime('return')->nullable();
+            $table->integer('lend_duration');
+            $table->dateTime('return_date')->nullable();
             $table->timestamps();
         });
     }

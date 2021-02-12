@@ -12,6 +12,8 @@ class Bookshelf extends Model
     use Geographical;
 
     protected $fillable = ['longitude', 'latitude'];
+
+    protected $table = "bookshelves";
     
     /**
      * Get user that belong to the Bookshelf
@@ -22,10 +24,10 @@ class Bookshelf extends Model
     }
 
     /**
-     * The bookshelves that belong to the setting.
+     * The bookshel items that belong to the bookshelf.
      */
-    public function Bookshelf_item()
+    public function bookshelf_items()
     {
-        return $this->belongsToMany(Bookshelf_item::class);
+        return $this->hasMany(Bookshelf_item::class);
     }
 }

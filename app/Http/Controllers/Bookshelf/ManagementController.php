@@ -12,11 +12,27 @@ use App\Enums\BookStatus;
 use BenSampo\Enum\Rules\EnumValue;
 
 use App\Models\Book;
+use App\Models\Bookshelf;
 use App\Models\Bookshelf_item;
 
 
 class ManagementController extends Controller
 {
+
+    private $userId;
+    private $bookshelf;
+
+    public function __construct()
+    {
+        $this->userId = Auth::id();
+        $this->bookshelf = Bookshelf::where('user_id', '=', $this->userId)->first();
+    }
+
+    public function getAll(){
+        
+        return $this->bookshelf->bookshelf_items()->with('book')->get();
+    }
+
     public function getByBookshelfItemId($id){
         try {
             $book = Bookshelf_Item::with('book')
@@ -39,36 +55,8 @@ class ManagementController extends Controller
         ]);
 
         try {
-            $book = Book::firstOrCreate([
-                'title' => $request->title, 
-                'ISBN' => $request->ISBN, 
-            ],
-            [
-                'description' => $request->description, 
-                'thumbnail' => $request->thumbnail,  
-            ]);
 
-            if(is_array($request->categories) && count($request->categories) > 0){
-                foreach ($request->categories as $key => $value) {
-                    $book->categories()->firstOrCreate([
-                        'name' => $value
-                    ]);
-                }
-            }
-
-            if(is_array($request->authors) && count($request->authors) > 0){
-                foreach ($request->authors as $key => $value) {
-                    $book->authors()->firstOrCreate([
-                        'name' => $value
-                    ]);
-                }
-            }
-
-            $book->bookshelves()->create([
-                'condition' => $request->condition, 
-                'status' => $request->status, 
-                'user_id' => Auth::id(),
-            ]);
+           Book::Add($request, $userId);
 
             return response()->json([ "success" => true]);
         } catch (\Throwable $th) {

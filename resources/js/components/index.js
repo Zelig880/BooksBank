@@ -3,7 +3,6 @@ import Card from './Card'
 import Child from './Child'
 import Button from './Button'
 import Checkbox from './Checkbox'
-import Search from './Search'
 import { HasError, AlertError, AlertSuccess } from 'vform'
 
 // Components that are registered globaly.
@@ -12,7 +11,6 @@ import { HasError, AlertError, AlertSuccess } from 'vform'
   Child,
   Button,
   Checkbox,
-  Search,
   HasError,
   AlertError,
   AlertSuccess

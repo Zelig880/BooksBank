@@ -34,7 +34,8 @@ export default [
     children: [
       { path: '', redirect: { name: 'bookshelf.settings' } },
       { path: 'settings', name: 'bookshelf.settings', component: page('bookshelf/settings.vue') },
-      { path: 'search', name: 'bookshelf.search', component: page('bookshelf/search.vue') }
+      { path: 'add', name: 'bookshelf.add', component: page('bookshelf/add.vue') },
+      { path: 'all', name: 'bookshelf.all', component: page('bookshelf/all.vue') },
     ] },
 
   { path: '*', component: page('errors/404.vue') }

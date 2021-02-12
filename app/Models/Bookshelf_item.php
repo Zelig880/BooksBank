@@ -9,15 +9,7 @@ class Bookshelf_item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['condition', 'status', 'user_id'];
-
-    /**
-     * Get user that belong to the Bookshelf_item
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = ['condition', 'status'];
 
     /**
      * Get book that belong to the Bookshelf_item

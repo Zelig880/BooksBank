@@ -65,7 +65,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'Search',
+  name: 'Add',
   data () {
     return {
       text: '',

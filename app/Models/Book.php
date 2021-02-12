@@ -30,9 +30,42 @@ class Book extends Model
     /**
      * The bookshelves that belong to the book.
      */
-    public function Bookshelf_item()
+    public function bookshelf_item()
     {
         return $this->belongsToMany(Bookshelf_item::class);
+    }
+
+    public function add($item, $userId){
+        $book = Book::firstOrCreate([
+            'title' => $item->title, 
+            'ISBN' => $item->ISBN, 
+        ],
+        [
+            'description' => $item->description, 
+            'thumbnail' => $item->thumbnail,  
+        ]);
+
+        if(is_array($item->categories) && count($item->categories) > 0){
+            foreach ($item->categories as $key => $value) {
+                $book->categories()->firstOrCreate([
+                    'name' => $value
+                ]);
+            }
+        }
+
+        if(is_array($item->authors) && count($item->authors) > 0){
+            foreach ($item->authors as $key => $value) {
+                $book->authors()->firstOrCreate([
+                    'name' => $value
+                ]);
+            }
+        }
+
+        $book->bookshelf_item()->create([
+            'condition' => $item->condition, 
+            'status' => $item->status, 
+            'bookshelf_id' => $userId
+        ]);
     }
     
 }

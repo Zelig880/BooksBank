@@ -29,6 +29,11 @@ export default {
     tabs () {
       return [
         {
+          icon: 'book',
+          name: this.$t('personal_bookshelf'),
+          route: 'bookshelf.all'
+        },
+        {
           icon: 'user',
           name: this.$t('profile'),
           route: 'bookshelf.settings'
@@ -36,7 +41,7 @@ export default {
         {
           icon: 'magnifier',
           name: this.$t('add_books'),
-          route: 'bookshelf.search'
+          route: 'bookshelf.add'
         }
       ]
     }

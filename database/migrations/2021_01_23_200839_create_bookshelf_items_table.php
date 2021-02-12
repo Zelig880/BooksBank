@@ -17,7 +17,6 @@ class CreateBookshelfItemsTable extends Migration
     {
         Schema::create('Bookshelf_items', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id");
             $table->integer("bookshelf_id");
             $table->integer("book_id");
             $table->tinyInteger('condition')->unsigned()->default(BookCondition::Good);
