@@ -9,7 +9,7 @@ class Ledge extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['lender', 'borrower', 'status', 'return'];
+    protected $fillable = ['lender_id', 'borrower_id', 'book_id', 'bookshelf_item_id'];
 
     /**
      * Get lender of a transaction

@@ -9,6 +9,9 @@
         <p class="card-text short_text">
           {{ selectedBook.book.description }}
         </p>
+        <button class="btn btn-primary" @click="request(selectedBook.id)">
+          Borrow book
+        </button>
       </div>
     </div>
   </div>
@@ -30,7 +33,8 @@ export default {
     if (data.success) this.selectedBook = data.result
   },
   methods: {
-    ...mapActions('bookshelf', ['fetchByBookshelfItemId'])
+    ...mapActions('bookshelf', ['fetchByBookshelfItemId']),
+    ...mapActions('ledge', ['request'])
   }
 }
 </script>

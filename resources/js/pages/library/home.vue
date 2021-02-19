@@ -17,7 +17,7 @@
             {{ result.book.description }}
           </p>
           <button class="btn btn-primary" @click="goToLendPage(result.id)">
-            Lend book
+            Borrow book
           </button>
         </div>
       </div>
