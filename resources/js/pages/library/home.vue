@@ -1,5 +1,5 @@
 <template>
-  <card :title="$t('your_password')">
+  <div>
     <button @click="search({latitude: 51.67139816, longitude: -4.00746388, radius: 3000})">
       Search with hardcoded location
     </button>
@@ -22,7 +22,22 @@
         </div>
       </div>
     </div>
-  </card>
+    <h2>Ledge information</h2>
+    <div v-for="(result, index) in items" :key="index">
+      <div class="card" style="width: 18rem;">
+        <img :src="result.book.thumbnail" class="card-img-top" :alt="result.book.title">
+        <div class="card-body">
+          <h4 class="card-title">
+            {{ result.book.title }}
+          </h4>
+          <p class="card-text short_text">
+            {{ result.book.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </template>
 
 <script>
@@ -38,10 +53,15 @@ export default {
   data: () => ({
   }),
   computed: {
-    ...mapGetters('library', ['searchedBooks'])
+    ...mapGetters('library', ['searchedBooks']),
+    ...mapGetters('ledge', ['items'])
+  },
+  mounted () {
+    this.getAll()
   },
   methods: {
     ...mapActions('library', ['search']),
+    ...mapActions('ledge', ['getAll']),
     goToLendPage (bookshelfItemId) {
       this.$router.push({ name: 'library.borrow', params: { bookshelfItemId } })
     }

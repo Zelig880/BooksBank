@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/bookshelf/{type}/{text}', 'Bookshelf\SearchController@index');
 
     //Ledge
+    Route::get('/ledge', 'Ledge\ManagementController@getAll');
     Route::post('/ledge/request/', 'Ledge\ManagementController@request');
 
     

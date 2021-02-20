@@ -11,6 +11,23 @@ use App\Models\Bookshelf_item;
 
 class ManagementController extends Controller
 {
+    
+    /**
+     * Get a list of all borrowed or lend book for current user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAll(){
+        $userId = Auth::id();
+
+        $result = Ledge::with(['book'])
+            ->where('lender_id', $userId)
+            ->whereOr('borrower_id', $userId)
+            ->get();
+
+        return $result;
+    }
+    
     /**
      * Issue a request to lend a book
      *
