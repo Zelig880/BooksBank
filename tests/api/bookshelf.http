@@ -1,0 +1,2 @@
+GET https://graph.microsoft.com/beta/users?$filter=startswith(mail,'geert')	
+Authorization: Bearer {{auth.response.body.token}}

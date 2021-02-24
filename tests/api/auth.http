@@ -1,0 +1,15 @@
+@baseUrl = http://bookswap/api
+
+# @name auth
+POST {{baseUrl}}/login HTTP/1.1	
+content-type: application/json;charset=UTF-8
+
+{
+    "email": "test2@test.com",
+    "password": "password"
+}
+
+###
+
+GET {{baseUrl}}/bookshelf
+Authorization: Bearer {{auth.response.body.token}}

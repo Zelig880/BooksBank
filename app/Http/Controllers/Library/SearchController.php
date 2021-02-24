@@ -11,7 +11,7 @@ use Geographical;
 class SearchController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of books within a radius
      *
      * @return \Illuminate\Http\Response
      */

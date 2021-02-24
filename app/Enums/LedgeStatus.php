@@ -13,9 +13,10 @@ use BenSampo\Enum\Enum;
  */
 final class LedgeStatus extends Enum
 {
-    const WaitingApproval = '0';
-    const WaitingPickup = '1';
-    const InProgress = '2';
-    const AwaitingReturn = '3';
-    const Completed = '4';
+    const WaitingApproval = 0;
+    const WaitingPickup = 1;
+    const InProgress = 2;
+    const AwaitingReturn = 3;
+    const Completed = 4;
+    const Rejected = 5;
 }

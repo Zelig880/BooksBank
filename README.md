@@ -30,6 +30,7 @@ The project has been build on top of the laravel-vue-spa starter pack (https://g
 - Create copy of the ".env.example" file and name it ".env"
 - Create a database and add information in Env file
 - Run "php artisan migrate"
+- Run "php artisan db:seed"
 - Run "npm install" or "yarn install"
 - Run "npm run watch"
 
@@ -43,7 +44,5 @@ The project has been build on top of the laravel-vue-spa starter pack (https://g
 - composer install
 - npm install
 - php artisan migrate
-- php artisan db:seed --class=UserSeeder
-- php artisan db:seed --class=BookshelfSeeder
-- php artisan db:seed --class=FactorySeeder
+- Run "php artisan db:seed"
 - npm run watch

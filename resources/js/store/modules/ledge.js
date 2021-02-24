@@ -2,12 +2,22 @@ import axios from 'axios'
 
 // state
 export const state = {
-  items: []
+  items: [],
+  status: [
+    'WaitingApproval',
+    'WaitingPickup',
+    'InProgress',
+    'AwaitingReturn',
+    'Completed',
+    'Rejected'
+  ]
 }
 
 // getters
 export const getters = {
-  items: state => state.items
+  request: (state, getter, rootGetter) => state.items.filter(item => item.borrower_id === rootGetter.auth.user.id),
+  ledge: (state, getter, rootGetter) => state.items.filter(item => item.lender_id === rootGetter.auth.user.id),
+  status: state => state.status
 }
 
 // mutations
@@ -26,6 +36,10 @@ export const actions = {
   },
   async request ({ commit }, bookshelfItemId) {
     const { data } = await axios.post(`/api/ledge/request`, { bookshelfItemId })
+    console.log(data)
+  },
+  async respond ({ commit }, { ledgeId, response }) {
+    const { data } = await axios.post(`/api/ledge/request/respond`, { ledgeId, response })
     console.log(data)
   }
 }

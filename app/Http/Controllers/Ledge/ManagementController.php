@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Ledge;
 use App\Models\Bookshelf_item;
 
+use App\Enums\LedgeStatus;
+
 class ManagementController extends Controller
 {
     
@@ -20,7 +22,7 @@ class ManagementController extends Controller
     public function getAll(){
         $userId = Auth::id();
 
-        $result = Ledge::with(['book'])
+        $result = Ledge::with(['book', 'lender', 'borrower'])
             ->where('lender_id', $userId)
             ->whereOr('borrower_id', $userId)
             ->get();
@@ -54,4 +56,41 @@ class ManagementController extends Controller
         
         return response()->json($result);
     }
+
+    
+    /**
+     * Responde to a book request
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function respond(Request $request){
+
+        $this->validate($request, [
+            'ledgeId' => 'required',
+            'response' => 'required'
+        ]);
+
+        $userId = Auth::id();
+
+        $ledge = Ledge::find($request->input('ledgeId'));
+
+        //check if the user is the owner of the ledge
+        if($userId === $ledge->lender_id) return response()->json(['error' => 'Not authorized.'], 403);
+
+        
+        //Ledge not in waiting status
+        if($ledge->status !== LedgeStatus::WaitingApproval) return response()->json(['error' => 'Not authorized.'], 403);
+
+        try {
+            $ledgeStatus = $request->input('response') === 'accept' ? LedgeStatus::WaitingPickup : LedgeStatus::Rejected;
+            $ledge->status = $ledgeStatus;
+            $ledge->save();
+
+            return response()->json(['success' => $ledge]);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'An error has occured'], 500);
+        }
+    }
+    
 }

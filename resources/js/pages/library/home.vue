@@ -22,22 +22,48 @@
         </div>
       </div>
     </div>
-    <h2>Ledge information</h2>
-    <div v-for="(result, index) in items" :key="index">
-      <div class="card" style="width: 18rem;">
-        <img :src="result.book.thumbnail" class="card-img-top" :alt="result.book.title">
-        <div class="card-body">
-          <h4 class="card-title">
-            {{ result.book.title }}
-          </h4>
-          <p class="card-text short_text">
-            {{ result.book.description }}
-          </p>
-        </div>
-      </div>
+    <h2>My Borrow request</h2>
+    <div>
+      <table>
+        <tr>
+          <th>Book name</th>
+          <th>Length time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+        <tr v-for="(result, index) in request" :key="`br-${index}`">
+          <td>{{ result.book.title }}</td>
+          <td>{{ result.lend_duration }}</td>
+          <td>{{ status[result.status] }}</td>
+          <td>Action</td>
+        </tr>
+      </table>
+    </div>
+    <h2>Lending board</h2>
+    <div>
+      <table>
+        <tr>
+          <th>Book name</th>
+          <th>Length time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+        <tr v-for="(result, index) in ledge" :key="`ld-${index}`">
+          <td>{{ result.book.title }}</td>
+          <td>{{ result.lend_duration }}</td>
+          <td>{{ status[result.status] }}</td>
+          <td>
+            <button @click="respond({ledgeId: result.id, response:'accept'})">
+              Accept
+            </button>
+            <button @click="respond({ledgeId: result.id, response:'reject'})">
+              Reject
+            </button>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -54,14 +80,14 @@ export default {
   }),
   computed: {
     ...mapGetters('library', ['searchedBooks']),
-    ...mapGetters('ledge', ['items'])
+    ...mapGetters('ledge', ['request', 'status', 'ledge'])
   },
   mounted () {
     this.getAll()
   },
   methods: {
     ...mapActions('library', ['search']),
-    ...mapActions('ledge', ['getAll']),
+    ...mapActions('ledge', ['getAll', 'respond']),
     goToLendPage (bookshelfItemId) {
       this.$router.push({ name: 'library.borrow', params: { bookshelfItemId } })
     }

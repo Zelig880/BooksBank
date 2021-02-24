@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     //Ledge
     Route::get('/ledge', 'Ledge\ManagementController@getAll');
     Route::post('/ledge/request/', 'Ledge\ManagementController@request');
+    Route::post('/ledge/request/respond', 'Ledge\ManagementController@respond');
 
     
 
