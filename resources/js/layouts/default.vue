@@ -1,21 +1,25 @@
 <template>
   <div class="main-layout">
-    <navbar />
+    <sNavbar />
 
     <div class="container mt-4">
       <child />
     </div>
+
+    <sFooter />
   </div>
 </template>
 
 <script>
-import Navbar from '~/components/Navbar'
+import sNavbar from '~/components/shared/sNavbar'
+import sFooter from '~/components/shared/sFooter'
 
 export default {
   name: 'MainLayout',
 
   components: {
-    Navbar
+    sNavbar,
+    sFooter
   }
 }
 </script>
