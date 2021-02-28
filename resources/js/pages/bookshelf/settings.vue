@@ -49,9 +49,9 @@
       <!-- Submit Button -->
       <div class="form-group row">
         <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">
+          <button :loading="form.busy" type="success">
             {{ $t('update') }}
-          </v-button>
+          </button>
         </div>
       </div>
     </form>
@@ -86,7 +86,8 @@ export default {
 
   methods: {
     async update () {
-      const { data } = await this.form.post('/api/settings/geolocation')
+      // const { data } = await this.form.post('/api/geolocation/getGeolocationByPostcode')
+      const { data } = await this.form.post('/api/geolocation/getGeolocationByUserQuery')
 
       console.log(data)
     }

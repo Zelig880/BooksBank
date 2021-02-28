@@ -8,8 +8,10 @@
 <script>
 
 export default {
+  scrollToTop: true,
+  middleware: 'auth',
   metaInfo () {
-    return { title: this.$t('home') }
+    return { title: this.$t('library') }
   }
 }
 </script>

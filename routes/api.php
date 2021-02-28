@@ -18,8 +18,11 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     //Bookshef
     Route::get('/bookshelf', 'Bookshelf\ManagementController@getAll');
-    Route::post('/bookshelf/address', 'Bookshelf\GeolocationController@getAddress');//sc88: this need to be changed, Bookshelf is the wrong api
-    Route::post('/bookshelf/geolocation', 'Bookshelf\GeolocationController@getGeolocation');//sc88: this need to be changed, Bookshelf is the wrong api
+
+    Route::post('/geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
+    Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
+    Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
+    
     Route::post('/bookshelf/store', 'Bookshelf\ManagementController@store');
     Route::get('/bookshelf/bookshelf_item/{id}', 'Bookshelf\ManagementController@getByBookshelfItemId');
     Route::delete('/bookshelf/remove/{id}', 'Bookshelf\LibraryController@remove');

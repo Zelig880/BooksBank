@@ -20,6 +20,8 @@ import { mapGetters } from 'vuex'
 import { loadMessages } from '~/plugins/i18n'
 
 export default {
+  name: 'LocaleDropdown',
+
   computed: mapGetters({
     locale: 'lang/locale',
     locales: 'lang/locales'

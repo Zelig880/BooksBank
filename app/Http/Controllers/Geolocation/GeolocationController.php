@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Bookshelf;
+namespace App\Http\Controllers\Geolocation;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -20,12 +20,12 @@ class GeolocationController extends Controller
     }
 
     /**
-     * Get geofence from User Address
+     * Get address points and full information, by Postcode
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function getGeolocation(Request $request)
+    public function getGeolocationByPostcode(Request $request)
     {
         $this->validate($request, [
             'address_postcode' => 'required',
@@ -46,6 +46,27 @@ class GeolocationController extends Controller
         return response()->json($result);
     }
 
+    /**
+     * Get address points, by user input query
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getGeolocationByUserQuery(Request $request)
+    {
+        $this->validate($request, [
+            'address' => 'required',
+        ]);
+        
+        $search = $this->nominatim->newSearch();
+
+        $search->query($request->input('address'));
+
+        $result = $this->nominatim->find($search);
+        
+        return response()->json($result);
+    }
+
     
     /**
      * Get address from geolocation.
@@ -53,7 +74,7 @@ class GeolocationController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function getAddress(Request $request)
+    public function getAddressFromGeolocation(Request $request)
     {
 
         $this->validate($request, [

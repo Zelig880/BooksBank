@@ -17,9 +17,9 @@
           <!-- Submit Button -->
           <div class="form-group row">
             <div class="col-md-9 ml-md-auto">
-              <v-button :loading="form.busy">
+              <button :loading="form.busy">
                 {{ $t('send_password_reset_link') }}
-              </v-button>
+              </button>
             </div>
           </div>
         </form>
