@@ -5,7 +5,16 @@ module.exports = {
     './resources/**/*.vue'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {}
+    container: {
+      screens: {
+        sm: "100%",
+        md: "100%",
+        lg: "1024px",
+        xl: "1280px"
+      }
+    },
+    extend: {
+    }
   },
   variants: {
     extend: {}

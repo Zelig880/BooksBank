@@ -1,20 +1,26 @@
 <template>
-  <main class="welcomeSearch">
-    <form @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('search') }}</label>
-        <div class="col-md-5">
-          <input v-model="form.address" :class="{ 'is-invalid': form.errors.has('address') }" class="form-control" type="text" name="address">
-          <has-error :form="form" field="address" />
-          <div class="welcomeSearch__currentLocation form-text text-info" @click="currentLocation">
-            {{ $t('use_current_location') }}
+  <main class="welcomeSearch relative flex flex-wrap items-center justify-between">
+    <div class="container px-4 mx-auto my-12 flex flex-wrap items-center justify-between">
+      <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
+        <h2>{{ $t('welcomeSearch-title') }}</h2>
+        <h2>{{ $t('welcomeSearch-paragraph') }}</h2>
+        <form @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
+          <div class="">
+            <label class="">{{ $t('search') }}</label>
+            <div class="">
+              <input v-model="form.address" :class="{ 'is-invalid': form.errors.has('address') }" class="appearance-none relative block w-auto px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none rounded-md focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" type="text" name="address">
+              <has-error :form="form" field="address" />
+              <div class="welcomeSearch__currentLocation" @click="currentLocation">
+                {{ $t('use_current_location') }}
+              </div>
+            </div>
+            <button class="">
+              {{ $t('search') }}
+            </button>
           </div>
-        </div>
-        <button class="col-md-2">
-          {{ $t('search') }}
-        </button>
+        </form>
       </div>
-    </form>
+    </div>
   </main>
 </template>
 
@@ -63,6 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .welcomeSearch{
   &__currentLocation{
     cursor: pointer;

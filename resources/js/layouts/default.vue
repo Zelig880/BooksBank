@@ -2,7 +2,7 @@
   <div class="main-layout">
     <sNavbar />
 
-    <div class="container mt-4">
+    <div class="">
       <child />
     </div>
 
@@ -23,3 +23,8 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.main-layout{
+}
+</style>

@@ -1,7 +1,9 @@
 <template>
-  <main>
-    welcomeAbout
-  </main>
+  <div class="welcomeSearch relative flex flex-wrap items-center justify-between">
+    <div class="container px-4 mx-auto my-12 flex flex-wrap items-center justify-between">
+      welcomeAbout
+    </div>
+  </div>
 </template>
 
 <script>
