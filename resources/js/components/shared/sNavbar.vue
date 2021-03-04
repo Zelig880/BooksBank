@@ -1,14 +1,23 @@
 <template>
-  <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-200 navbar-expand-lg mb-3">
+  <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-200 mb-3">
     <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
-      <h1 class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
+      <h1 class="relative flex justify-between w-auto px-4 static block justify-start">
         <router-link :to="{ name: user ? 'home' : 'welcome' }">
-          <img src="/assets/img/Logo-2-colour.svg" alt="Stack Overflow">
+          <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
         </router-link>
       </h1>
-      <div id="example-navbar-info" class="flex lg:flex-grow items-center">
-        <authControls :authenticated="!!user" @logout="onLogout" />
+      <button class="md:hidden rounded-full bg-white py-3 px-2 items-center text-xs uppercase font-bold leading-snug text-white text-gray-700 hover:opacity-75" @click="toggleNavbar">
+        Menu
+        <fa icon="bars" fixed-width />
+      </button>
+      <!-- desktop view -->
+      <div class="hidden md:flex md:flex-grow md:items-center">
+        <AuthControls class="flex flex-col md:flex-row list-none ml-auto" :authenticated="!!user" />
       </div>
+    </div>
+    <!-- mobile view -->
+    <div :class="{'hidden': !showMenu}" class="border-t-2 border-gray-600 w-full my-4">
+      <AuthControls class="mt-2 px-2 pt-2 pb-3 space-y-1" :authenticated="!!user" />
     </div>
   </nav>
 </template>
@@ -16,11 +25,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
-import authControls from './Navbar/authControls'
+import AuthControls from './Navbar/authControls.vue'
 
 export default {
   components: {
-    authControls
+    AuthControls
   },
 
   data: () => ({

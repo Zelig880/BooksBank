@@ -1,5 +1,5 @@
 <template>
-  <ul class="flex flex-col lg:flex-row list-none ml-auto">
+  <ul>
     <!-- Authenticated -->
     <template v-if="authenticated">
       <li class="">
@@ -9,7 +9,7 @@
         </router-link>
       </li>
       <li>
-        <a href="#" @click.prevent="$emit('logout')" class="px-3 py-3 flex items-center text-xs uppercase font-bold leading-snug text-white text-gray-500 hover:opacity-75" >
+        <a href="#" class="px-3 py-3 flex items-center text-xs uppercase font-bold leading-snug text-white text-gray-500 hover:opacity-75" @click.prevent="$emit('logout')" >
           <fa icon="sign-out-alt" fixed-width />
           {{ $t('logout') }}
         </a>
@@ -28,8 +28,8 @@
         </router-link>
       </li>
     </template>
-    <li class="ml-4">
-      <Link class="px-4 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white text-gray-700 hover:opacity-75" routeName="bookshelf.add">
+    <li class="ml-4 hidden md:inline-block">
+      <Link class="" routeName="bookshelf.add">
       Add a book
       </Link>
     </li>
