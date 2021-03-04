@@ -12,14 +12,14 @@
       <div id="navbarToggler" class="collapse navbar-collapse">
         <ul class="navbar-nav">
           <locale-dropdown />
-          <!-- <li class="nav-item">
+          <!-- <li class="">
             <a class="nav-link" href="#">Link</a>
           </li> -->
         </ul>
 
         <ul class="navbar-nav ml-auto">
           <!-- Authenticated -->
-          <li v-if="user" class="nav-item dropdown">
+          <li v-if="user" class=" dropdown">
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
@@ -41,12 +41,12 @@
           </li>
           <!-- Guest -->
           <template v-else>
-            <li class="nav-item">
+            <li class="">
               <router-link :to="{ name: 'login' }" class="nav-link" active-class="active">
                 {{ $t('login') }}
               </router-link>
             </li>
-            <li class="nav-item">
+            <li class="">
               <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
                 {{ $t('register') }}
               </router-link>
