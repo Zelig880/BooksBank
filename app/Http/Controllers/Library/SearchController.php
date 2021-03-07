@@ -17,6 +17,7 @@ class SearchController extends Controller
      */
     public function index($latitude, $longitude, $radius)
     {
+        
         $query = Bookshelf_item::with(
             [
                 'bookshelf' => function ($query) use ($latitude, $longitude) {

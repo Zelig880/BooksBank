@@ -21,6 +21,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  middleware: 'auth',
   data () {
     return {
       selectedBook: null

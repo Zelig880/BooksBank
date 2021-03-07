@@ -20,7 +20,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/bookshelf', 'Bookshelf\ManagementController@getAll');
 
     Route::post('/geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
-    Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
     Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
     
     Route::post('/bookshelf/store', 'Bookshelf\ManagementController@store');
@@ -33,9 +32,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/ledge/request/', 'Ledge\ManagementController@request');
     Route::post('/ledge/request/respond', 'Ledge\ManagementController@respond');
 
-    
-
-    Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
 
     Route::get('/user', 'Auth\UserController@current');
 
@@ -55,4 +51,8 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
+    //LIBRARY
+    Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
+    //GEOLOCATION
+    Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
 });

@@ -27,6 +27,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  middleware: 'guest',
 
   computed: {
     ...mapGetters('library', ['searchedBooks'])
