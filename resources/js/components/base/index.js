@@ -3,7 +3,7 @@ import Card from './Card'
 import Checkbox from './Checkbox'
 import LocaleDropdown from './LocaleDropdown'
 import Button from './Button'
-import Link from './Link'
+import Anchor from './Anchor'
 
 // Components that are registered globaly.
 [
@@ -11,7 +11,7 @@ import Link from './Link'
   Checkbox,
   LocaleDropdown,
   Button,
-  Link
+  Anchor
 ].forEach(Component => {
   Vue.component(Component.name, Component)
 })

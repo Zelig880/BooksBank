@@ -7,19 +7,19 @@
       </p>
       <div class="col-span-1 flex place-content-around  mb-8">
         <ul>
-          <li>text</li>
-          <li>text</li>
-          <li>text</li>
+          <li><Anchor>text</Anchor></li>
+          <li><Anchor>text</Anchor></li>
+          <li><Anchor>text</Anchor></li>
         </ul>
         <ul>
-          <li>text</li>
-          <li>text</li>
-          <li>text</li>
+          <li><Anchor>text</Anchor></li>
+          <li><Anchor>text</Anchor></li>
+          <li><Anchor>text</Anchor></li>
         </ul>
         <ul>
-          <li>text</li>
-          <li>text</li>
-          <li>text</li>
+          <li><Anchor>text</Anchor></li>
+          <li><Anchor>text</Anchor></li>
+          <li><Anchor>text</Anchor></li>
         </ul>
       </div>
       <div class="col-span-1  mb-8">

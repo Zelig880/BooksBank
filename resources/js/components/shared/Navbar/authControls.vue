@@ -9,7 +9,7 @@
         </router-link>
       </li>
       <li>
-        <a href="#" class="px-3 py-3 flex items-center text-xs uppercase font-bold leading-snug text-white text-gray-500 hover:opacity-75" @click.prevent="$emit('logout')" >
+        <a href="#" class="px-3 py-3 flex items-center text-xs uppercase font-bold leading-snug text-white text-gray-500 hover:opacity-75" @click.prevent="$emit('logout')">
           <fa icon="sign-out-alt" fixed-width />
           {{ $t('logout') }}
         </a>
@@ -18,20 +18,20 @@
     <!-- Non Authenticated -->
     <template v-else>
       <li class="">
-        <router-link :to="{ name: 'login' }" class="px-3 py-3 flex items-center text-xs uppercase font-bold leading-snug text-white text-gray-500 hover:opacity-75" active-class="active">
+        <Anchor :to="{ name: 'login' }">
           {{ $t('login') }}
-        </router-link>
+        </Anchor>
       </li>
       <li class="">
-        <router-link :to="{ name: 'register' }" class="px-3 py-3 flex items-center text-xs uppercase font-bold leading-snug text-white text-gray-500 hover:opacity-75" active-class="active">
+        <Anchor :to="{ name: 'register' }">
           {{ $t('register') }}
-        </router-link>
+        </Anchor>
       </li>
     </template>
     <li class="ml-4 hidden md:inline-block">
-      <Link class="" routeName="bookshelf.add">
-      Add a book
-      </Link>
+      <Anchor theme="rounded" route-name="bookshelf.add">
+        Add a book
+      </Anchor>
     </li>
   </ul>
 </template>

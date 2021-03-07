@@ -10,6 +10,7 @@ mix
   .sass('resources/sass/app.scss', 'public/dist/css')
   .options({
     processCssUrls: false,
+    extractVueStyles: true,
     postCss: [ tailwindcss('./tailwind.config.js') ]
   })
   .disableNotifications()
