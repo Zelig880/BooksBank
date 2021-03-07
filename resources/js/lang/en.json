@@ -56,5 +56,8 @@
   "welcomeAdd-title": "Add a book",
   "welcomeAdd-subheading": "This is my subheading",
   "welcomeAdd-paragraph": "This is a short paragraph about how to add a book!",
-  "welcomeAdd-cta": "Add a book"
+  "welcomeAdd-cta": "Add a book",
+
+  "sFooter-text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
+
 }

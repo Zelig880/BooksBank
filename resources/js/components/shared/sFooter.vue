@@ -1,6 +1,36 @@
 <template>
   <footer>
-    footer
+    <div class="container grid grid-cols-1 md:grid-cols-2 mx-auto">
+      <img class="col-span-full mb-8" src="/assets/img/Logo-2-colour.svg" :alt="appName">
+      <p class="col-span-1  mb-8">
+        {{ $t('sFooter-text') }}
+      </p>
+      <div class="col-span-1 flex place-content-around  mb-8">
+        <ul>
+          <li>text</li>
+          <li>text</li>
+          <li>text</li>
+        </ul>
+        <ul>
+          <li>text</li>
+          <li>text</li>
+          <li>text</li>
+        </ul>
+        <ul>
+          <li>text</li>
+          <li>text</li>
+          <li>text</li>
+        </ul>
+      </div>
+      <div class="col-span-1  mb-8">
+        <span>facebook</span>
+        <span>twitter</span>
+        <span>instragram</span>
+      </div>
+      <p class="col-span-1 text-center mb-8">
+        @copyright Zelig880 LTD
+      </p>
+    </div>
   </footer>
 </template>
 
