@@ -3,7 +3,7 @@
     <div class="container mx-auto h-auto">
       <div class="mb-6 md:w-3/6">
         <h2 class="text-5xl font-bold mb-4">
-          {{ $t('search') }}
+          {{ $t('welcomeSearch-title') }}
         </h2>
         <p>{{ $t('welcomeSearch-paragraph') }}</p>
       </div>
