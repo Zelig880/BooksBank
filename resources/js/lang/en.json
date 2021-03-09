@@ -41,6 +41,7 @@
   "new_password": "New Password",
   "login_with": "Login with",
   "register_with": "Register with",
+  "register_with_email": "Register with email",
   "verify_email": "Verify Email",
   "send_verification_link": "Send Verification Link",
   "resend_verification_link": "Resend Verification Link ?",
@@ -49,6 +50,18 @@
 
   "search": "Search",
   "use_current_location": "Use current location",
+  "continue-with-google": "Continue with google",
+  "continue-with-twitter": "Continue with twitter",
+  "continue-with-facebook": "Continue with facebook",
+
+  "signin-title": "Login to your account",
+  "signin-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+
+  "register_title": "Create your account",
+  "register_name_placeholder": "John Smith",
+  "register_email_placeholder": "john@smith.com",
+  "register_password_placeholder": "***********",
+  "register_cta": "Signup",
 
   "welcomeSearch-title": "Search for a book",
   "welcomeSearch-paragraph": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",

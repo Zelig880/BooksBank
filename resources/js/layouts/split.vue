@@ -9,13 +9,13 @@
       <div class="w-full flex justify-center">
         <div class="lg:w-1/2 lg:text-right">
           <div class="split-layout__left-column pr-0 lg:pr-16 ml-8 mt-16 xl:ml-auto text-center lg:text-left">
-            <div class="border-b">
-              <button class="mr-16 pb-4 border-b-4  capitalize" :class="{ 'border-gray-300': signinPage}">
+            <div class="border-b pb-4">
+              <router-link :to="{name: 'login'}" class="mr-16 pb-4 capitalize" :class="{ 'border-b-4': signinPage}">
                 Signin
-              </button>
-              <button class="mr-16 pb-4 capitalize" :class="{ 'border-gray-300': signupPage}">
+              </router-link>
+              <router-link :to="{name: 'register'}" class="mr-16 pb-4 capitalize" :class="{ 'border-b-4': signupPage}">
                 Signup
-              </button>
+              </router-link>
             </div>
             <child />
           </div>
@@ -44,8 +44,8 @@ export default {
     signinPage () {
       return this.$route.name === 'login'
     },
-    signupPage () {      
-      return this.$route.name === 'signup'
+    signupPage () {
+      return this.$route.name === 'register'
     },
     imagePath () {
       return `/assets/img/splitLayout-${this.$route.name}.png`

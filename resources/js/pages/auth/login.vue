@@ -2,19 +2,19 @@
   <div>
     <div>
       <h2 class="mt-8 text-2xl font-bold">
-        Login to your account
+        {{ $t('signin-title') }}
       </h2>
       <p class="mt-4 mb-8">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        {{ $t('signin-description') }}
       </p>
       <button class="w-full rounded-full py-3 border-2 mb-2">
-        Continue with Google
+        {{ $t('continue-with-google') }}
       </button>
       <button class="w-full rounded-full py-3 border-2 bg-gray-400 text-white mb-2">
-        Continue with Facebook
+        {{ $t('continue-with-facebook') }}
       </button>
       <button class="w-full rounded-full py-3 border-2 bg-gray-700 text-white">
-        Continue with Twitter
+        {{ $t('continue-with-twitter') }}
       </button>
     </div>
     <div class="flex my-8">
@@ -25,11 +25,11 @@
     <form @submit.prevent="login" @keydown="form.onKeydown($event)">
       <div class="w-full border-2 py-4 px-4 mb-8 flex rounded-lg">
         <fa icon="envelope" fixed-width />
-        <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="w-full ml-4" type="text" name="email">
+        <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="w-full ml-4" type="text" name="email" :placeholder="$t('email')">
       </div>
       <div class="w-full border-2 py-4 px-4 mb-8 flex rounded-lg">
         <fa icon="lock" fixed-width />
-        <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="w-full ml-4" type="password" name="password">
+        <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="w-full ml-4" type="password" name="password" :placeholder="$t('password')">
       </div>
       <a href="#">{{ $t('forgot_password') }}</a>
       <has-error :form="form" field="email" />
@@ -69,7 +69,6 @@ export default {
     async login () {
       // Submit the form.
       const { data } = await this.form.post('/api/login')
-      debugger
       // Save the token.
       this.$store.dispatch('auth/saveToken', {
         token: data.token,
