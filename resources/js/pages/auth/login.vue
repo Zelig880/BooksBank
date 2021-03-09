@@ -1,54 +1,43 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('login')">
-        <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-              <has-error :form="form" field="email" />
-            </div>
-          </div>
-
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-              <has-error :form="form" field="password" />
-            </div>
-          </div>
-
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-3" />
-            <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
-              </checkbox>
-
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('forgot_password') }}
-              </router-link>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
-              <!-- Submit Button -->
-              <button :loading="form.busy">
-                {{ $t('login') }}
-              </button>
-
-              <!-- GitHub Login Button -->
-              <login-with-github />
-            </div>
-          </div>
-        </form>
-      </card>
+  <div>
+    <div>
+      <h2 class="mt-8 text-2xl font-bold">
+        Login to your account
+      </h2>
+      <p class="mt-4 mb-8">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      </p>
+      <button class="w-full rounded-full py-3 border-2 mb-2">
+        Continue with Google
+      </button>
+      <button class="w-full rounded-full py-3 border-2 bg-gray-400 text-white mb-2">
+        Continue with Facebook
+      </button>
+      <button class="w-full rounded-full py-3 border-2 bg-gray-700 text-white">
+        Continue with Twitter
+      </button>
     </div>
+    <div class="flex my-8">
+      <span class="border-b-2 flex-grow mb-3" />
+      <span class="mx-4 text-gray-400">OR</span>
+      <span class="border-b-2 flex-grow mb-3" />
+    </div>
+    <form @submit.prevent="login" @keydown="form.onKeydown($event)">
+      <div class="w-full border-2 py-4 px-4 mb-8 flex rounded-lg">
+        <fa icon="envelope" fixed-width />
+        <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="w-full ml-4" type="text" name="email">
+      </div>
+      <div class="w-full border-2 py-4 px-4 mb-8 flex rounded-lg">
+        <fa icon="lock" fixed-width />
+        <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="w-full ml-4" type="password" name="password">
+      </div>
+      <a href="#">{{ $t('forgot_password') }}</a>
+      <has-error :form="form" field="email" />
+      <has-error :form="form" field="password" />
+      <button type="text" class="w-full border-2 py-4 px-4 mt-8 rounded-lg bg-gray-400 text-white capitalize" :loading="form.busy">
+        {{ $t('login') }}
+      </button>
+    </form>
   </div>
 </template>
 
@@ -58,6 +47,7 @@ import LoginWithGithub from '~/components/LoginWithGithub'
 
 export default {
   middleware: 'guest',
+  layout: 'split',
 
   components: {
     LoginWithGithub
@@ -79,7 +69,7 @@ export default {
     async login () {
       // Submit the form.
       const { data } = await this.form.post('/api/login')
-
+      debugger
       // Save the token.
       this.$store.dispatch('auth/saveToken', {
         token: data.token,
@@ -90,7 +80,7 @@ export default {
       await this.$store.dispatch('auth/fetchUser')
 
       // Redirect home.
-      this.$router.push({ name: 'library.home' })
+      this.$router.push({ name: 'welcome' })
     }
   }
 }

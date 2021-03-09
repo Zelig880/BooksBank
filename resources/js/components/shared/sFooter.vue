@@ -7,19 +7,19 @@
       </p>
       <div class="col-span-1 flex place-content-around  mb-8">
         <ul>
-          <li><Anchor>text</Anchor></li>
-          <li><Anchor>text</Anchor></li>
-          <li><Anchor>text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
         </ul>
         <ul>
-          <li><Anchor>text</Anchor></li>
-          <li><Anchor>text</Anchor></li>
-          <li><Anchor>text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
         </ul>
         <ul>
-          <li><Anchor>text</Anchor></li>
-          <li><Anchor>text</Anchor></li>
-          <li><Anchor>text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor routeName="test">text</Anchor></li>
         </ul>
       </div>
       <div class="col-span-1  mb-8">
@@ -36,7 +36,11 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      appName: window.config.appName
+    }
+  }
 }
 </script>
 

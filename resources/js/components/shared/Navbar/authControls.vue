@@ -18,12 +18,12 @@
     <!-- Non Authenticated -->
     <template v-else>
       <li class="">
-        <Anchor :to="{ name: 'login' }">
+        <Anchor route-name="login">
           {{ $t('login') }}
         </Anchor>
       </li>
       <li class="">
-        <Anchor :to="{ name: 'register' }">
+        <Anchor route-name="register">
           {{ $t('register') }}
         </Anchor>
       </li>

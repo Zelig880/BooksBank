@@ -45,7 +45,7 @@ export default {
         token: e.data.token
       })
 
-      this.$router.push({ name: 'library.home' })
+      this.$router.push({ name: 'welcome' })
     }
   }
 }
