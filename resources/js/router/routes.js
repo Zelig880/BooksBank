@@ -18,7 +18,7 @@ export default [
     children: [
       { path: '', redirect: { name: 'library.home' } },
       { path: 'home', name: 'library.home', component: page('library/home.vue') },
-      { path: 'view/:latitude/:longitude/:radius', name: 'library.view', component: page('library/view.vue') },
+      { path: 'view/:latitude/:longitude/:radius/:searchTitle?', name: 'library.view', component: page('library/view.vue') },
       { path: 'borrow/:bookshelfItemId', name: 'library.borrow', component: page('library/borrow.vue') },
     ] 
   },

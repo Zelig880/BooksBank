@@ -1,6 +1,5 @@
 <template>
   <div>
-    <router-link to="bookshelf">BookShelf</router-link>
     <router-view />
   </div>
 </template>

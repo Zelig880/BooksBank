@@ -58,7 +58,6 @@ export default {
       if (!layout || !layouts[layout]) {
         layout = this.defaultLayout
       }
-
       this.layout = layouts[layout]
     }
   }

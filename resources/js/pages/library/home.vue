@@ -57,7 +57,7 @@ export default {
   data: () => ({
   }),
   computed: {
-    ...mapGetters('library', ['searchedBooks']),
+    ...mapGetters('library', ['searchedBook']),
     ...mapGetters('ledge', ['request', 'status', 'ledge'])
   },
   mounted () {

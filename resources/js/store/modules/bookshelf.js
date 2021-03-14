@@ -30,7 +30,7 @@ export const state = {
 
 // getters
 export const getters = {
-  searchedBooks: state => state.searchResult,
+  searchedBook: state => state.searchResult,
   items: state => state.items
 }
 

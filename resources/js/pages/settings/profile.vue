@@ -1,5 +1,6 @@
 <template>
-  <card :title="$t('your_info')">
+  <div>
+    <h2>{{ $t('your_info') }}</h2>
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('info_updated')" />
 
@@ -73,7 +74,7 @@
         </div>
       </div>
     </form>
-  </card>
+  </div>
 </template>
 
 <script>

@@ -10,7 +10,7 @@
       <form class="md:bg-white md:w-4/5 md:rounded-full md:pl-10 md:flex h-auto md:h-16 " @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow py-2 px-10 md:px-0 md:mr-4 w-10/12 md:w-auto mx-auto">
           <label>Search by</label>
-          <input :class="{ 'is-invalid': form.errors.has('address') }" type="text" placeholder="ISBN or Name">
+          <input v-model="form.searchTitle" :class="{ 'is-invalid': form.errors.has('searchTitle') }" type="text" placeholder="ISBN or Name">
         </div>
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 border-l-2 w-10/12 md:w-auto mx-auto">
           <label>Location</label>
@@ -32,10 +32,11 @@ export default {
 
   data: () => ({
     form: new Form({
+      searchTitle: '',
       address: '',
       latitude: null,
       longitude: null,
-      radius: 3000
+      radius: 5000
     })
   }),
 

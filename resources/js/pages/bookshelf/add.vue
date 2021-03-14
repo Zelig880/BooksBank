@@ -17,7 +17,7 @@
       Find
     </button>
     <hr>
-    <div v-for="(book, index) in searchedBooks" :key="index">
+    <div v-for="(book, index) in searchedBook" :key="index">
       <div class="card" style="width: 18rem;">
         <img :src="book.thumbnail" class="card-img-top" :alt="book.title">
         <div class="card-body">
@@ -79,7 +79,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('bookshelf', ['searchedBooks'])
+    ...mapGetters('bookshelf', ['searchedBook'])
   },
   methods: {
     ...mapActions({

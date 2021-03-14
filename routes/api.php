@@ -20,7 +20,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/bookshelf', 'Bookshelf\ManagementController@getAll');
 
     Route::post('/geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
-    Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
     
     Route::post('/bookshelf/store', 'Bookshelf\ManagementController@store');
     Route::get('/bookshelf/bookshelf_item/{id}', 'Bookshelf\ManagementController@getByBookshelfItemId');
@@ -55,4 +54,5 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
     //GEOLOCATION
     Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
+    Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
 });

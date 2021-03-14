@@ -1,22 +1,50 @@
 <template>
   <main>
-    <h2>Books in your area</h2>
-    <div v-for="(result, index) in searchedBooks" :key="index">
-      <div class="card" style="width: 18rem;">
-        <img :src="result.book.thumbnail" class="card-img-top" :alt="result.book.title">
-        <div class="card-body">
-          <h4 class="card-title">
-            {{ result.book.title }}
-          </h4>
-          <h5 class="card-title">
-            DIstance: {{ result.bookshelf.distance }}
-          </h5>
-          <p class="card-text short_text">
-            {{ result.book.description }}
-          </p>
-          <button class="btn btn-primary" @click="goToBorrowPage(result.id)">
-            Borrow book
-          </button>
+    <div class="w-full border-b-2 pb-8">
+      <div class="container mx-auto flex flex-col md:flex-row justify-between">
+        <div class="rounded-full border-2 pl-8 pr-12 py-2 flex flex-col relative md:w-7/12">
+          <label for="search" class="text-xs text-gray-400 font-bold">You search for:</label>
+          <input id="search" v-model="searchText" class="font-bold text-lg" type="text" @keyup.enter="searchHandle">
+          <fa icon="search" class="absolute right-4 top-3 text-gray-400" size="2x" @click="searchHandle" />
+        </div>
+        <div class="md:w-4/12">
+          <div class="flex justify-between">
+            <span>Distance</span>
+            <span>{{ radiusMiles }} Miles</span>
+          </div>
+          <VueSlider v-model="radiusMiles" v-bind="sliderOptions" @drag-end="searchHandle" />
+        </div>
+      </div>
+    </div>
+    <div class="w-full bg-gray-100 py-8">
+      <div class="container mx-auto">
+        <h2 class="text-2xl mb-8">
+          Search result: {{ searchedBook.length }}
+        </h2>
+        <div class="grid grid-cols-2 gap-4">
+          <card
+            v-for="result in searchedBook" :key="result.id"
+            :title="result.book.title"
+            :description="result.book.description"
+            :thumbnail="result.book.thumbnail"
+            :condition="conditions[result.condition]"
+            :distance="result.bookshelf.distance"
+            @click="goToBorrowPage(result.id)"
+          />
+        </div>
+        <h2 v-if="otherBooks.length > 0" class="text-2xl mb-10 pb-12 mt-16 border-b-2">
+          Other books available within your radius
+        </h2>
+        <div class="grid grid-cols-2 gap-4">
+          <card
+            v-for="result in otherBooks" :key="result.id"
+            :title="result.book.title"
+            :description="result.book.description"
+            :thumbnail="result.book.thumbnail"
+            :condition="conditions[result.condition]"
+            :distance="result.bookshelf.distance"
+            @click="goToBorrowPage(result.id)"
+          />
         </div>
       </div>
     </div>
@@ -24,26 +52,54 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
+import Card from '../../components/base/Card.vue'
 
 export default {
   middleware: 'guest',
 
+  components: {
+    VueSlider,
+    Card
+  },
+
+  data () {
+    return {
+      searchText: 'Fake book',
+      radiusMiles: 5,
+      sliderOptions: {
+        min: 1,
+        max: 100,
+        dotSize: 18,
+        tooltip: 'hover',
+        tooltipFormatter: '{value} Miles',
+        tooltipPlacement: 'bottom'
+      }
+    }
+  },
   computed: {
-    ...mapGetters('library', ['searchedBooks'])
+    ...mapState('library', ['conditions']),
+    ...mapGetters('library', ['searchedBook', 'otherBooks'])
   },
   async mounted () {
-    const query = {
-      longitude: this.$route.params.longitude,
-      latitude: this.$route.params.latitude,
-      radius: this.$route.params.radius
-    }
-    await this.search(query)
+    this.radiusMiles = Math.round(this.$route.params.radius / 1000)
+    await this.searchHandle()
   },
   methods: {
     ...mapActions('library', ['search']),
     goToBorrowPage (bookshelfItemId) {
       this.$router.push({ name: 'library.borrow', params: { bookshelfItemId } })
+    },
+    async searchHandle () {
+      const query = {
+        searchTitle: this.$route.params.searchTitle,
+        longitude: this.$route.params.longitude,
+        latitude: this.$route.params.latitude,
+        radius: this.radiusMiles * 1000
+      }
+      await this.search(query)
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <router-link :class="themeClass" :to="{ name: routeName}">
+  <router-link :class="themeClass" :to="{ name: routeName, params}">
     <slot />
   </router-link>
 </template>
@@ -13,6 +13,10 @@ export default {
     routeName: {
       type: String,
       required: true
+    },
+    params: {
+      type: Object,
+      default: () => {}
     },
     theme: {
       type: String,

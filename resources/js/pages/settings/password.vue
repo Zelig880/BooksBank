@@ -1,5 +1,6 @@
 <template>
-  <card :title="$t('your_password')">
+  <div>
+    <h2>{{ $t('your_password') }}</h2>
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('password_updated')" />
 
@@ -30,7 +31,7 @@
         </div>
       </div>
     </form>
-  </card>
+  </div>
 </template>
 
 <script>

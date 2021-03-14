@@ -20,7 +20,7 @@
       <span class="border-b-2 flex-grow mb-3" />
     </div>
     <button class="w-full rounded-2 py-3 border-2" @click="handleClick('email')">
-      {{ $t('register-with-email') }}
+      {{ $t('register_with_email') }}
     </button>
   </div>
 </template>

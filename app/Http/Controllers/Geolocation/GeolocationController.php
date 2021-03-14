@@ -15,7 +15,7 @@ class GeolocationController extends Controller
      */
     public function __construct()
     {
-        
+        $this->middleware('guest');
         $this->nominatim = new Nominatim(config('nominatim.url'));
     }
 
