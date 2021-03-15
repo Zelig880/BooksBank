@@ -32,7 +32,7 @@ export default {
 
   data: () => ({
     form: new Form({
-      searchTitle: '',
+      searchTitle: 'All',
       address: '',
       latitude: null,
       longitude: null,

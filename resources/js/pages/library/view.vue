@@ -58,8 +58,6 @@ import 'vue-slider-component/theme/default.css'
 import Card from '../../components/base/Card.vue'
 
 export default {
-  middleware: 'guest',
-
   components: {
     VueSlider,
     Card
@@ -67,7 +65,7 @@ export default {
 
   data () {
     return {
-      searchText: 'Fake book',
+      searchText: '',
       radiusMiles: 5,
       sliderOptions: {
         min: 1,
@@ -85,6 +83,7 @@ export default {
   },
   async mounted () {
     this.radiusMiles = Math.round(this.$route.params.radius / 1000)
+    this.searchText = this.$route.params.searchTitle || 'All'
     await this.searchHandle()
   },
   methods: {
@@ -94,7 +93,7 @@ export default {
     },
     async searchHandle () {
       const query = {
-        searchTitle: this.$route.params.searchTitle,
+        searchTitle: this.searchTitle,
         longitude: this.$route.params.longitude,
         latitude: this.$route.params.latitude,
         radius: this.radiusMiles * 1000

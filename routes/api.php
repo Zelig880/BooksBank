@@ -50,9 +50,12 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
-    //LIBRARY
-    Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
-    //GEOLOCATION
-    Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
-    Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
 });
+
+//LIBRARY
+Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
+//GEOLOCATION
+Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
+Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
+
+

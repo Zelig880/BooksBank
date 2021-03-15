@@ -47,7 +47,7 @@ export const actions = {
 
     if (!data) return
 
-    if (searchTitle) commit('SET_SEARCH_TITLE', searchTitle)
+    if (searchTitle && searchTitle !== 'All') commit('SET_SEARCH_TITLE', searchTitle)
     commit('UPDATE_SEARCH_RESULT', data)
   }
 }

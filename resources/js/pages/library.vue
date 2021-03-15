@@ -8,7 +8,6 @@
 
 export default {
   scrollToTop: true,
-  middleware: 'guest',
   metaInfo () {
     return { title: this.$t('library') }
   }

@@ -78,8 +78,12 @@ export default {
       // Fetch the user.
       await this.$store.dispatch('auth/fetchUser')
 
-      // Redirect home.
-      this.$router.push({ name: 'welcome' })
+      // Redirect to the page that required the auth if exists
+      if (this.$route.query.redirect) {
+        this.$router.push(this.$route.query.redirect)
+      } else {
+        this.$router.push({ name: 'welcome' })
+      }
     }
   }
 }
