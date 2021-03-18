@@ -71,6 +71,16 @@
   "welcomeAdd-paragraph": "This is a short paragraph about how to add a book!",
   "welcomeAdd-cta": "Add a book",
 
+  "bookshelfAdd-title": "Add a book",
+  "bookshelfAdd-paragraph": "Give your book a second life, by simply adding them to your virtual library following 3 easy steps.",
+  "bookshelfAdd-step1-title": "Find your book",
+  "bookshelfAdd-step1-description": "Search out database with millions of books available",
+  "bookshelfAdd-step2-title": "Set it's condition",
+  "bookshelfAdd-step2-description": "Provide some quick details for users to know",
+  "bookshelfAdd-step3-title": "Review and Finish",
+  "bookshelfAdd-step3-description": "Review your information and add make the book available",
+
+
   "sFooter-text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
 
 }

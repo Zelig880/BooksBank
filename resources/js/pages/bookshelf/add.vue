@@ -1,19 +1,14 @@
 <template>
   <div>
+    <h2 class="mb-4 text-center font-black text-gray-700 text-2xl">
+      {{ $t('bookshelfAdd-title') }}
+    </h2>
+    <p class="text-lg">{{ $t('bookshelfAdd-title') }}</p>
+    <BookshelfAddSteps :currentStep="currentStep" />
+    <Button @click="step(1)">Start Now</Button>
     <label for="search">{{ $t('search_book') }}</label>
-    <select id="type" v-model="type">
-      <option value="isbn">
-        ISBN
-      </option>
-      <option value="title">
-        Title
-      </option>
-      <option value="author">
-        Authors
-      </option>
-    </select>
     <input id="search" v-model="text" type="text">
-    <button @click="find({type, text})">
+    <button @click="find(text)">
       Find
     </button>
     <hr>
@@ -27,7 +22,9 @@
           <p class="card-text short_text">
             {{ book.description }}
           </p>
-          <button class="btn btn-primary" @click="showLendForm(index)">Lend book</button>
+          <button class="btn btn-primary" @click="showLendForm(index)">
+            Lend book
+          </button>
         </div>
       </div>
     </div>
@@ -56,26 +53,32 @@
           Not Available
         </option>
       </select>
-      <button class="btn btn-primary" @click="addToBookshelf">Add to bookshelf</button>
+      <button class="btn btn-primary" @click="addToBookshelf">
+        Add to bookshelf
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import BookshelfAddSteps from '../../components/sections/bookshelfAddSteps.vue'
 
 export default {
   name: 'Add',
+  components: {
+    BookshelfAddSteps
+  },
   data () {
     return {
       text: '',
-      type: 'ISBN',
       showLend: false,
       selectedBook: {
         status: '',
         condition: '',
         bookIndex: 0
-      }
+      },
+      currentStep: 0
     }
   },
   computed: {
@@ -93,6 +96,9 @@ export default {
     showLendForm (index) {
       this.selectedBook.bookIndex = index
       this.showLend = true
+    },
+    step (index) {
+      this.currentStep = index
     }
   }
 }

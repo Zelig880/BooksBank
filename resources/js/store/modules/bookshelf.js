@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const createBookObject = function (book) {
-
   if (!book.volumeInfo) return
 
   const ISBN = book.volumeInfo.industryIdentifiers[0].identifier
@@ -49,7 +48,11 @@ export const mutations = {
 
 // actions
 export const actions = {
-  async find ({ commit, dispatch }, { type, text }) {
+  async find ({ commit, dispatch }, text) {
+    const isbnRegex = /^(97(8|9))?\d{9}(\d|X)$/
+
+    const type = text.match(isbnRegex) ? 'ISBN' : 'title'
+
     const { data } = await axios.get(`/api/bookshelf/${type}/${text}`)
 
     if (!data) return
