@@ -9,10 +9,10 @@ export const state = {
     lon: null
   },
   conditions: [
-    'VeryGood',
-    'Good',
-    'Acceptable',
-    'Poor'
+    { name: 'Very Good', description: 'Shows signs of wear. May have minor defects: clipped or chipped dust jacket; owner’s inscription; remainder mark; minor foxing or bumping. Used textbooks do not come with supplemental materials.' },
+    { name: 'Good', description: 'Average used book with all pages present. May have any of the defects above to a greater degree, including highlighting, library markings, or loose bindings. Rare and collectible books may have cocked spine, cracked hinges, water stains; torn or repaired dust jacket.' },
+    { name: 'Acceptable', description: 'May be very worn, soiled, torn, or barely holding together. Used textbooks do not come with supplemental materials.' },
+    { name: 'Poor', description: 'May have extensive damage from moisture or insects; detached boards; parts may be missing; marginally salable unless very unusual. Used textbooks do not come with supplemental materials.' }
   ]
 }
 

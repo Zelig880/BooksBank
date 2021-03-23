@@ -27,7 +27,7 @@
             :title="result.book.title"
             :description="result.book.description"
             :thumbnail="result.book.thumbnail"
-            :condition="conditions[result.condition]"
+            :condition="conditions[result.condition].name"
             :distance="result.bookshelf.distance"
             @click="goToBorrowPage(result.id)"
           />
@@ -36,12 +36,12 @@
           Other books available within your radius
         </h2>
         <div class="grid grid-cols-2 gap-4">
-          <card
+          <LibraryViewCard
             v-for="result in otherBooks" :key="result.id"
             :title="result.book.title"
             :description="result.book.description"
             :thumbnail="result.book.thumbnail"
-            :condition="conditions[result.condition]"
+            :condition="conditions[result.condition].name"
             :distance="result.bookshelf.distance"
             @click="goToBorrowPage(result.id)"
           />
@@ -55,12 +55,12 @@
 import { mapActions, mapGetters, mapState } from 'vuex'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
-import Card from '../../components/base/Card.vue'
+import LibraryViewCard from '../../components/sections/libraryViewCard.vue'
 
 export default {
   components: {
     VueSlider,
-    Card
+    LibraryViewCard
   },
 
   data () {

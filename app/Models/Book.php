@@ -35,7 +35,7 @@ class Book extends Model
         return $this->belongsToMany(Bookshelf_item::class);
     }
 
-    public function add($item, $userId){
+    public static function add($item, $bookshelf_id){
         $book = Book::firstOrCreate([
             'title' => $item->title, 
             'ISBN' => $item->ISBN, 
@@ -64,7 +64,8 @@ class Book extends Model
         $book->bookshelf_item()->create([
             'condition' => $item->condition, 
             'status' => $item->status, 
-            'bookshelf_id' => $userId
+            'bookshelf_id' => $bookshelf_id,
+            'book_id' => $book->id
         ]);
     }
     

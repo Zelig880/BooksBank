@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class BookStatus extends Enum
 {
-    const Available = '0';
-    const NotAvailable = '1';
-    const AwaitingCollection = '2';
+    const Available = 0;
+    const NotAvailable = 1;
+    const AwaitingCollection = 2;
 }

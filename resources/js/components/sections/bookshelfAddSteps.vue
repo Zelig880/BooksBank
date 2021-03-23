@@ -7,10 +7,10 @@
         </div>
         <div class="w-2/3 bg-gray-200 h-24 flex flex-col items-center justify-center px-1 rounded-r-lg body-step">
           <h2 class="font-bold text-sm">
-            {{ $t('bookshelfAdd-step1-title') }}
+            {{ $t('bookshelfAdd-steps-step1-title') }}
           </h2>
           <p class="text-xs text-gray-600">
-            {{ $t('bookshelfAdd-step1-description') }}
+            {{ $t('bookshelfAdd-steps-step1-description') }}
           </p>
         </div>
       </div>
@@ -25,10 +25,10 @@
         </div>
         <div class="w-2/3 bg-gray-200 h-24 flex flex-col items-center justify-center px-1 rounded-r-lg body-step">
           <h2 class="font-bold text-sm">
-            {{ $t('bookshelfAdd-step2-title') }}
+            {{ $t('bookshelfAdd-steps-step2-title') }}
           </h2>
           <p class="text-xs text-gray-600">
-            {{ $t('bookshelfAdd-step2-description') }}
+            {{ $t('bookshelfAdd-steps-step2-description') }}
           </p>
         </div>
       </div>
@@ -43,10 +43,10 @@
         </div>
         <div class="w-2/3 bg-gray-200 h-24 flex flex-col items-center justify-center px-1 rounded-r-lg body-step">
           <h2 class="font-bold text-sm">
-            {{ $t('bookshelfAdd-step3-title') }}
+            {{ $t('bookshelfAdd-steps-step3-title') }}
           </h2>
           <p class="text-xs text-gray-600">
-            {{ $t('bookshelfAdd-step3-description') }}
+            {{ $t('bookshelfAdd-steps-step3-description') }}
           </p>
         </div>
       </div>

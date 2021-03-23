@@ -12,15 +12,11 @@
         {{ formattedDescription }}
       </p>
 
-      <div class="my-3">
-        <fa icon="map-marker-alt" />
-        {{ formattedDistance }} Miles</div>
-
       <div class="flex justify-between">
+        <span class="self-end">ISBN: <span class="font-semibold">{{ ISBN }}</span></span>
         <button class="flex items-center text-xs uppercase font-bold text-gray-800 hover:opacity-75 rounded-full py-3 px-8 bg-gray-200" @click="$emit('click')">
-          Borrow
+          Select
         </button>
-        <span class="self-end">Condition: <span class="font-semibold">{{ condition }}</span></span>
       </div>
     </div>
   </div>
@@ -28,7 +24,7 @@
 
 <script>
 export default {
-  name: 'Card',
+  name: 'BookshelfAddCard',
 
   props: {
     title: {
@@ -44,21 +40,15 @@ export default {
       required: false,
       default: 'https://picsum.photos/300/500'
     },
-    condition: {
+    // eslint-disable-next-line vue/prop-name-casing
+    ISBN: {
       type: String,
-      required: true
-    },
-    distance: {
-      type: Number,
       required: true
     }
   },
   computed: {
-    formattedDistance () {
-      return Math.round(this.distance * 10) / 10
-    },
     formattedDescription () {
-      const truncatedDescription = this.description.substring(0, 112)
+      const truncatedDescription = this.description.substring(0, 80)
       return truncatedDescription + '...'
     }
   }

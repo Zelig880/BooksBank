@@ -12,8 +12,8 @@ use BenSampo\Enum\Enum;
  */
 final class BookCondition extends Enum
 {
-    const VeryGood = '0';
-    const Good = '1';
-    const Acceptable = '2';
-    const Poor = '3';
+    const VeryGood = 0;
+    const Good = 1;
+    const Acceptable = 2;
+    const Poor = 3;
 }

@@ -38,7 +38,7 @@ export default {
           route: 'bookshelf.settings'
         },
         {
-          icon: 'magnifier',
+          icon: 'search',
           name: this.$t('add_books'),
           route: 'bookshelf.add'
         }

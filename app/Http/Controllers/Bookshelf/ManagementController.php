@@ -55,8 +55,7 @@ class ManagementController extends Controller
         ]);
 
         try {
-
-           Book::Add($request, $userId);
+            Book::Add($request, $this->bookshelf->id);
 
             return response()->json([ "success" => true]);
         } catch (\Throwable $th) {
