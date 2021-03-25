@@ -22,7 +22,7 @@
           Search result: {{ searchedBook.length }}
         </h2>
         <div class="grid grid-cols-2 gap-4">
-          <card
+          <LibraryViewCard
             v-for="result in searchedBook" :key="result.id"
             :title="result.book.title"
             :description="result.book.description"

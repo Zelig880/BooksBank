@@ -55,6 +55,8 @@
           </button>
         </div>
       </div>
+
+      <TimeSlot :title="$t('bookshelfSettings-timeslot-title')" :selected-slots.sync="form.timeSlots" />
     </form>
   </div>
 </template>
@@ -76,7 +78,8 @@ export default {
       address_line_1: '',
       address_country: '',
       address_city: '',
-      address_postcode: ''
+      address_postcode: '',
+      timeSlots: []
     }),
     countries
   }),

@@ -2,7 +2,7 @@
   <nav class="relative flex flex-wrap items-center justify-between py-3 mb-3">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <h1 class="relative flex justify-between w-auto static block justify-start">
-        <router-link :to="{ name: user ? 'home' : 'welcome' }">
+        <router-link :to="{ name: 'welcome' }">
           <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
         </router-link>
       </h1>
