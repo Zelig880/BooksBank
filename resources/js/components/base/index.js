@@ -3,7 +3,8 @@ import Checkbox from './Checkbox'
 import LocaleDropdown from './LocaleDropdown'
 import Button from './Button'
 import Anchor from './Anchor'
-import Timeslot from './Timeslot'
+import LendTimeslot from './LendTimeslot'
+import BorrowTimeslot from './BorrowTimeslot'
 
 // Components that are registered globaly.
 [
@@ -11,7 +12,8 @@ import Timeslot from './Timeslot'
   LocaleDropdown,
   Button,
   Anchor,
-  Timeslot
+  LendTimeslot,
+  BorrowTimeslot
 ].forEach(Component => {
   Vue.component(Component.name, Component)
 })

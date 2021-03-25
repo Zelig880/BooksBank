@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <TimeSlot :title="$t('bookshelfSettings-timeslot-title')" :selected-slots.sync="form.timeSlots" />
+      <LendTimeSlot :title="$t('bookshelfSettings-timeslot-title')" :selected-slots.sync="form.timeSlots" />
     </form>
   </div>
 </template>

@@ -11,7 +11,7 @@ class Bookshelf extends Model
     use HasFactory;
     use Geographical;
 
-    protected $fillable = ['longitude', 'latitude'];
+    protected $fillable = ['longitude', 'latitude', 'pickup_times'];
 
     protected $table = "bookshelves";
     

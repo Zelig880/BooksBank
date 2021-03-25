@@ -35,7 +35,7 @@ class ManagementController extends Controller
 
     public function getByBookshelfItemId($id){
         try {
-            $book = Bookshelf_Item::with('book')
+            $book = Bookshelf_Item::with('book', 'book.authors', 'book.categories', 'bookshelf')
                 ->where('bookshelf_items.id', $id)
                 ->first();
 

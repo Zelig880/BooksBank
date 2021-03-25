@@ -28,7 +28,7 @@ class Book extends Model
     }
     
     /**
-     * The bookshelves that belong to the book.
+     * The bookshelf items that belong to the book.
      */
     public function bookshelf_item()
     {

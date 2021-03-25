@@ -9,8 +9,8 @@
       <tr v-for="(time, timeIndex) in times" :key="time">
         <th>{{ time }}</th>
         <td v-for="(day, dayIndex) in days" :key="day">
-          <label :class="{selected: isSelected(dayIndex, timeIndex)}">
-            {{ isSelected(dayIndex, timeIndex) ? 'Available' : 'Unavailable' }}
+          <label v-if="isAvailable(dayIndex, timeIndex)" :class="{selected: isSelected(dayIndex, timeIndex)}">
+            {{ isSelected(dayIndex, timeIndex) ? 'Selected' : 'Available' }}
             <input type="checkbox" :checked="isSelected(dayIndex, timeIndex)" @click="select(dayIndex, timeIndex)">
           </label>
         </td>
@@ -21,13 +21,13 @@
 
 <script>
 export default {
-  name: 'TimeSlot',
+  name: 'BorrowTimeSlot',
   props: {
     title: {
       type: String,
       required: true
     },
-    selectedSlots: {
+    availableSlots: {
       type: Array,
       required: true
     }
@@ -35,27 +35,31 @@ export default {
   data () {
     return {
       days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      times: ['8.00 - 10.00', '10.00 - 12.00', '12.00 - 14.00', '14.00 - 16.00', '16.00 - 18.00', '18.00 - 20.00']
+      times: ['8.00 - 10.00', '10.00 - 12.00', '12.00 - 14.00', '14.00 - 16.00', '16.00 - 18.00', '18.00 - 20.00'],
+      selectedSlots: []
     }
   },
+  computed: {
+  },
   methods: {
+    isAvailable (day, timeslot) {
+      const selectedIndex = (day * 7) + timeslot
+      return this.availableSlots.includes(selectedIndex)
+    },
     isSelected (day, timeslot) {
       const selectedIndex = (day * 7) + timeslot
       return this.selectedSlots.includes(selectedIndex)
     },
     select (day, timeslot) {
       const selectedSlot = (day * 7) + timeslot
-      const indexInSelectedSlots = this.selectedSlots.indexOf(selectedSlot)
-      let updatedSelectedSlots = [...this.selectedSlots]
-      // the selected checkbox needs to be added
-      if (indexInSelectedSlots === -1) {
-        updatedSelectedSlots.push(selectedSlot)
-      } else {
-        this.$delete(updatedSelectedSlots, indexInSelectedSlots)
-      }
 
-      this.$emit('update:selectedSlots', updatedSelectedSlots)
-    }
+      if (this.mode === 'lender') {
+        this.selectForLender(selectedSlot)
+      } else {
+        this.selectedSlots.push(selectedSlot)
+        this.$emit('select', this.selectedSlots)
+      }
+    },
   }
 }
 </script>

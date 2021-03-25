@@ -89,6 +89,8 @@
 
   "bookshelfSettings-timeslot-title": "Choose your preferred time for the book to be picked up",
 
+  "libraryBorrow-timeslot-title": "Available times to pick up. Please select at least 3 slots before continuing",
+
   "sFooter-text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
 
 }

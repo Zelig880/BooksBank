@@ -25,7 +25,7 @@ class BookFactory extends Factory
             'title' => $this->faker->sentence($nbWords = 4),
             'description' => $this->faker->text($maxNbChars = 200),
             'ISBN' => $this->faker->isbn13,
-            'thumbnail' => $this->faker->imageUrl($width = 640, $height = 480),
+            'thumbnail' => 'https://picsum.photos/160/240',
         ];
     }
 }
