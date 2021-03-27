@@ -17,6 +17,7 @@
         </p>
         <hr>
         <BorrowTimeSlot :title="$t('libraryBorrow-timeslot-title')" :available-slots="availableTimeslot" @select="setPickups" />
+        <BorrowModal :show="true" />
         <button class="btn btn-primary" @click="request(selectedBook.id)">
           Borrow book
         </button>
@@ -30,9 +31,13 @@
 
 <script>
 import { mapActions } from 'vuex'
+import BorrowModal from '../../components/sections/BorrowModal.vue'
 
 export default {
   middleware: 'auth',
+  components: {
+    BorrowModal
+  },
   data () {
     return {
       selectedBook: null,

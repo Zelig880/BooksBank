@@ -39,7 +39,8 @@ class ManagementController extends Controller
     public function request(Request $request){
 
         $this->validate($request, [
-            'bookshelfItemId' => 'required'
+            'bookshelfItemId' => 'required',
+            'date' => 'required'
         ]);
 
         $userId = Auth::id();
@@ -52,6 +53,7 @@ class ManagementController extends Controller
             'borrower_id' => $userId,
             'book_id' => $bookshelf_item->book_id,
             'bookshelf_item_id' => $request->input('bookshelfItemId'),
+            'pickup_date' => $request->input('date'),
         ]);
         
         return response()->json($result);

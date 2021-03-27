@@ -22,6 +22,7 @@ class CreateLedgeTable extends Migration
             $table->integer('bookshelf_item_id');
             $table->tinyInteger('status')->unsigned()->default(LedgeStatus::WaitingApproval);
             $table->integer('lend_duration')->default(14);
+            $table->dateTime('pickup_date');
             $table->dateTime('return_date')->nullable();
             $table->timestamps();
         });

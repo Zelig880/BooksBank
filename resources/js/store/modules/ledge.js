@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { DateTime } from 'luxon'
 
 // state
 export const state = {
@@ -35,7 +36,10 @@ export const actions = {
     commit('SET_ITEMS', data)
   },
   async request ({ commit }, bookshelfItemId) {
-    const { data } = await axios.post(`/api/ledge/request`, { bookshelfItemId })
+    //sc88: Need to define date time from UI
+    const date = DateTime.local(2021, 3, 27, 12).toFormat('yyyy-LL-dd TT')
+  
+    const { data } = await axios.post(`/api/ledge/request`, { bookshelfItemId, date })
     console.log(data)
   },
   async respond ({ commit }, { ledgeId, response }) {
