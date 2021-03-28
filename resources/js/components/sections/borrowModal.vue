@@ -1,8 +1,8 @@
 <template>
   <Modal :show="show">
     <template v-slot:body>
-      <div class="borrowModal grid grid-cols-6">
-        <div class="col-span-5 p-9 flex flex-wrap">
+      <div class="borrowModal grid grid-cols-4">
+        <div class="col-span-3 p-9 flex flex-wrap">
           <div class="flex-grow">
             <h2 class="text-2xl text-gray-700 font-bold" >Collection time available</h2>
             <p class="text-gray-500 mb-12">Find the time that suit you best, from the available list</p>
@@ -46,6 +46,8 @@
           <h2>Book return date:</h2>
           <!-- sc88: make this dynamic -->
           <p>Bok return date</p>
+          <!-- sc88: need to emit the selected date and time -->
+          <Button @click="$emit('close')">Send Request</Button>
         </div>
       </div>
     </template>
