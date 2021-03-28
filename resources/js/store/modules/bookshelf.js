@@ -3,9 +3,9 @@ import axios from 'axios'
 const createBookObject = function (book) {
   if (!book.volumeInfo) return
 
-  const ISBN = book.volumeInfo.industryIdentifiers[0].identifier
-  const thumbnail = book.volumeInfo.imageLinks.thumbnail
-  const description = book.volumeInfo.description
+  const ISBN = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : 'N/A'
+  const thumbnail = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '/assets/img/default_cover.png'
+  const description = book.volumeInfo.description || ''
   const categories = book.volumeInfo.categories
   const authors = book.volumeInfo.authors
   const title = book.volumeInfo.title

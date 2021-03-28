@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <h2 class="mb-4 text-center font-black text-gray-700 text-2xl">
-      {{ $t('bookshelfAdd-title') }}
-    </h2>
-    <p class="text-lg">
-      {{ $t('welcomeAdd-paragraph') }}
-    </p>
-    <BookshelfAddSteps :current-step="currentStep" />
-    <BookshelfAddStep1 v-if="currentStep === 1" @select="selectBook" />
-    <BookshelfAddStep2 v-if="currentStep === 2" @select="selectCondition" />
-    <BookshelfAddStep3 v-if="currentStep === 3" v-bind="selectedBook" @select="confirm" />
+  <div class="flex">
+    <img :src="thumbnail" :alt="thumbnail_alt" class="mr-8 hidden md:block" />
+    <div class="add-form">
+      <h2 class="mb-4 font-black text-gray-700 text-2xl">
+        {{ $t('bookshelfAdd-title') }}
+      </h2>
+      <p class="text-lg">
+        {{ $t('welcomeAdd-paragraph') }}
+      </p>
+      <BookshelfAddStep1 v-if="currentStep === 1" @select="selectBook" />
+      <BookshelfAddStep2 v-if="currentStep === 2" @select="selectCondition" />
+      <BookshelfAddStep3 v-if="currentStep === 3" v-bind="selectedBook" @select="confirm" />
+    </div>
   </div>
 </template>
 
@@ -18,12 +20,10 @@ import { mapActions } from 'vuex'
 import BookshelfAddStep1 from '../../components/sections/bookshelfAddStep1.vue'
 import BookshelfAddStep2 from '../../components/sections/bookshelfAddStep2.vue'
 import BookshelfAddStep3 from '../../components/sections/bookshelfAddStep3.vue'
-import BookshelfAddSteps from '../../components/sections/bookshelfAddSteps.vue'
 
 export default {
   name: 'Add',
   components: {
-    BookshelfAddSteps,
     BookshelfAddStep1,
     BookshelfAddStep2,
     BookshelfAddStep3
@@ -33,6 +33,15 @@ export default {
       selectedBook: null,
       currentStep: 1
     }
+  },
+  computed: {
+    thumbnail () {
+      return this.selectedBook ? this.selectedBook.thumbnail : '/assets/img/default_cover.png'
+    },
+    thumbnail_alt () {
+      return this.selectedBook ? `cover for ${this.selectedBook.title}` : 'Empty book cover'
+    }
+
   },
   methods: {
     ...mapActions({
@@ -63,12 +72,7 @@ export default {
 </script>
 
 <style>
-.short_text{
-  overflow: hidden;
-  white-space: nowrap;
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  width: auto;
+.add-form{
+  max-width: 624px;
 }
 </style>
