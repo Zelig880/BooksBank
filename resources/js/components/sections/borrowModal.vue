@@ -1,16 +1,16 @@
 <template>
-  <Modal :show="show">
+  <Modal :show="show" @close="$emit('close')">
     <template v-slot:body>
       <div class="borrowModal grid grid-cols-4">
-        <div class="col-span-3 p-9 flex flex-wrap">
+        <div class="col-span-4 md:col-span-3 p-9 flex flex-wrap">
           <div class="flex-grow">
             <h2 class="text-2xl text-gray-700 font-bold" >Collection time available</h2>
             <p class="text-gray-500 mb-12">Find the time that suit you best, from the available list</p>
           </div>
-          <div class="w-4/6 pr-8">
+          <div class="w-full md:w-4/6 pr-8">
             <date-picker :is-expanded="true" title-position="left" :value="minDate" :min-date="minDate" :max-date="maxDate" @dayclick="onDayClick" />
           </div>
-          <div class="w-2/6 pr-4">
+          <div class="w-full md:w-2/6 pr-4">
             <!-- sc88: make this dynamic -->
             <p class="mb-3">Tuesday the xx of xxx</p>
             <div class="time selected">8.00 - 10.00</div>
@@ -21,7 +21,7 @@
             <div class="time">18.00 - 20.00</div>
           </div>
         </div>
-        <div class="col-span-1 bg-gray-300 p-9">
+        <div class="col-span-4 md:col-span-1 bg-gray-300 p-9">
           <h2>You are borrwing:</h2>
           <!-- sc88: make this dynamic -->
           <p>Book Title</p>

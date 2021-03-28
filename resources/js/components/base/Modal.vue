@@ -1,15 +1,15 @@
 <template>
-  <transition v-show="show" name="modal">
+  <transition v-if="show" name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container rounded-xl shadow-md mx-auto md:w-2/3 ">
-          <div class="modal-body">
+        <div class="modal-container rounded-xl shadow-md mx-auto md:w-2/3 mt-8">
+          <div class="modal-body md:h-auto">
             <slot name="body">
               default body
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
             </slot>
+            <button class="modal-default-button" @click="$emit('close')">
+              <fa icon="times" size="lg" />
+            </button>
           </div>
         </div>
       </div>
@@ -51,7 +51,20 @@ export default {
   background-color: #fff;
   transition: all 0.3s ease;
   overflow:hidden;
+  position: relative;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-body {
+  height: 100vh;
+  overflow: auto;
+}
+
+.modal-default-button {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+
 }
 
 /*

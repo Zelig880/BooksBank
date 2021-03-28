@@ -17,7 +17,7 @@
         </p>
         <hr>
         <BorrowTimeSlot :title="$t('libraryBorrow-timeslot-title')" :available-slots="availableTimeslot" @select="setPickups" />
-        <BorrowModal :show="true" />
+        <BorrowModal :show="showModal" @close="closeModal" />
         <button class="btn btn-primary" @click="request(selectedBook.id)">
           Borrow book
         </button>
@@ -42,7 +42,8 @@ export default {
     return {
       selectedBook: null,
       showFullDescription: false,
-      selectedPickups: []
+      selectedPickups: [],
+      showModal: true
     }
   },
   computed: {
@@ -74,6 +75,10 @@ export default {
     ...mapActions('ledge', ['request']),
     setPickups (slots) {
       this.selectedPickups = slots
+    },
+    closeModal () {
+      debugger;
+      this.showModal = false
     }
   }
 }
