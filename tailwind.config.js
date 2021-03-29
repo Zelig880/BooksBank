@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: [
     './resources/**/*.blade.php',
@@ -7,11 +9,15 @@ module.exports = {
   theme: {
     container: {
       screens: {
-        sm: "100%",
-        md: "100%",
-        lg: "1024px",
-        xl: "1280px"
+        sm: '100%',
+        md: '100%',
+        lg: '1024px',
+        xl: '1280px'
       }
+    },
+    fontFamily: {
+      'lora': ['Lora', ...defaultTheme.fontFamily.serif],
+      'sans': ['"Open+Sans"', ...defaultTheme.fontFamily.sans]
     },
     extend: {
     }

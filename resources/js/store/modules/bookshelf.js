@@ -43,6 +43,9 @@ export const mutations = {
   },
   SET_ITEMS (state, items) {
     state.items = items
+  },
+  RESET_SEARCH_RESULT (state) {
+    state.searchResult = []
   }
 }
 
@@ -74,5 +77,8 @@ export const actions = {
     const { data } = await axios.get(`/api/bookshelf`)
 
     commit('SET_ITEMS', data)
+  },
+  reset ({ commit }) {
+    commit('RESET_SEARCH_RESULT')
   }
 }

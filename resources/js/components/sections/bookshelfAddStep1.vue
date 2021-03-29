@@ -1,10 +1,8 @@
 <template>
-  <div class="mt-8 bokshelfAddStep1">
-    <h3 class="text-xl font-bold">Add ISBN or book title</h3>
-    <div class="bokshelfAddStep1-field rounded-sm border-2 pl-8 pr-12 py-2 flex flex-col relative w-full">
-      <label for="search" class="text-xs text-gray-400 font-bold">{{ $t( 'bookshelfAdd-step1-search-label' ) }}</label>
-      <input id="search" v-model="searchText" class="font-bold text-lg" type="text" @keyup.enter="find(searchText)">
-      <fa icon="search" class="absolute right-4 top-3 text-gray-400" size="2x" @click="find(searchText)" />
+  <div class="mt-8 mb-11 bokshelfAddStep1">
+    <label for="search" class="text-2xl font-semibold mb-3">{{ $t( 'bookshelfAdd-step1-search-label' ) }}</label>
+    <div class="bokshelfAddStep1-field rounded-md border-2 pl-8 pr-12 py-2 flex flex-col relative w-full">
+      <input id="search" v-model="searchText" class="font-bold text-lg" type="text" @keyup.enter="find(searchText)" placeholder="1234567891231 or The Lord of the ring" :disabled="disabled">
       <perfect-scrollbar v-if="searchedBook.length > 0" class="bokshelfAddStep1-result">
         <bookshelf-add-card
           v-for="result in searchedBook" :key="result.id"
@@ -12,7 +10,7 @@
           :description="result.description"
           :thumbnail="result.thumbnail"
           :ISBN="result.ISBN"
-          @click="$emit('select', result)"
+          @click="selectBook(result)"
         />
       </perfect-scrollbar>
     </div>
@@ -26,6 +24,9 @@ import BookshelfAddCard from './bookshelfAddCard.vue'
 export default {
   name: 'BookshelfAddStep1',
   components: { BookshelfAddCard },
+  props: {
+    disabled: Boolean
+  },
   data () {
     return {
       searchText: ''
@@ -36,8 +37,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      find: 'bookshelf/find'
-    })
+      find: 'bookshelf/find',
+      reset: 'bookshelf/reset'
+    }),
+    selectBook (book) {
+      this.$emit('select', book)
+      this.reset()
+    }
   }
 }
 </script>
@@ -48,6 +54,9 @@ export default {
 
   &-field {
     position: relative;
+    input{
+      background-color: white !important;
+    }
   }
   &-result{
     position: absolute;

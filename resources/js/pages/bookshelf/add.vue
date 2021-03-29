@@ -1,16 +1,18 @@
 <template>
-  <div class="flex">
-    <img :src="thumbnail" :alt="thumbnail_alt" class="mr-8 hidden md:block" />
+  <div class="container mx-auto flex">
+    <div class="mr-8 hidden md:block">
+      <img :src="thumbnail" :alt="thumbnail_alt" class="w-full h-auto" />
+    </div>
     <div class="add-form">
-      <h2 class="mb-4 font-black text-gray-700 text-2xl">
+      <h2 class="mb-4 font-black text-gray-700 text-6xl font-lora">
         {{ $t('bookshelfAdd-title') }}
       </h2>
       <p class="text-lg">
         {{ $t('welcomeAdd-paragraph') }}
       </p>
-      <BookshelfAddStep1 v-if="currentStep === 1" @select="selectBook" />
-      <BookshelfAddStep2 v-if="currentStep === 2" @select="selectCondition" />
-      <BookshelfAddStep3 v-if="currentStep === 3" v-bind="selectedBook" @select="confirm" />
+      <BookshelfAddStep1 :disabled="currentStep !== 1" @select="selectBook" />
+      <BookshelfAddStep2 v-if="currentStep >= 2" :disabled="currentStep !== 2" @select="selectCondition" />
+      <Button v-if="currentStep === 3" class="float-right mt-6" @click="addToBookshelf">Add to your Bookshelf</Button>
     </div>
   </div>
 </template>
@@ -19,14 +21,13 @@
 import { mapActions } from 'vuex'
 import BookshelfAddStep1 from '../../components/sections/bookshelfAddStep1.vue'
 import BookshelfAddStep2 from '../../components/sections/bookshelfAddStep2.vue'
-import BookshelfAddStep3 from '../../components/sections/bookshelfAddStep3.vue'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Add',
   components: {
     BookshelfAddStep1,
-    BookshelfAddStep2,
-    BookshelfAddStep3
+    BookshelfAddStep2
   },
   data () {
     return {
@@ -49,7 +50,13 @@ export default {
     }),
     async addToBookshelf () {
       await this.addBook(this.selectedBook)
-      this.showLend = true
+      Swal.fire({
+        type: 'success',
+        title: 'Good Job!',
+        text: 'Your book has been succesfully added to your Bookshelf!'
+      }).then(() => {
+        this.$router.push({ name: 'bookshelf.all' })
+      })
     },
     selectBook (book) {
       this.selectedBook = book
@@ -74,5 +81,6 @@ export default {
 <style>
 .add-form{
   max-width: 624px;
+  width:100%;
 }
 </style>

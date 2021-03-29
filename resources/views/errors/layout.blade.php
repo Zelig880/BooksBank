@@ -9,7 +9,7 @@
   <title>@yield('title')</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <style>
