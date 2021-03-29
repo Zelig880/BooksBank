@@ -16,8 +16,8 @@ export const state = {
 
 // getters
 export const getters = {
-  request: (state, getter, rootGetter) => state.items.filter(item => item.borrower_id === rootGetter.auth.user.id),
-  ledge: (state, getter, rootGetter) => state.items.filter(item => item.lender_id === rootGetter.auth.user.id),
+  borrowed: (state, getter, rootGetter) => state.items.filter(item => item.borrower_id === rootGetter.auth.user.id),
+  lent: (state, getter, rootGetter) => state.items.filter(item => item.lender_id === rootGetter.auth.user.id),
   status: state => state.status
 }
 

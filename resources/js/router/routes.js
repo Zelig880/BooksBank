@@ -29,13 +29,12 @@ export default [
       { path: 'profile', name: 'settings.profile', component: page('settings/profile.vue') },
       { path: 'password', name: 'settings.password', component: page('settings/password.vue') }
     ] },
-    
+  { path: '/bookshelf/add', name: 'bookshelf.add', component: page('bookshelf/add.vue') },
   { path: '/bookshelf',
     component: page('bookshelf/index.vue'),
     children: [
       { path: '', redirect: { name: 'bookshelf.settings' } },
       { path: 'settings', name: 'bookshelf.settings', component: page('bookshelf/settings.vue') },
-      { path: 'add', name: 'bookshelf.add', component: page('bookshelf/add.vue') },
       { path: 'all', name: 'bookshelf.all', component: page('bookshelf/all.vue') },
       { path: 'requested', name: 'bookshelf.requested', component: page('bookshelf/requested.vue') },
     ] },

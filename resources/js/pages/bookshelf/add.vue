@@ -25,6 +25,7 @@ import Swal from 'sweetalert2'
 
 export default {
   name: 'Add',
+  middleware: 'auth',
   components: {
     BookshelfAddStep1,
     BookshelfAddStep2

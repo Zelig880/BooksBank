@@ -9,7 +9,7 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(result, index) in request" :key="`br-${index}`">
+        <tr v-for="(result, index) in borrowed" :key="`br-${index}`">
           <td>{{ result.book.title }}</td>
           <td>{{ result.lend_duration }}</td>
           <td>{{ status[result.status] }}</td>
@@ -26,7 +26,7 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(result, index) in ledge" :key="`ld-${index}`">
+        <tr v-for="(result, index) in lent" :key="`ld-${index}`">
           <td>{{ result.book.title }}</td>
           <td>{{ result.lend_duration }}</td>
           <td>{{ status[result.status] }}</td>
@@ -58,7 +58,7 @@ export default {
   }),
   computed: {
     ...mapGetters('library', ['searchedBook']),
-    ...mapGetters('ledge', ['request', 'status', 'ledge'])
+    ...mapGetters('ledge', ['borrowed', 'status', 'lent'])
   },
   mounted () {
     this.getAll()
