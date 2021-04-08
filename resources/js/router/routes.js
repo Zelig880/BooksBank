@@ -37,6 +37,7 @@ export default [
       { path: 'settings', name: 'bookshelf.settings', component: page('bookshelf/settings.vue') },
       { path: 'all', name: 'bookshelf.all', component: page('bookshelf/all.vue') },
       { path: 'requested', name: 'bookshelf.requested', component: page('bookshelf/requested.vue') },
+      { path: 'info', name: 'bookshelf.info', component: page('bookshelf/info.vue') },
     ] },
 
   { path: '*', component: page('errors/404.vue') }

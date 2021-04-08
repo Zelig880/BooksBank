@@ -14,14 +14,11 @@
           </div>
         </div>
         <div class=" absolute right-0 bottom-0">
-          <router-link class="bookshelf-index__button" :class="{ 'bookshelf-index__button--selected': $route.name === 'bookshelf.all'}" :to="{ name: 'bookshelf.all' }">
+          <router-link class="bookshelf-index__button" :class="{ 'bookshelf-index__button--selected': $route.name === 'bookshelf.all'} " :to="{ name: 'bookshelf/all' }">
             My Library
           </router-link>
-          <router-link class="bookshelf-index__button" :class="{ 'bookshelf-index__button--selected': $route.name === 'bookshelf.info'}" :to="{ name: 'bookshelf.info' }">
-            My Dashboard
-          </router-link>
-          <router-link class="bookshelf-index__button" :class="{ 'bookshelf-index__button--selected': $route.name === 'bookshelf.settings'}" :to="{ name: 'bookshelf.settings' }">
-            My Settings
+          <router-link class="bookshelf-index__button" :to="{ name: 'bookshelf/info' }">
+            My Books
           </router-link>
         </div>
       </div>
@@ -49,9 +46,9 @@ export default {
     min-height: 500px;
   }
   &__button{
-    @apply bg-gray-400 rounded-t-lg text-blue-600 py-4 px-7 font-semibold inline-block;
+    @apply bg-gray-400 rounded-t-lg text-blue-600 py-4 px-7 font-semibold;
     &--selected{
-      @apply bg-white font-semibold text-gray-700;
+      @apply bg-white font-semibold;
     }
   }
 }
