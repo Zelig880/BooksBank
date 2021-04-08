@@ -10,10 +10,10 @@
         <div class="lg:w-1/2 lg:text-right">
           <div class="split-layout__left-column pr-0 lg:pr-16 ml-8 mt-16 xl:ml-auto text-center lg:text-left">
             <div class="border-b pb-4">
-              <router-link :to="{name: 'login'}" class="mr-16 pb-4 capitalize" :class="{ 'border-b-4': signinPage}">
+              <router-link :to="{name: 'login'}" :class="{ 'border-b-4': signinPage}">
                 Signin
               </router-link>
-              <router-link :to="{name: 'register'}" class="mr-16 pb-4 capitalize" :class="{ 'border-b-4': signupPage}">
+              <router-link :to="{name: 'register'}" :class="{ 'border-b-4': signupPage}">
                 Signup
               </router-link>
             </div>
@@ -58,6 +58,10 @@ export default {
 .split-layout{
   &__left-column{
     max-width: 640px;
+  }
+  a{
+    @apply mr-16 pb-4 capitalize;
+    border-color: var(--outline);
   }
 }
 </style>

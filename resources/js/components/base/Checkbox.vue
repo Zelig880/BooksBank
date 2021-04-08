@@ -64,3 +64,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.custom-checkbox{
+  input{
+    width:24px;
+    height:24px;
+  }
+  label{
+    vertical-align: top;
+  }
+}
+</style>

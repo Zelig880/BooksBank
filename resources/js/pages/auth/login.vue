@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     <div>
       <h2 class="mt-8 text-2xl font-bold">
         {{ $t('signin-title') }}
@@ -34,7 +34,7 @@
       <a href="#">{{ $t('forgot_password') }}</a>
       <has-error :form="form" field="email" />
       <has-error :form="form" field="password" />
-      <button type="text" class="w-full border-2 py-4 px-4 mt-8 rounded-lg bg-gray-400 text-white capitalize" :loading="form.busy">
+      <button type="text" class="submit-button" :loading="form.busy">
         {{ $t('login') }}
       </button>
     </form>
@@ -88,3 +88,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.login{
+  .submit-button{
+    @apply w-full border-2 py-4 px-4 mt-8 rounded-lg text-white;
+    text-transform: uppercase;
+    background-color: var(--outline);
+  }
+}
+</style>

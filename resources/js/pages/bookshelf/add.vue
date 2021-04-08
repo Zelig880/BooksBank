@@ -1,7 +1,7 @@
 <template>
-  <div class="container mx-auto flex">
-    <div class="mr-8 hidden md:block">
-      <img :src="thumbnail" :alt="thumbnail_alt" class="w-full h-auto" />
+  <div class="add-component container mx-auto flex">
+    <div class="mr-8 hidden md:block add-component__image">
+      <img v-if="thumbnail" :src="thumbnail" :alt="thumbnail_alt" />
     </div>
     <div class="add-form">
       <h2 class="mb-4 font-black text-gray-700 text-6xl font-lora">
@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     thumbnail () {
-      return this.selectedBook ? this.selectedBook.thumbnail : '/assets/img/default_cover.png'
+      return this.selectedBook ? this.selectedBook.thumbnail : false
     },
     thumbnail_alt () {
       return this.selectedBook ? `cover for ${this.selectedBook.title}` : 'Empty book cover'
@@ -79,9 +79,22 @@ export default {
 }
 </script>
 
-<style>
-.add-form{
-  max-width: 624px;
-  width:100%;
+<style lang="scss">
+.add-component{
+  &__image{
+    width: 175px;
+    height: 264px;
+    background-color: var(--img-holder);
+    img{
+      height:100%;
+      width: 100%;
+    }
+  }
+  .add-form{
+    max-width: 624px;
+    width:100%;
+    min-height:600px;
+  }
 }
+
 </style>

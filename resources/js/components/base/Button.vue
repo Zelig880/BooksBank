@@ -5,7 +5,8 @@
 </template>
 
 <script>
-const themes = ['rounded']
+const themes = ['cta', 'primary', 'secondary', 'square']
+const colours = ['primary', 'secondary']
 
 export default {
   name: 'Button',
@@ -13,13 +14,18 @@ export default {
     theme: {
       type: String,
       required: false,
-      default: 'rounded',
+      default: 'primary',
       validator: value => themes.includes(value)
+    },
+    color: {
+      type: String,
+      default: 'primary',
+      validator: value => colours.includes(value)
     }
   },
   computed: {
     themeClass () {
-      return `button button-${this.theme}`
+      return `button button-${this.theme} color-${this.color}`
     }
   }
 }
@@ -30,7 +36,86 @@ export default {
   display: inline-block;
   cursor: pointer;
 }
-.button-rounded{
-  @apply items-center text-xs uppercase font-bold text-gray-700 hover:opacity-75 rounded-full py-3 px-6 bg-gray-200;
+.button-cta{
+  width: 230px;
+  height: 56px;
+  padding: 8px 28px 11.5px 42px;
+  border-radius: 28px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.03;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  &.color-cta{
+    background-color: var(--primary-1);
+  }
+  &.color-primary{
+    background-color: var(--outline);
+  }
+  &.color-secondary{
+    background-color: var(--outline-2);
+  }
+}
+.button-primary{
+  min-width: 130px;
+  height: 40px;
+  padding: 10px 22px 11px 21px;
+  border-radius: 20.8px;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  &.color-cta{
+    background-color: var(--primary-1);
+  }
+  &.color-primary{
+    background-color: var(--outline);
+  }
+  &.color-secondary{
+    background-color: var(--outline-2);
+  }
+}
+.button-secondary{
+  min-width: 112px;
+  height: 44px;
+  padding: 6px 12px 8.8px 10px;
+  border-radius: 22.4px;
+  &.color-cta{
+    border: solid 1.6px var(--primary-1);
+  }
+  &.color-primary{
+    border: solid 1.6px var(--outline);
+  }
+  &.color-secondary{
+    border: solid 1.6px var(--outline-2);
+  }
+}
+.button-square{
+  width: 278px;
+  height: 56px;
+  margin: 8px 17px 14px 0;
+  padding: 9px 50px 10.5px 51px;
+  border-radius: 5px;
+  font-family: OpenSans;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.03;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--outline-2);
+  border: solid 1.6px var(--outline-2);
+  &:hover, &.color-primary{
+    background-color: var(--outline-2);
+    color: white;
+  }
 }
 </style>

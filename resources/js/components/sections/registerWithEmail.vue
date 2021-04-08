@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="registerWithEmail">
     <div v-if="mustVerifyEmail">
       <div class="alert alert-success" role="alert">
         {{ $t('verify_email_address') }}
@@ -26,12 +26,13 @@
         <div class="w-full border-2 py-4 px-4 mb-8 flex rounded-lg">
           <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" class="w-full ml-4" type="password" name="password_confirmation" :placeholder="$t('register_password_placeholder')">
         </div>
-        <a href="#">{{ $t('forgot_password') }}</a>
+        <Checkbox @click="policySigned = true" class="w-full">I agree to the privacy policy</Checkbox>
         <has-error :form="form" field="name" />
         <has-error :form="form" field="email" />
         <has-error :form="form" field="password" />
         <has-error :form="form" field="password_confirmation" />
-        <button class="w-full border-2 py-4 px-4 mt-8 rounded-lg bg-gray-400 text-white capitalize" :loading="form.busy">
+        <has-error :form="form" field="policy" />
+        <button :disabled="!policySigned" :loading="form.busy">
           {{ $t('register_cta') }}
         </button>
       </form>
@@ -54,7 +55,8 @@ export default {
       password: '',
       password_confirmation: ''
     }),
-    mustVerifyEmail: false
+    mustVerifyEmail: false,
+    policySigned: false
   }),
   methods: {
     async register () {
@@ -82,6 +84,16 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.registerWithEmail{
+  button{
+    @apply w-full border-2 py-4 px-4 mt-8 rounded-lg text-white;
+    text-transform: uppercase;
+    background-color: var(--outline);
+    &:disabled{
+      cursor:no-drop;
+    background-color: var(--body-standard);
+    }
+  }
+}
 </style>

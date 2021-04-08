@@ -5,7 +5,8 @@
 </template>
 
 <script>
-const themes = ['default', 'rounded']
+const themes = ['cta', 'primary', 'secondary', 'none']
+const colours = ['primary', 'secondary']
 
 export default {
   name: 'Anchor',
@@ -21,23 +22,103 @@ export default {
     theme: {
       type: String,
       required: false,
-      default: 'default',
+      default: 'primary',
       validator: value => themes.includes(value)
+    },
+    color: {
+      type: String,
+      default: 'primary',
+      validator: value => colours.includes(value)
     }
   },
   computed: {
     themeClass () {
-      return `anchor-${this.theme}`
+      return `anchor anchor-${this.theme} color-${this.color}`
     }
   }
 }
 </script>
 
 <style lang="scss">
-.anchor-rounded{
-  @apply flex items-center text-xs uppercase font-bold text-gray-700 hover:opacity-75 rounded-full py-3 px-6 bg-gray-200;
+.anchor{
+  display: inline-block;
+  cursor: pointer;
 }
-.anchor-default{
-  @apply px-3 py-3 flex items-center text-xs uppercase font-bold leading-snug text-gray-500 hover:opacity-75;
+.anchor-cta{
+  width: 230px;
+  height: 56px;
+  padding: 8px 28px 11.5px 42px;
+  border-radius: 28px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.03;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  &.color-cta{
+    background-color: var(--primary-1);
+  }
+  &.color-primary{
+    background-color: var(--outline);
+  }
+  &.color-secondary{
+    background-color: var(--outline-2);
+  }
+}
+.anchor-primary{
+  width: 130px;
+  height: 40px;
+  padding: 10px 22px 11px 21px;
+  border-radius: 20.8px;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  &.color-cta{
+    background-color: var(--primary-1);
+  }
+  &.color-primary{
+    background-color: var(--outline);
+  }
+  &.color-secondary{
+    background-color: var(--outline-2);
+  }
+}
+.anchor-secondary{
+  width: 112px;
+  height: 44px;
+  padding: 6px 12px 8.8px 10px;
+  border-radius: 22.4px;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.71;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  &.color-cta{
+    border: solid 1.6px var(--primary-1);
+  }
+  &.color-primary{
+    border: solid 1.6px var(--outline);
+  }
+  &.color-secondary{
+    border: solid 1.6px var(--outline-2);
+  }
+}
+.anchor-none{
+  color: var(--body-standard);
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
 }
 </style>

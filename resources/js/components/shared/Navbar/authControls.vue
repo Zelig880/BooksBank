@@ -18,18 +18,18 @@
     <!-- Non Authenticated -->
     <template v-else>
       <li class="">
-        <Anchor route-name="login">
+        <Anchor theme="none" route-name="login" class="pt-2 mr-6">
           {{ $t('login') }}
         </Anchor>
       </li>
       <li class="">
-        <Anchor route-name="register">
+        <Anchor theme="none" route-name="register" class="pt-2 mr-5">
           {{ $t('register') }}
         </Anchor>
       </li>
     </template>
     <li class="ml-4 hidden md:inline-block">
-      <Anchor theme="rounded" route-name="bookshelf.add">
+      <Anchor theme="primary" color="cta" route-name="bookshelf.add">
         Add a book
       </Anchor>
     </li>

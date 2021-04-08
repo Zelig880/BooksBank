@@ -7,19 +7,19 @@
       </p>
       <div class="col-span-1 flex place-content-around  mb-8">
         <ul>
-          <li><Anchor routeName="test">text</Anchor></li>
-          <li><Anchor routeName="test">text</Anchor></li>
-          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
         </ul>
         <ul>
-          <li><Anchor routeName="test">text</Anchor></li>
-          <li><Anchor routeName="test">text</Anchor></li>
-          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
         </ul>
         <ul>
-          <li><Anchor routeName="test">text</Anchor></li>
-          <li><Anchor routeName="test">text</Anchor></li>
-          <li><Anchor routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="test">text</Anchor></li>
         </ul>
       </div>
       <div class="col-span-1  mb-8">

@@ -16,7 +16,7 @@
           <label>Location</label>
           <input v-model="form.address" type="text" placeholder="Postcode">
         </div>
-        <button class="bg-gray-500 block text-white font-bold rounded-full md:rounded-l-none flex-grow mt-6 md:mt-0 w-10/12 md:w-1/4 mx-auto py-4">
+        <button id="search-button" class="block text-white font-bold rounded-full md:rounded-l-none flex-grow mt-6 md:mt-0 w-10/12 md:w-1/4 mx-auto py-4">
           {{ $t('search') }}
         </button>
       </form>
@@ -70,10 +70,7 @@ export default {
 </script>
 
 <style lang="scss">
-
-.welcomeSearch{
-  &__currentLocation{
-    cursor: pointer;
-  }
+#search-button{
+  background-color: var(--outline);
 }
 </style>
