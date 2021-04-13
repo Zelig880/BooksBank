@@ -1,12 +1,20 @@
 # BookSwap
 
-Welcome to BookSwap, the first project aimed at supporting book lending.
+Welcome to BooksBank, the first project aimed at supporting book lending.
 
-The project aim is to support communities to lend and borrow books between each other, saving themselves money and also allowing people less fortunate to enjoy reading.
+The project goal is to support communities to lend and borrow books between each other, saving themselves money and also allowing people less fortunate to enjoy reading.
 
 The project is runned by Zelig880 (www.zelig880.com), and is open to everyone that wants to contribute.
 
-If interested, please send me an email at scuomo1988@gmail.com, to get access to the project board and receive full support while developing the app. 
+# How to contribute
+The best way to get involved is to find an issue with the label of "Good first issue" or contact me on Twitter (@zelig880). This project is great for people that want to start and learn Vue Js, as I will be reviewing and providing guidance in best practices.
+
+The project designs can be found here: 
+
+- Invision designs: https://projects.invisionapp.com/d/main/default/#/console/17236584/446551990/preview
+- zeplin: https://app.zeplin.io/project/6047d3685cdff106a3f16337/screen/6047d80ebafdbb06f6d2df8e
+
+We are aiming at developing Mobile ready components, and trying to replicate the designs as best as we can, taking into consideration the time involved in doing so.
 
 # TechStack
 
