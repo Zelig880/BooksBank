@@ -7,7 +7,7 @@
             User
           </div>
           <div class="font-lora text-6xl">
-            My Name
+            {{ user.name }}
           </div>
           <div class="text-blue-600 font-sans">
             Address line 1, line 2
@@ -33,8 +33,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  middleware: 'auth'
+  middleware: 'auth',
+  computed: mapGetters({
+    user: 'auth/user'
+  })
 }
 </script>
 

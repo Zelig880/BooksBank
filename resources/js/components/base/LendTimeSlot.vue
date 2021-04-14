@@ -1,50 +1,44 @@
 <template>
-  <table class="timeslot">
-    <caption>{{ title }}</caption>
-    <tbody>
-      <tr>
-        <td>&nbsp;</td>
-        <th v-for="day in days" :key="day">{{ day }}</th>
-      </tr>
-      <tr v-for="(time, timeIndex) in times" :key="time">
-        <th>{{ time }}</th>
-        <td v-for="(day, dayIndex) in days" :key="day">
-          <label :class="{selected: isSelected(dayIndex, timeIndex)}">
-            {{ isSelected(dayIndex, timeIndex) ? 'Available' : 'Unavailable' }}
-            <input type="checkbox" :checked="isSelected(dayIndex, timeIndex)" @click="select(dayIndex, timeIndex)">
-          </label>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="timeslot">
+    <template v-for="(item, index) in typeItems">
+      <label :key="`${style}-${index}`" :class="{selected: isSelected(index)}">
+        {{ item }}
+        <input type="checkbox" :checked="isSelected(index)" @click="select(index)">
+      </label>
+    </template>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'LendTimeSlot',
   props: {
-    title: {
-      type: String,
-      required: true
-    },
     selectedSlots: {
       type: Array,
+      required: true
+    },
+    type: {
+      type: String,
       required: true
     }
   },
   data () {
     return {
-      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       times: ['8.00 - 10.00', '10.00 - 12.00', '12.00 - 14.00', '14.00 - 16.00', '16.00 - 18.00', '18.00 - 20.00']
     }
   },
+  computed: {
+    typeItems () {
+      const items = this[this.type]
+      return items
+    }
+  },
   methods: {
-    isSelected (day, timeslot) {
-      const selectedIndex = (day * 7) + timeslot
+    isSelected (selectedIndex) {
       return this.selectedSlots.includes(selectedIndex)
     },
-    select (day, timeslot) {
-      const selectedSlot = (day * 7) + timeslot
+    select (selectedSlot) {
       const indexInSelectedSlots = this.selectedSlots.indexOf(selectedSlot)
       let updatedSelectedSlots = [...this.selectedSlots]
       // the selected checkbox needs to be added
@@ -63,31 +57,23 @@ export default {
 <style lang="scss">
 .timeslot {
   width: 100%;
-  padding:2rem;
-
-  caption {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-
-  th{
-    text-transform: uppercase;
-  }
-
-  tr{
-    height:40px;
-    margin-bottom:5px;
-    text-align: center;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
   label {
-    padding: 0.25rem 1rem;
+    padding: 0.50rem 1.25rem;
     border:1px solid #999;
     border-radius:0.25rem;
     cursor: pointer;
+    margin-right: 0.75rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    text-align: center;
 
     &.selected{
-      background-color: cadetblue;
+      background-color: var(--outline-2);
+      color:white;
     }
   }
 
