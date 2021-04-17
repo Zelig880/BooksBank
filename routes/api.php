@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
 
-    //Bookshef
+    //Bookshelf
     Route::get('/bookshelf', 'Bookshelf\ManagementController@getAll');
 
     Route::post('/geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
-    
+
     Route::post('/bookshelf/store', 'Bookshelf\ManagementController@store');
     Route::get('/bookshelf/bookshelf_item/{id}', 'Bookshelf\ManagementController@getByBookshelfItemId');
     Route::delete('/bookshelf/remove/{id}', 'Bookshelf\LibraryController@remove');
