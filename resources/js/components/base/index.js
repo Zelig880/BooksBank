@@ -3,8 +3,8 @@ import Checkbox from './Checkbox'
 import LocaleDropdown from './LocaleDropdown'
 import Button from './Button'
 import Anchor from './Anchor'
-import LendTimeslot from './LendTimeslot'
-import BorrowTimeslot from './BorrowTimeslot'
+import LendTimeslot from './LendTimeSlot'
+import BorrowTimeslot from './BorrowTimeSlot'
 import Modal from './Modal'
 
 // Components that are registered globaly.

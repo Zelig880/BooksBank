@@ -31,7 +31,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import BorrowModal from '../../components/sections/BorrowModal.vue'
+import BorrowModal from '../../components/sections/borrowModal'
 
 export default {
   middleware: 'auth',
