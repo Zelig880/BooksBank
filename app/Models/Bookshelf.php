@@ -8,13 +8,20 @@ use Malhal\Geographical\Geographical;
 
 class Bookshelf extends Model
 {
-    use HasFactory;
-    use Geographical;
+    use HasFactory, Geographical;
 
-    protected $fillable = ['longitude', 'latitude', 'pickup_times'];
+    protected $fillable = [
+        'longitude',
+        'latitude',
+        'opening_days',
+        'opening_hours'
+    ];
 
-    protected $table = "bookshelves";
-    
+    protected $casts = [
+        'opening_days' => 'array',
+        'opening_hours' => 'array'
+    ];
+
     /**
      * Get user that belong to the Bookshelf
      */

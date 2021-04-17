@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
-use DB;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BookshelfSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -14,25 +16,47 @@ class BookshelfSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bookshelves')->insert([
-            'user_id' => 1,
-            'longitude' => -3.9823859,
-            'latitude' => 51.6075778,
-            'pickup_times' => '[1,2,3]',
-            'delivery' => 2,
-        ]);
-        DB::table('bookshelves')->insert([
-            'user_id' => 2,
-            'longitude' => -3.8518577,
-            'latitude' => 51.7197665,
-            'pickup_times' => '[25,45,12,44,13,2,0,5]',
-            'delivery' => 1,    
-        ]);
-        DB::table('bookshelves')->insert([
-            'user_id' => 3,
-            'longitude' => -4.8518577,
-            'latitude' => 58.7197665,
-            'delivery' => 1,    
-        ]);
+        Model::unguard();
+
+        $bookshelves = [
+            [
+                'user_id' => 1,
+                'longitude' => -3.9823859,
+                'latitude' => 51.6075778,
+                'opening_days' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers(1, 30)),
+                'opening_hours' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers()),
+                'delivery' => 2,
+            ], [
+                'user_id' => 2,
+                'longitude' => -3.8518577,
+                'latitude' => 51.7197665,
+                'opening_days' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers(1, 30)),
+                'opening_hours' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers()),
+                'delivery' => 1,
+            ], [
+                'user_id' => 3,
+                'longitude' => -4.8518577,
+                'latitude' => 58.7197665,
+                'opening_days' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers(1, 30)),
+                'opening_hours' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers()),
+                'delivery' => 1,
+            ]
+        ];
+
+        Model::reguard();
+
+//        DB::table('bookshelves')->truncate();
+        DB::table('bookshelves')->insert($bookshelves);
+    }
+
+    private function generateArrayOfRandomNumbers(int $lowerBound = 1, int $upperBound = 24)
+    {
+        $random = [];
+        for ($i = 0; $i < 4; $i++)
+        {
+            $random[] = rand($lowerBound, $upperBound);
+        }
+
+        return $random;
     }
 }

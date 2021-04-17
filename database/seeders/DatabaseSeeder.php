@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(BookshelfSeeder::class);
         $this->call(FactorySeeder::class);
-        
+
         User::factory()->make();
     }
 }

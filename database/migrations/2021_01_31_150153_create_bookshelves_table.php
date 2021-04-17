@@ -19,7 +19,7 @@ class CreateBookshelvesTable extends Migration
             $table->integer("user_id");
             $table->double('longitude');
             $table->double('latitude');
-            $table->string('pickup_times', 512)->nullable();
+            $table->text('pickup_times')->nullable();
             $table->tinyInteger('delivery')->unsigned()->default(BookshelfDeliveryType::Any);
             $table->timestamps();
         });
