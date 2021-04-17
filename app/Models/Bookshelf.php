@@ -10,10 +10,16 @@ class Bookshelf extends Model
 {
     use HasFactory, Geographical;
 
-    protected $fillable = ['longitude', 'latitude'];
+    protected $fillable = [
+        'longitude',
+        'latitude',
+        'opening_days',
+        'opening_hours'
+    ];
 
     protected $casts = [
-        'pickup_times' => 'array'
+        'opening_days' => 'array',
+        'opening_hours' => 'array'
     ];
 
     /**
