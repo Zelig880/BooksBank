@@ -8,17 +8,11 @@
             <p class="text-gray-500 mb-12">Find the time that suit you best, from the available list</p>
           </div>
           <div class="w-full md:w-4/6 pr-8">
-            <date-picker :is-expanded="true" title-position="left" :value="minDate" :min-date="minDate" :max-date="maxDate" @dayclick="onDayClick" />
+            <date-picker :disabled-dates='formattedDisableDays' :is-expanded="true" title-position="left" :value="selectedDate" :min-date="minDate" :max-date="maxDate" @dayclick="onDayClick" />
           </div>
-          <div class="w-full md:w-2/6 pr-4">
-            <!-- sc88: make this dynamic -->
-            <p class="mb-3">Tuesday the xx of xxx</p>
-            <div class="time selected">8.00 - 10.00</div>
-            <div class="time">10.00 - 12.00</div>
-            <div class="time">12.00 - 14.00</div>
-            <div class="time">14.00 - 16.00</div>
-            <div class="time">16.00 - 18.00</div>
-            <div class="time">18.00 - 20.00</div>
+          <div v-if="selectedDate" class="w-full md:w-2/6 pr-4">
+            <p class="mb-3">Selected Date: {{ selectedDate }}</p>
+            <div v-for="(time, index) in times" :key="index" class="time" :class="{ selected: timeSlot === (index) }" @click="onTimeClick(index)">{{ time }}</div>
           </div>
         </div>
         <div class="col-span-4 md:col-span-1 bg-gray-300 p-9">
@@ -37,17 +31,15 @@
           </p>
           <hr>
           <h2>Collection date:</h2>
-          <!-- sc88: make this dynamic -->
-          <p>Collection Date</p>
+          <p>{{ selectedDate }}</p>
           <h2>Collection time:</h2>
-          <!-- sc88: make this dynamic -->
-          <p>Collection Time</p>
+          <p>{{ times[timeSlot] }}</p>
           <hr>
           <h2>Book return date:</h2>
           <!-- sc88: make this dynamic -->
           <p>Bok return date</p>
           <!-- sc88: need to emit the selected date and time -->
-          <Button @click="$emit('close')">Send Request</Button>
+          <Button :disabled="submitDisabled" @click="$emit('close')">Send Request</Button>
         </div>
       </div>
     </template>
@@ -67,12 +59,32 @@ export default {
   data () {
     return {
       minDate: DateTime.now().plus({ days: 1 }),
-      maxDate: DateTime.now().plus({ weeks: 2 })
+      maxDate: DateTime.now().plus({ weeks: 2 }),
+      disabledDays: [2, 3, 4],
+      selectedDate: null,
+      times: ['8.00 - 10.00', '10.00 - 12.00', '12.00 - 14.00', '14.00 - 16.00', '16.00 - 18.00', '18.00 - 20.00'],
+      timeSlot: null,
+      DaySlot: null
+    }
+  },
+  computed: {
+    formattedDisableDays () {
+      return { weekdays: this.disabledDays }
+    },
+    submitDisabled () {
+      const dateSelected = !!this.DaySlot
+      const timeSelected = !!this.timeSlot
+
+      return !dateSelected || !timeSelected
     }
   },
   methods: {
-    onDayClick (day) {
-      console.log(day)
+    onDayClick ({ day, month, year, weekdayPosition }) {
+      this.selectedDate = DateTime.fromObject({ day, month, year }).toFormat('cccc, d LLLL')
+      this.DaySlot = weekdayPosition
+    },
+    onTimeClick (timeIndex) {
+      this.timeSlot = timeIndex
     }
   }
 }
