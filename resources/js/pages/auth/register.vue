@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import RegisterChoice from '~/components/sections/RegisterChoice'
-import RegisterWithEmail from '~/components/sections/RegisterWithEmail'
+import RegisterChoice from '~/components/sections/registerChoice'
+import RegisterWithEmail from '~/components/sections/registerWithEmail'
 
 export default {
   middleware: 'guest',
