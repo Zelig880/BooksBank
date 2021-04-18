@@ -29,7 +29,7 @@
       </li>
     </template>
     <li class="ml-4 hidden md:inline-block">
-      <Anchor theme="primary" color="cta" route-name="bookshelf.add">
+      <Anchor theme="primary" color="primary" route-name="bookshelf.add">
         Add a book
       </Anchor>
     </li>
