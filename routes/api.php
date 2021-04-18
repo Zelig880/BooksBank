@@ -13,32 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('logout', 'Auth\LoginController@logout');
+// Library
+Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
 
-    //Bookshelf
-    Route::get('/bookshelf', 'Bookshelf\ManagementController@getAll');
-
-    Route::post('/geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
-
-    Route::post('/bookshelf/store', 'Bookshelf\ManagementController@store');
-    Route::get('/bookshelf/bookshelf_item/{id}', 'Bookshelf\ManagementController@getByBookshelfItemId');
-    Route::delete('/bookshelf/remove/{id}', 'Bookshelf\LibraryController@remove');
-    Route::get('/bookshelf/{type}/{text}', 'Bookshelf\SearchController@index');
-
-    //Ledge
-    Route::get('/ledge', 'Ledge\ManagementController@getAll');
-    Route::post('/ledge/request/', 'Ledge\ManagementController@request');
-    Route::post('/ledge/request/respond', 'Ledge\ManagementController@respond');
-
-
-    Route::get('/user', 'Auth\UserController@current');
-
-    Route::patch('settings/profile', 'Settings\ProfileController@update');
-    Route::patch('settings/password', 'Settings\PasswordController@update');
-});
+// Geolocation
+Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
+Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
 
 Route::group(['middleware' => 'guest:api'], function () {
+    // Auth
     Route::post('login', 'Auth\LoginController@login');
     Route::post('register', 'Auth\RegisterController@register');
 
@@ -52,10 +35,29 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
 
-//LIBRARY
-Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
-//GEOLOCATION
-Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
-Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('logout', 'Auth\LoginController@logout');
 
+    // Bookshelf and Bookshelf Item
+    Route::get('/bookshelf', 'Bookshelf\BookshelfItemManagementController@index');
+    Route::post('/bookshelf/store', 'Bookshelf\BookshelfItemManagementController@store');
+    Route::get('/bookshelf/bookshelf_item/{id}', 'Bookshelf\BookshelfItemManagementController@getByBookshelfItemId');
 
+    Route::put('/bookshelf/{id}/update', 'Bookshelf\BookshelfManagementController@update');
+
+    Route::get('/bookshelf/{type}/{text}', 'Bookshelf\SearchController@index');
+    Route::delete('/bookshelf/remove/{id}', 'Bookshelf\LibraryController@remove');
+
+    Route::post('/geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
+
+    // Ledge
+    Route::get('/ledge', 'Ledge\ManagementController@getAll');
+    Route::post('/ledge/request/', 'Ledge\ManagementController@request');
+    Route::post('/ledge/request/respond', 'Ledge\ManagementController@respond');
+
+    // User
+    Route::get('/user', 'Auth\UserController@current');
+
+    Route::patch('settings/profile', 'Settings\ProfileController@update');
+    Route::patch('settings/password', 'Settings\PasswordController@update');
+});
