@@ -1,7 +1,7 @@
 <template>
   <div class="timeslot">
     <template v-for="(item, index) in typeItems">
-      <label :key="`${style}-${index}`" :class="{selected: isSelected(index)}">
+      <label :key="`${type}-${index}`" :class="{selected: isSelected(index)}">
         {{ item }}
         <input type="checkbox" :checked="isSelected(index)" @click="select(index)">
       </label>

@@ -17,7 +17,7 @@
         </p>
         <hr>
         <BorrowTimeSlot :title="$t('libraryBorrow-timeslot-title')" :available-slots="availableTimeslot" @select="setPickups" />
-        <BorrowModal :show="showModal" @close="closeModal" />
+        <BorrowModal :show="showModal" :selected-book="selectedBook" @close="closeModal" />
         <button class="btn btn-primary" @click="request(selectedBook.id)">
           Borrow book
         </button>

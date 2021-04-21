@@ -14,10 +14,20 @@ class BookshelfManagementController
     {
         $this->user = Auth::user();
     }
+    
+    /**
+     * Get bookshelf of current user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function current()
+    {
+        return response()->json($this->user->bookshelf()->first());
+    }
 
     public function update(UpdateBookshelfRequest $request, $id)
     {
-        return $this->user->bookshelves()->find($id)->update($request->validated());
+        return $this->user->bookshelf()->find($id)->update($request->validated());
     }
 
 }

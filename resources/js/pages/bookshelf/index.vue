@@ -21,7 +21,7 @@
             My Dashboard
           </router-link>
           <router-link class="bookshelf-index__button" :class="{ 'bookshelf-index__button--selected': $route.name === 'bookshelf.settings'}" :to="{ name: 'bookshelf.settings' }">
-            My Settings
+            My Bookshelf
           </router-link>
         </div>
       </div>

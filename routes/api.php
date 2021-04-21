@@ -18,7 +18,6 @@ Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController
 
 // Geolocation
 Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
-Route::post('/geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
 
 Route::group(['middleware' => 'guest:api'], function () {
     // Auth
@@ -39,10 +38,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
 
     // Bookshelf and Bookshelf Item
-    Route::get('/bookshelf', 'Bookshelf\BookshelfItemManagementController@index');
-    Route::post('/bookshelf/store', 'Bookshelf\BookshelfItemManagementController@store');
-    Route::get('/bookshelf/bookshelf_item/{id}', 'Bookshelf\BookshelfItemManagementController@getByBookshelfItemId');
+    Route::get('/bookshelf_item', 'Bookshelf\BookshelfItemManagementController@index');
+    Route::post('/bookshelf_item/store', 'Bookshelf\BookshelfItemManagementController@store');
+    Route::get('/bookshelf_item/{id}', 'Bookshelf\BookshelfItemManagementController@getByBookshelfItemId');
 
+    Route::get('/bookshelf', 'Bookshelf\BookshelfManagementController@current');
     Route::put('/bookshelf/{id}/update', 'Bookshelf\BookshelfManagementController@update');
 
     Route::get('/bookshelf/{type}/{text}', 'Bookshelf\SearchController@index');

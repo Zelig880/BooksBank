@@ -24,14 +24,14 @@ class UpdateBookshelfRequest extends FormRequest
     public function rules()
     {
         return [
-            'longitude' => ['required', 'double'],
-            'latitude' => ['required', 'double'],
+            'longitude' => ['required', 'numeric'],
+            'latitude' => ['required', 'numeric'],
             'opening_days' => ['sometimes', 'nullable', 'array'],
             'opening_hours' => ['sometimes', 'nullable', 'array'],
             'address_line_1' => ['sometimes', 'nullable', 'string'],
             'city' => ['sometimes', 'nullable', 'string'],
             'postcode' => ['sometimes', 'nullable', 'string'],
-            'delivery' => ['sometimes', 'nullable', 'string']
+            'delivery' => ['sometimes', 'nullable', 'numeric']
         ];
     }
 }
