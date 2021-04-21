@@ -5,7 +5,6 @@
     </h2>
     <form class="bookshelf_settings__container" @submit.prevent="update" @keydown="form.onKeydown($event)">
       <div>
-        <alert-success :form="form" :message="$t('info_updated')" />
         <template v-for="field in formFields">
           <div :key="field">
             <label>{{ $t(field) }}:</label>

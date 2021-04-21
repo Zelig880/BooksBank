@@ -6,11 +6,11 @@
           <div class="text-gray-400">
             User
           </div>
-          <div class="font-lora text-6xl">
+          <div class="font-lora text-6xl mb-2">
             {{ user.name }}
           </div>
           <div class="text-blue-600 font-sans">
-            Address line 1, line 2
+            {{ currentBookshelf.address_line_1 }}, {{ currentBookshelf.city }}, {{ currentBookshelf.postcode }}
           </div>
         </div>
         <div class=" absolute right-0 bottom-0">
@@ -33,13 +33,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   middleware: 'auth',
   computed: mapGetters({
-    user: 'auth/user'
-  })
+    user: 'auth/user',
+    currentBookshelf: 'bookshelf/currentBookshelf'
+  }),
+  async beforeMount () {
+    await this.getCurrent()
+  },
+  methods: mapActions('bookshelf', ['getCurrent'])
 }
 </script>
 
