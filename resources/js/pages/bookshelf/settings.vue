@@ -20,12 +20,12 @@
         <div>
           <h3 class="text-xl font-semibold">My Library Opening type</h3>
           <sub>What times are you most likely to be home for books collection and dropoff?</sub>
-          <LendTimeSlot type="times" :selected-slots.sync="form.opening_days" />
+          <LendTimeSlot type="times" :selected-slots.sync="form.opening_hours" />
         </div>
         <div>
           <h3 class="text-xl font-semibold">My Library Opening days</h3>
           <sub>What days suit you best for collection and dropoff</sub>
-          <LendTimeSlot type="days" :selected-slots.sync="form.opening_hours" />
+          <LendTimeSlot type="days" :selected-slots.sync="form.opening_days" />
         </div>
         <Button :loading="form.busy" class="float-right" @click="update">
           {{ $t('update') }}
@@ -78,9 +78,9 @@ export default {
   methods: {
     ...mapActions('bookshelf', ['getCurrent']),
     async update () {
-      const { data } = await this.form.post('/api/geolocation/getGeolocationByUserQuery')
+      var { data: result } = await this.form.post('/api/geolocation/getGeolocationByUserQuery')
 
-      if (!data || !data[0]) {
+      if (!result || !result[0]) {
         Swal.fire({
           type: 'error',
           title: 'Your location could not be found',
@@ -88,10 +88,18 @@ export default {
         })
       }
 
-      this.longitude = data[0].lon
-      this.latitude = data[0].lat
+      this.longitude = result[0].lon
+      this.latitude = result[0].lat
 
-      await this.form.put(`/api/bookshelf/${this.currentBookshelf.id}/update`)
+      var { data } = await this.form.put(`/api/bookshelf/${this.currentBookshelf.id}/update`)
+
+      if (data) {
+        Swal.fire({
+          type: 'success',
+          title: 'All done',
+          text: 'Your information have been updated!'
+        })
+      }
     },
     iconByField (field) {
       switch (field) {

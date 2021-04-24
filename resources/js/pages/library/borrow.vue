@@ -11,14 +11,13 @@
         </h2>
         <p class="font-semibold">
           {{ showFullDescription ? selectedBook.book.description : shortDescription }}
-          <a class="cursor-pointer underline font-bold" @click="showFullDescription = !showFullDescription"> 
+          <a class="cursor-pointer underline font-bold" @click="showFullDescription = !showFullDescription">
             {{ showFullDescription ? 'show less' : 'show more' }}
           </a>
         </p>
         <hr>
-        <BorrowTimeSlot :title="$t('libraryBorrow-timeslot-title')" :available-slots="availableTimeslot" @select="setPickups" />
         <BorrowModal :show="showModal" :selected-book="selectedBook" @close="closeModal" />
-        <button class="btn btn-primary" @click="request(selectedBook.id)">
+        <button class="btn btn-primary" @click="showModal = true">
           Borrow book
         </button>
       </div>
@@ -42,7 +41,6 @@ export default {
     return {
       selectedBook: null,
       showFullDescription: false,
-      selectedPickups: [],
       showModal: true
     }
   },
@@ -59,11 +57,6 @@ export default {
       if (fullDescription.length <= 256) return fullDescription
 
       return `${fullDescription.substring(0, 256)}...`
-    },
-    availableTimeslot () {
-      if (!this.selectedBook.bookshelf.pickup_times) return []
-
-      return JSON.parse(this.selectedBook.bookshelf.pickup_times)
     }
   },
   async mounted () {
@@ -72,10 +65,6 @@ export default {
   },
   methods: {
     ...mapActions('bookshelf', ['fetchByBookshelfItemId']),
-    ...mapActions('ledge', ['request']),
-    setPickups (slots) {
-      this.selectedPickups = slots
-    },
     closeModal () {
       this.showModal = false
     }

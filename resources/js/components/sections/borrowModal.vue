@@ -20,9 +20,11 @@
             <p class="mb-3">
               Selected Date: {{ selectedDate }}
             </p>
-            <div v-for="(time, index) in times" :key="index" class="time" :class="{ selected: timeSlot === (index) }" @click="onTimeClick(index)">
-              {{ time }}
-            </div>
+            <template v-for="(time, index) in times">
+              <div v-if="selectedBook.bookshelf.opening_hours.includes(index)" :key="index" class="time" :class="{ selected: timeSlot === (index) }" @click="onTimeClick(index)">
+                {{ time }}
+              </div>
+            </template>
           </div>
         </div>
         <div class="col-span-4 md:col-span-1 bg-gray-300 p-9">
@@ -30,9 +32,7 @@
           <p class="font-semibold">{{ selectedBook.book.title }}</p>
           <hr>
           <p>
-            <fa icon="map-marker-alt" />
-            <!-- sc88: make this dynamic -->
-            2000 Miles
+            <fa icon="map-marker-alt" />{{ selectedBook.bookshelf.city}}
           </p>
           <hr>
           <h2>Collection date:</h2>
@@ -41,10 +41,8 @@
           <p class="font-semibold">{{ times[timeSlot] }}</p>
           <hr>
           <h2>Book return date:</h2>
-          <!-- sc88: make this dynamic -->
-          <p>Bok return date</p>
-          <!-- sc88: need to emit the selected date and time -->
-          <Button :disabled="submitDisabled" @click="$emit('close')">
+          <p class="font-semibold">{{ returnDate.toFormat('yyyy-LL-dd') }}</p>
+          <Button :disabled="submitDisabled" @click="onSendRequest">
             Send Request
           </Button>
         </div>
@@ -54,6 +52,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { DateTime } from 'luxon'
 
 export default {
@@ -71,9 +70,9 @@ export default {
     return {
       minDate: DateTime.now().plus({ days: 1 }),
       maxDate: DateTime.now().plus({ weeks: 2 }),
-      disabledDays: [2, 3, 4],
+      returnDate: DateTime.now().plus({ months: 1 }),
       selectedDate: null,
-      times: ['8.00 - 10.00', '10.00 - 12.00', '12.00 - 14.00', '14.00 - 16.00', '16.00 - 18.00', '18.00 - 20.00'],
+      times: ['8:00 - 10:00', '10:00 - 12:00', '12:00 - 14:00', '14:00 - 16:00', '16:00 - 18:00', '18:00 - 20:00'],
       timeSlot: null,
       DaySlot: null
     }
@@ -87,15 +86,36 @@ export default {
       const timeSelected = !!this.timeSlot
 
       return !dateSelected || !timeSelected
+    },
+    disabledDays () {
+      const weekDays = [ 1, 2, 3, 4, 5, 6, 7 ]
+      return weekDays.filter(day => {
+        // We just return the value that are NOT included in the bookshelf
+        return !this.selectedBook.bookshelf.opening_days.includes(day)
+      })
     }
   },
   methods: {
+    ...mapActions('ledge', ['request']),
     onDayClick ({ day, month, year, weekdayPosition }) {
-      this.selectedDate = DateTime.fromObject({ day, month, year }).toFormat('cccc, d LLLL')
+      const dateObject = DateTime.fromObject({ day, month, year })
+      this.selectedDate = dateObject.toFormat('cccc, d LLLL')
+      this.returnDate = dateObject.plus({ months: 1 })
       this.DaySlot = weekdayPosition
     },
     onTimeClick (timeIndex) {
       this.timeSlot = timeIndex
+    },
+    async onSendRequest () {
+      // we need to get the initial hour of the timeslot
+      const timeslotHour = this.times[this.timeSlot].split(':')[0]
+      const payload = {
+        bookshelfItemId: this.selectedBook.id,
+        pickup_date: DateTime.fromFormat(this.selectedDate, 'cccc, d LLLL').set({ hour: timeslotHour }).toFormat('yyyy-LL-dd T'),
+        return_date: this.returnDate.toFormat('yyyy-LL-dd T')
+      }
+      await this.request(payload)
+      this.$emit('close')
     }
   }
 }
