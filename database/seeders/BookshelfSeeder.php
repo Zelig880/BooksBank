@@ -47,6 +47,9 @@ class BookshelfSeeder extends Seeder
                 'latitude' => 58.7197665,
                 'opening_days' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers(1, 30)),
                 'opening_hours' => \GuzzleHttp\json_encode($this->generateArrayOfRandomNumbers()),
+                'address_line_1' => $faker->address,
+                'city' => $faker->city,
+                'postcode' => $faker->postcode,
                 'delivery' => 1,
             ]
         ];
