@@ -54,6 +54,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { DateTime } from 'luxon'
+import Swal from 'sweetalert2'
 
 export default {
   props: {
@@ -115,7 +116,13 @@ export default {
         return_date: this.returnDate.toFormat('yyyy-LL-dd T')
       }
       await this.request(payload)
-      this.$emit('close')
+      Swal.fire({
+        type: 'success',
+        title: 'Good Job!',
+        text: 'Your request has been sent!'
+      }).then(() => {
+        this.$emit('close')
+      })
     }
   }
 }

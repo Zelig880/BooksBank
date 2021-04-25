@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-14 bookshelf-info">
+  <div class="mt-14 mb-20 bookshelf-info">
     <div class="">
       <div class="">
         <div class="border-b">
@@ -9,28 +9,34 @@
           <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'Loaned'}" @click="view = 'Loaned'">
             Loaned
           </button>
-          <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'Requests'}" @click="view = 'Requests'">
-            Requests
+          <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'IncomingRequests'}" @click="view = 'IncomingRequests'">
+            Incoming Requests
+          </button>
+          <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'OutgoingRequests'}" @click="view = 'OutgoingRequests'">
+            Outgoing Requests
           </button>
         </div>
         <div>
           <h3>{{ title }}</h3>
           <table>
             <thead>
-              <th>ciao</th>
-              <th>ciao</th>
-              <th>ciao</th>
+              <tr>
+                <th v-for="header in headers" :key="header">{{ header }}</th>
+              </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Ciao</td>
-                <td>Ciao</td>
-                <td>Ciao</td>
-              </tr>
-              <tr>
-                <td>Ciao</td>
-                <td>Ciao</td>
-                <td>Ciao</td>
+              <tr v-for="row in rows" :key="row.id">
+                <template v-for="(value, key) in row">
+                  <td v-if="key !== 'id'" :key="`${row.id}-${key}`">{{ value }}</td>
+                </template>
+                <td v-if="view === 'Borrowed'">
+                  <Button @click="returnBook(row)">Return</Button>
+                </td>
+                <td v-else-if="view === 'IncomingRequests' && row.status === 'WaitingApproval'">
+                  <Button @click="handleResponse(row.id, 'accept')">Accept</Button>
+                  <Button theme="secondary" @click="handleResponse(row.id, 'reject')">Reject</Button>
+                </td>
+                <td v-else>&nbsp;</td>
               </tr>
             </tbody>
           </table>
@@ -42,16 +48,23 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Info',
   data () {
     return {
-      view: 'Borrowed'
+      view: 'Borrowed',
+      tableHeading: {
+        'Borrowed': ['Lender', 'Book', 'Condition'],
+        'Loaned': ['Borrower', 'Book', 'Condition'],
+        'IncomingRequests': ['User', 'Book', 'Condition', 'Proposed Collection', 'Time slot', 'status'],
+        'OutgoingRequests': ['User', 'Book', 'Condition', 'Proposed Collection', 'Time slot', 'status']
+      }
     }
   },
   computed: {
-    ...mapGetters('ledge', ['borrowed', 'lent']),
+    ...mapGetters('ledge', ['borrowed', 'lent', 'incomingRequests', 'outgoingRequests']),
     title () {
       let value
       switch (this.view) {
@@ -61,8 +74,34 @@ export default {
         case 'Loaned':
           value = 'Your book on loan'
           break
-        case 'Requests':
-          value = 'Open requests'
+        case 'IncomingRequests':
+          value = 'Incoming requests'
+          break
+        case 'OutgoingRequests':
+          value = 'Outgoing requests'
+          break
+      }
+
+      return value
+    },
+    headers () {
+      return this.tableHeading[this.view]
+    },
+    rows () {
+      let value
+      switch (this.view) {
+        case 'Borrowed':
+          value = this.borrowed
+          break
+        case 'Loaned':
+          value = this.lent
+          break
+        case 'OutgoingRequests':
+          value = this.outgoingRequests
+          break
+        case 'IncomingRequests':
+          value = this.incomingRequests
+          break
       }
 
       return value
@@ -73,8 +112,39 @@ export default {
   },
   methods: {
     ...mapActions({
-      getAll: 'ledge/getAll'
-    })
+      getAll: 'ledge/getAll',
+      respond: 'ledge/respond'
+    }),
+    async handleResponse (ledgeId, response) {
+      try {
+        await this.respond({ ledgeId, response })
+        let message = {}
+
+        switch (response) {
+          case 'accept':
+            message.title = 'Request Accepted'
+            message.text = 'Thank you for accepting the request! The book will be picked up as planned!'
+            break
+          default:
+            message.title = 'Request Rejected'
+            message.text = 'We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.'
+            break
+        }
+        Swal.fire({
+          type: 'success',
+          title: message.title,
+          text: message.text
+        }).then(() => {
+          this.getAll()
+        })
+      } catch (error) {
+        Swal.fire({
+          type: 'error',
+          title: 'Server error',
+          text: 'The request was not sent. Please try again later, and contact your administrator if the issue persist.'
+        })
+      }
+    }
   }
 }
 </script>

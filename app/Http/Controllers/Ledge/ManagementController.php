@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Ledge;
 use App\Models\Bookshelf_item;
-
 use App\Enums\LedgeStatus;
+use App\Enums\BookCondition;
 
 class ManagementController extends Controller
 {
@@ -22,9 +22,9 @@ class ManagementController extends Controller
     public function getAll(){
         $userId = Auth::id();
 
-        $result = Ledge::with(['book', 'lender', 'borrower'])
+        $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
             ->where('lender_id', $userId)
-            ->whereOr('borrower_id', $userId)
+            ->orWhere('borrower_id', $userId)
             ->get();
 
         return $result;

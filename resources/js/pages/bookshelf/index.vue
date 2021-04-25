@@ -59,7 +59,9 @@ export default {
     min-height: 500px;
   }
   &__button{
-    @apply bg-gray-400 rounded-t-lg text-blue-600 py-4 px-7 font-semibold inline-block;
+    @apply rounded-t-lg py-4 px-7 font-semibold inline-block;
+    background-color: var(--outline);
+    color: white;
     &--selected{
       @apply bg-white font-semibold text-gray-700;
     }

@@ -6,7 +6,7 @@
 
 <script>
 const themes = ['cta', 'primary', 'secondary', 'square']
-const colours = ['primary', 'secondary']
+const colours = ['primary', 'secondary', 'cta']
 
 export default {
   name: 'Button',
@@ -84,9 +84,15 @@ export default {
 }
 .button-secondary{
   min-width: 112px;
-  height: 44px;
+  height: 40px;
   padding: 6px 12px 8.8px 10px;
   border-radius: 22.4px;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
   &.color-cta{
     border: solid 1.6px var(--primary-1);
   }
