@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-gray-600 py-14 mb-10">
+  <article class="py-14 mb-10">
     <div class="container mx-auto h-auto">
       <div class="mb-6 text-center flex flex-col content-center items-center justify-center">
         <h2 class="text-3xl text-white font-medium mb-4">
@@ -16,7 +16,7 @@
         </form>
       </div>
     </div>
-  </main>
+  </article>
 </template>
 
 <script>
@@ -37,3 +37,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  article {
+    background-color: #cf6f5f;
+  } 
+  @media (min-width: 768px) {
+    article {
+      background-image: url('/assets/img/swinging.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+</style>
