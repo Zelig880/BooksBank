@@ -11,8 +11,7 @@ use BenSampo\Enum\Rules\EnumValue;
 
 use Google_Client;
 use Google_Service_Books;
-use Validator;
-
+use Illuminate\Support\Facades\Validator;
 
 class SearchController extends Controller
 {
@@ -25,7 +24,6 @@ class SearchController extends Controller
      */
     public function __construct()
     {
-        
         $client = new Google_Client();
         $apiKey = config('services.google.api');
         $client->setDeveloperKey($apiKey);
@@ -54,29 +52,29 @@ class SearchController extends Controller
         return response()->json($result->getItems());
     }
 
-    private function findByISBN($isbn){
-        
-        $optParams = array(
+    private function findByISBN($isbn)
+    {
+        $optParams = [
             'q' => "isbn:{$isbn}"
-        );
+        ];
 
         return $this->API->volumes->listVolumes($optParams);
     }
 
-    private function findByTitle($title){
-        
-        $optParams = array(
+    private function findByTitle($title)
+    {
+        $optParams = [
             'q' => "intitle:{$title}"
-        );
+        ];
 
         return $this->API->volumes->listVolumes($optParams);
     }
 
-    private function findByAuthor($author){
-        
-        $optParams = array(
+    private function findByAuthor($author)
+    {
+        $optParams = [
             'q' => "inauthor:{$author}"
-        );
+        ];
 
         return $this->API->volumes->listVolumes($optParams);
     }

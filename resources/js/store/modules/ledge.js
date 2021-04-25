@@ -35,11 +35,8 @@ export const actions = {
 
     commit('SET_ITEMS', data)
   },
-  async request ({ commit }, bookshelfItemId) {
-    //sc88: Need to define date time from UI
-    const date = DateTime.local(2021, 3, 27, 12).toFormat('yyyy-LL-dd TT')
-  
-    const { data } = await axios.post(`/api/ledge/request`, { bookshelfItemId, date })
+  async request ({ commit }, payload) {
+    const { data } = await axios.post(`/api/ledge/request`, payload)
     console.log(data)
   },
   async respond ({ commit }, { ledgeId, response }) {

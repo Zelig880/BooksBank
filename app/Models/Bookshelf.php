@@ -14,7 +14,10 @@ class Bookshelf extends Model
         'longitude',
         'latitude',
         'opening_days',
-        'opening_hours'
+        'opening_hours',
+        'address_line_1',
+        'city',
+        'postcode',
     ];
 
     protected $casts = [

@@ -23,14 +23,15 @@ const createBookObject = function (book) {
 // state
 export const state = {
   searchResult: [],
-  bookshelf: [],
+  currentBookshelf: {},
   items: []
 }
 
 // getters
 export const getters = {
   searchedBook: state => state.searchResult,
-  items: state => state.items
+  items: state => state.items,
+  currentBookshelf: state => state.currentBookshelf
 }
 
 // mutations
@@ -46,6 +47,9 @@ export const mutations = {
   },
   RESET_SEARCH_RESULT (state) {
     state.searchResult = []
+  },
+  SET_CURRENT_BOOKSHELF (state, bookshelf) {
+    state.currentBookshelf = bookshelf
   }
 }
 
@@ -65,18 +69,23 @@ export const actions = {
     commit('UPDATE_SEARCH_RESULT', books)
   },
   async add_book ({ commit, state }, selectedBook) {
-    await axios.post(`/api/bookshelf/store`, { ...selectedBook, status: 0 })
+    await axios.post(`/api/bookshelf_item/store`, { ...selectedBook, status: 0 })
     commit('ADD_ITEM', selectedBook)
   },
   async fetchByBookshelfItemId ({ commit }, bookshelfItemId) {
-    const { data } = await axios.get(`/api/bookshelf/bookshelf_item/${bookshelfItemId}`)
+    const { data } = await axios.get(`/api/bookshelf_item/${bookshelfItemId}`)
 
     return data
   },
   async getAll ({ commit }) {
-    const { data } = await axios.get(`/api/bookshelf`)
+    const { data } = await axios.get(`/api/bookshelf_item`)
 
     commit('SET_ITEMS', data)
+  },
+  async getCurrent ({ commit }) {
+    const { data } = await axios.get('/api/bookshelf')
+
+    commit('SET_CURRENT_BOOKSHELF', data)
   },
   reset ({ commit }) {
     commit('RESET_SEARCH_RESULT')
