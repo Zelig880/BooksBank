@@ -52,4 +52,8 @@ return [
     'google' => [
         'api' => env('GOOGLE_API'),
     ],
+    
+    'sendinblue' => [
+        'api' => env('SENDINBLUE_API_KEY'),
+    ],
 ];

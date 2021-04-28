@@ -21,18 +21,21 @@
 
 <script>
 import Form from 'vform'
+import { mapActions } from 'vuex'
 
 export default {
 
   data: () => ({
     form: new Form({
-      address: '',
+      address: ''
     })
   }),
 
   methods: {
-    async handleForm () {
-     
+    ...mapActions('newsletter', ['createContact']),
+    handleForm () {
+      if (!this.form.address) return
+      this.createContact(this.form.address)
     }
   }
 }

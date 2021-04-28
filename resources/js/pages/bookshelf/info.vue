@@ -193,7 +193,7 @@ export default {
       letter-spacing: normal;
       color: var(--link);
     }
-    td:nth-child(2) {  
+    td:nth-child(2) {
       font-family: OpenSans;
       font-size: 16px;
       font-weight: normal;

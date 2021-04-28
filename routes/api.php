@@ -19,6 +19,9 @@ Route::get('/library/{latitude}/{longitude}/{radius}', 'Library\SearchController
 // Geolocation
 Route::post('/geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
 
+//Newsletter
+Route::post('newsletter/createContact', 'NewsletterController@createContact');
+
 Route::group(['middleware' => 'guest:api'], function () {
     // Auth
     Route::post('login', 'Auth\LoginController@login');
@@ -60,4 +63,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
+
+    //Newsletter
+    Route::get('newsletter/getAccount', 'NewsletterController@getAccount');
 });
