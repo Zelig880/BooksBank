@@ -3,8 +3,7 @@ import Checkbox from './Checkbox'
 import LocaleDropdown from './LocaleDropdown'
 import Button from './Button'
 import Anchor from './Anchor'
-import LendTimeslot from './LendTimeslot'
-import BorrowTimeslot from './BorrowTimeslot'
+import LendTimeslot from './LendTimeSlot'
 import Modal from './Modal'
 
 // Components that are registered globaly.
@@ -14,7 +13,6 @@ import Modal from './Modal'
   Button,
   Anchor,
   LendTimeslot,
-  BorrowTimeslot,
   Modal
 ].forEach(Component => {
   Vue.component(Component.name, Component)

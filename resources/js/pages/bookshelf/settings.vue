@@ -3,53 +3,42 @@
     <h2 class="">
       {{ $t('your_info') }}
     </h2>
-    <div class="bookshelf_settings__container">
+    <form class="bookshelf_settings__container" @submit.prevent="update" @keydown="form.onKeydown($event)">
       <div>
-        <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-          <alert-success :form="form" :message="$t('info_updated')" />
-          <template v-for="field in formFields">
-            <div :key="field">
-              <label>{{ $t(field) }}:</label>
-              <div class="w-full border-b-2 py-4 px-4 mb-8 flex items-center">
-                <fa :icon="iconByField(field)" fixed-width />
-                <input v-model="form[field]" :class="{ 'is-invalid': form.errors.has(field) }" class="w-full ml-4" type="text" :name="field" :placeholder="$t(field)">
-                <has-error :form="form" :field="field" />
-              </div>
-            </div>
-          </template>
-
-          <!-- Submit Button -->
-          <div class="">
-            <div class="col-md-9 ml-md-auto">
-              <button :loading="form.busy" type="success">
-                {{ $t('update') }}
-              </button>
+        <template v-for="field in formFields">
+          <div :key="field">
+            <label>{{ $t(field) }}:</label>
+            <div class="w-full border-b-2 py-4 px-4 mb-8 flex items-center">
+              <fa :icon="iconByField(field)" fixed-width />
+              <input v-model="form[field]" :class="{ 'is-invalid': form.errors.has(field) }" class="w-full ml-4" type="text" :name="field" :placeholder="$t(field)">
+              <has-error :form="form" :field="field" />
             </div>
           </div>
-        </form>
+        </template>
       </div>
       <div class="relative">
         <div>
-          <h3>My Library Opening type</h3>
+          <h3 class="text-xl font-semibold">My Library Opening type</h3>
           <sub>What times are you most likely to be home for books collection and dropoff?</sub>
-          <LendTimeSlot type="times" :selected-slots.sync="form.days" />
+          <LendTimeSlot type="times" :selected-slots.sync="form.opening_hours" />
         </div>
         <div>
-          <h3>My Library Opening days</h3>
+          <h3 class="text-xl font-semibold">My Library Opening days</h3>
           <sub>What days suit you best for collection and dropoff</sub>
-          <LendTimeSlot type="days" :selected-slots.sync="form.times" />
+          <LendTimeSlot type="days" :selected-slots.sync="form.opening_days" />
         </div>
-        <Button :loading="form.busy" class="absolute bottom-4 right-4" >
+        <Button :loading="form.busy" class="float-right" @click="update">
           {{ $t('update') }}
         </Button>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
 import Form from 'vform'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import Swal from 'sweetalert2'
 
 export default {
   scrollToTop: false,
@@ -60,31 +49,57 @@ export default {
 
   data: () => ({
     form: new Form({
-      name: '',
-      email: '',
       address_line_1: '',
-      address_country: '',
-      address_city: '',
-      address_postcode: '',
-      days: [],
-      times: []
+      city: '',
+      postcode: '',
+      opening_days: [],
+      opening_hours: [],
+      longitude: null,
+      latitude: null,
+      delivery: 0 // This is the value for Dropoff delivery. We Hardcode t for now
     }),
-    formFields: ['name', 'email', 'address_line_1', 'address_city', 'address_postcode']
+    formFields: ['address_line_1', 'city', 'postcode']
   }),
 
   computed: mapGetters({
-    user: 'auth/user'
+    currentBookshelf: 'bookshelf/currentBookshelf'
   }),
-  mounted () {
-    this.form.name = this.user.name
-    this.form.email = this.user.email
-  },
-  methods: {
-    async update () {
-      // const { data } = await this.form.post('/api/geolocation/getGeolocationByPostcode')
-      const { data } = await this.form.post('/api/geolocation/getGeolocationByUserQuery')
 
-      console.log(data)
+  async mounted () {
+    await this.getCurrent()
+    for (const key in this.currentBookshelf) {
+      if (Object.hasOwnProperty.call(this.currentBookshelf, key)) {
+        const element = this.currentBookshelf[key]
+        if (element) this.form[key] = element
+      }
+    }
+  },
+
+  methods: {
+    ...mapActions('bookshelf', ['getCurrent']),
+    async update () {
+      var { data: result } = await this.form.post('/api/geolocation/getGeolocationByUserQuery')
+
+      if (!result || !result[0]) {
+        Swal.fire({
+          type: 'error',
+          title: 'Your location could not be found',
+          text: 'The server was not able to find your addres location!'
+        })
+      }
+
+      this.longitude = result[0].lon
+      this.latitude = result[0].lat
+
+      var { data } = await this.form.put(`/api/bookshelf/${this.currentBookshelf.id}/update`)
+
+      if (data) {
+        Swal.fire({
+          type: 'success',
+          title: 'All done',
+          text: 'Your information have been updated!'
+        })
+      }
     },
     iconByField (field) {
       switch (field) {
@@ -92,9 +107,9 @@ export default {
           return 'envelope'
         case 'address_line_1':
           return 'home'
-        case 'address_city':
+        case 'city':
           return 'city'
-        case 'address_postcode':
+        case 'postcode':
           return 'map-marker-alt'
         case 'name':
           return 'user'
@@ -106,6 +121,7 @@ export default {
 
 <style lang="scss">
 .bookshelf_settings{
+  margin-bottom:50px;
   h2{
     @apply mt-10 border-b-2 mb-6 pb-1 text-2xl;
     color: var(--header);

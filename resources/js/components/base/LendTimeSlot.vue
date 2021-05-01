@@ -1,7 +1,7 @@
 <template>
   <div class="timeslot">
     <template v-for="(item, index) in typeItems">
-      <label :key="`${style}-${index}`" :class="{selected: isSelected(index)}">
+      <label :key="`${type}-${index}`" :class="{selected: isSelected(index)}">
         {{ item }}
         <input type="checkbox" :checked="isSelected(index)" @click="select(index)">
       </label>
@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       times: ['8.00 - 10.00', '10.00 - 12.00', '12.00 - 14.00', '14.00 - 16.00', '16.00 - 18.00', '18.00 - 20.00']
     }
   },

@@ -11,6 +11,7 @@ use App\Models\Ledge;
 use App\Models\Bookshelf_item;
 use App\Enums\LedgeStatus;
 use Illuminate\Support\Facades\Mail;
+use App\Enums\BookCondition;
 
 class ManagementController extends BaseController
 {
@@ -18,17 +19,17 @@ class ManagementController extends BaseController
     /**
      * Get a list of all borrowed or lend book for current user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getAll(){
         $userId = Auth::id();
 
-        $result = Ledge::with(['book', 'lender', 'borrower'])
+        $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
             ->where('lender_id', $userId)
-            ->whereOr('borrower_id', $userId)
+            ->orWhere('borrower_id', $userId)
             ->get();
 
-        return $result;
+        return $this->responseJson(true, 200, '', $result);
     }
 
     /**
@@ -42,7 +43,8 @@ class ManagementController extends BaseController
 
         $this->validate($request, [
             'bookshelfItemId' => 'required',
-            'date' => 'required'
+            'pickup_date' => 'required',
+            'return_date' => 'required'
         ]);
 
         $userId = Auth::id();
@@ -55,7 +57,8 @@ class ManagementController extends BaseController
             'borrower_id' => $userId,
             'book_id' => $bookshelf_item->book_id,
             'bookshelf_item_id' => $request->input('bookshelfItemId'),
-            'pickup_date' => $request->input('date'),
+            'pickup_date' => $request->input('pickup_date'),
+            'return_date' => $request->input('return_date')
         ]);
 
         Mail::to($result->lender->email)->send(new BookRequestMail($result));

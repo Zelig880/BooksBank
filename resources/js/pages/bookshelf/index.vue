@@ -6,11 +6,11 @@
           <div class="text-gray-400">
             User
           </div>
-          <div class="font-lora text-6xl">
+          <div class="font-lora text-6xl mb-2">
             {{ user.name }}
           </div>
           <div class="text-blue-600 font-sans">
-            Address line 1, line 2
+            {{ currentBookshelf.address_line_1 }}, {{ currentBookshelf.city }}, {{ currentBookshelf.postcode }}
           </div>
         </div>
         <div class=" absolute right-0 bottom-0">
@@ -21,7 +21,7 @@
             My Dashboard
           </router-link>
           <router-link class="bookshelf-index__button" :class="{ 'bookshelf-index__button--selected': $route.name === 'bookshelf.settings'}" :to="{ name: 'bookshelf.settings' }">
-            My Settings
+            My Bookshelf
           </router-link>
         </div>
       </div>
@@ -33,13 +33,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   middleware: 'auth',
   computed: mapGetters({
-    user: 'auth/user'
-  })
+    user: 'auth/user',
+    currentBookshelf: 'bookshelf/currentBookshelf'
+  }),
+  async beforeMount () {
+    await this.getCurrent()
+  },
+  methods: mapActions('bookshelf', ['getCurrent'])
 }
 </script>
 
@@ -54,7 +59,9 @@ export default {
     min-height: 500px;
   }
   &__button{
-    @apply bg-gray-400 rounded-t-lg text-blue-600 py-4 px-7 font-semibold inline-block;
+    @apply rounded-t-lg py-4 px-7 font-semibold inline-block;
+    background-color: var(--outline);
+    color: white;
     &--selected{
       @apply bg-white font-semibold text-gray-700;
     }

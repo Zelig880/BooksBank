@@ -107,8 +107,8 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         return [];
     }
 
-    public function bookshelves()
+    public function bookshelf()
     {
-        return $this->hasMany(Bookshelf::class);
+        return $this->hasOne(Bookshelf::class);
     }
 }

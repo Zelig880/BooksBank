@@ -14,7 +14,7 @@
         </div>
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 border-l-2 w-10/12 md:w-auto mx-auto">
           <label>Location</label>
-          <input v-model="form.address" type="text" placeholder="Postcode">
+          <input v-model="form.postcode" type="text" placeholder="Postcode">
         </div>
         <button id="search-button" class="block text-white font-bold rounded-full md:rounded-l-none flex-grow mt-6 md:mt-0 w-10/12 md:w-1/4 mx-auto py-4">
           {{ $t('search') }}
@@ -33,7 +33,7 @@ export default {
   data: () => ({
     form: new Form({
       searchTitle: 'All',
-      address: '',
+      postcode: '',
       latitude: null,
       longitude: null,
       radius: 5000
@@ -49,7 +49,7 @@ export default {
     },
     async handleForm () {
       if (!this.form.latitude || !this.form.longitude) {
-        const { lat, lon } = await this.getGeolocation(this.address)
+        const { lat, lon } = await this.getGeolocation(this.postcode)
         this.form.latitude = lat
         this.form.longitude = lon
       }
