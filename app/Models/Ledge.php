@@ -16,7 +16,7 @@ class Ledge extends Model
      */
     public function lender()
     {
-        return $this->belongsTo(User::class, 'lender_id')->select(array('id', 'name'));
+        return $this->belongsTo(User::class, 'lender_id')->select(array('id', 'name', 'email'));
     }
 
     /**
@@ -24,7 +24,7 @@ class Ledge extends Model
      */
     public function borrower()
     {
-        return $this->belongsTo(User::class, 'borrower_id')->select(array('id', 'name'));
+        return $this->belongsTo(User::class, 'borrower_id')->select(array('id', 'name', 'email'));
     }
 
     /**

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Ledge;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
+use App\Mail\BookRequestMail;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\Ledge;
 use App\Models\Bookshelf_item;
-
 use App\Enums\LedgeStatus;
+use Illuminate\Support\Facades\Mail;
 
-class ManagementController extends Controller
+class ManagementController extends BaseController
 {
-    
+
     /**
      * Get a list of all borrowed or lend book for current user
      *
@@ -29,12 +30,13 @@ class ManagementController extends Controller
 
         return $result;
     }
-    
+
     /**
      * Issue a request to lend a book
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function request(Request $request){
 
@@ -55,44 +57,49 @@ class ManagementController extends Controller
             'bookshelf_item_id' => $request->input('bookshelfItemId'),
             'pickup_date' => $request->input('date'),
         ]);
-        
-        return response()->json($result);
+
+        Mail::to($result->lender->email)->send(new BookRequestMail($result));
+
+        return $this->responseJson(true, 200, 'Book request made', $result);
     }
 
-    
     /**
      * Responde to a book request
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Ledge $ledge
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function respond(Request $request){
-
+    public function respond(Request $request, Ledge $ledge)
+    {
         $this->validate($request, [
-            'ledgeId' => 'required',
             'response' => 'required'
         ]);
 
         $userId = Auth::id();
 
-        $ledge = Ledge::find($request->input('ledgeId'));
-
         //check if the user is the owner of the ledge
-        if($userId === $ledge->lender_id) return response()->json(['error' => 'Not authorized.'], 403);
+        if ($userId === $ledge->lender_id) return response()->json(['error' => 'Not authorized.'], 403);
 
-        
+
         //Ledge not in waiting status
-        if($ledge->status !== LedgeStatus::WaitingApproval) return response()->json(['error' => 'Not authorized.'], 403);
+        if ($ledge->status !== LedgeStatus::WaitingApproval)
+        {
+            return response()->json(['error' => 'Ledge is not awaiting approval.'], 404);
+        }
 
         try {
             $ledgeStatus = $request->input('response') === 'accept' ? LedgeStatus::WaitingPickup : LedgeStatus::Rejected;
-            $ledge->status = $ledgeStatus;
-            $ledge->save();
+            $ledge->update([
+                'status' => $ledgeStatus
+            ]);
 
             return response()->json(['success' => $ledge]);
-        } catch (Exception $e) {
-            return response()->json(['error' => 'An error has occured'], 500);
+        }
+        catch (Exception $e) {
+            return response()->json(['error' => 'An error has occurred'], 500);
         }
     }
-    
+
 }
