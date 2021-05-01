@@ -12,12 +12,12 @@
       </button>
       <!-- desktop view -->
       <div class="hidden md:flex md:flex-grow md:items-center">
-        <AuthControls class="flex flex-col md:flex-row list-none ml-auto" :authenticated="!!user" @logout="onLogout" />
+        <AuthControls class="flex flex-col md:flex-row list-none ml-auto" :authenticated="!!user" :mobile="false" @logout="onLogout" />
       </div>
     </div>
     <!-- mobile view -->
     <div :class="{'hidden': !showMenu}" class="border-t-2 border-gray-600 w-full my-4">
-      <AuthControls class="mt-2 px-2 pt-2 pb-3 space-y-1" :authenticated="!!user" @logout="onLogout" />
+      <AuthControls class="mt-2 px-2 pt-2 pb-3 space-y-1" :authenticated="!!user" :mobile="true" @logout="onLogout" />
     </div>
   </nav>
 </template>
