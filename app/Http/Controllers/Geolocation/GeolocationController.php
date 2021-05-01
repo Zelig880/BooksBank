@@ -9,9 +9,10 @@ use NominatimLaravel\Content\Nominatim;
 class GeolocationController extends Controller
 {
     private $nominatim;
-    
+
     /**
      * Instantiate a new SettingsController instance.
+     * @throws \NominatimLaravel\Exceptions\NominatimException
      */
     public function __construct()
     {
@@ -22,29 +23,29 @@ class GeolocationController extends Controller
      * Get address points, by user input query
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getGeolocationByUserQuery(Request $request)
     {
         $this->validate($request, [
             'postcode' => 'required',
         ]);
-        
+
         $search = $this->nominatim->newSearch();
 
         $search->query($request->input('postcode'));
 
         $result = $this->nominatim->find($search);
-        
+
         return response()->json($result);
     }
 
-    
+
     /**
      * Get address from geolocation.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getAddressFromGeolocation(Request $request)
     {
@@ -59,7 +60,7 @@ class GeolocationController extends Controller
                     ->latlon($request['lat'], $request['lon']);
 
         $result = $this->nominatim->find($search);
-        
+
         return response()->json($result);
     }
 }

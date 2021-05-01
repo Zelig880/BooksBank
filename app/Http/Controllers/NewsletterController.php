@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use SendinBlue\Client\Api\AccountApi;
@@ -22,15 +23,15 @@ class NewsletterController extends Controller
     {
         $apiKey = config('services.sendinblue.api');
         $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', $apiKey);
-    
+
         $this->accountApiInstance = new AccountApi(
             new GuzzleHttp\Client(),
             $config
-        );    
+        );
         $this->contactsApiInstance = new ContactsApi(
             new GuzzleHttp\Client(),
             $config
-        );    
+        );
     }
 
     public function getAccount(){
@@ -42,14 +43,14 @@ class NewsletterController extends Controller
     }
 
     public function createContact(Request $request){
-        
+
         $this->validate($request, [
             'email' => 'required'
         ]);
 
         $contact = new CreateContact();
         $contact['email'] = $request->input('email');
-        
+
         try {
             return $this->contactsApiInstance->createContact($contact);
         } catch (Exception $e) {

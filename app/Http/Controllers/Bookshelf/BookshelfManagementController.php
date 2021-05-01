@@ -14,7 +14,7 @@ class BookshelfManagementController
     {
         $this->user = Auth::user();
     }
-    
+
     /**
      * Get bookshelf of current user
      *
