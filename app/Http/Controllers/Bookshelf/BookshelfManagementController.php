@@ -14,13 +14,7 @@ class BookshelfManagementController
     {
         $this->user = Auth::user();
     }
-<<<<<<< HEAD
 
-    public function update(UpdateBookshelfRequest $request, $id)
-    {
-        return $this->user->bookshelves()->find($id)->update($request->validated());
-=======
-    
     /**
      * Get bookshelf of current user
      *
@@ -34,7 +28,6 @@ class BookshelfManagementController
     public function update(UpdateBookshelfRequest $request, $id)
     {
         return $this->user->bookshelf()->find($id)->update($request->validated());
->>>>>>> 9d811699eb61e793d542b4c3cf6c560947eccb88
     }
 
 }

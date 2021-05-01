@@ -2,13 +2,13 @@
 
 namespace App\Mail;
 
+use App\Enums\LedgeStatus;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Config;
 
-class BookRequestMail extends Mailable
+class BookRequestStatusMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,9 +31,10 @@ class BookRequestMail extends Mailable
      */
     public function build()
     {
+        $status = $this->ledge->status === LedgeStatus::WaitingPickup ? 'accepted' : 'rejected';
         Config::set('mail.username', 'support@booksbank.com');
         return $this->view('mail.book-request-mail')
                     ->from('noreply@booksbank.com','BooksBank')
-                    ->subject('Your Book request has been made');
+                    ->subject("Your Book request has been $status");
     }
 }

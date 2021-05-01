@@ -4,7 +4,7 @@
     <td valign="top" style="padding-bottom:5px;padding-left:40px;padding-right:30px;" class="mainTitle">
       <!-- Main Title Text // -->
       <h2 class="text" style="color:#000000; font-family:'Open Sans', Helvetica, Arial, sans-serif; font-size:28px; font-weight:500; font-style:normal; font-stretch: expanded; letter-spacing:normal; line-height:36px; text-transform:none; padding:0; margin:0;">
-        Hey {{ $ledge->lender->name }}!
+        Hey {{ $ledge->borrower->name }}!
       </h2>
     </td>
   </tr>
@@ -18,7 +18,7 @@
           Book name: {{ $ledge->book->title }}
         </p>
         <p>
-          Borrower name: {{ $ledge->borrower->name }}
+          Borrower name: {{ $ledge->lender->name }}
         </p>
         <p>
           Pick up date/time: {{ date('d F Y, h:i:s A', strtotime($ledge->pickup_date)) }}

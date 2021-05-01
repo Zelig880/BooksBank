@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Ledge
     Route::get('ledge', 'Ledge\ManagementController@getAll');
     Route::post('ledge/request/', 'Ledge\ManagementController@request');
-    Route::post('ledge/request/respond', 'Ledge\ManagementController@respond');
+    Route::put('ledge/request/respond/{ledge_id}', 'Ledge\ManagementController@respond');
 
     // User
     Route::get('user', 'Auth\UserController@current');

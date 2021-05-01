@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ledge;
 
 use App\Http\Controllers\BaseController;
+use App\Mail\BookRequestStatusMail;
 use App\Mail\BookRequestMail;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,7 +12,6 @@ use App\Models\Ledge;
 use App\Models\Bookshelf_item;
 use App\Enums\LedgeStatus;
 use Illuminate\Support\Facades\Mail;
-use App\Enums\BookCondition;
 
 class ManagementController extends BaseController
 {
@@ -70,38 +70,44 @@ class ManagementController extends BaseController
      * Responde to a book request
      *
      * @param \Illuminate\Http\Request $request
-     * @param Ledge $ledge
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function respond(Request $request, Ledge $ledge)
+    public function respond(Request $request, $id)
     {
         $this->validate($request, [
             'response' => 'required'
         ]);
 
+        $ledge = Ledge::find($id);
+
+        // check if the user is the owner of the ledge
         $userId = Auth::id();
 
-        //check if the user is the owner of the ledge
-        if ($userId === $ledge->lender_id) return response()->json(['error' => 'Not authorized.'], 403);
+        // check if the user is the owner of the ledge
+        if (($userId === $ledge->lender_id) === 1)
+        {
+            return response()->json(['error' => 'Not authorized.'], 403);
+        }
 
-
-        //Ledge not in waiting status
+        // ledge not awaiting approval
         if ($ledge->status !== LedgeStatus::WaitingApproval)
         {
-            return response()->json(['error' => 'Ledge is not awaiting approval.'], 404);
+            return response()->json(['error' => 'Ledge is not awaiting approval.'], 409);
         }
 
         try {
-            $ledgeStatus = $request->input('response') === 'accept' ? LedgeStatus::WaitingPickup : LedgeStatus::Rejected;
             $ledge->update([
-                'status' => $ledgeStatus
+                'status' => $request->input('response') === 'accept' ? LedgeStatus::WaitingPickup : LedgeStatus::Rejected
             ]);
+
+            Mail::to($ledge->borrower->email)->send(new BookRequestStatusMail($ledge));
 
             return response()->json(['success' => $ledge]);
         }
         catch (Exception $e) {
-            return response()->json(['error' => 'An error has occurred'], 500);
+            throw $e;
         }
     }
 
