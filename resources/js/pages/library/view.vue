@@ -1,10 +1,10 @@
 <template>
-  <main>
+  <main class="flex flex-col">
     <div class="w-full border-b-2 pb-8">
       <div class="container mx-auto flex flex-col md:flex-row justify-between">
         <div class="rounded-full border-2 pl-8 pr-12 py-2 flex flex-col relative md:w-7/12">
           <label for="search" class="text-xs text-gray-400 font-bold">You search for:</label>
-          <input id="search" v-model="searchText" class="font-bold text-lg" type="text" @keyup.enter="searchHandle">
+          <input id="search" v-model="searchTitle" class="font-bold text-lg" type="text" @keyup.enter="searchHandle">
           <fa icon="search" class="absolute right-4 top-3 text-gray-400" size="2x" @click="searchHandle" />
         </div>
         <div class="md:w-4/12">
@@ -16,38 +16,49 @@
         </div>
       </div>
     </div>
-    <div class="w-full bg-gray-100 py-8">
+    <div class="w-full flex-1 bg-gray-100 py-8 mb-8">
       <div class="container mx-auto">
-        <h2 class="text-2xl mb-8">
-          Search result: {{ searchedBook.length }}
-        </h2>
-        <div class="grid grid-cols-2 gap-4">
-          <LibraryViewCard
-            v-for="result in searchedBook" :key="result.id"
-            :title="result.book.title"
-            :description="result.book.description"
-            :thumbnail="result.book.thumbnail"
-            :condition="conditions[result.condition].name"
-            :distance="result.bookshelf.distance"
-            @click="goToBorrowPage(result.id)"
-          />
-        </div>
-        <h2 v-if="otherBooks.length > 0" class="text-2xl mb-10 pb-12 mt-16 border-b-2">
-          Other books available within your radius
-        </h2>
-        <div class="grid grid-cols-2 gap-4">
-          <LibraryViewCard
-            v-for="result in otherBooks" :key="result.id"
-            :title="result.book.title"
-            :description="result.book.description"
-            :thumbnail="result.book.thumbnail"
-            :condition="conditions[result.condition].name"
-            :distance="result.bookshelf.distance"
-            @click="goToBorrowPage(result.id)"
-          />
-        </div>
+        <template v-if="loading">
+          <img class="mx-auto" src="/assets/img/loading.gif" alt="loading gif">
+        </template>
+        <template v-else>
+          <h2 class="text-2xl mb-8">
+            Search result: {{ searchedBook.length }}
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <template v-if="searchedBook.length !== 0">
+              <LibraryViewCard
+                v-for="result in searchedBook" :key="result.id"
+                :title="result.book.title"
+                :description="result.book.description"
+                :thumbnail="result.book.thumbnail"
+                :condition="conditions[result.condition].name"
+                :distance="result.bookshelf.distance"
+                @click="onSelectBook(result.id)"
+              />
+            </template>
+            <template v-else>
+              <p>Ops.. The book that you searched is not in your radius! See other books available within your radius or increase the radius for more results</p>
+            </template>
+          </div>
+          <h2 v-if="otherBooks.length > 0" class="text-2xl mb-10 pb-12 mt-16 border-b-2">
+            Other books available within your radius
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <LibraryViewCard
+              v-for="result in otherBooks" :key="result.id"
+              :title="result.book.title"
+              :description="result.book.description"
+              :thumbnail="result.book.thumbnail"
+              :condition="conditions[result.condition].name"
+              :distance="result.bookshelf.distance"
+              @click="onSelectBook(result.id)"
+            />
+          </div>
+        </template>
       </div>
     </div>
+    <BorrowModal v-if="selectedBook" :show="showModal" :selected-book="selectedBook" @close="closeModal" :key="selectedBook.id" />
   </main>
 </template>
 
@@ -56,20 +67,24 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import LibraryViewCard from '../../components/sections/libraryViewCard.vue'
+import BorrowModal from '../../components/sections/borrowModal'
 
 export default {
   components: {
     VueSlider,
-    LibraryViewCard
+    LibraryViewCard,
+    BorrowModal
   },
 
   data () {
     return {
-      searchText: '',
+      searchTitle: '',
       radiusMiles: 5,
+      showModal: true,
+      selectedBook: null,
       sliderOptions: {
         min: 1,
-        max: 100,
+        max: 50,
         dotSize: 18,
         tooltip: 'hover',
         tooltipFormatter: '{value} Miles',
@@ -79,26 +94,35 @@ export default {
   },
   computed: {
     ...mapState('library', ['conditions']),
-    ...mapGetters('library', ['searchedBook', 'otherBooks'])
+    ...mapGetters('library', ['searchedBook', 'otherBooks', 'loading'])
   },
   async mounted () {
-    this.radiusMiles = Math.round(this.$route.params.radius / 1000)
-    this.searchText = this.$route.params.searchTitle || 'All'
+    this.radiusMiles = this.$route.params.radius
+    this.searchTitle = this.$route.params.searchTitle || 'All'
     await this.searchHandle()
   },
   methods: {
     ...mapActions('library', ['search']),
+    ...mapActions('bookshelf', ['fetchByBookshelfItemId']),
     goToBorrowPage (bookshelfItemId) {
       this.$router.push({ name: 'library.borrow', params: { bookshelfItemId } })
+    },
+    async onSelectBook (bookId) {
+      const data = await this.fetchByBookshelfItemId(bookId)
+      if (data.success) this.selectedBook = data.result
     },
     async searchHandle () {
       const query = {
         searchTitle: this.searchTitle,
         longitude: this.$route.params.longitude,
         latitude: this.$route.params.latitude,
-        radius: this.radiusMiles * 1000
+        radius: this.radiusMiles
       }
       await this.search(query)
+    },
+    closeModal () {
+      this.showModal = false
+      this.selectedBook = null
     }
   }
 }

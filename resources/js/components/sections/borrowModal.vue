@@ -31,9 +31,10 @@
           <h2>You are borrowing:</h2>
           <p class="font-semibold">{{ selectedBook.book.title }}</p>
           <hr>
-          <p>
-            <fa icon="map-marker-alt" />{{ selectedBook.bookshelf.city}}
+          <p class="font-semibold">
+            <fa icon="map-marker-alt" class="mr-1" />{{ selectedBook.bookshelf.city}}, {{ selectedBook.bookshelf.postcode}}
           </p>
+          <sub>The full address will be received by email on approval</sub>
           <hr>
           <h2>Collection date:</h2>
           <p class="font-semibold">{{ selectedDate }}</p>
@@ -115,14 +116,19 @@ export default {
         pickup_date: DateTime.fromFormat(this.selectedDate, 'cccc, d LLLL').set({ hour: timeslotHour }).toFormat('yyyy-LL-dd T'),
         return_date: this.returnDate.toFormat('yyyy-LL-dd T')
       }
-      await this.request(payload)
-      Swal.fire({
-        type: 'success',
-        title: 'Good Job!',
-        text: 'Your request has been sent!'
-      }).then(() => {
+
+      try {
+        await this.request(payload)
+        Swal.fire({
+          type: 'success',
+          title: 'Good Job!',
+          text: 'Your request has been sent!'
+        }).then(() => {
+          this.$emit('close')
+        })
+      } catch (error) {
         this.$emit('close')
-      })
+      }
     }
   }
 }

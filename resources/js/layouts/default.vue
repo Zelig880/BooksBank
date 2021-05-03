@@ -2,7 +2,7 @@
   <div class="main-layout">
     <sNavbar />
 
-    <div class="">
+    <div class="flex-1">
       <child />
     </div>
 
@@ -26,5 +26,8 @@ export default {
 
 <style lang="scss">
 .main-layout{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>
