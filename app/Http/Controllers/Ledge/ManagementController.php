@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Ledge;
 
-use App\Http\Controllers\BaseController;
-use App\Mail\BookRequestStatusMail;
-use App\Mail\BookRequestMail;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Ledge;
-use App\Models\Bookshelf_item;
 use App\Enums\LedgeStatus;
+use Illuminate\Http\Request;
+use App\Mail\BookRequestMail;
+use App\Models\Bookshelf_item;
+use App\Mail\BookReturnStatusMail;
+use App\Mail\BookRequestStatusMail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\BaseController;
 
 class ManagementController extends BaseController
 {
@@ -21,7 +22,8 @@ class ManagementController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAll(){
+    public function getAll()
+    {
         $userId = Auth::id();
 
         $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
@@ -32,6 +34,36 @@ class ManagementController extends BaseController
         return $this->responseJson(true, 200, '', $result);
     }
 
+    public function return($id)
+    {
+        $ledge = Ledge::find($id);
+
+        // check if the user is the owner of the ledge
+        $userId = Auth::id();
+
+        // check if the user is the borrower of the ledge
+        if (($userId === $ledge->borrower_id) === 1) {
+            return response()->json(['error' => 'Not authorized.'], 403);
+        }
+
+        // ledge not awaiting approval
+        if ($ledge->status !== LedgeStatus::InProgress) {
+            return response()->json(['error' => 'Ledge is not due for return.'], 409);
+        }
+
+        try {
+            $ledge->update([
+                'status' => LedgeStatus::AwaitingReturn
+            ]);
+
+            Mail::to($ledge->lender->email)->send(new BookReturnStatusMail($ledge));
+
+            return response()->json(['success' => $ledge]);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     /**
      * Issue a request to lend a book
      *
@@ -39,7 +71,8 @@ class ManagementController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function request(Request $request){
+    public function request(Request $request)
+    {
 
         $this->validate($request, [
             'bookshelfItemId' => 'required',
@@ -49,8 +82,8 @@ class ManagementController extends BaseController
 
         $userId = Auth::id();
         $bookshelf_item = Bookshelf_item::with(['bookshelf'])
-                            ->where('id', $request->input('bookshelfItemId'))
-                            ->first();
+            ->where('id', $request->input('bookshelfItemId'))
+            ->first();
 
         $result = Ledge::create([
             'lender_id' => $bookshelf_item->bookshelf->user_id,
@@ -86,14 +119,12 @@ class ManagementController extends BaseController
         $userId = Auth::id();
 
         // check if the user is the owner of the ledge
-        if (($userId === $ledge->lender_id) === 1)
-        {
+        if (($userId === $ledge->lender_id) === 1) {
             return response()->json(['error' => 'Not authorized.'], 403);
         }
 
         // ledge not awaiting approval
-        if ($ledge->status !== LedgeStatus::WaitingApproval)
-        {
+        if ($ledge->status !== LedgeStatus::WaitingApproval) {
             return response()->json(['error' => 'Ledge is not awaiting approval.'], 409);
         }
 
@@ -105,10 +136,8 @@ class ManagementController extends BaseController
             Mail::to($ledge->borrower->email)->send(new BookRequestStatusMail($ledge));
 
             return response()->json(['success' => $ledge]);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             throw $e;
         }
     }
-
 }

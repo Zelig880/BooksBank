@@ -28,3 +28,4 @@ Homestead.json
 
 phpunit.dusk.xml
 *.code-workspace
+/.history
