@@ -27,11 +27,11 @@ class ManagementController extends BaseController
         $userId = Auth::id();
 
         $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
-            ->where('lender_id', $userId)
-            ->orWhere('borrower_id', $userId)
-            ->get();
+                        ->where('lender_id', $userId)
+                        ->orWhere('borrower_id', $userId)
+                        ->get();
 
-        return $this->responseJson(true, 200, '', $result);
+        return $this->responseJson(true, 200, 'Ledges fetched!', $result);
     }
 
     public function return($id)
@@ -59,7 +59,8 @@ class ManagementController extends BaseController
             Mail::to($ledge->lender->email)->send(new BookReturnStatusMail($ledge));
 
             return response()->json(['success' => $ledge]);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             throw $e;
         }
     }
@@ -82,8 +83,8 @@ class ManagementController extends BaseController
 
         $userId = Auth::id();
         $bookshelf_item = Bookshelf_item::with(['bookshelf'])
-            ->where('id', $request->input('bookshelfItemId'))
-            ->first();
+                                        ->where('id', $request->input('bookshelfItemId'))
+                                        ->first();
 
         $result = Ledge::create([
             'lender_id' => $bookshelf_item->bookshelf->user_id,

@@ -5,24 +5,22 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Config;
 
 class BookReturnStatusMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $lender;
+    public $ledge;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $ledge
      */
-    public function __construct($lender)
+    public function __construct($ledge)
     {
-        //
-        $this->lender = $lender;
+        $this->ledge = $ledge;
     }
 
     /**
@@ -32,10 +30,9 @@ class BookReturnStatusMail extends Mailable
      */
     public function build()
     {
-
         Config::set('mail.username', 'support@booksbank.com');
         return $this->view('mail.book-request-mail')
-            ->from('noreply@booksbank.com', 'BooksBank')
-            ->subject("Your Book is awaiting return");
+                    ->from('noreply@booksbank.com', 'BooksBank')
+                    ->subject("Your Book is awaiting return");
     }
 }
