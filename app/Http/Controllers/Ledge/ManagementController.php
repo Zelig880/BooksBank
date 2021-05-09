@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Ledge;
 
-use Exception;
-use App\Models\Ledge;
-use App\Enums\LedgeStatus;
-use Illuminate\Http\Request;
-use App\Mail\BookRequestMail;
-use App\Models\Bookshelf_item;
-use App\Mail\BookReturnStatusMail;
-use App\Mail\BookRequestStatusMail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BaseController;
+use App\Mail\BookRequestStatusMail;
+use App\Mail\BookRequestMail;
+use App\Mail\BookReturnStatusMail;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Ledge;
+use App\Models\Bookshelf_item;
+use App\Enums\LedgeStatus;
+use Illuminate\Support\Facades\Mail;
 
 class ManagementController extends BaseController
 {
@@ -57,7 +57,6 @@ class ManagementController extends BaseController
             ]);
 
             Mail::to($ledge->lender->email)->send(new BookReturnStatusMail($ledge));
-
             return response()->json(['success' => $ledge]);
         }
         catch (Exception $e) {
@@ -118,14 +117,15 @@ class ManagementController extends BaseController
 
         // check if the user is the owner of the ledge
         $userId = Auth::id();
-
-        // check if the user is the owner of the ledge
-        if (($userId === $ledge->lender_id) === 1) {
+        if (($userId === $ledge->lender_id) === 1)
+        {
             return response()->json(['error' => 'Not authorized.'], 403);
         }
 
         // ledge not awaiting approval
-        if ($ledge->status !== LedgeStatus::WaitingApproval) {
+
+        if ($ledge->status !== LedgeStatus::WaitingApproval)
+        {
             return response()->json(['error' => 'Ledge is not awaiting approval.'], 409);
         }
 
@@ -137,7 +137,8 @@ class ManagementController extends BaseController
             Mail::to($ledge->borrower->email)->send(new BookRequestStatusMail($ledge));
 
             return response()->json(['success' => $ledge]);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             throw $e;
         }
     }

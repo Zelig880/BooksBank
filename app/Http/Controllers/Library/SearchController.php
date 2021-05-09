@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bookshelf;
 use App\Models\Bookshelf_item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Geographical;
 
 class SearchController extends Controller
@@ -17,7 +18,10 @@ class SearchController extends Controller
      */
     public function index($latitude, $longitude, $radius)
     {
-        
+        // This endpoint is available also to unauthenticated user. 
+        // But if we are authenticated, we do not return that user books
+        $userId = Auth::id();
+
         $query = Bookshelf_item::with(
             [
                 'bookshelf' => function ($query) use ($latitude, $longitude) {
@@ -27,6 +31,12 @@ class SearchController extends Controller
                 },
                 'book'
             ])
+            ->whereHas('bookshelf', function ($query) use ($latitude, $longitude, $radius, $userId) {
+                return $query
+                        ->distance($latitude, $longitude)
+                        ->having('distance', '<', $radius)
+                        ->where('user_id', '<>', $userId);
+            })
             ->get();
 
         return $query;

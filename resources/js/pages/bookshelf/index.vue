@@ -9,7 +9,7 @@
           <div class="font-lora text-6xl mb-2">
             {{ user.name }}
           </div>
-          <div class="text-blue-600 font-sans">
+          <div class="text-blue-600 font-sans hidden md:block">
             {{ currentBookshelf.address_line_1 }}, {{ currentBookshelf.city }}, {{ currentBookshelf.postcode }}
           </div>
         </div>
@@ -59,7 +59,7 @@ export default {
     min-height: 500px;
   }
   &__button{
-    @apply rounded-t-lg py-4 px-7 font-semibold inline-block;
+    @apply rounded-t-lg px-2 md:px-7 py-4 font-semibold inline-block;
     background-color: var(--outline);
     color: white;
     &--selected{

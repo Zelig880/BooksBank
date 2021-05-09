@@ -5,7 +5,7 @@
 </template>
 
 <script>
-const themes = ['cta', 'primary', 'secondary', 'none']
+const themes = ['cta', 'primary', 'secondary', 'none', 'icon']
 const colours = ['primary', 'secondary']
 
 export default {
@@ -120,5 +120,19 @@ export default {
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
+}
+.anchor-icon{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--img-holder);
+  color: var(--body-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+  &:hover{
+    opacity:1;
+  }
 }
 </style>
