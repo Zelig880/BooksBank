@@ -1,6 +1,6 @@
 <?php
 namespace Deployer;
-require 'recipe/laravel.php';
+require './deployer/recipe/laravel.php';
 
 inventory('hosts.yaml');
 
