@@ -19,8 +19,7 @@ mix
 if (mix.inProduction()) {
   mix
     // .extract() // Disabled until resolved: https://github.com/JeffreyWay/laravel-mix/issues/1889
-    // .version() // Use `laravel-mix-versionhash` for the generating correct Laravel Mix manifest file.
-    .versionHash()
+    .version() // Use `laravel-mix-versionhash` for the generating correct Laravel Mix manifest file.
 } else {
   mix.sourceMaps()
 }
@@ -37,6 +36,6 @@ mix.webpackConfig({
   },
   output: {
     chunkFilename: 'dist/js/[chunkhash].js',
-    path: path.resolve(__dirname, './public/')
+    path: path.resolve(__dirname, './public')
   }
 })
