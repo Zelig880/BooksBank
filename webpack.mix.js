@@ -1,5 +1,4 @@
 const path = require('path')
-const fs = require('fs-extra')
 const mix = require('laravel-mix')
 require('laravel-mix-versionhash')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
@@ -38,23 +37,6 @@ mix.webpackConfig({
   },
   output: {
     chunkFilename: 'dist/js/[chunkhash].js',
-    // path: mix.config.hmr ? '/' : path.resolve(__dirname, './public/build')
-    path: path.resolve(__dirname, './public/build')
+    path: path.resolve(__dirname, './public/')
   }
 })
-
-// mix.then(() => {
-//   if (!mix.config.hmr) {
-//     process.nextTick(() => publishAseets())
-//   }
-// })
-
-// function publishAseets () {
-//   const publicDir = path.resolve(__dirname, './public')
-
-//   if (mix.inProduction()) {
-//     fs.removeSync(path.join(publicDir, 'dist'))
-//   }
-//   fs.copySync(path.join(publicDir, 'build', 'dist'), path.join(publicDir, 'dist'))
-//   fs.removeSync(path.join(publicDir, 'build'))
-// }
