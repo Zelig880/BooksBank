@@ -22,6 +22,10 @@ task('upload', function () {
     upload(__DIR__ . "/.build/current/", '{{release_path}}');
 });
 
+task('remove:node_modules', function () {
+    run('cd {{release_path}} && rm -rf node_modules');
+});
+
 task('build', function () {
     set('deploy_path', __DIR__ . '/.build');
     invoke('deploy:prepare');
@@ -30,6 +34,7 @@ task('build', function () {
     invoke('deploy:vendors');
     run('cd {{release_path}} && yarn install');
     run('cd {{release_path}} && yarn production');
+    invoke('remove:node_modules');
     invoke('deploy:symlink');
 })->local();
 
