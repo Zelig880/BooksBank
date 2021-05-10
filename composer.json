@@ -1,7 +1,11 @@
 {
     "name": "cretueusebiu/laravel-vue-spa",
     "description": "A Laravel-Vue SPA starter project template.",
-    "keywords": ["spa", "laravel", "vue"],
+    "keywords": [
+        "spa",
+        "laravel",
+        "vue"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -11,6 +15,7 @@
         "fruitcake/laravel-cors": "^1.0",
         "google/apiclient": "2.7",
         "guzzlehttp/guzzle": "^7.2",
+        "infureal/artisan-gui": "^2.0",
         "jbohme/nominatim-laravel": "^1.0",
         "laravel/framework": "^8.0",
         "laravel/socialite": "^5.1",
@@ -22,6 +27,8 @@
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.4.0",
+        "deployer/deployer": "^6.8",
+        "deployer/recipes": "^6.2",
         "doctrine/dbal": "^2.9",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",
@@ -38,7 +45,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-              "laravel/dusk"
+                "laravel/dusk"
             ]
         },
         "google/apiclient-services": [

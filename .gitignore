@@ -21,6 +21,7 @@ public_html/hot
 
 storage/*.key
 .env
+.env.production
 Homestead.yaml
 Homestead.json
 /.vagrant
@@ -28,3 +29,7 @@ Homestead.json
 
 phpunit.dusk.xml
 *.code-workspace
+
+# deployer build
+.build
+hosts.yaml

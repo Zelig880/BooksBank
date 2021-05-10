@@ -7,10 +7,12 @@ const tailwindcss = require('tailwindcss')
 
 mix
   .js('resources/js/app.js', 'public/dist/js')
+  .vue({
+    extractStyles: true
+  })
   .sass('resources/sass/app.scss', 'public/dist/css')
   .options({
     processCssUrls: false,
-    extractVueStyles: true,
     postCss: [ tailwindcss('./tailwind.config.js') ]
   })
   .disableNotifications()
@@ -36,23 +38,23 @@ mix.webpackConfig({
   },
   output: {
     chunkFilename: 'dist/js/[chunkhash].js',
-    path: mix.config.hmr ? '/' : path.resolve(__dirname, './public/build')
+    // path: mix.config.hmr ? '/' : path.resolve(__dirname, './public/build')
+    path: path.resolve(__dirname, './public/build')
   }
 })
 
-mix.then(() => {
-  if (!mix.config.hmr) {
-    process.nextTick(() => publishAseets())
-  }
-})
+// mix.then(() => {
+//   if (!mix.config.hmr) {
+//     process.nextTick(() => publishAseets())
+//   }
+// })
 
-function publishAseets () {
-  const publicDir = path.resolve(__dirname, './public')
+// function publishAseets () {
+//   const publicDir = path.resolve(__dirname, './public')
 
-  if (mix.inProduction()) {
-    fs.removeSync(path.join(publicDir, 'dist'))
-  }
-
-  fs.copySync(path.join(publicDir, 'build', 'dist'), path.join(publicDir, 'dist'))
-  fs.removeSync(path.join(publicDir, 'build'))
-}
+//   if (mix.inProduction()) {
+//     fs.removeSync(path.join(publicDir, 'dist'))
+//   }
+//   fs.copySync(path.join(publicDir, 'build', 'dist'), path.join(publicDir, 'dist'))
+//   fs.removeSync(path.join(publicDir, 'build'))
+// }
