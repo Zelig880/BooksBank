@@ -4,6 +4,9 @@
       <h2 class="mt-8 mb-8 text-2xl font-bold">
         {{ $t('register_title') }}
       </h2>
+      <p class="mt-4 mb-8">
+        {{ $t('register_description') }}
+      </p>
       <button class="w-full rounded-full py-3 border-2 mb-2" @click="handleClick('google')">
         {{ $t('continue-with-google') }}
       </button>

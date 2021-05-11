@@ -23,7 +23,7 @@
         </template>
         <template v-else>
           <h2 class="text-2xl mb-8">
-            Search result: {{ searchedBook.length }}
+            {{ $t('libraryBorrow-searchBooks') }}: {{ searchedBook.length }}
           </h2>
           <div class="grid grid-cols-2 gap-4">
             <template v-if="searchedBook.length !== 0">
@@ -38,11 +38,11 @@
               />
             </template>
             <template v-else>
-              <p>Ops.. The book that you searched is not in your radius! See other books available within your radius or increase the radius for more results</p>
+              <p>{{ $t('libraryBorrow-noBooks') }}</p>
             </template>
           </div>
           <h2 v-if="otherBooks.length > 0" class="text-2xl mb-10 pb-12 mt-16 border-b-2">
-            Other books available within your radius
+            {{ $t('libraryBorrow-searchOtherBooks') }}
           </h2>
           <div class="grid grid-cols-2 gap-4">
             <LibraryViewCard
