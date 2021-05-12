@@ -36,8 +36,7 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "process-timeout":600
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
@@ -64,6 +63,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "pre-install-cmd": [
+          "Composer\\Config::disableProcessTimeout"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
