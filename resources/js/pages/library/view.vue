@@ -3,7 +3,7 @@
     <div class="w-full border-b-2 pb-8">
       <div class="container mx-auto flex flex-col md:flex-row justify-between">
         <div class="rounded-full border-2 pl-8 pr-12 py-2 flex flex-col relative md:w-7/12">
-          <label for="search" class="text-xs text-gray-400 font-bold">You search for:</label>
+          <label for="search" class="text-xs text-gray-400 font-bold">{{ $t('libraryBorrow-searchTitleLabel') }}:</label>
           <input id="search" v-model="searchTitle" class="font-bold text-lg" type="text" @keyup.enter="searchHandle">
           <fa icon="search" class="absolute right-4 top-3 text-gray-400" size="2x" @click="searchHandle" />
         </div>
@@ -34,7 +34,7 @@
                 :thumbnail="result.book.thumbnail"
                 :condition="conditions[result.condition].name"
                 :distance="result.bookshelf.distance"
-                @click="onSelectBook(result.id)"
+                @click="goToBorrowPage(result.id)"
               />
             </template>
             <template v-else>
@@ -52,13 +52,12 @@
               :thumbnail="result.book.thumbnail"
               :condition="conditions[result.condition].name"
               :distance="result.bookshelf.distance"
-              @click="onSelectBook(result.id)"
+              @click="goToBorrowPage(result.id)"
             />
           </div>
         </template>
       </div>
     </div>
-    <BorrowModal v-if="selectedBook" :show="showModal" :selected-book="selectedBook" @close="closeModal" :key="selectedBook.id" />
   </main>
 </template>
 
@@ -67,13 +66,11 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import LibraryViewCard from '../../components/sections/libraryViewCard.vue'
-import BorrowModal from '../../components/sections/borrowModal'
 
 export default {
   components: {
     VueSlider,
-    LibraryViewCard,
-    BorrowModal
+    LibraryViewCard
   },
 
   data () {
@@ -81,7 +78,6 @@ export default {
       searchTitle: '',
       radiusMiles: 5,
       showModal: true,
-      selectedBook: null,
       sliderOptions: {
         min: 1,
         max: 50,
@@ -103,13 +99,8 @@ export default {
   },
   methods: {
     ...mapActions('library', ['search']),
-    ...mapActions('bookshelf', ['fetchByBookshelfItemId']),
     goToBorrowPage (bookshelfItemId) {
       this.$router.push({ name: 'library.borrow', params: { bookshelfItemId } })
-    },
-    async onSelectBook (bookId) {
-      const data = await this.fetchByBookshelfItemId(bookId)
-      if (data.success) this.selectedBook = data.result
     },
     async searchHandle () {
       const query = {
@@ -119,10 +110,6 @@ export default {
         radius: this.radiusMiles
       }
       await this.search(query)
-    },
-    closeModal () {
-      this.showModal = false
-      this.selectedBook = null
     }
   }
 }
