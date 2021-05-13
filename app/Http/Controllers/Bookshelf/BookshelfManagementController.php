@@ -29,5 +29,10 @@ class BookshelfManagementController
     {
         return $this->user->bookshelf()->find($id)->update($request->validated());
     }
+    
+    public function create(UpdateBookshelfRequest $request)
+    {
+        return $this->user->bookshelf()->create($request->validated());
+    }
 
 }
