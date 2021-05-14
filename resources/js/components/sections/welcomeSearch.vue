@@ -37,7 +37,7 @@ export default {
       postcode: '',
       latitude: null,
       longitude: null,
-      radius: 5
+      radius: 15
     })
   }),
 

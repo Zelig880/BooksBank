@@ -76,7 +76,7 @@ export default {
   data () {
     return {
       searchTitle: '',
-      radiusMiles: 5,
+      radiusMiles: 15,
       showModal: true,
       sliderOptions: {
         min: 1,
