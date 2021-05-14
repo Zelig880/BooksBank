@@ -50,14 +50,22 @@ export default {
       addBook: 'bookshelf/add_book'
     }),
     async addToBookshelf () {
-      await this.addBook(this.selectedBook)
-      Swal.fire({
-        type: 'success',
-        title: 'Good Job!',
-        text: 'Your book has been succesfully added to your Bookshelf!'
-      }).then(() => {
-        this.$router.push({ name: 'bookshelf.all' })
-      })
+      const { success } = await this.addBook(this.selectedBook)
+      if (success) {
+        Swal.fire({
+          type: 'success',
+          title: 'Good Job!',
+          text: 'Your book has been succesfully added to your Bookshelf!'
+        }).then(() => {
+          this.$router.push({ name: 'bookshelf.all' })
+        })
+      } else {
+        Swal.fire({
+          type: 'error',
+          title: 'Opps, you book fell!',
+          text: 'There was an error in processing your request.'
+        })
+      }
     },
     selectBook (book) {
       this.selectedBook = book
