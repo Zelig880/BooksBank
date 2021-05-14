@@ -104,8 +104,9 @@ export const mutations = {
 export const actions = {
   async getAll ({ commit }) {
     const { data } = await axios.get(`/api/ledge`)
-
-    commit('SET_ITEMS', data)
+    if (data.status) {
+      commit('SET_ITEMS', data.data)
+    }
   },
   async request ({ commit }, payload) {
     const { data } = await axios.post(`/api/ledge/request`, payload)

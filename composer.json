@@ -1,13 +1,16 @@
 {
     "name": "cretueusebiu/laravel-vue-spa",
     "description": "A Laravel-Vue SPA starter project template.",
-    "keywords": ["spa", "laravel", "vue"],
+    "keywords": [
+        "spa",
+        "laravel",
+        "vue"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": "^7.2.5",
         "bensampo/laravel-enum": "^3.2",
-        "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "google/apiclient": "2.7",
         "guzzlehttp/guzzle": "^7.2",
@@ -15,13 +18,15 @@
         "laravel/framework": "^8.0",
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0",
+        "laravel/ui": "^3.2",
         "malhal/laravel-geographical": "^1.0",
         "sendinblue/api-v3-sdk": "7.x.x",
-        "tymon/jwt-auth": "^1.0.0"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.4.0",
+        "deployer/deployer": "^6.8",
+        "deployer/recipes": "^6.2",
         "doctrine/dbal": "^2.9",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",
@@ -38,7 +43,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-              "laravel/dusk"
+                "laravel/dusk"
             ]
         },
         "google/apiclient-services": [
@@ -60,6 +65,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "pre-install-cmd": [
+          "Composer\\Config::disableProcessTimeout"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

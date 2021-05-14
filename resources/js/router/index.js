@@ -70,7 +70,6 @@ async function beforeEach (to, from, next) {
   if (components[components.length - 1].loading !== false) {
     router.app.$nextTick(() => router.app.$loading.start())
   }
-
   // Get the middleware for all the matched components.
   const middleware = getMiddleware(components)
 
@@ -78,7 +77,8 @@ async function beforeEach (to, from, next) {
   callMiddleware(middleware, to, from, (...args) => {
     // Set the application layout only if "next()" was called with no args.
     if (args.length === 0) {
-      router.app.setLayout(components[0].layout || '')
+      const component = components[0].default || components[0]
+      router.app.setLayout(component.layout || '')
     }
 
     next(...args)
@@ -154,13 +154,15 @@ function resolveComponents (components) {
 function getMiddleware (components) {
   const middleware = [...globalMiddleware]
 
-  components.filter(c => c.middleware).forEach(component => {
-    if (Array.isArray(component.middleware)) {
-      middleware.push(...component.middleware)
-    } else {
-      middleware.push(component.middleware)
-    }
-  })
+  components.map(component => component.default || component)
+    .forEach(component => {
+      if (!component.middleware) return
+      if (Array.isArray(component.middleware)) {
+        middleware.push(...component.middleware)
+      } else {
+        middleware.push(component.middleware)
+      }
+    })
 
   return middleware
 }
@@ -202,7 +204,8 @@ function resolveMiddleware (requireContext) {
     .map(file =>
       [file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file)]
     )
-    .reduce((guards, [name, guard]) => (
-      { ...guards, [name]: guard.default }
-    ), {})
+    .reduce((guards, [name, guard]) => {
+      return { ...guards, [name]: guard.default || guard }
+    }
+    , {})
 }

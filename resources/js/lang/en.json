@@ -55,23 +55,35 @@
   "continue-with-facebook": "Continue with facebook",
 
   "signin-title": "Login to your account",
-  "signin-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "signin-description": "Sign in, using your preferred method, or quickly create an account.",
 
   "register_title": "Create your account",
+  "register_description": "Join the community by using one of the method below.",
   "register_name_placeholder": "John Smith",
   "register_email_placeholder": "john@smith.com",
   "register_password_placeholder": "***********",
   "register_cta": "Signup",
 
-  "welcomeSearch-title": "Search for a book",
-  "welcomeSearch-paragraph": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+  "welcomeSearch-title": "Get Started!",
+  "welcomeSearch-paragraph": "You are one click away, to borrow any books from a place near you, and its totally free!",
 
-  "welcomeAdd-title": "Add a book",
-  "welcomeAdd-paragraph": "This is a short paragraph about how to add a book!",
+  "welcomeHow-title": "How it works",
+  "welcomeHow-subtitle": "Finding a book to borrow has never been easier.",
+  "welcomeHow-step1": "Search for a specific book, or just browse available books near you",
+  "welcomeHow-step2": "Select a book from the list of available title near you",
+  "welcomeHow-step3": "Choose a date and time that suit you and send your request",
+  "welcomeHow-step4": "Pick up your book, after received confirmation of your request",
+
+  "welcomeAdd-title": "Share your books",
+  "welcomeAdd-paragraph": "Give a second life to your books, by lending them to people near you. It is as easy as selecting a book using our database and selecting your preferred pick up times.",
   "welcomeAdd-cta": "Add a book",
 
   "welcomeJoin-title": "Join the community",
-  "welcomeJoin-paragraph": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+  "welcomeJoin-paragraph": "Stay up to speed, with BooksBank News, features announcement, and carefully selected offers.",
+
+  "welcomeAbout-title": "About Booksbank",
+  "welcomeAbout-paragraph1": "Booksbank is a community driven project, aimed at allowing everyone to be able to enjoy a nice read, by borrowing books that would otherwise sit on a shelf collecting dust.",
+  "welcomeAbout-paragraph2": "The heart of booksbank it's YOU! This project could not be possible, if it wasn't for the thousants of community memebers that are happy to lent their",
 
   "bookshelfAdd-title": "Add a book",
   "bookshelfAdd-paragraph": "Give your book a second life, by simply adding them to your virtual library following 3 easy steps.",
@@ -92,8 +104,12 @@
 
   "bookshelfSettings-timeslot-title": "Choose your preferred time for the book to be picked up",
 
+  "libraryBorrow-noBooks": "Ops.. The book that you searched is not in your radius! See other books available within your radius or increase the radius for more results",
+  "libraryBorrow-searchBooks": "Search result",
+  "libraryBorrow-searchTitleLabel": "You searched for",
+  "libraryBorrow-searchOtherBooks": "Other books available within your radius",
   "libraryBorrow-timeslot-title": "Available times to pick up. Please select at least 3 slots before continuing",
 
-  "sFooter-text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
+  "sFooter-text": "Finding a book to borrow has never been easier. Join our community members and start to read now from the comfort of your home."
 
 }
