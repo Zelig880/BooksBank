@@ -93,14 +93,14 @@
   "bookshelfAdd-steps-step2-description": "Provide some quick details for users to know",
   "bookshelfAdd-steps-step3-title": "Review and Finish",
   "bookshelfAdd-steps-step3-description": "Review your information and add make the book available",
-  
   "bookshelfAdd-step1-search-label": "Enter Book ISBN or Title:",
-
   "bookshelfAdd-step2-title": "Set it's condition",
   "bookshelfAdd-step2-description": "Select the condition that best describe our book",
-
   "bookshelfAdd-step3-title": "Review time",
   "bookshelfAdd-step3-description": "Review the following information before adding your book",
+
+  "bookshelfAll-BooksYouAreReading": "The books you are reading",
+  "bookshelfAll-BookYouOwn": "The books you own",
 
   "bookshelfSettings-timeslot-title": "Choose your preferred time for the book to be picked up",
 

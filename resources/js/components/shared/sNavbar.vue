@@ -47,11 +47,8 @@ export default {
       this.showMenu = !this.showMenu
     },
     async onLogout () {
-      // Log out the user.
       await this.logout()
-
-      // Redirect to login.
-      this.$router.push({ name: 'login' })
+      this.$router.push({ name: 'welcome' })
     }
   }
 }
