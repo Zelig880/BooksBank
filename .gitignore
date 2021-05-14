@@ -29,6 +29,7 @@ Homestead.json
 
 phpunit.dusk.xml
 *.code-workspace
+/.history
 
 # deployer build
 .build
