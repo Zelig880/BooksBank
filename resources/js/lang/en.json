@@ -99,6 +99,10 @@
   "bookshelfAdd-step3-title": "Review time",
   "bookshelfAdd-step3-description": "Review the following information before adding your book",
 
+  "bookshelfAddNoBookshelfBanner-title": "Bookshelf registration required!",
+  "bookshelfAddNoBookshelfBanner-paragraph": "Your bookshelf need to be fully configured to be able to add books into it.<br/>Click the link below to quickly complete the registration of your bookshelf",
+  "bookshelfAddNoBookshelfBanner-button": "Complete registration",
+  
   "bookshelfAll-BooksYouAreReading": "The books you are reading",
   "bookshelfAll-BookYouOwn": "The books you own",
 

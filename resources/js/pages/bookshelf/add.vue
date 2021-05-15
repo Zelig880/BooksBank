@@ -4,13 +4,14 @@
       <img v-if="thumbnail" :src="thumbnail" :alt="thumbnail_alt" />
     </div>
     <div class="add-form">
+      <BookshelfAddNoBookshelfBanner v-if="!currentBookshelf"></BookshelfAddNoBookshelfBanner>
       <h2 class="mb-4 font-black text-gray-700 text-6xl font-lora">
         {{ $t('bookshelfAdd-title') }}
       </h2>
       <p class="text-lg">
         {{ $t('welcomeAdd-paragraph') }}
       </p>
-      <BookshelfAddStep1 :disabled="currentStep !== 1" @select="selectBook" />
+      <BookshelfAddStep1 :disabled="currentStep !== 1 || !currentBookshelf" @select="selectBook" />
       <BookshelfAddStep2 v-if="currentStep >= 2" :disabled="currentStep !== 2" @select="selectCondition" />
       <Button v-if="currentStep === 3" class="float-right mt-6" @click="addToBookshelf">Add to your Bookshelf</Button>
     </div>
@@ -18,7 +19,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import BookshelfAddNoBookshelfBanner from '../../components/sections/bookshelfAddNoBookshelfBanner.vue'
 import BookshelfAddStep1 from '../../components/sections/bookshelfAddStep1.vue'
 import BookshelfAddStep2 from '../../components/sections/bookshelfAddStep2.vue'
 import Swal from 'sweetalert2'
@@ -28,7 +30,8 @@ export default {
   middleware: 'auth',
   components: {
     BookshelfAddStep1,
-    BookshelfAddStep2
+    BookshelfAddStep2,
+    BookshelfAddNoBookshelfBanner
   },
   data () {
     return {
@@ -37,18 +40,21 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      currentBookshelf: 'bookshelf/currentBookshelf'
+    }),
     thumbnail () {
       return this.selectedBook ? this.selectedBook.thumbnail : false
     },
     thumbnail_alt () {
       return this.selectedBook ? `cover for ${this.selectedBook.title}` : 'Empty book cover'
     }
-
+  },
+  mounted () {
+    this.getCurrent()
   },
   methods: {
-    ...mapActions({
-      addBook: 'bookshelf/add_book'
-    }),
+    ...mapActions('bookshelf', ['getCurrent', 'addBook']),
     async addToBookshelf () {
       const { success } = await this.addBook(this.selectedBook)
       if (success) {
@@ -62,7 +68,7 @@ export default {
       } else {
         Swal.fire({
           type: 'error',
-          title: 'Opps, you book fell!',
+          title: 'Ops, you book fell!',
           text: 'There was an error in processing your request.'
         })
       }
