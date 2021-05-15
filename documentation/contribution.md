@@ -12,6 +12,6 @@ Join our Slack community by following this link (it just last 30 days, so if it 
 
 ## Onboard
 
-The next step required for you to contribute (if you are a developer), is to get the application up and running locally. You can do so by following the [installation guide]("installation.md").
+The next step required for you to contribute (if you are a developer), is to get the application up and running locally. You can do so by following the [installation guide](installation.md).
 
 
