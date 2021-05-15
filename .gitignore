@@ -33,4 +33,3 @@ phpunit.dusk.xml
 
 # deployer build
 .build
-hosts.yaml
