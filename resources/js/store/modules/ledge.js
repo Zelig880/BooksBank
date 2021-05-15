@@ -113,7 +113,7 @@ export const actions = {
     console.log(data)
   },
   async respond ({ commit }, { ledgeId, response }) {
-    const { data } = await axios.post(`/api/ledge/request/respond`, { ledgeId, response })
+    const { data } = await axios.put(`/api/ledge/request/respond/${ledgeId}`, { response })
     console.log(data)
   }
 }
