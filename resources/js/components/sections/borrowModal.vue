@@ -119,12 +119,11 @@ export default {
 
       try {
         await this.request(payload)
+        this.$emit('close')
         Swal.fire({
           type: 'success',
           title: 'Good Job!',
           text: 'Your request has been sent!'
-        }).then(() => {
-          this.$emit('close')
         })
       } catch (error) {
         this.$emit('close')
