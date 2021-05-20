@@ -8,7 +8,7 @@ I am going to define the steps necessary to achieve your first PR (or if you are
 
 The first and foremost requirement to get started, is to join our slack community. There you will be able to get help you need to install the app (if the provided guide is not enough), and also support in picking your first story and get it out of the door.
 
-Join our Slack community by following this link (it just last 30 days, so if it is expired, let me know on twitter on #zelig880, or by raising an issue on this repo): https://join.slack.com/t/booksbank/shared_invite/zt-p04vtxqv-xC6zBkLwgwlEpeaPoN6a6Q 
+Join our Slack community by following this link (it just last 30 days, so if it is expired, let me know on twitter on #zelig880, or by raising an issue on this repo): https://join.slack.com/t/booksbank/shared_invite/zt-qt1f081d-5J3EKVP2T162bTMu~jYAuA
 
 ## Onboard
 
