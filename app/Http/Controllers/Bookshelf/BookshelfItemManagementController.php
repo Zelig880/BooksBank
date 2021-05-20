@@ -22,7 +22,11 @@ class BookshelfItemManagementController extends Controller
 
     public function index()
     {
-        return $this->bookshelf->bookshelf_items()->with('book')->get();
+        $bookshelf = $this->bookshelf;
+
+        if(!$bookshelf) return;
+
+        return $bookshelf->bookshelf_items()->with('book')->get();
     }
 
     public function getByBookshelfItemId($id)

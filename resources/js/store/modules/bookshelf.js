@@ -24,7 +24,7 @@ const createBookObject = function (book) {
 // state
 export const state = {
   searchResult: [],
-  currentBookshelf: {},
+  currentBookshelf: null,
   items: []
 }
 
@@ -77,7 +77,7 @@ export const actions = {
   },
   async addBook ({ commit, state }, selectedBook) {
     const { data } = await axios.post(`/api/bookshelf_item/store`, { ...selectedBook, status: 0 })
-    commit('ADD_ITEM', selectedBook)
+    commit('ADD_ITEMS', selectedBook)
 
     return data
   },
@@ -94,6 +94,7 @@ export const actions = {
   async getCurrent ({ commit }) {
     const { data } = await axios.get('/api/bookshelf')
 
+    if (Object.keys(data).length === 0) return
     commit('SET_CURRENT_BOOKSHELF', data)
   },
   reset ({ commit }) {

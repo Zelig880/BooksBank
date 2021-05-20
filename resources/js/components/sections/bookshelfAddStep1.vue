@@ -6,7 +6,7 @@
         <input id="search" v-model="searchText" class="font-bold text-lg w-4/5" type="text" placeholder="1234567891231 or The Lord of the ring" :disabled="disabled" autocomplete="off" @keyup.enter="find(searchText)">
         <fa icon="times" class="bokshelfAddStep1-icon mt-1" size="lg" @click="resetSearch" />
       </div>
-      <perfect-scrollbar v-if="searchedBook.length > 0" v-once class="bokshelfAddStep1-result">
+      <perfect-scrollbar v-if="searchedBook.length > 0" class="bokshelfAddStep1-result">
         <bookshelf-add-card
           v-for="result in searchedBook" :key="result.id"
           :title="result.title"
