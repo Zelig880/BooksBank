@@ -11,9 +11,10 @@
       <p class="text-lg">
         {{ $t('welcomeAdd-paragraph') }}
       </p>
-      <BookshelfAddStep1 :disabled="currentStep !== 1 || !currentBookshelf" @select="selectBook" />
+      <BookshelfAddStep1 :disabled="currentStep !== 1 || !currentBookshelf" @select="selectBook" ref="bookSelection" />
       <BookshelfAddStep2 v-if="currentStep >= 2" :disabled="currentStep !== 2" @select="selectCondition" />
-      <Button v-if="currentStep === 3" class="float-right mt-6" @click="addToBookshelf">Add to your Bookshelf</Button>
+      <Button v-if="currentStep === 3" class="float-right mt-6 ml-6" @click="addToBookshelf">Add to your Bookshelf</Button>
+      <Button v-if="selectedBook" theme="secondary" color="secondary" class="float-right mt-6" @click="resetSelection">Start again</Button>
     </div>
   </div>
 </template>
@@ -87,6 +88,13 @@ export default {
         this.currentStep = 1
       } else {
         this.addBook(this.selectedBook)
+      }
+    },
+    resetSelection(){
+      this.currentStep = 1
+      this.selectedBook = null
+      if(this.$refs.bookSelection && this.$refs.bookSelection.resetSearch){
+        this.$refs.bookSelection.resetSearch()
       }
     }
   }
