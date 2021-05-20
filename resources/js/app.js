@@ -5,7 +5,6 @@ import i18n from '~/plugins/i18n'
 import App from '~/components/App'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 import PerfectScrollbar from 'vue2-perfect-scrollbar'
-import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 
 import '~/plugins'
 import '~/components'
