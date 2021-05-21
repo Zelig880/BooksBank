@@ -20,8 +20,8 @@
             <child />
           </div>
         </div>
-        <div class="hidden lg:block w-1/2">
-          <img :src="imagePath" alt="Authentication image">
+        <div class="hidden lg:flex w-1/2">
+          <img class="split-layout_illustration" :src="imagePath" alt="Authentication image">
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@ export default {
       return this.$route.name === 'register'
     },
     imagePath () {
-      return `/assets/img/splitLayout-${this.$route.name}.png`
+      return `/assets/img/splitLayout-${this.$route.name}.svg`
     }
   }
 }
@@ -62,6 +62,9 @@ export default {
   a{
     @apply mr-16 pb-4 capitalize;
     border-color: var(--outline);
+  }
+  &_illustration{
+    max-width:550px;
   }
 }
 </style>
