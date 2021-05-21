@@ -3,7 +3,9 @@
     <div class="relative flex flex-wrap items-center justify-between py-3 mb-3 bg-white">
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <h1 class="w-auto static block justify-start">
-          <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
+          <router-link :to="{ name: 'welcome' }">
+            <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
+          </router-link>
         </h1>
       </div>
       <div class="w-full flex justify-center">
