@@ -51,7 +51,6 @@ class GeolocationController extends Controller
     {
 
         $this->validate($request, [
-            'country' => 'required',
             'lat' => 'required',
             'lon' => 'required'
         ]);

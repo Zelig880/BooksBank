@@ -47,9 +47,14 @@ task('release', [
     'deploy:prepare',
     'deploy:release',
     'upload',
+    'artisan:migrate',
+    'artisan:view:cache',
+    'artisan:config:cache',
+    'artisan:optimize',
     'deploy:shared',
     'deploy:writable',
     'deploy:symlink',
+    'artisan:queue:restart'
 ]);
 
 // Tasks

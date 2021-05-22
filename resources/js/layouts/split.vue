@@ -3,7 +3,9 @@
     <div class="relative flex flex-wrap items-center justify-between py-3 mb-3 bg-white">
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <h1 class="w-auto static block justify-start">
-          <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
+          <router-link :to="{ name: 'welcome' }">
+            <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
+          </router-link>
         </h1>
       </div>
       <div class="w-full flex justify-center">
@@ -20,8 +22,8 @@
             <child />
           </div>
         </div>
-        <div class="hidden lg:block w-1/2">
-          <img :src="imagePath" alt="Authentication image">
+        <div class="hidden lg:flex w-1/2">
+          <img class="split-layout_illustration" :src="imagePath" alt="Authentication image">
         </div>
       </div>
     </div>
@@ -48,7 +50,7 @@ export default {
       return this.$route.name === 'register'
     },
     imagePath () {
-      return `/assets/img/splitLayout-${this.$route.name}.png`
+      return `/assets/img/splitLayout-${this.$route.name}.svg`
     }
   }
 }
@@ -62,6 +64,9 @@ export default {
   a{
     @apply mr-16 pb-4 capitalize;
     border-color: var(--outline);
+  }
+  &_illustration{
+    max-width:550px;
   }
 }
 </style>
