@@ -17,31 +17,19 @@
         <p>
           Book name: {{ $ledge->book->title }}
         </p>
+        @if ($ledge->status === 'Rejected')
         <p>
-          Borrower name: {{ $ledge->lender->name }}
+          Unfortuantely, your book request has been rejected from the user. We apologies for the inconvenient.
         </p>
+        @else
         <p>
-          Pick up date/time: {{ date('d F Y, h:i:s A', strtotime($ledge->pickup_date)) }}
+          Great News, your book request has been accepted! Do not forget to pick you the book at the time and place mentioned below:
+          <b>Pick up date/time:</b> {{ date('d F Y, h:i:s A', strtotime($ledge->pickup_date)) }}
+          <b>Address:</b> {{ $ledge->lender->address_line_1, $ledge->lender->city, $ledge->lender->postcode  }}
         </p>
+        </p>
+        @endif
       </h4>
-    </td>
-  </tr>
-
-  <tr>
-    <td  valign="top" style="padding-top:5px;padding-bottom:20px;padding-left: 40px;">
-
-      <!-- Button Table // -->
-      <table border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td class="ctaButton" style="background-color:#003CE5;padding-top:12px;padding-bottom:12px;padding-left:35px;padding-right:35px;border-radius:50px">
-            <!-- Button Link // -->
-            <a class="text" href="http://www.localhost:8000/api/ledge/request/respond/{{ $ledge->id }}" target="_blank" style="color:#FFFFFF; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:13px; font-weight:600; font-style:normal;letter-spacing:1px; line-height:20px; text-transform:uppercase; text-decoration:none; display:block">
-              Accept Request
-            </a>
-          </td>
-        </tr>
-      </table>
-
     </td>
   </tr>
 
