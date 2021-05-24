@@ -23,7 +23,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import BookshelfAddCard from './bookshelfAddCard.vue'
-
 export default {
   name: 'BookshelfAddStep1',
   components: { BookshelfAddCard },
@@ -34,6 +33,9 @@ export default {
     return {
       searchText: ''
     }
+  },
+  beforeDestroy(){ 
+      this.resetSearch() 
   },
   computed: {
     ...mapGetters('bookshelf', ['searchedBook'])
@@ -58,7 +60,6 @@ export default {
 <style lang="scss">
 .bokshelfAddStep1{
   position: relative;
-
   &-field {
     position: relative;
     input{
