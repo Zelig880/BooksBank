@@ -3,9 +3,11 @@
     <label for="search" class="text-2xl font-semibold mb-3">{{ $t( 'bookshelfAdd-step1-search-label' ) }}</label>
     <div class="bokshelfAddStep1-field rounded-md border-2 pl-8 pr-6 py-2 flex flex-col relative w-full">
       <div>
-        <input id="search" v-model="searchText" class="font-bold text-lg w-4/5" type="text" placeholder="1234567891231 or The Lord of the ring" :disabled="disabled" autocomplete="off" @keyup.enter="find(searchText)">
+        
+        <input id="search"  v-model="searchText" class="font-bold text-lg w-4/5" type="text" placeholder="1234567891231 or The Lord of the ring" :disabled="disabled" autocomplete="off" @keyup.enter="find(searchText)">
         <fa icon="times" class="bokshelfAddStep1-icon mt-1" size="lg" @click="resetSearch" />
       </div>
+      
       <perfect-scrollbar v-if="searchedBook.length > 0" class="bokshelfAddStep1-result">
         <bookshelf-add-card
           v-for="result in searchedBook" :key="result.id"
@@ -33,8 +35,16 @@ export default {
   data () {
     return {
       searchText: ''
+      
+
     }
   },
+  beforeDestroy(){
+    this.reset()
+
+  }
+  
+  ,
   computed: {
     ...mapGetters('bookshelf', ['searchedBook'])
   },
