@@ -7,25 +7,15 @@
       </p>
       <div class="col-span-1 flex place-content-around  mb-8">
         <ul>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="welcome">Home</Anchor></li>
+          <li><Anchor theme="none" routeName="bookshelf.all">My Library</Anchor></li>
+          <li><Anchor theme="none" routeName="bookshelf.info">My Requests</Anchor></li>
         </ul>
         <ul>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
+          <li><Anchor theme="none" routeName="about">About</Anchor></li>
+          <li><Anchor theme="none" routeName="bookshelf.settings">My Settings</Anchor></li>
+          <li><Anchor theme="none" routeName="bookshelf.add">Add a Book</Anchor></li>
         </ul>
-        <ul>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
-          <li><Anchor theme="none" routeName="test">text</Anchor></li>
-        </ul>
-      </div>
-      <div class="col-span-1  mb-8">
-        <span>facebook</span>
-        <span>twitter</span>
-        <span>instragram</span>
       </div>
       <p class="col-span-1 text-center mb-8">
         @copyright Zelig880 LTD
