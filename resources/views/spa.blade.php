@@ -5,7 +5,7 @@ $config = [
     'locales' => config('app.locales'),
     'githubAuth' => config('services.github.client_id'),
 ];
-$measurement_id = env('GOOGLE_API', 'None'); //Retrieving measurement_id from .env
+$measurement_id = env('GOOGLE_MEASUREMENT_ID', 'None'); //Retrieving measurement_id from .env
 ?>
 
 <!DOCTYPE html>
@@ -26,30 +26,31 @@ $measurement_id = env('GOOGLE_API', 'None'); //Retrieving measurement_id from .e
 	<meta name="theme-color" content="#ffffff">
 	<meta name="msapplication-config" content="favicon/browserconfig.xml" />
 
+	<script>
+    var m_id = '<?php echo $measurement_id; ?>';
+    var src_url = 'https://www.googletagmanager.com/gtag/js?id=' + m_id; // Appending m_id to URL
+	//alert(src_url);
+	</script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<?php 
+	if($measurement_id != 'None') {
+	  echo "<script async src=src_url></script>
+	        <script>
+	          window.dataLayer = window.dataLayer || [];
+	          function gtag(){dataLayer.push(arguments);}
+	          gtag('js', new Date());
+	          gtag('config', m_id);
+	        </script>";
+	}
+	?>
   <title>{{ config('app.name') }}</title>
 
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
 <body>
   <div id="app"></div>
-  
-  <script>
-    var m_id = '<?php echo $measurement_id; ?>';
-    var src_url = 'https://www.googletagmanager.com/gtag/js?id=' + m_id; // Appending m_id to URL
-  </script>
-  
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <?php 
-    if($measurement_id != 'None') {
-      echo "<script async src=src_url></script>
-            <script>
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', m_id);
-            </script>";
-    }
-  ?>
+ 
   {{-- Global configuration object --}}
   <script>
     window.config = @json($config);
