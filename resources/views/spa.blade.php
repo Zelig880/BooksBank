@@ -1,11 +1,13 @@
-@php
+<?php
 $config = [
     'appName' => config('app.name'),
     'locale' => $locale = app()->getLocale(),
     'locales' => config('app.locales'),
     'githubAuth' => config('services.github.client_id'),
 ];
-@endphp
+$measurement_id = env('GOOGLE_API', 'None'); //Retrieving measurement_id from .env
+?>
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -30,7 +32,24 @@ $config = [
 </head>
 <body>
   <div id="app"></div>
-
+  
+  <script>
+    var m_id = '<?php echo $measurement_id; ?>';
+    var src_url = 'https://www.googletagmanager.com/gtag/js?id=' + m_id; // Appending m_id to URL
+  </script>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <?php 
+    if($measurement_id != 'None') {
+      echo "<script async src=src_url></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', m_id);
+            </script>";
+    }
+  ?>
   {{-- Global configuration object --}}
   <script>
     window.config = @json($config);
