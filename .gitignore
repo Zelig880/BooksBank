@@ -33,3 +33,6 @@ phpunit.dusk.xml
 
 # deployer build
 .build
+
+# MISC
+.DS_Store
