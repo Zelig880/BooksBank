@@ -1,12 +1,12 @@
 # Installation guide
 
 - Pull the code
-- Run "composer install"
-- Create copy of the ".env.example" file and name it ".env"
+- Run ```composer install```
+- Create copy of the ".env.example" file and name it ".env" ```cp .env.example .env```
 - Create a database and add information in Env file
-- Run "php artisan migrate"
-- Run "php artisan db:seed"
-- Run "yarn install" or "npm install"
+- Run ```php artisan migrate```
+- Run ```php artisan db:seed```
+- Run ```yarn install``` or ```npm install```
 
 # Required to be installed on your machine
 
@@ -17,5 +17,5 @@
 
 ## To run the project locally
 
-- start your php server
-- Yarn hot of npm run hot
+- ```yarn hot``` or ```npm run hot```
+- start your php server, run ```php artisan serve```
