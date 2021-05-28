@@ -12,9 +12,9 @@
         {{ $t('welcomeAdd-paragraph') }}
       </p>
       <BookshelfAddStep1 :disabled="currentStep !== 1 || !currentBookshelf" @select="selectBook" ref="bookSelection" />
-      <BookshelfAddStep2 v-if="currentStep ===2 || currentStep===3" @select="selectCondition" />
+      <BookshelfAddStep2 v-if="currentStep === 2 || currentStep === 3" @select="selectCondition" />
       <Button v-if="currentStep === 3" class="float-right mt-6 ml-6" @click="addToBookshelf">Add to your Bookshelf</Button>
-      <Button v-if="selectedBook && currentStep!==4" theme="secondary" color="secondary" class="float-right mt-6" @click="resetSelection">Start again</Button>
+      <Button v-if="selectedBook && currentStep !== 4" theme="secondary" color="secondary" class="float-right mt-6" @click="resetSelection">Start again</Button>
       <Button v-if="currentStep === 4" theme="cta" color="secondary" class="float-right mt-6 ml-6" @click="resetSelection">Add another book</Button>
       <Button v-if="currentStep === 4" theme="cta" color="secondary" class="float-right mt-6 ml-6" @click="routetolib">My Library</Button>
     </div>
@@ -66,7 +66,7 @@ export default {
           title: 'Good Job!',
           text: 'Your book has been succesfully added to your Bookshelf!'
         })
-        this.currentStep=4
+        this.currentStep = 4
       } else {
         Swal.fire({
           type: 'error',
