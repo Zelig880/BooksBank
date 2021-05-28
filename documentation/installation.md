@@ -17,5 +17,5 @@
 
 ## To run the project locally
 
-- ```yarn hot``` or ```npm run hot```
+- Run ```yarn hot``` or ```npm run hot```
 - Start your php server, run ```php artisan serve```
