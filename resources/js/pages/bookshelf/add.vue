@@ -65,8 +65,9 @@ export default {
           type: 'success',
           title: 'Good Job!',
           text: 'Your book has been succesfully added to your Bookshelf!'
+        }).then(() => {
+          this.currentStep = 4
         })
-        this.currentStep = 4
       } else {
         Swal.fire({
           type: 'error',
