@@ -17,15 +17,15 @@
         <p>
           Book name: {{ $ledge->book->title }}
         </p>
-        @if ($ledge->status === 'Rejected')
+        @if ($ledge->status == 5)
         <p>
           Unfortuantely, your book request has been rejected from the user. We apologies for the inconvenient.
         </p>
         @else
         <p>
-          Great News, your book request has been accepted! Do not forget to pick you the book at the time and place mentioned below:
-          <b>Pick up date/time:</b> {{ date('d F Y, h:i:s A', strtotime($ledge->pickup_date)) }}
-          <b>Address:</b> {{ $ledge->lender->address_line_1, $ledge->lender->city, $ledge->lender->postcode  }}
+          Great News, your book request has been accepted! Do not forget to pick you the book at the time and place mentioned below:<br/><br/>
+          <b>Pick up date/time:</b> {{ date('d F Y, h:i:s A', strtotime($ledge->pickup_date)) }}<br/>
+          <b>Address:</b> {{ $ledge->lender->bookshelf->address_line_1 }}, {{ $ledge->lender->bookshelf->city }}, {{ $ledge->lender->bookshelf->postcode }}
         </p>
         </p>
         @endif
