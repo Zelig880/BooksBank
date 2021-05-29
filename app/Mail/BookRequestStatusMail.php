@@ -33,7 +33,7 @@ class BookRequestStatusMail extends Mailable
     {
         $status = $this->ledge->status === LedgeStatus::WaitingPickup ? 'accepted' : 'rejected';
         Config::set('mail.username', 'support@booksbank.com');
-        return $this->view('mail.book-request-mail')
+        return $this->view('mail.book-request-status-mail')
                     ->from('noreply@booksbank.com','BooksBank')
                     ->subject("Your Book request has been $status");
     }
