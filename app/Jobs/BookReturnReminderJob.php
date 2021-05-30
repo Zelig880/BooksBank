@@ -2,9 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Enums\LedgeStatus;
-use App\Mail\PickupBookMail;
+use App\Mail\BookReturnReminderMail;
 use App\Models\Ledge;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,7 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class PickupBookJob implements ShouldQueue
+class BookReturnReminderJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -35,10 +35,15 @@ class PickupBookJob implements ShouldQueue
     {
         $ledges = Ledge::all();
         foreach ($ledges as $ledge) {
-            if ($ledge->status = LedgeStatus::WaitingPickup && $ledge->pickup_date->format('H:i:s') <= now()->toTimeString())
+            if ($ledge->return_date !== NULL && $this->differenceBetweenTodayAndDate($ledge->return_date) === 7)
             {
-                Mail::to($ledge->lender->email)->send(new PickupBookMail($ledge));
+                Mail::to($ledge->borrower->email)->send(new BookReturnReminderMail($ledge));
             }
         }
+    }
+
+    private function differenceBetweenTodayAndDate($date)
+    {
+        return Carbon::parse($date)->diffInDays(Carbon::now());
     }
 }
