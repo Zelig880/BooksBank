@@ -26,6 +26,12 @@
           Settings
         </template>
       </Anchor>
+      <Button :theme="buttonTheme" class="mr-3" @click="$emit('logout')">
+        <fa icon="sign-out-alt" aria-label="Settings" />
+        <template v-if="mobile">
+          Log out
+        </template>
+      </Button>
     </template>
     <!-- Non Authenticated -->
     <template v-else>

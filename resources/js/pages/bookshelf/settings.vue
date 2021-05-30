@@ -76,7 +76,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('bookshelf', ['getCurrent']),
+    ...mapActions('bookshelf', ['getCurrent', 'updateOrCreate']),
     async update () {
       var { data: result } = await this.form.post('/api/geolocation/getGeolocationByUserQuery')
 
@@ -88,12 +88,12 @@ export default {
         })
       }
 
-      this.longitude = result[0].lon
-      this.latitude = result[0].lat
+      this.form.longitude = result[0].lon
+      this.form.latitude = result[0].lat
 
-      var { data } = await this.form.put(`/api/bookshelf/${this.currentBookshelf.id}/update`)
+      const response = await this.updateOrCreate(this.form)
 
-      if (data) {
+      if (response) {
         Swal.fire({
           type: 'success',
           title: 'All done',

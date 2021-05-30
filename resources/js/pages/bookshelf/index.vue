@@ -9,7 +9,7 @@
           <div class="font-lora text-6xl mb-2">
             {{ user.name }}
           </div>
-          <div class="text-blue-600 font-sans hidden md:block">
+          <div v-if="currentBookshelf" class="text-blue-600 font-sans hidden md:block">
             {{ currentBookshelf.address_line_1 }}, {{ currentBookshelf.city }}, {{ currentBookshelf.postcode }}
           </div>
         </div>

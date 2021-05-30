@@ -5,7 +5,7 @@
 </template>
 
 <script>
-const themes = ['cta', 'primary', 'secondary', 'square']
+const themes = ['cta', 'primary', 'secondary', 'square', 'icon']
 const colours = ['primary', 'secondary', 'cta']
 
 export default {
@@ -122,6 +122,20 @@ export default {
   &:hover, &.color-primary{
     background-color: var(--outline-2);
     color: white;
+  }
+}
+.button-icon{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--img-holder);
+  color: var(--body-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+  &:hover{
+    opacity:1;
   }
 }
 </style>

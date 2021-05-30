@@ -3,12 +3,14 @@
 namespace App\Jobs;
 
 use App\Enums\LedgeStatus;
+use App\Mail\PickupBookMail;
 use App\Models\Ledge;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class PickupBookJob implements ShouldQueue
 {
@@ -32,8 +34,11 @@ class PickupBookJob implements ShouldQueue
     public function handle()
     {
         $ledges = Ledge::with(['book', 'borrower', 'lender'])->get();
-        $ledges->filter(function ($ledge) {
-            return $ledge->status = LedgeStatus::AwaitingReturn;
-        });
+        foreach ($ledges as $ledge) {
+            if ($ledge->status = LedgeStatus::WaitingPickup && $ledge->pickup_date->format('H:i:s') <= now()->toTimeString())
+            {
+                Mail::to($ledge->lender->email)->send(new PickupBookMail($ledge));
+            }
+        }
     }
 }

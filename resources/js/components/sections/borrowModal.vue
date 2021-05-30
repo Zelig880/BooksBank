@@ -93,7 +93,9 @@ export default {
       const weekDays = [ 1, 2, 3, 4, 5, 6, 7 ]
       return weekDays.filter(day => {
         // We just return the value that are NOT included in the bookshelf
-        return !this.selectedBook.bookshelf.opening_days.includes(day)
+        // we also remove 1 to the weekDay value, as the calendar plugin starts from 1 and the value saved start from 0
+        const currentDay = day - 1
+        return !this.selectedBook.bookshelf.opening_days.includes(currentDay)
       })
     }
   },
@@ -119,12 +121,11 @@ export default {
 
       try {
         await this.request(payload)
+        this.$emit('close')
         Swal.fire({
           type: 'success',
           title: 'Good Job!',
           text: 'Your request has been sent!'
-        }).then(() => {
-          this.$emit('close')
         })
       } catch (error) {
         this.$emit('close')

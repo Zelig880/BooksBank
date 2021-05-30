@@ -27,10 +27,14 @@ class CreateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'ISBN' => 'required',
+            'title' => ['required', 'string'],
+            'ISBN' => ['required'],
             'condition' => ['required', new EnumValue(BookCondition::class)],
-            'status' => ['required', new EnumValue(BookStatus::class)]
+            'status' => ['required', new EnumValue(BookStatus::class)],
+            'authors' => ['nullable'],
+            'description' => ['required', 'string'],
+            'categories' => ['nullable'],
+            'thumbnail' => ['nullable', 'string'],
         ];
     }
 }

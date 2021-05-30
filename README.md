@@ -1,15 +1,30 @@
 # BookSwap
 
-Welcome to BooksBank, the first project aimed at supporting book lending.
+Welcome to BooksBank, the first open source project aimed at supporting book lending.
 
 The project goal is to support communities to lend and borrow books between each other, saving themselves money and also allowing people less fortunate to enjoy reading.
 
+The idea behind the project started during the Covid19 lockdown, when I had lots of time on my hand to read books. After a period a found myself spending a lot of money buying books, that ended up on a shelf, collecting dust. Long story short, I started to borrow my books and lend some from my friends.
+
+Now imagine the above situation, and having the possibility to find the book you wanted, within your community, and be able to borrow for free! 
+
+Hopefully as the project grows, it will be able to not only help few people giving a second life to their book, but also help people that may not have the financial possibilities to buy books to get access to them freely (for example university book and very expensive titles not provided by libraries).
+
 The project is runned by Zelig880 (www.zelig880.com), and is open to everyone that wants to contribute.
 
-# How to contribute
-The best way to get involved is to find an issue with the label of "Good first issue" or contact me on Twitter (@zelig880). This project is great for people that want to start and learn Vue Js, as I will be reviewing and providing guidance in best practices.
 
-Join our Slack community by following this link (it just last 30 days, so if it is expired, let me know): https://join.slack.com/t/booksbank/shared_invite/zt-p04vtxqv-xC6zBkLwgwlEpeaPoN6a6Q 
+# How to contribute
+
+This projects could have never been possible without the help of the amazing contributors, that have helped me getting it at the current stage (and hopefully help it grow even further).
+
+I am a Engineer architect and mentor, and I am more than happy to support all level of contribution and even support people in getting their first PR out of the door. So if you are interested, please find out more in the [contribution section](documents/contribution.md).
+
+# Intallation
+
+If you are looking at information on how to get started and run the application locally, I suggest you to head to the [installation documentation](documents/installation.md).
+
+
+# Other information
 
 The project designs can be found here: 
 
@@ -33,26 +48,3 @@ The project has been build on top of the laravel-vue-spa starter pack (https://g
 - SCSS
 - Boostrap (soon to be removed)
 
-# Get started
-
-- Pull the code
-- Run "composer install"
-- Create copy of the ".env.example" file and name it ".env"
-- Create a database and add information in Env file
-- Run "php artisan migrate"
-- Run "php artisan db:seed"
-- Run "npm install" or "yarn install"
-- Run "npm run watch"
-
-# Required
-
-- Laravel
-- Node
-
-# To get started
-
-- composer install
-- npm install
-- php artisan migrate
-- Run "php artisan db:seed"
-- npm run watch

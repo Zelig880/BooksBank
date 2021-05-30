@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const createBookObject = function (book) {
   if (!book.volumeInfo) return
@@ -23,7 +24,7 @@ const createBookObject = function (book) {
 // state
 export const state = {
   searchResult: [],
-  currentBookshelf: {},
+  currentBookshelf: null,
   items: []
 }
 
@@ -61,16 +62,24 @@ export const actions = {
     const type = text.match(isbnRegex) ? 'ISBN' : 'title'
 
     const { data } = await axios.get(`/api/bookshelf/${type}/${text}`)
-
-    if (!data) return
+    if (!data || data.length === 0) {
+      Swal.fire({
+        type: 'error',
+        title: 'Your book could not be found',
+        text: 'Unfortunately, your book could not be found. If you used the ISBN, try to use the title instead.'
+      })
+      return
+    }
 
     const books = data.map(createBookObject)
 
     commit('UPDATE_SEARCH_RESULT', books)
   },
-  async add_book ({ commit, state }, selectedBook) {
-    await axios.post(`/api/bookshelf_item/store`, { ...selectedBook, status: 0 })
-    commit('ADD_ITEM', selectedBook)
+  async addBook ({ commit, state }, selectedBook) {
+    const { data } = await axios.post(`/api/bookshelf_item/store`, { ...selectedBook, status: 0 })
+    commit('ADD_ITEMS', selectedBook)
+
+    return data
   },
   async fetchByBookshelfItemId ({ commit }, bookshelfItemId) {
     const { data } = await axios.get(`/api/bookshelf_item/${bookshelfItemId}`)
@@ -85,9 +94,20 @@ export const actions = {
   async getCurrent ({ commit }) {
     const { data } = await axios.get('/api/bookshelf')
 
+    if (Object.keys(data).length === 0) return
     commit('SET_CURRENT_BOOKSHELF', data)
   },
   reset ({ commit }) {
     commit('RESET_SEARCH_RESULT')
+  },
+  async updateOrCreate ({ dispatch, state }, payload) {
+    if (state.currentBookshelf.id) {
+      const { data } = await axios.put(`/api/bookshelf/${state.currentBookshelf.id}/update`, payload)
+      return data
+    } else {
+      const { data } = await axios.post(`/api/bookshelf/create`, payload)
+      dispatch('getCurrent')
+      return data
+    }
   }
 }

@@ -51,9 +51,9 @@ export const getters = {
   incomingRequests: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.status >= 2 || item.borrower_id !== rootGetter.auth.user.id) return
+      if (item.status >= 2 || item.lender_id !== rootGetter.auth.user.id) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
-      const pickDateTime = DateTime.fromSQL(item.pickup_date)
+      const pickDateTime = DateTime.fromISO(item.pickup_date).toUTC()
       const proposedCollection = pickDateTime.toFormat('cccc, d LLLL')
       const timeSlot = pickDateTime.toFormat('t') + ' - ' + pickDateTime.plus({ hours: 2 }).toFormat('t')
       const value = {
@@ -73,9 +73,9 @@ export const getters = {
   outgoingRequests: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.status >= 2 || item.lender_id !== rootGetter.auth.user.id) return
+      if (item.status >= 2 || item.borrower_id !== rootGetter.auth.user.id) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
-      const pickDateTime = DateTime.fromSQL(item.pickup_date)
+      const pickDateTime = DateTime.fromISO(item.pickup_date).toUTC()
       const proposedCollection = pickDateTime.toFormat('cccc, d LLLL')
       const timeSlot = pickDateTime.toFormat('t') + ' - ' + pickDateTime.plus({ hours: 2 }).toFormat('t')
       const value = {
@@ -104,15 +104,16 @@ export const mutations = {
 export const actions = {
   async getAll ({ commit }) {
     const { data } = await axios.get(`/api/ledge`)
-
-    commit('SET_ITEMS', data)
+    if (data.status) {
+      commit('SET_ITEMS', data.data)
+    }
   },
   async request ({ commit }, payload) {
     const { data } = await axios.post(`/api/ledge/request`, payload)
     console.log(data)
   },
   async respond ({ commit }, { ledgeId, response }) {
-    const { data } = await axios.post(`/api/ledge/request/respond`, { ledgeId, response })
+    const { data } = await axios.put(`/api/ledge/request/respond/${ledgeId}`, { response })
     console.log(data)
   }
 }

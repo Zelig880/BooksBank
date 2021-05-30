@@ -69,7 +69,7 @@ export default {
   }
 }
 .anchor-primary{
-  width: 130px;
+  min-width: 130px;
   height: 40px;
   padding: 10px 22px 11px 21px;
   border-radius: 20.8px;
@@ -91,7 +91,7 @@ export default {
   }
 }
 .anchor-secondary{
-  width: 112px;
+  min-width: 112px;
   height: 44px;
   padding: 6px 12px 8.8px 10px;
   border-radius: 22.4px;
@@ -102,7 +102,7 @@ export default {
   line-height: 2.71;
   letter-spacing: normal;
   text-align: center;
-  color: #ffffff;
+  background-color: white;
   &.color-cta{
     border: solid 1.6px var(--primary-1);
   }
