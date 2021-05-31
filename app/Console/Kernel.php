@@ -2,9 +2,10 @@
 
 namespace App\Console;
 
+use App\Jobs\BookReturnReminderJob;
+use App\Jobs\PickupBookJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Jobs\BookReturnReminder;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +25,10 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {#
-        $schedule->job(new BookReturnReminder)->dailyAt('13:00');
+    {
+        $schedule->job(new PickupBookJob())->dailyAt('12:00');
+
+        $schedule->job(new BookReturnReminderJob())->dailyAt('12:00');
     }
 
     /**

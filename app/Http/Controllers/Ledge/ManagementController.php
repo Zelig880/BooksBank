@@ -27,9 +27,9 @@ class ManagementController extends BaseController
         $userId = Auth::id();
 
         $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
-            ->where('lender_id', $userId)
-            ->orWhere('borrower_id', $userId)
-            ->get();
+                       ->where('lender_id', $userId)
+                       ->orWhere('borrower_id', $userId)
+                       ->get();
 
         return $this->responseJson(true, 200, 'Ledges fetched!', $result);
     }
