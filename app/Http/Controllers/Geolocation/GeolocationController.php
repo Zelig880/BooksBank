@@ -31,11 +31,23 @@ class GeolocationController extends Controller
             'postcode' => 'required',
         ]);
 
-        $search = $this->nominatim->newSearch();
-
+        $search = $this->nominatim->newSearch()->country('UK');
+        
         $search->query($request->input('postcode'));
 
         $result = $this->nominatim->find($search);
+        
+        if(!$result || !$result[0]){
+            
+            $this->validate($request, [
+                'city' => 'required',
+            ]);
+            
+            $search->query($request->input('city'));
+            
+            $result=$this->nominatim->find($search);
+   
+        }
 
         return response()->json($result);
     }
