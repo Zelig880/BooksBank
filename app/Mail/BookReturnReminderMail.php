@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Config;
 
-class BookReturnStatusMail extends Mailable
+class BookReturnReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,8 +31,8 @@ class BookReturnStatusMail extends Mailable
     public function build()
     {
         Config::set('mail.username', 'support@booksbank.com');
-        return $this->view('mail.book-return-mail')
+        return $this->view('mail.book-return-reminder-mail')
                     ->from('noreply@booksbank.com', 'BooksBank')
-                    ->subject("Your Book is awaiting return");
+                    ->subject("Reminder to return book");
     }
 }
