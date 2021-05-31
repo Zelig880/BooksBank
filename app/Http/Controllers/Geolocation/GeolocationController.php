@@ -31,7 +31,7 @@ class GeolocationController extends Controller
             'postcode' => 'required',
         ]);
 
-        $search = $this->nominatim->newSearch()->country('UK');
+        $search = $this->nominatim->newSearch();
         
         $search->query($request->input('postcode'));
 
