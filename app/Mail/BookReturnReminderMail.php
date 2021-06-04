@@ -3,12 +3,11 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Config;
 
-class BookRequestMail extends Mailable
+class BookReturnReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +31,8 @@ class BookRequestMail extends Mailable
     public function build()
     {
         Config::set('mail.username', 'support@booksbank.com');
-        return $this->view('mail.book-request-mail')
-                    ->from('noreply@booksbank.com','BooksBank')
-                    ->subject('A Book request has been received');
+        return $this->view('mail.book-return-reminder-mail')
+                    ->from('noreply@booksbank.com', 'BooksBank')
+                    ->subject("Reminder to return book");
     }
 }
