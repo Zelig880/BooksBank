@@ -27,7 +27,7 @@ $measurement_id = env('GA_MEASUREMENT_ID', 'None'); //Retrieving measurement_id 
 	<meta name="msapplication-config" content="favicon/browserconfig.xml" />
   
   <!-- Global site tag (gtag.js) - Google Analytics --> 
-  <!-- This block only runs of the measurement_id is provided -->
+  <!-- This block only runs if the measurement_id is provided -->
   @if($measurement_id !== "None") 
     <script>
       var m_id = '{{ $measurement_id }}';
