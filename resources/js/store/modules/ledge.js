@@ -115,5 +115,9 @@ export const actions = {
   async respond ({ commit }, { ledgeId, response }) {
     const { data } = await axios.put(`/api/ledge/request/respond/${ledgeId}`, { response })
     console.log(data)
+  },
+  async collect ({ commit }, { ledgeId }) {
+    const { data } = await axios.put(`/api/ledge/request/collect/${ledgeId}`)
+    console.log(data)
   }
 }

@@ -139,4 +139,37 @@ class ManagementController extends BaseController
             throw $e;
         }
     }
+
+    /**
+     * Collect a book
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function collect(Request $request, $id)
+    {
+        $ledge = Ledge::find($id);
+
+        // check if the user is the owner of the ledge
+        $userId = Auth::id();
+        if (($userId === $ledge->lender_id) === 1) {
+            return response()->json(['error' => 'Not authorized.'], 403);
+        }
+
+        if ($ledge->status !== LedgeStatus::WaitingPickup) {
+            return response()->json(['error' => 'Ledge is not awaiting pickup.'], 409);
+        }
+
+        try {
+            $ledge->update([
+                'status' => LedgeStatus::InProgress
+            ]);
+
+            return response()->json(['success' => $ledge]);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }
