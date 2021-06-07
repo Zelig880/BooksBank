@@ -37,11 +37,7 @@ class GeolocationController extends Controller
 
         $result = $this->nominatim->find($search);
         
-        if(!$result || !$result[0]){
-            
-            $this->validate($request, [
-                'city' => 'required',
-            ]);
+        if( $request->input('city') && (!$result || !$result[0])){
             
             $search->query($request->input('city'));
             
