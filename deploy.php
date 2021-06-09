@@ -47,7 +47,6 @@ task('release', [
     'deploy:prepare',
     'deploy:release',
     'upload',
-    'artisan:migrate',
     'artisan:view:cache',
     'artisan:optimize',
     'deploy:shared',
