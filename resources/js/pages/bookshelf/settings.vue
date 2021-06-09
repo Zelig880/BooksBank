@@ -18,16 +18,20 @@
       </div>
       <div class="relative">
         <div>
-          <h3 class="text-xl font-semibold">My Library Opening type</h3>
+          <h3 class="text-xl font-semibold">
+            My Library Opening type
+          </h3>
           <sub>What times are you most likely to be home for books collection and dropoff?</sub>
           <LendTimeSlot type="times" :selected-slots.sync="form.opening_hours" />
         </div>
         <div>
-          <h3 class="text-xl font-semibold">My Library Opening days</h3>
+          <h3 class="text-xl font-semibold">
+            My Library Opening days
+          </h3>
           <sub>What days suit you best for collection and dropoff</sub>
           <LendTimeSlot type="days" :selected-slots.sync="form.opening_days" />
         </div>
-        <Button :loading="form.busy" class="float-right" @click="update">
+        <Button :loading="form.busy" class="mx-auto" @click="update">
           {{ $t('update') }}
         </Button>
       </div>

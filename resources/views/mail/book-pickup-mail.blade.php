@@ -1,4 +1,6 @@
-$APP_URL = env('APP_URL', 'http://localhost:8000');
+@php
+$APP_URL = env('APP_URL', 'http://localhost:8000')
+@endphp
 @extends('layouts.email')
 @section('body')
   <tr>
