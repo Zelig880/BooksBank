@@ -8,7 +8,7 @@
         {{ $t('register_description') }}
       </p>
       <LoginWithOAuth provider="google">
-        {{ $t('continue-with-google') }}
+        <img src="/assets/img/Google__G__Logo.png" class="inline mr-3" alt="google logo">{{ $t('continue-with-google') }}
       </LoginWithOAuth>
     </div>
     <div class="flex my-8">
