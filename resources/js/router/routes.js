@@ -5,6 +5,10 @@ function page (path) {
 export default [
   { path: '/', name: 'welcome', component: page('welcome.vue') },
 
+  //Static pages
+  { path: '/privacy', name: 'privacy', component: page('privacy.vue') },
+  { path: '/terms', name: 'terms', component: page('terms.vue') },
+
   //Registration Process
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
