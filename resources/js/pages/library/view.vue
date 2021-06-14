@@ -1,7 +1,7 @@
 <template>
   <main class="flex flex-col">
     <div class="w-full border-b-2 pb-8">
-      <div class="container mx-auto flex flex-col md:flex-row justify-between">
+      <div class="container px-6 lg:px-0 lg:mx-auto flex flex-col md:flex-row justify-between">
         <div class="rounded-full border-2 pl-8 pr-12 py-2 flex flex-col relative md:w-7/12">
           <label for="search" class="text-xs text-gray-400 font-bold">{{ $t('libraryBorrow-searchTitleLabel') }}:</label>
           <input id="search" v-model="searchTitle" class="font-bold text-lg" type="text" @keyup.enter="searchHandle">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="w-full flex-1 bg-gray-100 py-8 mb-8">
-      <div class="container mx-auto">
+      <div class="container px-6 lg:px-0 lg:mx-auto">
         <template v-if="loading">
           <img class="mx-auto" src="/assets/img/loading.gif" alt="loading gif">
         </template>
@@ -25,7 +25,7 @@
           <h2 class="text-2xl mb-8">
             {{ $t('libraryBorrow-searchBooks') }}: {{ searchedBook.length }}
           </h2>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <template v-if="searchedBook.length !== 0">
               <LibraryViewCard
                 v-for="result in searchedBook" :key="result.id"
