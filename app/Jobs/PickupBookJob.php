@@ -3,8 +3,11 @@
 namespace App\Jobs;
 
 use App\Enums\LedgeStatus;
+use App\Mail\BookRequestMail;
+use App\Mail\BookReturnRequestMail;
 use App\Mail\PickupBookMail;
 use App\Models\Ledge;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -35,9 +38,19 @@ class PickupBookJob implements ShouldQueue
     {
         $ledges = Ledge::all();
         foreach ($ledges as $ledge) {
-            if ($ledge->status = LedgeStatus::WaitingPickup && $ledge->pickup_date->format('H:i:s') <= now()->toTimeString())
+            if ($ledge->status === LedgeStatus::WaitingPickup && $ledge->pickup_date->format('H:i:s') <= now()->toTimeString())
             {
-                Mail::to($ledge->lender->email)->send(new PickupBookMail($ledge));
+                Mail::to($ledge->lender->email)->queue(new PickupBookMail($ledge));
+            }
+
+            if ($ledge->status === LedgeStatus::ReturnRequested && Carbon::now()->diffInHours($ledge->updated_at) > 24)
+            {
+                Mail::to($ledge->lender->email)->queue(new BookReturnRequestMail($ledge));
+            }
+
+            if ($ledge->status === LedgeStatus::WaitingApproval && Carbon::now()->diffInHours($ledge->updated_at) > 24)
+            {
+                Mail::to($ledge->lender->email)->queue(new BookRequestMail($ledge));
             }
         }
     }

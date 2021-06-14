@@ -48,7 +48,6 @@ task('release', [
     'deploy:release',
     'upload',
     'artisan:view:cache',
-    'artisan:config:cache',
     'artisan:optimize',
     'deploy:shared',
     'deploy:writable',

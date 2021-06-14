@@ -1,17 +1,22 @@
 <template>
-  <button v-if="githubAuth" class="btn btn-dark ml-auto" type="button" @click="login">
-    {{ $t('login_with') }}
-    <fa :icon="['fab', 'github']" />
+  <button class="w-full rounded-full py-3 border-2 mb-2" @click="login">
+    <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: 'LoginWithGithub',
+  name: 'LoginWithOAuth',
+
+  props: {
+    provider: {
+      type: String,
+      required: true
+    }
+  },
 
   computed: {
-    githubAuth: () => window.config.githubAuth,
-    url: () => `/api/oauth/github`
+    url: () => `/api/oauth/${this.provider}`
   },
 
   mounted () {
@@ -27,7 +32,7 @@ export default {
       const newWindow = openWindow('', this.$t('login'))
 
       const url = await this.$store.dispatch('auth/fetchOauthUrl', {
-        provider: 'github'
+        provider: this.provider
       })
 
       newWindow.location.href = url

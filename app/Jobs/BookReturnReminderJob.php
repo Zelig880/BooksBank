@@ -2,7 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Enums\LedgeStatus;
 use App\Mail\BookReturnReminderMail;
+use App\Mail\SendThankYouMail;
 use App\Models\Ledge;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -34,16 +36,47 @@ class BookReturnReminderJob implements ShouldQueue
     public function handle()
     {
         $ledges = Ledge::all();
-        foreach ($ledges as $ledge) {
-            if ($ledge->return_date !== NULL && $this->differenceBetweenTodayAndDate($ledge->return_date) === 7)
-            {
-                Mail::to($ledge->borrower->email)->send(new BookReturnReminderMail($ledge));
-            }
+        foreach ($ledges as $ledge)
+        {
+            $this->sendReminderMail($ledge);
         }
     }
 
-    private function differenceBetweenTodayAndDate($date)
+    private function sendReminderMail(Ledge $ledge)
+    {
+        if ($ledge->status === LedgeStatus::WaitingPickup && $ledge->return_date !== NULL && $this->differenceInDaysBetweenTodayAndDate($ledge->return_date) === 1)
+        {
+            $this->sendMail($ledge);
+        }
+
+        if ($ledge->status === LedgeStatus::InProgress && $ledge->return_date !== NULL && $this->differenceInDaysBetweenTodayAndDate($ledge->return_date) === 2)
+        {
+            $this->sendMail($ledge);
+        }
+
+        if ($ledge->status === LedgeStatus::InProgress && $ledge->return_date !== NULL && $this->differenceInDaysBetweenTodayAndDate($ledge->return_date) === 7)
+        {
+            $this->sendMail($ledge);
+        }
+
+        if ($ledge->status === LedgeStatus::AwaitingReturn && $ledge->return_date !== NULL && $this->differenceInDaysBetweenTodayAndDate($ledge->return_date) === 1)
+        {
+            $this->sendMail($ledge);
+        }
+
+        if ($ledge->status === LedgeStatus::Completed && $ledge->return_date !== NULL && $this->differenceInDaysBetweenTodayAndDate($ledge->updated_at) === 1)
+        {
+            Mail::to($ledge->borrower->email)->queue(new SendThankYouMail($ledge));
+        }
+    }
+
+    private function differenceInDaysBetweenTodayAndDate($date)
     {
         return Carbon::parse($date)->diffInDays(Carbon::now());
+    }
+
+    private function sendMail(Ledge $ledge)
+    {
+        Mail::to($ledge->borrower->email)->queue(new BookReturnReminderMail($ledge));
     }
 }

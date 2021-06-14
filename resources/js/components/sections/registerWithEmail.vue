@@ -26,7 +26,7 @@
         <div class="w-full border-2 py-4 px-4 mb-8 flex rounded-lg">
           <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" class="w-full ml-4" type="password" name="password_confirmation" :placeholder="$t('register_password_placeholder')">
         </div>
-        <Checkbox @click="policySigned = true" class="w-full">I agree to the privacy policy</Checkbox>
+        <Checkbox @click="policySigned = true" class="w-full">I agree to the <a target="_blank" href="/privacy">privacy policy</a></Checkbox>
         <has-error :form="form" field="name" />
         <has-error :form="form" field="email" />
         <has-error :form="form" field="password" />

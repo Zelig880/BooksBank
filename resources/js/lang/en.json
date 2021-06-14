@@ -57,6 +57,9 @@
   "signin-title": "Login to your account",
   "signin-description": "Sign in, using your preferred method, or quickly create an account.",
 
+  "privacyPolicy": "Privacy Policy",
+  "terms": "Terms and Condition",
+
   "register_title": "Create your account",
   "register_description": "Join the community by using one of the method below.",
   "register_name_placeholder": "John Smith",
