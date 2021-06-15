@@ -141,8 +141,6 @@ class ManagementController extends BaseController
             throw $e;
         }
     }
-
-    
     /**
      * Issue a returnRequest to retured a borrowed a book
      *
@@ -157,9 +155,9 @@ class ManagementController extends BaseController
             'ledgeId' => 'required',
             'return_date' => 'required'
         ]);
-        
+
         $ledge = Ledge::find($request->input('ledgeId'));
-        
+
         // check if the user is the owner of the ledge
         $userId = Auth::id();
         if ($userId != $ledge->borrower_id) {
@@ -181,7 +179,7 @@ class ManagementController extends BaseController
 
         return $this->responseJson(true, 200, 'Book return request made', $ledge);
     }
-    
+
 
     /**
      * Responde to a book return request

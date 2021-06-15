@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Config;
 
-class PickupBookMail extends Mailable
+class PickupBookMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
