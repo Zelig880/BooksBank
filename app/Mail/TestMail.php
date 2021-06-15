@@ -15,9 +15,8 @@ class TestMail extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param $ledge
      */
-    public function __construct($ledge)
+    public function __construct()
     {
     }
 
@@ -29,7 +28,7 @@ class TestMail extends Mailable
     public function build()
     {
         Config::set('mail.username', 'support@booksbank.com');
-        return $this->view('mail.test')
+        return $this->view('mail.test-mail')
                     ->from('noreply@booksbank.com','BooksBank')
                     ->subject('Test');
     }
