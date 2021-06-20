@@ -1,6 +1,6 @@
 <template>
   <footer class="mt-8">
-    <div class="container grid grid-cols-1 md:grid-cols-2 mx-auto">
+    <div class="container grid grid-cols-1 md:grid-cols-2 px-6 lg:px-0 lg:mx-auto">
       <div class="col-span-1">
         <img class="mb-8" src="/assets/img/Logo-2-colour.svg" :alt="appName">
         <p class="">

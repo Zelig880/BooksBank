@@ -56,7 +56,7 @@
     </p>
 
     <p>You must not:</p>
-    <ul>
+    <ul class="list-disc pl-5">
       <li>Republish material from BooksBank</li>
       <li>Sell, rent or sub-license material from BooksBank</li>
       <li>Reproduce, duplicate or copy material from BooksBank</li>

@@ -26,9 +26,6 @@ export default {
 
 <style lang="scss">
 .welcomeHow{
-  &_illustration{
-    max-width: 480px;
-  }
   ol{
     counter-reset: list-counter;
     margin-top:2.5rem;

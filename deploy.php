@@ -47,12 +47,13 @@ task('release', [
     'deploy:prepare',
     'deploy:release',
     'upload',
-    'artisan:view:cache',
-    'artisan:optimize',
     'deploy:shared',
     'deploy:writable',
     'deploy:symlink',
-    'artisan:queue:restart'
+    'artisan:optimize',
+    'artisan:view:cache',
+    'artisan:config:cache',
+    'artisan:migrate',
 ]);
 
 // Tasks
