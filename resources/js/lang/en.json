@@ -112,7 +112,8 @@
 
   "bookshelfSettings-timeslot-title": "Choose your preferred time for the book to be picked up",
 
-  "libraryBorrow-noBooks": "Ops.. The book that you searched is not in your radius! See other books available within your radius or increase the radius for more results",
+  "libraryBorrow-noBooks": "Why not tweet this or invite your friends to join and start thier own library?",
+  "libraryBorrow-noBooks-heading": "There are still not enough books in your searched area!",
   "libraryBorrow-searchBooks": "Search result",
   "libraryBorrow-searchTitleLabel": "You searched for",
   "libraryBorrow-searchOtherBooks": "Other books available within your radius",
