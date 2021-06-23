@@ -14,7 +14,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class BookReturnRequestReminderJob implements ShouldQueue
+class LenderRemindersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -37,12 +37,12 @@ class BookReturnRequestReminderJob implements ShouldQueue
     {
         $ledges = Ledge::with(['lender', 'borrower', 'book'])->get();
         foreach ($ledges as $ledge) {
-            if ($ledge->status === LedgeStatus::ReturnRequested && Carbon::now()->diffInHours($ledge->updated_at) > 24)
+            if ($ledge->status === LedgeStatus::ReturnRequested && Carbon::parse($ledge->updated_at)->isYesterday())
             {
                 Mail::to($ledge->lender->email)->queue(new BookReturnRequestMail($ledge));
             }
 
-            if ($ledge->status === LedgeStatus::WaitingApproval && Carbon::now()->diffInHours($ledge->updated_at) > 24)
+            if ($ledge->status === LedgeStatus::WaitingApproval && Carbon::parse($ledge->updated_at)->isYesterday() && $ledge->pickup_date->format('H:i:s') <= now()->toTimeString())
             {
                 Mail::to($ledge->lender->email)->queue(new BookRequestMail($ledge));
             }
