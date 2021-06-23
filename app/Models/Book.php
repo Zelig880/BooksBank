@@ -37,11 +37,10 @@ class Book extends Model
 
     public static function add($item, $bookshelf_id)
     {
-        $book = Book::firstOrCreate([
+        $book = Book::query()->firstOrCreate([
             'title' => $item['title'],
             'ISBN' => $item['ISBN'],
-        ],
-        [
+        ], [
             'description' => $item['description'],
             'thumbnail' => $item['thumbnail'],
         ]);

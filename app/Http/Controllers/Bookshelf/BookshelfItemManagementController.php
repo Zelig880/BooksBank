@@ -17,7 +17,7 @@ class BookshelfItemManagementController extends Controller
     public function __construct()
     {
         $this->userId = Auth::id();
-        $this->bookshelf = Bookshelf::where('user_id', '=', $this->userId)->first();
+        $this->bookshelf = Bookshelf::query()->where('user_id', '=', $this->userId)->first();
     }
 
     public function index()
@@ -33,8 +33,8 @@ class BookshelfItemManagementController extends Controller
     {
         try {
             $book = Bookshelf_Item::with('book', 'book.authors', 'book.categories', 'bookshelf')
-                                    ->where('bookshelf_items.id', $id)
-                                    ->first();
+                                  ->where('bookshelf_items.id', $id)
+                                  ->first();
 
             return response()->json(["success" => true, "result" => $book]);
         }
@@ -53,5 +53,16 @@ class BookshelfItemManagementController extends Controller
             return response()->json(["success" => false, "message" => $th]);
         }
     }
+
+//    public function removeBookShelfItem($id)
+//    {
+//        try {
+//            $userBookShelf = Auth::user()->bookshelf->bookshelf_items;
+//            return response()->json(["success" => true, 'message' => 'Bookshelf item deleted!']);
+//        }
+//        catch (\Throwable $th) {
+//            return response()->json(["success" => false, "message" => $th]);
+//        }
+//    }
 
 }
