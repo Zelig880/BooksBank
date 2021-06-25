@@ -24,7 +24,7 @@ $APP_URL = env('APP_URL', 'http://localhost:8000')
           Borrower name: {{ $ledge->borrower->name }}
         </p>
         <p>
-          Pick up date/time: {{ date('d F Y, h:i:s A', strtotime($ledge->pickup_date)) }}
+          Proposed return date/time: {{ date('d F Y, h:i:s A', strtotime($ledge->return_date)) }}
         </p>
       </h4>
     </td>

@@ -31,8 +31,9 @@ phpunit.dusk.xml
 *.code-workspace
 /.history
 
-# deployer build
+# deployer
 .build
+hosts.yaml
 
 # MISC
 .DS_Store

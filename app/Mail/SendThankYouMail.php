@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Config;
 
-class PickupBookMail extends Mailable implements ShouldQueue
+class SendThankYouMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +32,8 @@ class PickupBookMail extends Mailable implements ShouldQueue
     public function build()
     {
         Config::set('mail.username', 'support@booksbank.com');
-        return $this->view('mail.book-pickup-mail')
-                    ->from('noreply@booksbank.com','BooksBank')
-                    ->subject('Has the requested book been picked up?');
+        return $this->view('mail.thank-you-mail')
+                    ->from('noreply@booksbank.com', 'BooksBank')
+                    ->subject("Thank you!");
     }
 }

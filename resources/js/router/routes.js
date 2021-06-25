@@ -5,6 +5,10 @@ function page (path) {
 export default [
   { path: '/', name: 'welcome', component: page('welcome.vue') },
 
+  //Static pages
+  { path: '/privacy', name: 'privacy', component: page('privacy.vue') },
+  { path: '/terms', name: 'terms', component: page('terms.vue') },
+
   //Registration Process
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
@@ -37,7 +41,7 @@ export default [
       { path: 'settings', name: 'bookshelf.settings', component: page('bookshelf/settings.vue') },
       { path: 'all', name: 'bookshelf.all', component: page('bookshelf/all.vue') },
       { path: 'requested', name: 'bookshelf.requested', component: page('bookshelf/requested.vue') },
-      { path: 'info', name: 'bookshelf.info', component: page('bookshelf/info.vue') },
+      { path: 'info', name: 'bookshelf.info', component: page('bookshelf/info.vue'), alias: ['info/incoming', 'info/outgoing', 'info/borrowed', 'info/loaned'] },
     ] },
 
   { path: '*', component: page('errors/404.vue') }
