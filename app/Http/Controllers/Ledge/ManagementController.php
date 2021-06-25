@@ -3,18 +3,13 @@
 namespace App\Http\Controllers\Ledge;
 
 use App\Http\Controllers\BaseController;
-use App\Mail\BookRequestStatusMail;
-use App\Mail\BookRequestMail;
-use App\Mail\BookReturnRequestMail;
-use App\Mail\BookReturnRequestStatusMail;
-use App\Mail\BookReturnStatusMail;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ledge;
 use App\Models\Bookshelf_item;
 use App\Enums\LedgeStatus;
-use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendEmail;
 
 class ManagementController extends BaseController
 {
@@ -58,7 +53,7 @@ class ManagementController extends BaseController
                 'status' => LedgeStatus::AwaitingReturn
             ]);
 
-            Mail::to($ledge->lender->email)->send(new BookReturnStatusMail($ledge));
+            SendEmail::dispatch('App\Mail\BookReturnStatusMail', $ledge, $ledge->lender->email);
 
             return $this->responseJson(true, 200, 'Book return process initiated', $ledge);
         } catch (Exception $e) {
@@ -96,7 +91,7 @@ class ManagementController extends BaseController
             'return_date' => $request->input('return_date')
         ]);
 
-        Mail::to($result->lender->email)->send(new BookRequestMail($result));
+        SendEmail::dispatch('App\Mail\BookRequestMail', $result, $result->lender->email);
 
         return $this->responseJson(true, 200, 'Book request made', $result);
     }
@@ -134,7 +129,7 @@ class ManagementController extends BaseController
                 'status' => $request->input('response') === 'accept' ? LedgeStatus::WaitingPickup : LedgeStatus::Rejected
             ]);
 
-            Mail::to($ledge->borrower->email)->send(new BookRequestStatusMail($ledge));
+            SendEmail::dispatch('App\Mail\BookRequestStatusMail', $ledge, $ledge->borrower->email);
 
             return response()->json(['success' => $ledge]);
         } catch (Exception $e) {
@@ -175,7 +170,7 @@ class ManagementController extends BaseController
             'return_date' => $request->input('return_date')
         ]);
 
-        Mail::to($ledge->lender->email)->send(new BookReturnRequestMail($ledge));
+        SendEmail::dispatch('App\Mailable\BookReturnRequestMail', $ledge, $ledge->lender->email);
 
         return $this->responseJson(true, 200, 'Book return request made', $ledge);
     }
@@ -214,7 +209,7 @@ class ManagementController extends BaseController
                 'status' => $request->input('response') === 'accept' ? LedgeStatus::AwaitingReturn : LedgeStatus::InProgress
             ]);
 
-            Mail::to($ledge->borrower->email)->send(new BookReturnRequestStatusMail($ledge));
+            SendEmail::dispatch('App\Mailable\BookReturnRequestStatusMail', $ledge, $ledge->borrower->email);
 
             return response()->json(['success' => $ledge]);
         } catch (Exception $e) {
