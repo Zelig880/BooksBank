@@ -7,7 +7,7 @@
           <input id="search" v-model="searchTitle" class="font-bold text-lg" type="text" @keyup.enter="searchHandle">
           <fa icon="search" class="absolute right-4 top-3 text-gray-400" size="2x" @click="searchHandle" />
         </div>
-        <div class="md:w-4/12">
+        <div class="md:w-4/12 mt-10 sm:mt-0">
           <div class="flex justify-between">
             <span>Distance</span>
             <span>{{ radiusMiles }} Miles</span>
@@ -41,7 +41,7 @@
               <img alt="Pile of books" src="/assets/img/pile-of-books.png" class="m-auto mb-6">
               <h3 class="Light-backgroundH1---h6H4 font-bold">{{ $t('libraryBorrow-noBooks-heading') }}</h3>
               <p class="Light-backgroundH1---h6H4">{{ $t('libraryBorrow-noBooks') }}</p>
-              <div class="text-center mt-6">
+              <div class="flex flex-col md:flex-row items-center justify-center mt-6 mb-3">
                 <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https://booksbank.co.uk&text=Come%20and%20join%20@BooksBank%20and%20give%20your%20books%20another%20life:">Share on twitter</a>
                 <a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://booksbank.co.uk">Share on facebook</a>
                 <a class="pinterest" target="_blank" href="https://pinterest.com/pin/create/button/?url=https://booksbank.co.uk&media=&description=Come%20and%20join%20@BooksBank%20and%20give%20your%20books%20another%20life:">Share on pinterest</a>
@@ -130,8 +130,8 @@ export default {
   }
   & .twitter,& .facebook, & .pinterest{
     width: 179px;
-    height: 53px;
-    margin: 1px 0 0 17px;
+    height: fit-content;
+    margin: 10px;
     padding: 10px 28px 11px;
     border-radius: 4px;
     background-color: #3b5799;

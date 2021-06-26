@@ -53,8 +53,8 @@
           </li>
         </ul>
       </div>
-      <p class="col-span-full text-right mb-8">
-        @copyright Zelig880 LTD
+      <p class="col-span-full text-right my-8 text-gray-400">
+        	&copy;2021 Zelig880 LTD.
       </p>
     </div>
     <cookie-law />

@@ -1,6 +1,6 @@
 .Light-backgroundH1---h6H1 {
   font-family: Lora;
-  font-size: 84px;  
+  font-size: 84px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -167,9 +167,16 @@
 .Light-backgroundTertiaryTeritary-light {
   font-size: 14px;
   font-weight: normal;
-  font-stretch: normal; 
+  font-stretch: normal;
   font-style: normal;
   line-height: 1.35;
   letter-spacing: 0.5px;
   color: var(--body-standard);
+}
+
+@media (max-width: 1000px) {
+  .Light-backgroundH1---h6H1 {
+    font-size: 50px;
+    letter-spacing: 0;
+  }
 }

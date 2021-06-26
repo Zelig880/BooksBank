@@ -4,13 +4,13 @@
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <h1 class="w-auto static block justify-start">
           <router-link :to="{ name: 'welcome' }">
-            <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
+            <img src="/assets/img/Logo-2-colour.svg" :alt="appName" class="ml-3">
           </router-link>
         </h1>
       </div>
       <div class="w-full flex justify-center">
         <div class="lg:w-1/2 lg:text-right">
-          <div class="split-layout__left-column pr-0 lg:pr-16 ml-8 mt-16 xl:ml-auto text-center lg:text-left">
+          <div class="split-layout__left-column pr-0 lg:pr-16 md:ml-8 mt-16 xl:ml-auto text-center lg:text-left">
             <div class="border-b pb-4">
               <router-link :to="{name: 'login'}" :class="{ 'border-b-4': signinPage}">
                 Signin
@@ -62,11 +62,22 @@ export default {
     max-width: 640px;
   }
   a{
-    @apply mr-16 pb-4 capitalize;
+    @apply mr-6 ml-8 pb-4 capitalize;
     border-color: var(--outline);
   }
   &_illustration{
     max-width:550px;
   }
+}
+
+.split-layout__left-column {
+  max-width: 500px;
+}
+
+@media (max-width: 600px) {
+  .split-layout__left-column {
+  max-width: 300px;
+}
+
 }
 </style>
