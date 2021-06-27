@@ -1,5 +1,5 @@
 @php
-$APP_URL = env('APP_URL', 'http://localhost:8000')
+$APP_URL = config('app.url')
 @endphp
 @extends('layouts.email')
 @section('body')
