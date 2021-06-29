@@ -42,4 +42,17 @@ export default {
     }
   }
 }
+
+@media (max-width: 768px) {
+  .welcomeHow{
+    li {
+      margin-bottom: 20px;
+      font-size: 16px;
+      &:before {
+        font-size: 25px;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
 </style>
