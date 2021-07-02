@@ -14,4 +14,11 @@ Join our Slack community by following this link (it just last 30 days, so if it 
 
 The next step required for you to contribute (if you are a developer), is to get the application up and running locally. You can do so by following the [installation guide](installation.md).
 
+## Before pushing
+
+Please before pushing a pull request ensure:
+
+- The code has passed the required ESLINT and PRETTIER contiguration
+- The PR description includes a link to the ISSUE that has been solved and or details of what the changes are expected to include
+
 
