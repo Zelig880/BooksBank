@@ -2,38 +2,38 @@
   <div class="mt-14 mb-20 bookshelf-info">
     <div class="">
       <div class="">
-        <div class="border-b">
+        <div class="bookshelf-info__header border-b flex justify-between md:justify-start">
           <button
-            class="bookshelf-info__header-button"
+            class="bookshelf-info__header__button"
             :class="{
-              'bookshelf-info__header-button--selected': view === 'borrowed',
+              'bookshelf-info__header__button--selected': view === 'borrowed',
             }"
             @click="handleRoute('borrowed')"
           >
             Borrowed
           </button>
           <button
-            class="bookshelf-info__header-button"
+            class="bookshelf-info__header__button"
             :class="{
-              'bookshelf-info__header-button--selected': view === 'loaned',
+              'bookshelf-info__header__button--selected': view === 'loaned',
             }"
             @click="handleRoute('loaned')"
           >
             Loaned
           </button>
           <button
-            class="bookshelf-info__header-button"
+            class="bookshelf-info__header__button"
             :class="{
-              'bookshelf-info__header-button--selected': view === 'incoming',
+              'bookshelf-info__header__button--selected': view === 'incoming',
             }"
             @click="handleRoute('incoming')"
           >
             Incoming Requests
           </button>
           <button
-            class="bookshelf-info__header-button"
+            class="bookshelf-info__header__button"
             :class="{
-              'bookshelf-info__header-button--selected': view === 'outgoing',
+              'bookshelf-info__header__button--selected': view === 'outgoing',
             }"
             @click="handleRoute('outgoing')"
           >
@@ -45,7 +45,9 @@
           <table>
             <thead>
               <tr>
-                <th v-for="header in headers" :key="header">{{ header }}</th>
+                <th v-for="header in headers" :key="header">
+                  {{ header }}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -59,37 +61,47 @@
                   </td>
                 </template>
                 <td v-if="view === 'borrowed'">
-                  <Button @click="handleReturnRequest(row)">Return</Button>
+                  <Button @click="handleReturnRequest(row)">
+                    Return
+                  </Button>
                 </td>
                 <td v-else-if="view === 'incoming'">
                   <template v-if="row.status === 'WaitingApproval'">
-                    <Button @click="handleResponse(row.id, 'accept')"
-                      >Accept</Button
-                    >
+                    <Button @click="handleResponse(row.id, 'accept')">
+                      Accept
+                    </Button>
                     <Button
                       theme="secondary"
                       @click="handleResponse(row.id, 'reject')"
-                      >Reject</Button
                     >
+                      Reject
+                    </Button>
                   </template>
                   <template v-if="row.status === 'ReturnRequested'">
-                    <Button @click="handleReturnResponse(row.id, 'accept')"
-                      >Accept</Button
-                    >
+                    <Button @click="handleReturnResponse(row.id, 'accept')">
+                      Accept
+                    </Button>
                     <Button
                       theme="secondary"
                       @click="handleReturnResponse(row.id, 'reject')"
-                      >Reject</Button
                     >
+                      Reject
+                    </Button>
                   </template>
                   <template v-if="row.status === 'WaitingPickup'">
-                    <Button @click="handleCollection(row.id)">Collected</Button>
+                    <Button @click="handleCollection(row.id)">
+                      Collected
+                    </Button>
                   </template>
                   <template v-if="row.status === 'AwaitingReturn'">
-                    <Button @click="handleReturned(row.id)">Returned</Button>
+                    <Button @click="handleReturned(row.id)">
+                      Returned
+                    </Button>
                   </template>
                 </td>
-                <td v-else>&nbsp;</td>
+                <td v-else>
+&nbsp;
+                </td>
               </tr>
             </tbody>
           </table>
@@ -105,239 +117,239 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import ReturnModal from "../../components/sections/returnModal";
-import Swal from "sweetalert2";
+import { mapActions, mapGetters } from 'vuex'
+import ReturnModal from '../../components/sections/returnModal'
+import Swal from 'sweetalert2'
 
 export default {
-  name: "Info",
+  name: 'Info',
   components: {
-    ReturnModal,
+    ReturnModal
   },
-  data() {
+  data () {
     return {
-      view: "borrowed",
+      view: 'borrowed',
       tableHeading: {
-        borrowed: ["Lender", "Book", "Condition", "status"],
-        loaned: ["Borrower", "Book", "Condition", "status"],
+        borrowed: ['Lender', 'Book', 'Condition', 'status'],
+        loaned: ['Borrower', 'Book', 'Condition', 'status'],
         incoming: [
-          "User",
-          "Book",
-          "Condition",
-          "Proposed Collection",
-          "Time slot",
-          "status",
+          'User',
+          'Book',
+          'Condition',
+          'Proposed Collection',
+          'Time slot',
+          'status'
         ],
         outgoing: [
-          "User",
-          "Book",
-          "Condition",
-          "Proposed Collection",
-          "Time slot",
-          "status",
-        ],
+          'User',
+          'Book',
+          'Condition',
+          'Proposed Collection',
+          'Time slot',
+          'status'
+        ]
       },
       showModal: false,
-      selectedBook: null,
-    };
+      selectedBook: null
+    }
   },
   computed: {
-    ...mapGetters("ledge", [
-      "borrowed",
-      "lent",
-      "incomingRequests",
-      "outgoingRequests",
-      "getItemByLedgeId",
+    ...mapGetters('ledge', [
+      'borrowed',
+      'lent',
+      'incomingRequests',
+      'outgoingRequests',
+      'getItemByLedgeId'
     ]),
-    title() {
-      let value;
+    title () {
+      let value
       switch (this.view) {
-        case "borrowed":
-          value = "Borrowed book";
-          break;
-        case "loaned":
-          value = "Your book on loan";
-          break;
-        case "incoming":
-          value = "Incoming requests";
-          break;
-        case "outgoing":
-          value = "Outgoing requests";
-          break;
+        case 'borrowed':
+          value = 'Borrowed book'
+          break
+        case 'loaned':
+          value = 'Your book on loan'
+          break
+        case 'incoming':
+          value = 'Incoming requests'
+          break
+        case 'outgoing':
+          value = 'Outgoing requests'
+          break
       }
 
-      return value;
+      return value
     },
-    headers() {
-      return this.tableHeading[this.view];
+    headers () {
+      return this.tableHeading[this.view]
     },
-    rows() {
-      let value;
+    rows () {
+      let value
       switch (this.view) {
-        case "borrowed":
-          value = this.borrowed;
-          break;
-        case "loaned":
-          value = this.lent;
-          break;
-        case "outgoing":
-          value = this.outgoingRequests;
-          break;
-        case "incoming":
-          value = this.incomingRequests;
-          break;
+        case 'borrowed':
+          value = this.borrowed
+          break
+        case 'loaned':
+          value = this.lent
+          break
+        case 'outgoing':
+          value = this.outgoingRequests
+          break
+        case 'incoming':
+          value = this.incomingRequests
+          break
       }
 
-      return value;
-    },
-  },
-  mounted() {
-    const pathArray = this.$route.path.split("/");
-    const view = pathArray[pathArray.length - 1];
-    // we make sure that we have not landed on the generic endpoint
-    if (view !== "info") {
-      // if the view is set, we update it.
-      this.view = view;
+      return value
     }
-    this.getAll();
+  },
+  mounted () {
+    const pathArray = this.$route.path.split('/')
+    const view = pathArray[pathArray.length - 1]
+    // we make sure that we have not landed on the generic endpoint
+    if (view !== 'info') {
+      // if the view is set, we update it.
+      this.view = view
+    }
+    this.getAll()
   },
   methods: {
     ...mapActions({
-      getAll: "ledge/getAll",
-      respond: "ledge/respond",
-      collect: "ledge/collect",
-      returnRespond: "ledge/returnRespond",
-      returned: "ledge/returned",
+      getAll: 'ledge/getAll',
+      respond: 'ledge/respond',
+      collect: 'ledge/collect',
+      returnRespond: 'ledge/returnRespond',
+      returned: 'ledge/returned'
     }),
-    ...mapActions("bookshelf", ["fetchByBookshelfItemId"]),
-    handleRoute(view) {
-      this.view = view;
-      this.$router.push(`/bookshelf/info/${view}`);
+    ...mapActions('bookshelf', ['fetchByBookshelfItemId']),
+    handleRoute (view) {
+      this.view = view
+      this.$router.push(`/bookshelf/info/${view}`)
     },
-    async handleReturnRequest(book) {
-      const data = await this.fetchByBookshelfItemId(book.bookshelf_item_id);
-      if (!data.success) return;
+    async handleReturnRequest (book) {
+      const data = await this.fetchByBookshelfItemId(book.bookshelf_item_id)
+      if (!data.success) return
 
       // we add the ledgeId to the returned object
-      data.result.ledgeId = book.id;
-      this.selectedBook = data.result;
-      this.showModal = true;
+      data.result.ledgeId = book.id
+      this.selectedBook = data.result
+      this.showModal = true
     },
-    async handleResponse(ledgeId, response) {
+    async handleResponse (ledgeId, response) {
       try {
-        await this.respond({ ledgeId, response });
-        let message = {};
+        await this.respond({ ledgeId, response })
+        let message = {}
 
         switch (response) {
-          case "accept":
-            message.title = "Request Accepted";
+          case 'accept':
+            message.title = 'Request Accepted'
             message.text =
-              "Thank you for accepting the request! The book will be picked up as planned!";
-            break;
+              'Thank you for accepting the request! The book will be picked up as planned!'
+            break
           default:
-            message.title = "Request Rejected";
+            message.title = 'Request Rejected'
             message.text =
-              "We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.";
-            break;
+              'We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.'
+            break
         }
         Swal.fire({
-          type: "success",
+          type: 'success',
           title: message.title,
-          text: message.text,
+          text: message.text
         }).then(() => {
-          this.getAll();
-        });
+          this.getAll()
+        })
       } catch (error) {
         Swal.fire({
-          type: "error",
-          title: "Server error",
-          text: "The request was not sent. Please try again later, and contact your administrator if the issue persist.",
-        });
+          type: 'error',
+          title: 'Server error',
+          text: 'The request was not sent. Please try again later, and contact your administrator if the issue persist.'
+        })
       }
     },
-    async handleReturnResponse(ledgeId, response) {
+    async handleReturnResponse (ledgeId, response) {
       try {
-        await this.returnRespond({ ledgeId, response });
-        let message = {};
+        await this.returnRespond({ ledgeId, response })
+        let message = {}
 
         switch (response) {
-          case "accept":
-            message.title = "Return request accepted";
+          case 'accept':
+            message.title = 'Return request accepted'
             message.text =
-              "Thank you for accepting the request! The book will be returned up as planned!";
-            break;
+              'Thank you for accepting the request! The book will be returned up as planned!'
+            break
           default:
-            message.title = "Return request rejected";
+            message.title = 'Return request rejected'
             message.text =
-              "We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.";
-            break;
+              'We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.'
+            break
         }
         Swal.fire({
-          type: "success",
+          type: 'success',
           title: message.title,
-          text: message.text,
+          text: message.text
         }).then(() => {
-          this.getAll();
-        });
+          this.getAll()
+        })
       } catch (error) {
         Swal.fire({
-          type: "error",
-          title: "Server error",
-          text: "The request was not sent. Please try again later, and contact your administrator if the issue persist.",
-        });
+          type: 'error',
+          title: 'Server error',
+          text: 'The request was not sent. Please try again later, and contact your administrator if the issue persist.'
+        })
       }
     },
-    async handleReturned(ledgeId) {
+    async handleReturned (ledgeId) {
       try {
-        await this.returned({ ledgeId });
-        let message = {};
+        await this.returned({ ledgeId })
+        let message = {}
 
-        message.title = "Book return recorded";
-        message.text = "Thank you for updating the book status.";
+        message.title = 'Book return recorded'
+        message.text = 'Thank you for updating the book status.'
 
         Swal.fire({
-          type: "success",
+          type: 'success',
           title: message.title,
-          text: message.text,
+          text: message.text
         }).then(() => {
-          this.getAll();
-        });
+          this.getAll()
+        })
       } catch (error) {
         Swal.fire({
-          type: "error",
-          title: "Server error",
-          text: "The request was not sent. Please try again later, and contact your administrator if the issue persist.",
-        });
+          type: 'error',
+          title: 'Server error',
+          text: 'The request was not sent. Please try again later, and contact your administrator if the issue persist.'
+        })
       }
     },
-    async handleCollection(ledgeId) {
+    async handleCollection (ledgeId) {
       try {
-        await this.collect({ ledgeId });
-        let message = {};
+        await this.collect({ ledgeId })
+        let message = {}
 
-        message.title = "Collection recorded";
-        message.text = "Thank you for updating the book status.";
+        message.title = 'Collection recorded'
+        message.text = 'Thank you for updating the book status.'
 
         Swal.fire({
-          type: "success",
+          type: 'success',
           title: message.title,
-          text: message.text,
+          text: message.text
         }).then(() => {
-          this.getAll();
-        });
+          this.getAll()
+        })
       } catch (error) {
         Swal.fire({
-          type: "error",
-          title: "Server error",
-          text: "The request was not sent. Please try again later, and contact your administrator if the issue persist.",
-        });
+          type: 'error',
+          title: 'Server error',
+          text: 'The request was not sent. Please try again later, and contact your administrator if the issue persist.'
+        })
       }
     },
-    closeModal() {
-      this.showModal = false;
-    },
-  },
-};
+    closeModal () {
+      this.showModal = false
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -407,21 +419,27 @@ export default {
       color: var(--body-dark);
     }
   }
-  &__header-button {
-    margin: 0 35px 0px 0;
-    padding-bottom: 7px;
-    font-family: OpenSans;
-    font-size: 16px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.31;
-    letter-spacing: normal;
-    color: var(--link);
-    &--selected {
-      color: var(--header);
-      border-bottom-width: 4px;
-      border-color: var(--body-dark);
+  &__header{
+    &__button {
+      margin: 0 35px 0px 0;
+      padding-bottom: 7px;
+      font-family: OpenSans;
+      font-size: 16px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.31;
+      letter-spacing: normal;
+      color: var(--link);
+      &--selected {
+        color: var(--header);
+        border-bottom-width: 4px;
+        border-color: var(--body-dark);
+      }
+      @media (max-width:640px) {
+        font-size: 14px;
+        margin: 0;
+      }
     }
   }
 }
