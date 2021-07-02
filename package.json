@@ -47,7 +47,7 @@
     "eslint-plugin-vue": "^5.2.3",
     "laravel-mix": "^6.0.19",
     "laravel-mix-versionhash": "^1.1.7",
-    "postcss": "^8.2.15",
+    "postcss": "^7.0.36",
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.32.5",
     "sass-loader": "^7.3.1",
