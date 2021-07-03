@@ -130,8 +130,8 @@ export default {
     return {
       view: 'borrowed',
       tableHeading: {
-        borrowed: ['Lender', 'Book', 'Condition', 'status'],
-        loaned: ['Borrower', 'Book', 'Condition', 'status'],
+        borrowed: ['Lender', 'Book', 'Condition', 'Return date'],
+        loaned: ['Borrower', 'Book', 'Condition', 'Return date'],
         incoming: [
           'User',
           'Book',
