@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bookshelf_item;
+use App\Enums\LedgeStatus;
 use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
@@ -24,6 +25,9 @@ class SearchController extends Controller
                     $query->distance($latitude, $longitude)->orderBy('distance', 'ASC');
                 }, 'book'
             ])
+            ->whereDoesntHave('ledge', function ($query) {
+                return $query->whereIn('status', [LedgeStatus::WaitingPickup, LedgeStatus::InProgress, LedgeStatus::ReturnRequested, LedgeStatus::AwaitingReturn]);
+            })
             ->whereHas('bookshelf', function ($query) use ($latitude, $longitude, $radius, $userId) {
                 return $query->distance($latitude, $longitude)
                              ->having('distance', '<', $radius)

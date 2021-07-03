@@ -20,10 +20,20 @@ class Bookshelf_item extends Model
     }
     
     /**
-     * The Bookshelf that belong to the Bookshelf.
+     * The Bookshelf that belong to the Bookshelf_item.
      */
     public function bookshelf()
     {
         return $this->belongsTo(Bookshelf::class);
     }
+    
+    /**
+     * The ledges that belong to the Bookshelf_item.
+     */
+    public function ledge()
+    {
+        return $this->hasMany(Ledge::class);
+    }
+
+
 }
