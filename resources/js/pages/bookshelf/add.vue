@@ -89,7 +89,7 @@ export default {
     },
     selectBook (book) {
       // Check if book is already present on the user bookshelf
-      const bookAlreadyInBookshelf = this.bookshelf_items.some(bookshelfItem => bookshelfItem.book.title, book.title, book)
+      const bookAlreadyInBookshelf = this.bookshelf_items.some(bookshelfItem => bookshelfItem.book.title === book.title, book)
       if (bookAlreadyInBookshelf) {
         Swal.fire({
           type: 'error',

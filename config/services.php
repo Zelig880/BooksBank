@@ -53,7 +53,8 @@ return [
         'api' => env('GOOGLE_API'),
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('APP_URL') . "/api/oauth/google/callback"
+        'redirect' => env('APP_URL') . "/api/oauth/google/callback",
+        'ga_measurament_id'=> env('GA_MEASUREMENT_ID')
     ],
 
     'facebook' => [

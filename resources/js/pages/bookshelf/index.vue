@@ -3,7 +3,9 @@
     <div class="bookshelf-index__header">
       <div class="container mx-auto flex relative h-full">
         <div class="mt-9 ml-5">
-          <div class="text-gray-400">User</div>
+          <div class="text-gray-400">
+            User
+          </div>
           <div class="font-lora text-4xl md:text-6xl mb-2">
             {{ user.name }}
           </div>
@@ -56,19 +58,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  middleware: "auth",
+  middleware: 'auth',
   computed: mapGetters({
-    user: "auth/user",
-    currentBookshelf: "bookshelf/currentBookshelf",
+    user: 'auth/user',
+    currentBookshelf: 'bookshelf/currentBookshelf'
   }),
-  async beforeMount() {
-    await this.getCurrent();
+  async beforeMount () {
+    await this.getCurrent()
   },
-  methods: mapActions("bookshelf", ["getCurrent"]),
-};
+  methods: mapActions('bookshelf', ['getCurrent'])
+}
 </script>
 
 <style lang="scss">
