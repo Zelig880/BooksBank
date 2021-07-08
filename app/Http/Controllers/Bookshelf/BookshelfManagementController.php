@@ -23,7 +23,9 @@ class BookshelfManagementController
     public function current()
     {
         $data = $this->user->bookshelf()->first();
-        $data->makeVisible(['address_line_1']);
+        if($data) {
+            $data->makeVisible(['address_line_1']);
+        }
         return response()->json($data);
     }
 
