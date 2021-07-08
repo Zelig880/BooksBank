@@ -1,16 +1,32 @@
 <template>
   <div class="bookshelf_settings">
     <h2 class="">
-      {{ $t('your_info') }}
+      {{ $t("settings_yourInfo") }}
     </h2>
-    <form class="bookshelf_settings__container" @submit.prevent="update" @keydown="form.onKeydown($event)">
+    <p class="bookshelf_settings__subhead Light-backgroundBody-textBody-small">
+      {{ $t("settings_beSafe") }} <Anchor theme="none" route-name="safe">
+        Read more
+      </Anchor>
+    </p>
+    <form
+      class="bookshelf_settings__container"
+      @submit.prevent="update"
+      @keydown="form.onKeydown($event)"
+    >
       <div>
         <template v-for="field in formFields">
           <div :key="field">
             <label>{{ $t(field) }}:</label>
             <div class="w-full border-b-2 py-4 px-4 mb-8 flex items-center">
               <fa :icon="iconByField(field)" fixed-width />
-              <input v-model="form[field]" :class="{ 'is-invalid': form.errors.has(field) }" class="w-full ml-4" type="text" :name="field" :placeholder="$t(field)">
+              <input
+                v-model="form[field]"
+                :class="{ 'is-invalid': form.errors.has(field) }"
+                class="w-full ml-4"
+                type="text"
+                :name="field"
+                :placeholder="$t(field)"
+              >
               <has-error :form="form" :field="field" />
             </div>
           </div>
@@ -21,8 +37,12 @@
           <h3 class="text-xl font-semibold">
             My Library Opening type
           </h3>
-          <sub>What times are you most likely to be home for books collection and dropoff?</sub>
-          <LendTimeSlot type="times" :selected-slots.sync="form.opening_hours" />
+          <sub>What times are you most likely to be at your preferred meeting point for books collection and
+            dropoff?</sub>
+          <LendTimeSlot
+            type="times"
+            :selected-slots.sync="form.opening_hours"
+          />
         </div>
         <div>
           <h3 class="text-xl font-semibold">
@@ -32,7 +52,7 @@
           <LendTimeSlot type="days" :selected-slots.sync="form.opening_days" />
         </div>
         <Button :loading="form.busy" class="mx-auto" @click="update">
-          {{ $t('update') }}
+          {{ $t("update") }}
         </Button>
       </div>
     </form>
@@ -82,7 +102,9 @@ export default {
   methods: {
     ...mapActions('bookshelf', ['getCurrent', 'updateOrCreate']),
     async update () {
-      var { data: result } = await this.form.post('/api/geolocation/getGeolocationByUserQuery')
+      var { data: result } = await this.form.post(
+        '/api/geolocation/getGeolocationByUserQuery'
+      )
 
       if (!result || !result[0]) {
         Swal.fire({
@@ -124,20 +146,23 @@ export default {
 </script>
 
 <style lang="scss">
-.bookshelf_settings{
-  margin-bottom:50px;
-  h2{
-    @apply mt-10 border-b-2 mb-6 pb-1 text-2xl;
+.bookshelf_settings {
+  margin-bottom: 50px;
+  h2 {
+    @apply mt-10 mb-2 pb-1 text-2xl;
     color: var(--header);
   }
-  h3{
+  &__subhead{
+    @apply border-b-2 mb-6 pb-1;
+  }
+  h3 {
     font-family: OpenSans;
     font-size: 18px;
     line-height: 2;
     letter-spacing: normal;
     color: var(--body-dark);
   }
-  sub{
+  sub {
     font-family: OpenSans;
     font-size: 1rem;
     line-height: 2;
@@ -145,19 +170,27 @@ export default {
     color: var(--body-dark);
     margin-bottom: 1rem;
   }
-  label{
+  label {
     font-size: 1rem;
     font-weight: 500;
     color: var(--body-standard);
   }
-  &__container{
+  &__container {
     display: flex;
     justify-content: space-between;
-    & > div{
+    & > div {
       @apply w-full md:w-1/2 lg:w-2/5;
-      svg{
+      svg {
         color: var(--outline-2);
       }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .bookshelf_settings {
+    &__container {
+      flex-direction: column;
     }
   }
 }

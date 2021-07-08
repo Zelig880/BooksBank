@@ -3,7 +3,7 @@
     <div class="container mx-4 md:mx-auto flex flex-wrap items-center justify-between">
       <h1 class="w-auto static block justify-start">
         <router-link :to="{ name: 'welcome' }">
-          <img src="/assets/img/Logo-2-colour.svg" :alt="appName">
+          <img src="/assets/img/Logo-2-colour.svg" :alt="appName" class="ml-3">
         </router-link>
       </h1>
       <button class="md:hidden rounded-full bg-white py-3 px-2 items-center text-xs uppercase font-bold leading-snug text-white text-gray-700 hover:opacity-75" @click="toggleNavbar">
@@ -54,5 +54,5 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 </style>

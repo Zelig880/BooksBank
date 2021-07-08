@@ -5,7 +5,7 @@ $config = [
     'locales' => config('app.locales'),
     'githubAuth' => config('services.github.client_id'),
 ];
-$measurement_id = env('GA_MEASUREMENT_ID', 'None'); //Retrieving measurement_id from .env
+$measurement_id = config('services.google.ga_measurament_id');
 @endphp
 
 <!DOCTYPE html>

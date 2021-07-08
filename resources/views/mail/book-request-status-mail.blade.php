@@ -17,7 +17,7 @@
         <p>
           Book name: {{ $ledge->book->title }}
         </p>
-        @if ($ledge->status == 5)
+        @if ($ledge->status == 6)
         <p>
           Unfortuantely, your book request has been rejected from the user. We apologies for the inconvenience.
         </p>

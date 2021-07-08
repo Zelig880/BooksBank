@@ -2,17 +2,41 @@
   <div class="mt-14 mb-20 bookshelf-info">
     <div class="">
       <div class="">
-        <div class="border-b">
-          <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'borrowed'}" @click="handleRoute('borrowed')">
+        <div class="bookshelf-info__header border-b flex justify-between md:justify-start">
+          <button
+            class="bookshelf-info__header__button"
+            :class="{
+              'bookshelf-info__header__button--selected': view === 'borrowed',
+            }"
+            @click="handleRoute('borrowed')"
+          >
             Borrowed
           </button>
-          <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'loaned'}" @click="handleRoute('loaned')">
+          <button
+            class="bookshelf-info__header__button"
+            :class="{
+              'bookshelf-info__header__button--selected': view === 'loaned',
+            }"
+            @click="handleRoute('loaned')"
+          >
             Loaned
           </button>
-          <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'incoming'}" @click="handleRoute('incoming')">
+          <button
+            class="bookshelf-info__header__button"
+            :class="{
+              'bookshelf-info__header__button--selected': view === 'incoming',
+            }"
+            @click="handleRoute('incoming')"
+          >
             Incoming Requests
           </button>
-          <button class="bookshelf-info__header-button" :class="{ 'bookshelf-info__header-button--selected': view === 'outgoing'}" @click="handleRoute('outgoing')">
+          <button
+            class="bookshelf-info__header__button"
+            :class="{
+              'bookshelf-info__header__button--selected': view === 'outgoing',
+            }"
+            @click="handleRoute('outgoing')"
+          >
             Outgoing Requests
           </button>
         </div>
@@ -21,41 +45,74 @@
           <table>
             <thead>
               <tr>
-                <th v-for="header in headers" :key="header">{{ header }}</th>
+                <th v-for="header in headers" :key="header">
+                  {{ header }}
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="row in rows" :key="row.id">
                 <template v-for="(value, key) in row">
-                  <td v-if="key !== 'id' && !key.includes('_id')" :key="`${row.id}-${key}`">{{ value }}</td>
+                  <td
+                    v-if="key !== 'id' && !key.includes('_id')"
+                    :key="`${row.id}-${key}`"
+                  >
+                    {{ value }}
+                  </td>
                 </template>
                 <td v-if="view === 'borrowed'">
-                  <Button @click="handleReturnRequest(row)">Return</Button>
+                  <Button @click="handleReturnRequest(row)">
+                    Return
+                  </Button>
                 </td>
                 <td v-else-if="view === 'incoming'">
                   <template v-if="row.status === 'WaitingApproval'">
-                    <Button @click="handleResponse(row.id, 'accept')">Accept</Button>
-                    <Button theme="secondary" @click="handleResponse(row.id, 'reject')">Reject</Button>
+                    <Button @click="handleResponse(row.id, 'accept')">
+                      Accept
+                    </Button>
+                    <Button
+                      theme="secondary"
+                      @click="handleResponse(row.id, 'reject')"
+                    >
+                      Reject
+                    </Button>
                   </template>
                   <template v-if="row.status === 'ReturnRequested'">
-                    <Button @click="handleReturnResponse(row.id, 'accept')">Accept</Button>
-                    <Button theme="secondary" @click="handleReturnResponse(row.id, 'reject')">Reject</Button>
+                    <Button @click="handleReturnResponse(row.id, 'accept')">
+                      Accept
+                    </Button>
+                    <Button
+                      theme="secondary"
+                      @click="handleReturnResponse(row.id, 'reject')"
+                    >
+                      Reject
+                    </Button>
                   </template>
                   <template v-if="row.status === 'WaitingPickup'">
-                    <Button @click="handleCollection(row.id)">Collected</Button>
+                    <Button @click="handleCollection(row.id)">
+                      Collected
+                    </Button>
                   </template>
                   <template v-if="row.status === 'AwaitingReturn'">
-                    <Button @click="handleReturned(row.id)">Returned</Button>
+                    <Button @click="handleReturned(row.id)">
+                      Returned
+                    </Button>
                   </template>
                 </td>
-                <td v-else>&nbsp;</td>
+                <td v-else>
+&nbsp;
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <ReturnModal :show="showModal" :selected-book="selectedBook" @close="closeModal" />
+    <ReturnModal
+      :show="showModal"
+      :selected-book="selectedBook"
+      @close="closeModal"
+    />
   </div>
 </template>
 
@@ -73,17 +130,37 @@ export default {
     return {
       view: 'borrowed',
       tableHeading: {
-        'borrowed': ['Lender', 'Book', 'Condition', 'status'],
-        'loaned': ['Borrower', 'Book', 'Condition', 'status'],
-        'incoming': ['User', 'Book', 'Condition', 'Proposed Collection', 'Time slot', 'status'],
-        'outgoing': ['User', 'Book', 'Condition', 'Proposed Collection', 'Time slot', 'status']
+        borrowed: ['Lender', 'Book', 'Condition', 'Return date'],
+        loaned: ['Borrower', 'Book', 'Condition', 'Return date'],
+        incoming: [
+          'User',
+          'Book',
+          'Condition',
+          'Proposed Collection',
+          'Time slot',
+          'status'
+        ],
+        outgoing: [
+          'User',
+          'Book',
+          'Condition',
+          'Proposed Collection',
+          'Time slot',
+          'status'
+        ]
       },
       showModal: false,
       selectedBook: null
     }
   },
   computed: {
-    ...mapGetters('ledge', ['borrowed', 'lent', 'incomingRequests', 'outgoingRequests', 'getItemByLedgeId']),
+    ...mapGetters('ledge', [
+      'borrowed',
+      'lent',
+      'incomingRequests',
+      'outgoingRequests',
+      'getItemByLedgeId'
+    ]),
     title () {
       let value
       switch (this.view) {
@@ -166,11 +243,13 @@ export default {
         switch (response) {
           case 'accept':
             message.title = 'Request Accepted'
-            message.text = 'Thank you for accepting the request! The book will be picked up as planned!'
+            message.text =
+              'Thank you for accepting the request! The book will be picked up as planned!'
             break
           default:
             message.title = 'Request Rejected'
-            message.text = 'We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.'
+            message.text =
+              'We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.'
             break
         }
         Swal.fire({
@@ -196,11 +275,13 @@ export default {
         switch (response) {
           case 'accept':
             message.title = 'Return request accepted'
-            message.text = 'Thank you for accepting the request! The book will be returned up as planned!'
+            message.text =
+              'Thank you for accepting the request! The book will be returned up as planned!'
             break
           default:
             message.title = 'Return request rejected'
-            message.text = 'We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.'
+            message.text =
+              'We are sorry to hear that. If the time did not suit you, make sure to keep your bookshelf opening time updated.'
             break
         }
         Swal.fire({
@@ -298,13 +379,15 @@ export default {
       color: var(--sub-text);
       text-align: left;
     }
-    thead, tr {
+    thead,
+    tr {
       border-bottom: solid 1px rgba(44, 53, 68, 0.43);
     }
-    td, th {
+    td,
+    th {
       padding: 21px 0px 12px 0px;
     }
-    td:nth-child(1){
+    td:nth-child(1) {
       opacity: 0.71;
       font-family: OpenSans;
       font-size: 14px;
@@ -325,7 +408,7 @@ export default {
       letter-spacing: normal;
       color: var(--link);
     }
-    tbody{
+    tbody {
       font-family: OpenSans;
       font-size: 16px;
       font-weight: normal;
@@ -336,21 +419,27 @@ export default {
       color: var(--body-dark);
     }
   }
-  &__header-button {
-    margin: 0 35px 0px 0;
-    padding-bottom: 7px;
-    font-family: OpenSans;
-    font-size: 16px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.31;
-    letter-spacing: normal;
-    color: var(--link);
-    &--selected{
-      color: var(--header);
-      border-bottom-width: 4px;
-      border-color: var(--body-dark);
+  &__header{
+    &__button {
+      margin: 0 35px 0px 0;
+      padding-bottom: 7px;
+      font-family: OpenSans;
+      font-size: 16px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.31;
+      letter-spacing: normal;
+      color: var(--link);
+      &--selected {
+        color: var(--header);
+        border-bottom-width: 4px;
+        border-color: var(--body-dark);
+      }
+      @media (max-width:640px) {
+        font-size: 14px;
+        margin: 0;
+      }
     }
   }
 }

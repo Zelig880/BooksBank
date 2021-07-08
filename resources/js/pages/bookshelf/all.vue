@@ -2,7 +2,7 @@
   <div class="mt-14">
     <h3 class="font-sans text-2xl font-bold mb-6">{{ $t('bookshelfAll-BooksYouAreReading') }}</h3>
     <div class="grid grid-cols-4 gap-6">
-      <div v-for="(item, index) in borrowed" :key="index">
+      <div v-for="(item, index) in borrowedWithDetails" :key="index">
         <img :src="item.book.thumbnail" class="card-img-top" :alt="item.book.title">
         <div class="card-body">
           <h5 class="card-title">
@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('ledge', ['borrowed']),
+    ...mapGetters('ledge', ['borrowedWithDetails']),
     ...mapGetters('bookshelf', ['items'])
   },
   mounted () {

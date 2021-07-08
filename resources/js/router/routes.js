@@ -8,6 +8,8 @@ export default [
   //Static pages
   { path: '/privacy', name: 'privacy', component: page('privacy.vue') },
   { path: '/terms', name: 'terms', component: page('terms.vue') },
+  { path: '/safe', name: 'safe', component: page('safe.vue') },
+  { path: '/about', name: 'about', component: page('about.vue') },
 
   //Registration Process
   { path: '/login', name: 'login', component: page('auth/login.vue') },

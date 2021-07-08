@@ -17,11 +17,11 @@ The project is runned by Zelig880 (www.zelig880.com), and is open to everyone th
 
 This projects could have never been possible without the help of the amazing contributors, that have helped me getting it at the current stage (and hopefully help it grow even further).
 
-I am a Engineer architect and mentor, and I am more than happy to support all level of contribution and even support people in getting their first PR out of the door. So if you are interested, please find out more in the [contribution section](documentation/contribution.md).
+I am a Engineer architect and mentor, and I am more than happy to support all level of contribution and even support people in getting their first PR out of the door. So if you are interested, please find out more in the [contribute section](docs/contribute.md).
 
 # Installation
 
-If you are looking at information on how to get started and run the application locally, I suggest you to head to the [installation documentation](documentation/installation.md).
+If you are looking at information on how to get started and run the application locally, I suggest you to head to the [installation docs](docs/installation.md).
 
 
 # Other information
