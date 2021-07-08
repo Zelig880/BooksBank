@@ -50,6 +50,8 @@ class Book extends Model
             foreach ($item['categories'] as $key => $value) {
                 $book->categories()->updateOrCreate([
                     'name' => $value
+                ],[
+                    'name' => $value
                 ]);
             }
         }
@@ -58,6 +60,8 @@ class Book extends Model
         {
             foreach ($item['authors'] as $key => $value) {
                 $book->authors()->updateOrCreate([
+                    'name' => $value
+                ],[
                     'name' => $value
                 ]);
             }
