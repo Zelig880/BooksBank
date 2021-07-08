@@ -23,6 +23,7 @@ class BookshelfManagementController
     public function current()
     {
         $data = $this->user->bookshelf()->first();
+        
         if($data) {
             $data->makeVisible(['address_line_1']);
         }

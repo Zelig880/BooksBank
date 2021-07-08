@@ -101,7 +101,7 @@ export const actions = {
     commit('RESET_SEARCH_RESULT')
   },
   async updateOrCreate ({ dispatch, state }, payload) {
-    if (state.currentBookshelf.id) {
+    if (state.currentBookshelf?.id) {
       const { data } = await axios.put(`/api/bookshelf/${state.currentBookshelf.id}/update`, payload)
       return data
     } else {
