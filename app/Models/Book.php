@@ -48,7 +48,7 @@ class Book extends Model
         if (is_array($item['categories']) && count($item['categories']) > 0)
         {
             foreach ($item['categories'] as $key => $value) {
-                $book->categories()->firstOrCreate([
+                $book->categories()->updateOrCreate([
                     'name' => $value
                 ]);
             }
@@ -57,7 +57,7 @@ class Book extends Model
         if (is_array($item['authors']) && count($item['authors']) > 0)
         {
             foreach ($item['authors'] as $key => $value) {
-                $book->authors()->firstOrCreate([
+                $book->authors()->updateOrCreate([
                     'name' => $value
                 ]);
             }
