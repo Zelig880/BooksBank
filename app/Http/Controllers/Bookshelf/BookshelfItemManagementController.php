@@ -33,8 +33,8 @@ class BookshelfItemManagementController extends Controller
     {
         try {
             $book = Bookshelf_Item::with('book', 'book.authors', 'book.categories', 'bookshelf', 'bookshelf.user')
-                                  ->where('bookshelf_items.id', $id)
-                                  ->first();
+                                    ->where('bookshelf_items.id', $id)
+                                    ->first();
 
             return response()->json(["success" => true, "result" => $book]);
         }

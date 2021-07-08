@@ -12,6 +12,9 @@ class SearchController extends Controller
     /**
      * Display a listing of books within a radius
      *
+     * @param $latitude
+     * @param $longitude
+     * @param $radius
      * @return \Illuminate\Http\Response
      */
     public function index($latitude, $longitude, $radius)
