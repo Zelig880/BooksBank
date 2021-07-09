@@ -41,9 +41,6 @@ class SearchController extends Controller
             case BookSearchType::ISBN:
                 $result = $this->findByISBN($request['text']);
                 break;
-            case BookSearchType::Author:
-                $result = $this->findByAuthor($request['text']);
-                break;
             default:
                 $result = $this->findByTitle($request['text']);
                 break;
@@ -55,7 +52,8 @@ class SearchController extends Controller
     private function findByISBN($isbn)
     {
         $optParams = [
-            'q' => "isbn:{$isbn}"
+            'q' => "isbn:{$isbn}",
+            'maxResults'=> 2
         ];
 
         return $this->API->volumes->listVolumes($optParams);
@@ -64,19 +62,10 @@ class SearchController extends Controller
     private function findByTitle($title)
     {
         $optParams = [
-            'q' => "intitle:{$title}"
+            'maxResults'=> 40
         ];
 
-        return $this->API->volumes->listVolumes($optParams);
-    }
-
-    private function findByAuthor($author)
-    {
-        $optParams = [
-            'q' => "inauthor:{$author}"
-        ];
-
-        return $this->API->volumes->listVolumes($optParams);
+        return $this->API->volumes->listVolumes($title, $optParams);
     }
 
 }

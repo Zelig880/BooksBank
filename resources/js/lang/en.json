@@ -98,7 +98,7 @@
   "bookshelfAdd-steps-step2-description": "Provide some quick details for users to know",
   "bookshelfAdd-steps-step3-title": "Review and Finish",
   "bookshelfAdd-steps-step3-description": "Review your information and add make the book available",
-  "bookshelfAdd-step1-search-label": "Enter Book Title or ISBN:",
+  "bookshelfAdd-step1-search-label": "Enter Book Title and/or author",
   "bookshelfAdd-step2-title": "Set it's condition",
   "bookshelfAdd-step2-description": "Select the condition that best describe our book",
   "bookshelfAdd-step3-title": "Review time",
