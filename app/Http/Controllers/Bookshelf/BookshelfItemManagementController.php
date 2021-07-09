@@ -22,11 +22,7 @@ class BookshelfItemManagementController extends Controller
 
     public function index()
     {
-        $bookshelf = $this->bookshelf;
-
-        if(!$bookshelf) return;
-
-        return $bookshelf->bookshelf_items()->with('book')->get();
+        return $this->getCurrentUserBookshelfItems();
     }
 
     public function getByBookshelfItemId($id)
@@ -47,11 +43,20 @@ class BookshelfItemManagementController extends Controller
     {
         try {
             Book::Add($request->validated(), $this->bookshelf->id);
-            return response()->json(["success" => true]);
+            $bookshelfItems = $this->getCurrentUserBookshelfItems();
+            return response()->json(["success" => true, "result" => $bookshelfItems]);
         }
         catch (\Throwable $th) {
             return response()->json(["success" => false, "message" => $th]);
         }
+    }
+
+    private function getCurrentUserBookshelfItems() {
+        $bookshelf = $this->bookshelf;
+
+        if(!$bookshelf) return;
+
+        return $bookshelf->bookshelf_items()->with('book')->get();
     }
 
 //    public function removeBookShelfItem($id)
