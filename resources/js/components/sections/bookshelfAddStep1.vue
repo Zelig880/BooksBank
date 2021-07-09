@@ -10,9 +10,9 @@
         <bookshelf-add-card
           v-for="result in searchedBook" :key="result.id"
           :title="result.title"
+          :authors="result.authors"
           :description="result.description"
           :thumbnail="result.thumbnail"
-          :i-s-b-n="result.ISBN"
           @click="selectBook(result)"
         />
       </perfect-scrollbar>
