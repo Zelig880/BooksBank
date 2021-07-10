@@ -20,7 +20,7 @@ export const getters = {
   borrowed: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2) return
+      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2 || item.status !== 5) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
       const returnDate = DateTime.fromISO(item.return_date).toUTC().toFormat('cccc, d LLLL')
       const value = {
@@ -39,7 +39,7 @@ export const getters = {
   borrowedWithDetails: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2) return
+      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2 || item.status !== 5) return
       items.push(item)
     })
 
@@ -48,7 +48,7 @@ export const getters = {
   lent: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.lender_id !== rootGetter.auth.user.id || item.status !== 2) return
+      if (item.lender_id !== rootGetter.auth.user.id || item.status !== 2 || item.status !== 5) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
       const returnDate = DateTime.fromISO(item.return_date).toUTC().toFormat('cccc, d LLLL')
       const value = {
