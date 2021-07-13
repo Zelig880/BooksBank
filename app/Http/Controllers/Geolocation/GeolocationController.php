@@ -32,10 +32,18 @@ class GeolocationController extends Controller
         ]);
 
         $search = $this->nominatim->newSearch();
-
+        
         $search->query($request->input('postcode'));
 
         $result = $this->nominatim->find($search);
+        
+        if( $request->input('city') && (!$result || !$result[0])){
+            
+            $search->query($request->input('city'));
+            
+            $result=$this->nominatim->find($search);
+   
+        }
 
         return response()->json($result);
     }
