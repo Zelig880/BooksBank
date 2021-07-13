@@ -290,6 +290,14 @@
       provided free of charge, we will not be liable for any loss or damage of
       any nature.
     </p>
+
+    <h3>iData deletion</h3>
+
+    <p>
+      In line with GDPR requirements, users are able to ask for the removal of
+      all their sensitive data within the application at any time by sending an
+      email to the support team at <strong>info@booksbank.co.uk</strong>.
+    </p>
   </div>
 </template>
 

@@ -67,11 +67,14 @@ export default {
 
 <style lang="scss">
 .custom-checkbox{
+  cursor: pointer;
   input{
     width:24px;
     height:24px;
+    cursor: pointer;
   }
   label{
+    cursor: pointer;
     vertical-align: top;
   }
 }
