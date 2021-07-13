@@ -1,3 +1,6 @@
+@php
+$APP_URL = config('app.url')
+@endphp
 @extends('layouts.email')
 @section('body')
   <tr>
@@ -35,8 +38,8 @@
         <tr>
           <td class="ctaButton" style="background-color:#003CE5;padding-top:12px;padding-bottom:12px;padding-left:35px;padding-right:35px;border-radius:50px">
             <!-- Button Link // -->
-            <a class="text" href="http://www.localhost:8000/api/ledge/request/respond/{{ $ledge->id }}" target="_blank" style="color:#FFFFFF; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:13px; font-weight:600; font-style:normal;letter-spacing:1px; line-height:20px; text-transform:uppercase; text-decoration:none; display:block">
-              Accept Request
+            <a class="text" href="{{ $APP_URL }}/bookshelf/info/incoming" target="_blank" style="color:#FFFFFF; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:13px; font-weight:600; font-style:normal;letter-spacing:1px; line-height:20px; text-transform:uppercase; text-decoration:none; display:block">
+              Respond
             </a>
           </td>
         </tr>

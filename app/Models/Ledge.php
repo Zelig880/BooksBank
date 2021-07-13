@@ -47,4 +47,12 @@ class Ledge extends Model
     {
         return $this->belongsTo(Book::class);
     }
+    
+    /**
+     * The Bookshelf_item that belong to the ledge.
+     */
+    public function bookshelf_item()
+    {
+        return $this->belongsTo(Bookshelf_item::class);
+    }
 }

@@ -5,7 +5,9 @@ $config = [
     'locales' => config('app.locales'),
     'githubAuth' => config('services.github.client_id'),
 ];
+$measurement_id = config('services.google.ga_measurament_id');
 @endphp
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -23,9 +25,24 @@ $config = [
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 	<meta name="msapplication-config" content="favicon/browserconfig.xml" />
+  
+  <!-- Global site tag (gtag.js) - Google Analytics --> 
+  <!-- This block only runs if the measurement_id is provided -->
+  @if($measurement_id !== "None") 
+    <script>
+      var m_id = '{{ $measurement_id }}';
+    </script>
+    <script async src='https://www.googletagmanager.com/gtag/js?id=' + m_id></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', m_id);
+    </script>
+  @endif
 
   <title>{{ config('app.name') }}</title>
-
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
 <body>

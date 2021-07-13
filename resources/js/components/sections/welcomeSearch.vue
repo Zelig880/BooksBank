@@ -1,6 +1,6 @@
 <template>
   <main class="welcomeSearch py-10">
-    <div class="container mx-auto h-auto">
+    <div class="container mx-auto md:pl-24 h-auto">
       <div class="inline-block mx-3 pb-4 md:pb-16 md:w-3/6 align-text-bottom">
         <h2 class="Light-backgroundH1---h6H1">
           {{ $t('welcomeSearch-title') }}
@@ -10,7 +10,7 @@
       <div class="hidden md:inline-block md:w-2/6">
         <img class="welcomeSearch_illustration" src="/assets/img/search-for-books.svg" alt="Illustration of lady reading a book">
       </div>
-      <form class="md:bg-white md:w-4/5 md:rounded-full md:pl-10 md:flex h-auto md:h-16 " @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
+      <form class="md:bg-white md:w-4/5 md:rounded-full md:pl-10 md:flex h-auto md:h-18 mt-10" @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow py-2 px-10 md:px-0 md:mr-4 w-10/12 md:w-auto mx-auto">
           <label>Books title or All</label>
           <input v-model="form.searchTitle" :class="{ 'is-invalid': form.errors.has('searchTitle') }" type="text" placeholder="The lord of the ring">
@@ -106,9 +106,23 @@ export default {
   form{
     label{
       font-family: OpenSans;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--body-dark);
+    }
+
+    input[type=text] {
+      font-size: 25px;
+    }
+  }
+
+
+}
+
+@media (max-width:768px) {
+  .welcomeSearch{
+    p {
+      font-size: 20px;
     }
   }
 }

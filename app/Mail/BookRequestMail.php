@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Config;
 
-class BookRequestMail extends Mailable
+class BookRequestMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -34,6 +34,6 @@ class BookRequestMail extends Mailable
         Config::set('mail.username', 'support@booksbank.com');
         return $this->view('mail.book-request-mail')
                     ->from('noreply@booksbank.com','BooksBank')
-                    ->subject('Your Book request has been made');
+                    ->subject('A Book request has been received');
     }
 }

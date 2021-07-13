@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -56,8 +56,11 @@ export default {
 }
 
 .modal-body {
-  height: 100vh;
   overflow: auto;
+
+  @media (max-width: 768px) {
+    height: 100vh;
+  }
 }
 
 .modal-default-button {

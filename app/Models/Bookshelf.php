@@ -25,6 +25,10 @@ class Bookshelf extends Model
         'opening_hours' => 'array'
     ];
 
+    protected $hidden = [
+        'address_line_1'
+    ];
+
     /**
      * Get user that belong to the Bookshelf
      */

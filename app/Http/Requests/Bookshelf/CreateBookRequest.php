@@ -27,14 +27,22 @@ class CreateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string'],
-            'ISBN' => ['required'],
+            'title' => ['required', 'string', 'unique:books,title'],
+            'ISBN' => ['required', 'unique:books,ISBN'],
             'condition' => ['required', new EnumValue(BookCondition::class)],
             'status' => ['required', new EnumValue(BookStatus::class)],
             'authors' => ['nullable'],
             'description' => ['required', 'string'],
             'categories' => ['nullable'],
             'thumbnail' => ['nullable', 'string'],
+        ];
+    }
+
+    public function messages()
+    {
+        return parent::messages() + [
+            'title.unique' => 'A book with this title already exists.',
+            'ISBN.unique' => 'A book with this ISBN already exists.'
         ];
     }
 }

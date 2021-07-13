@@ -32,7 +32,7 @@ class BookReturnStatusMail extends Mailable
     {
         Config::set('mail.username', 'support@booksbank.com');
         return $this->view('mail.book-return-mail')
-            ->from('noreply@booksbank.com', 'BooksBank')
-            ->subject("Your Book is awaiting return");
+                    ->from('noreply@booksbank.com', 'BooksBank')
+                    ->subject("Your Book is awaiting return");
     }
 }

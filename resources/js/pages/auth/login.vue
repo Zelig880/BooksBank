@@ -7,15 +7,9 @@
       <p class="mt-4 mb-8">
         {{ $t('signin-description') }}
       </p>
-      <button class="w-full rounded-full py-3 border-2 mb-2">
-        {{ $t('continue-with-google') }}
-      </button>
-      <button class="w-full rounded-full py-3 border-2 bg-gray-400 text-white mb-2">
-        {{ $t('continue-with-facebook') }}
-      </button>
-      <button class="w-full rounded-full py-3 border-2 bg-gray-700 text-white">
-        {{ $t('continue-with-twitter') }}
-      </button>
+      <LoginWithOAuth provider="google">
+        <img src="/assets/img/Google__G__Logo.png" class="inline mr-3" alt="google logo">{{ $t('continue-with-google') }}
+      </LoginWithOAuth>
     </div>
     <div class="flex my-8">
       <span class="border-b-2 flex-grow mb-3" />
@@ -43,14 +37,14 @@
 
 <script>
 import Form from 'vform'
-import LoginWithGithub from '~/components/LoginWithGithub'
+import LoginWithOAuth from '~/components/sections/LoginWithOAuth'
 
 export default {
   middleware: 'guest',
   layout: 'split',
 
   components: {
-    LoginWithGithub
+    LoginWithOAuth
   },
 
   metaInfo () {

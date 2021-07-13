@@ -8,6 +8,7 @@ export const state = {
     'WaitingApproval',
     'WaitingPickup',
     'InProgress',
+    'ReturnRequested',
     'AwaitingReturn',
     'Completed',
     'Rejected'
@@ -21,13 +22,25 @@ export const getters = {
     state.items.forEach(item => {
       if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
+      const returnDate = DateTime.fromISO(item.return_date).toUTC().toFormat('cccc, d LLLL')
       const value = {
+        id: item.id,
+        bookshelf_item_id: item.bookshelf_item_id,
         borrower: item.borrower.name,
         book: item.book.title,
         condition: rootGetter.library.conditions[conditionIndex].name,
-        return_date: item.return_date
+        return_date: returnDate
       }
       items.push(value)
+    })
+
+    return items
+  },
+  borrowedWithDetails: (state, getter, rootGetter) => {
+    let items = []
+    state.items.forEach(item => {
+      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2) return
+      items.push(item)
     })
 
     return items
@@ -37,11 +50,14 @@ export const getters = {
     state.items.forEach(item => {
       if (item.lender_id !== rootGetter.auth.user.id || item.status !== 2) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
+      const returnDate = DateTime.fromISO(item.return_date).toUTC().toFormat('cccc, d LLLL')
       const value = {
+        id: item.id,
+        bookshelf_item_id: item.bookshelf_item_id,
         borrower: item.borrower.name,
         book: item.book.title,
         condition: rootGetter.library.conditions[conditionIndex].name,
-        return_date: item.return_date
+        return_date: returnDate
       }
       items.push(value)
     })
@@ -51,7 +67,30 @@ export const getters = {
   incomingRequests: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.status >= 2 || item.lender_id !== rootGetter.auth.user.id) return
+      if (item.status === 2 || item.lender_id !== rootGetter.auth.user.id) return
+      const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
+      const pickDateTime = DateTime.fromISO(item.pickup_date).toUTC()
+      const proposedCollection = pickDateTime.toFormat('cccc, d LLLL')
+      const timeSlot = pickDateTime.toFormat('t') + ' - ' + pickDateTime.plus({ hours: 2 }).toFormat('t')
+      const value = {
+        id: item.id,
+        borrower: item.borrower.name,
+        lender: item.lender.name,
+        book: item.book.title,
+        condition: rootGetter.library.conditions[conditionIndex].name,
+        proposed_collection: proposedCollection,
+        time_slot: timeSlot,
+        status: state.status[item.status]
+      }
+      items.push(value)
+    })
+
+    return items
+  },
+  outgoingRequests: (state, getter, rootGetter) => {
+    let items = []
+    state.items.forEach(item => {
+      if (item.status === 2 || item.borrower_id !== rootGetter.auth.user.id) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
       const pickDateTime = DateTime.fromISO(item.pickup_date).toUTC()
       const proposedCollection = pickDateTime.toFormat('cccc, d LLLL')
@@ -70,26 +109,8 @@ export const getters = {
 
     return items
   },
-  outgoingRequests: (state, getter, rootGetter) => {
-    let items = []
-    state.items.forEach(item => {
-      if (item.status >= 2 || item.borrower_id !== rootGetter.auth.user.id) return
-      const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
-      const pickDateTime = DateTime.fromISO(item.pickup_date).toUTC()
-      const proposedCollection = pickDateTime.toFormat('cccc, d LLLL')
-      const timeSlot = pickDateTime.toFormat('t') + ' - ' + pickDateTime.plus({ hours: 2 }).toFormat('t')
-      const value = {
-        borrower: item.borrower.name,
-        book: item.book.title,
-        condition: rootGetter.library.conditions[conditionIndex].name,
-        proposed_collection: proposedCollection,
-        time_slot: timeSlot,
-        status: state.status[item.status]
-      }
-      items.push(value)
-    })
-
-    return items
+  getItemByLedgeId: state => ledgeId => {
+    return state.items.find(item => item.id === ledgeId)
   }
 }
 
@@ -114,6 +135,22 @@ export const actions = {
   },
   async respond ({ commit }, { ledgeId, response }) {
     const { data } = await axios.put(`/api/ledge/request/respond/${ledgeId}`, { response })
+    console.log(data)
+  },
+  async collect ({ commit }, { ledgeId }) {
+    const { data } = await axios.put(`/api/ledge/collect/${ledgeId}`)
+    console.log(data)
+  },
+  async returnRequest ({ commit }, payload) {
+    const { data } = await axios.post(`/api/ledge/return_request`, payload)
+    console.log(data)
+  },
+  async returnRespond ({ commit }, { ledgeId, response }) {
+    const { data } = await axios.put(`/api/ledge/return_request/respond/${ledgeId}`, { response })
+    console.log(data)
+  },
+  async returned ({ commit }, { ledgeId }) {
+    const { data } = await axios.put(`/api/ledge/returned/${ledgeId}`)
     console.log(data)
   }
 }

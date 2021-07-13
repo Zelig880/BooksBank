@@ -40,9 +40,6 @@ export const mutations = {
   UPDATE_SEARCH_RESULT (state, result) {
     state.searchResult = result
   },
-  ADD_ITEMS (state, book) {
-    state.items = [...state.items, book]
-  },
   SET_ITEMS (state, items) {
     state.items = items
   },
@@ -77,7 +74,7 @@ export const actions = {
   },
   async addBook ({ commit, state }, selectedBook) {
     const { data } = await axios.post(`/api/bookshelf_item/store`, { ...selectedBook, status: 0 })
-    commit('ADD_ITEMS', selectedBook)
+    commit('SET_ITEMS', data.result)
 
     return data
   },
@@ -101,7 +98,7 @@ export const actions = {
     commit('RESET_SEARCH_RESULT')
   },
   async updateOrCreate ({ dispatch, state }, payload) {
-    if (state.currentBookshelf.id) {
+    if (state.currentBookshelf?.id) {
       const { data } = await axios.put(`/api/bookshelf/${state.currentBookshelf.id}/update`, payload)
       return data
     } else {

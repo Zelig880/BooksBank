@@ -26,9 +26,6 @@ export default {
 
 <style lang="scss">
 .welcomeHow{
-  &_illustration{
-    max-width: 480px;
-  }
   ol{
     counter-reset: list-counter;
     margin-top:2.5rem;
@@ -42,6 +39,19 @@ export default {
       font-size: 40px;
       font-weight: 300;
       color: var(--body-tertiaty);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .welcomeHow{
+    li {
+      margin-bottom: 20px;
+      font-size: 16px;
+      &:before {
+        font-size: 25px;
+        margin-right: 0.5rem;
+      }
     }
   }
 }

@@ -7,7 +7,7 @@
         <p class="Light-backgroundH1---h6H4">{{ $t('welcomeAbout-paragraph2') }}</p>
       </div>
       <div class="hidden md:inline-block md:w-2/6 lg:w-1/2">
-        <img class="welcomeHow_illustration" src="/assets/img/about-img.svg" alt="Illustration of a man sitting down reading a book">
+        <img class="welcomeAbout_illustration" src="/assets/img/about-img.svg" alt="Illustration of a man sitting down reading a book">
       </div>
     </div>
   </div>

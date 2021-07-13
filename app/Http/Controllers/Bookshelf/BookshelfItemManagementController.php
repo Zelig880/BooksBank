@@ -17,22 +17,18 @@ class BookshelfItemManagementController extends Controller
     public function __construct()
     {
         $this->userId = Auth::id();
-        $this->bookshelf = Bookshelf::where('user_id', '=', $this->userId)->first();
+        $this->bookshelf = Bookshelf::query()->where('user_id', '=', $this->userId)->first();
     }
 
     public function index()
     {
-        $bookshelf = $this->bookshelf;
-
-        if(!$bookshelf) return;
-
-        return $bookshelf->bookshelf_items()->with('book')->get();
+        return $this->getCurrentUserBookshelfItems();
     }
 
     public function getByBookshelfItemId($id)
     {
         try {
-            $book = Bookshelf_Item::with('book', 'book.authors', 'book.categories', 'bookshelf')
+            $book = Bookshelf_Item::with('book', 'book.authors', 'book.categories', 'bookshelf', 'bookshelf.user')
                                     ->where('bookshelf_items.id', $id)
                                     ->first();
 
@@ -47,11 +43,31 @@ class BookshelfItemManagementController extends Controller
     {
         try {
             Book::Add($request->validated(), $this->bookshelf->id);
-            return response()->json(["success" => true]);
+            $bookshelfItems = $this->getCurrentUserBookshelfItems();
+            return response()->json(["success" => true, "result" => $bookshelfItems]);
         }
         catch (\Throwable $th) {
             return response()->json(["success" => false, "message" => $th]);
         }
     }
+
+    private function getCurrentUserBookshelfItems() {
+        $bookshelf = $this->bookshelf;
+
+        if(!$bookshelf) return;
+
+        return $bookshelf->bookshelf_items()->with('book')->get();
+    }
+
+//    public function removeBookShelfItem($id)
+//    {
+//        try {
+//            $userBookShelf = Auth::user()->bookshelf->bookshelf_items;
+//            return response()->json(["success" => true, 'message' => 'Bookshelf item deleted!']);
+//        }
+//        catch (\Throwable $th) {
+//            return response()->json(["success" => false, "message" => $th]);
+//        }
+//    }
 
 }

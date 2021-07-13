@@ -8,7 +8,7 @@
         {{ title }}
       </h3>
 
-      <p class="h-12">
+      <p class="h-auto hidden md:block">
         {{ formattedDescription }}
       </p>
 
@@ -16,11 +16,11 @@
         <fa icon="map-marker-alt" />
         {{ formattedDistance }} Miles</div>
 
-      <div class="flex justify-between">
-        <button class="flex items-center text-xs uppercase font-bold text-gray-800 hover:opacity-75 rounded-full py-3 px-8 bg-gray-200" @click="$emit('click')">
+      <div class="flex justify-between items-baseline flex-col-reverse md:flex-row">
+        <button class="flex items-center w- text-xs uppercase font-bold text-gray-800 hover:opacity-75 rounded-full py-3 px-8 bg-gray-200" @click="$emit('click')">
           Borrow
         </button>
-        <span class="self-end">Condition: <span class="font-semibold">{{ condition }}</span></span>
+        <span class="md:self-end">Condition: <span class="font-semibold">{{ condition }}</span></span>
       </div>
     </div>
   </div>

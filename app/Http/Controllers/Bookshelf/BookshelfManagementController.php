@@ -22,7 +22,12 @@ class BookshelfManagementController
      */
     public function current()
     {
-        return response()->json($this->user->bookshelf()->first());
+        $data = $this->user->bookshelf()->first();
+        
+        if($data) {
+            $data->makeVisible(['address_line_1']);
+        }
+        return response()->json($data);
     }
 
     public function update(UpdateBookshelfRequest $request, $id)
