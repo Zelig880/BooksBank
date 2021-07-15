@@ -123,6 +123,9 @@ import Swal from 'sweetalert2'
 
 export default {
   name: 'Info',
+  metaInfo () {
+    return { title: this.$t('bookshelfInfo-title') }
+  },
   components: {
     ReturnModal
   },

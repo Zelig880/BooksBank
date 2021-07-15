@@ -40,7 +40,10 @@ export default {
 
     return {
       title: appName,
-      titleTemplate: `%s · ${appName}`
+      titleTemplate: `%s · ${appName}`,
+      meta: [
+        { name: 'description', content: 'Booksbank is a community driven project, allowing everyone to be able to enjoy reading, by borrowing books that would otherwise sit on a shelf collecting dust.' }
+      ]
     }
   },
 

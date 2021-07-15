@@ -28,7 +28,7 @@
 <script>
 export default {
   metaInfo () {
-    return { title: this.$t('terms') }
+    return { title: this.$t('about') }
   }
 }
 </script>

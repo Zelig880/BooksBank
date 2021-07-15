@@ -49,6 +49,11 @@
   "failed_to_verify_email": "Failed to verify email.",
   "verify_email_address": "We sent you an email with an the verification link.",
 
+  "about": "About",
+  "privacyPolicy": "Privacy Policy",
+  "terms": "Terms and Condition",
+  "safeguarding": "Safeguarding",
+
   "search": "Search",
   "use_current_location": "Use current location",
   "continue-with-google": "Continue with google",
@@ -58,8 +63,6 @@
   "signin-title": "Login to your account",
   "signin-description": "Sign in, using your preferred method, or quickly create an account.",
 
-  "privacyPolicy": "Privacy Policy",
-  "terms": "Terms and Condition",
 
   "register_title": "Create your account",
   "register_description": "Join the community by using one of the method below.",
@@ -108,8 +111,10 @@
   "bookshelfAddNoBookshelfBanner-paragraph": "Your bookshelf need to be fully configured to be able to add books into it.<br/>Click the link below to quickly complete the registration of your bookshelf",
   "bookshelfAddNoBookshelfBanner-button": "Complete registration",
   
+  "bookshelfAll-title": "Bookshelf info",
   "bookshelfAll-BooksYouAreReading": "The books you are reading",
   "bookshelfAll-BookYouOwn": "The books you own",
+  "bookshelfInfo-title": "Bookshelf requests",
 
   "bookshelfSettings-timeslot-title": "Choose your preferred time for the book to be picked up",
 

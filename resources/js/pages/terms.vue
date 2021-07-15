@@ -291,7 +291,7 @@
       any nature.
     </p>
 
-    <h3>iData deletion</h3>
+    <h3>Data deletion</h3>
 
     <p>
       In line with GDPR requirements, users are able to ask for the removal of

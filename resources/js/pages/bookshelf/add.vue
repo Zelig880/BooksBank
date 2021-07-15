@@ -38,6 +38,9 @@ import Swal from 'sweetalert2'
 
 export default {
   name: 'Add',
+  metaInfo () {
+    return { title: this.$t('bookshelfAdd-title') }
+  },
   middleware: 'auth',
   components: {
     BookshelfAddStep1,

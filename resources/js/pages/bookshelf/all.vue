@@ -36,6 +36,9 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'All',
+  metaInfo () {
+    return { title: this.$t('bookshelfAll-title') }
+  },
   data () {
     return {
     }
