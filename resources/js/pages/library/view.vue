@@ -33,14 +33,19 @@
                 :description="result.book.description"
                 :thumbnail="result.book.thumbnail"
                 :condition="conditions[result.condition].name"
+                :transaction-type="transactionType[result.type].nameForCustomer"
                 :distance="result.bookshelf.distance"
                 @click="goToBorrowPage(result.id)"
               />
             </template>
             <div v-else class="flex-col col-span-2 no-books-container">
               <img alt="Pile of books" src="/assets/img/pile-of-books.png" class="m-auto mb-6">
-              <h3 class="Light-backgroundH1---h6H4 font-bold">{{ $t('libraryBorrow-noBooks-heading') }}</h3>
-              <p class="Light-backgroundH1---h6H4">{{ $t('libraryBorrow-noBooks') }}</p>
+              <h3 class="Light-backgroundH1---h6H4 font-bold">
+                {{ $t('libraryBorrow-noBooks-heading') }}
+              </h3>
+              <p class="Light-backgroundH1---h6H4">
+                {{ $t('libraryBorrow-noBooks') }}
+              </p>
               <div class="flex flex-col md:flex-row items-center justify-center mt-6 mb-3">
                 <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https://booksbank.co.uk&text=Come%20and%20join%20@BooksBank%20and%20give%20your%20books%20another%20life:">Share on twitter</a>
                 <a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://booksbank.co.uk">Share on facebook</a>
@@ -58,6 +63,7 @@
               :description="result.book.description"
               :thumbnail="result.book.thumbnail"
               :condition="conditions[result.condition].name"
+              :transaction-type="transactionType[result.type].nameForCustomer"
               :distance="result.bookshelf.distance"
               @click="goToBorrowPage(result.id)"
             />
@@ -97,6 +103,7 @@ export default {
   },
   computed: {
     ...mapState('library', ['conditions']),
+    ...mapState('bookshelf', ['transactionType']),
     ...mapGetters('library', ['searchedBook', 'otherBooks', 'loading'])
   },
   async mounted () {
