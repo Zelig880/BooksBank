@@ -17,7 +17,7 @@
         </div>
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 border-l-2 w-10/12 md:w-auto mx-auto">
           <label>Location</label>
-          <input v-model="form.postcode" type="text" placeholder="city or postcode">
+          <input v-model="form.postcode" type="text" @keydown="handleChange" placeholder="city or postcode">
         </div>
         <button id="search-button" class="block text-white font-bold rounded-full md:rounded-l-none flex-grow mt-6 md:mt-0 w-10/12 md:w-1/4 mx-auto py-4">
           {{ $t('search') }}
@@ -41,7 +41,8 @@ export default {
       latitude: null,
       longitude: null,
       radius: 15
-    })
+    }),
+    autoAddress: false
   }),
 
   mounted () {
@@ -85,7 +86,6 @@ export default {
       }
     },
     async getAddressFromGeolocationApi ({ coords }) {
-
       this.form.latitude = coords.latitude
       this.form.longitude = coords.longitude
 
@@ -95,6 +95,14 @@ export default {
 
       if (address) {
         this.form.postcode = address.suburb || address.postcode
+        this.autoAddress = true
+      }
+    },
+    handleChange () {
+      if (this.autoAddress) {
+        this.autoAddress = false
+        this.form.latitude = null
+        this.form.longitude = null
       }
     }
   }
