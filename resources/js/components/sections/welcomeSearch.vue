@@ -94,7 +94,7 @@ export default {
       const address = data?.address
 
       if (address) {
-        this.postcode = address.suburb || address.postcode
+        this.form.postcode = address.suburb || address.postcode
       }
     }
   }
