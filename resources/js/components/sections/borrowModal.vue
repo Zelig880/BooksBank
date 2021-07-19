@@ -40,9 +40,12 @@
           <p class="font-semibold">{{ selectedDate }}</p>
           <h2>Collection time:</h2>
           <p class="font-semibold">{{ times[timeSlot] }}</p>
+          <!-- We just show the return date if the book is of type borrow -->
           <hr>
-          <h2>Book return date:</h2>
-          <p class="font-semibold">{{ returnDate.toFormat('yyyy-LL-dd') }}</p>
+          <template v-if="selectedBook.type === 0">
+            <h2>Book return date:</h2>
+            <p class="font-semibold">{{ returnDate.toFormat('yyyy-LL-dd') }}</p>
+          </template>
           <Button :disabled="submitDisabled" @click="onSendRequest">
             Send Request
           </Button>

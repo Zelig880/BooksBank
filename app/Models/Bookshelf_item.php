@@ -9,7 +9,7 @@ class Bookshelf_item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['condition', 'status', 'bookshelf_id', 'book_id'];
+    protected $fillable = ['condition', 'status', 'bookshelf_id', 'book_id', 'type'];
 
     /**
      * Get book that belong to the Bookshelf_item

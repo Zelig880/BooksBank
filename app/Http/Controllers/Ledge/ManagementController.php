@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Ledge;
 use App\Models\Bookshelf_item;
 use App\Enums\LedgeStatus;
+use App\Enums\BookshelfItemType;
 use App\Jobs\SendEmail;
 
 class ManagementController extends BaseController
@@ -24,6 +25,7 @@ class ManagementController extends BaseController
         $userId = Auth::id();
 
         $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
+                       ->whereNotIn('status', [LedgeStatus::GivenAway, LedgeStatus::Completed])
                        ->where('lender_id', $userId)
                        ->orWhere('borrower_id', $userId)
                        ->orderBy('id', 'DESC')
@@ -219,7 +221,7 @@ class ManagementController extends BaseController
     }
 
     /**
-     * Collect a book
+     * Collect a book. Change the status to either in progress of completed depending from the book transaction type
      *
      * @param \Illuminate\Http\Request $request
      * @param $id
@@ -240,10 +242,21 @@ class ManagementController extends BaseController
             return response()->json(['error' => 'Ledge is not awaiting pickup.'], 409);
         }
 
+
         try {
-            $ledge->update([
-                'status' => LedgeStatus::InProgress
-            ]);
+
+            $transactionType = $ledge->bookshelf_item->type;
+            switch ($transactionType) {
+                case BookshelfItemType::GiveAway:
+                    $this->handleGiveAway($ledge);
+                    break;
+                
+                default:
+                    $ledge->update([
+                        'status' => LedgeStatus::InProgress
+                    ]);
+                    break;
+            }
 
             return response()->json(['success' => $ledge]);
         } catch (Exception $e) {
@@ -281,5 +294,14 @@ class ManagementController extends BaseController
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    private function handleGiveAway($ledge) {
+
+        $ledge->update([
+            'status' => LedgeStatus::GivenAway
+        ]);
+
+        $ledge->bookshelf_item()->delete();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Bookshelf;
 
 use App\Enums\BookCondition;
 use App\Enums\BookStatus;
+use App\Enums\BookshelfItemType;
 use BenSampo\Enum\Rules\EnumValue;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,6 +31,7 @@ class CreateBookRequest extends FormRequest
             'title' => ['required', 'string'],
             'ISBN' => ['required'],
             'condition' => ['required', new EnumValue(BookCondition::class)],
+            'type' => ['required', new EnumValue(BookshelfItemType::class)],
             'status' => ['required', new EnumValue(BookStatus::class)],
             'authors' => ['nullable'],
             'description' => ['required', 'string'],

@@ -70,6 +70,7 @@ class Book extends Model
         $book->bookshelf_item()->create([
             'condition' => $item['condition'],
             'status' => $item['status'],
+            'type' => $item['type'],
             'bookshelf_id' => $bookshelf_id,
             'book_id' => $book->id
         ]);

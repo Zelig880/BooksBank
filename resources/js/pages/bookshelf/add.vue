@@ -12,17 +12,18 @@
         {{ $t('welcomeAdd-paragraph') }}
       </p>
       <BookshelfAddStep1 ref="bookSelection" :disabled="currentStep !== 1 || !currentBookshelf" @select="selectBook" />
-      <BookshelfAddStep2 v-if="currentStep === 2 || currentStep === 3" @select="selectCondition" />
-      <Button v-if="currentStep === 3" class="float-right mt-6 ml-6" @click="addToBookshelf">
+      <BookshelfAddStep2 v-if="currentStep === 2 || currentStep === 3 || currentStep === 4" @select="selectCondition" />
+      <BookshelfAddStep3 v-if="currentStep === 3 || currentStep === 4" @select="selectType" />
+      <Button v-if="currentStep === 4" class="float-right mt-6 ml-6" @click="addToBookshelf">
         Add to your Bookshelf
       </Button>
-      <Button v-if="selectedBook && currentStep !== 4" theme="secondary" color="secondary" class="float-right mt-6" @click="resetSelection">
+      <Button v-if="selectedBook && currentStep !== 5" theme="secondary" color="secondary" class="float-right mt-6" @click="resetSelection">
         Start again
       </Button>
-      <Button v-if="currentStep === 4" theme="cta" color="secondary" class="float-right mt-6 ml-6" @click="resetSelection">
+      <Button v-if="currentStep === 5" theme="cta" color="secondary" class="float-right mt-6 ml-6" @click="resetSelection">
         Add another book
       </Button>
-      <Button v-if="currentStep === 4" theme="cta" color="secondary" class="float-right mt-6 ml-6" @click="routetolib">
+      <Button v-if="currentStep === 5" theme="cta" color="secondary" class="float-right mt-6 ml-6" @click="routetolib">
         My Library
       </Button>
     </div>
@@ -34,6 +35,7 @@ import { mapActions, mapGetters } from 'vuex'
 import BookshelfAddNoBookshelfBanner from '../../components/sections/bookshelfAddNoBookshelfBanner.vue'
 import BookshelfAddStep1 from '../../components/sections/bookshelfAddStep1.vue'
 import BookshelfAddStep2 from '../../components/sections/bookshelfAddStep2.vue'
+import BookshelfAddStep3 from '../../components/sections/bookshelfAddStep3.vue'
 import Swal from 'sweetalert2'
 
 export default {
@@ -45,6 +47,7 @@ export default {
   components: {
     BookshelfAddStep1,
     BookshelfAddStep2,
+    BookshelfAddStep3,
     BookshelfAddNoBookshelfBanner
   },
   data () {
@@ -80,7 +83,7 @@ export default {
           title: 'Good Job!',
           text: 'Your book has been succesfully added to your Bookshelf!'
         }).then(() => {
-          this.currentStep = 4
+          this.currentStep = 5
         })
       } else {
         Swal.fire({
@@ -108,6 +111,10 @@ export default {
     selectCondition (condition) {
       this.$set(this.selectedBook, 'condition', condition)
       this.currentStep = 3
+    },
+    selectType (type) {
+      this.$set(this.selectedBook, 'type', type)
+      this.currentStep = 4
     },
     confirm (value) {
       if (value === 'Reject') {

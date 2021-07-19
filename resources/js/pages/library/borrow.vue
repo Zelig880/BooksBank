@@ -19,10 +19,13 @@
         <p class="text-xl mt-4 text-gray-500 mb-4">
           Book location: <span class="font-semibold">{{ selectedBook.bookshelf.city || selectedBook.bookshelf.postcode }}</span>
         </p>
+        <p class="text-xl mt-4 text-gray-500 mb-4">
+          Sale type: <span class="font-semibold">{{ transactionType[selectedBook.type].nameForCustomer }}</span>
+        </p>
         <hr>
         <BorrowModal :show="showModal" :selected-book="selectedBook" @close="closeModal" />
         <Button class="mt-3" @click="showModal = true">
-          Borrow book
+          Send request
         </Button>
       </div>
     </div>
@@ -31,7 +34,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import BorrowModal from '../../components/sections/borrowModal'
 
 export default {
@@ -47,6 +50,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('bookshelf', ['transactionType']),
     authors () {
       const authorsArray = this.selectedBook.book.authors
       const authorsNames = authorsArray.map(author => author['name'])

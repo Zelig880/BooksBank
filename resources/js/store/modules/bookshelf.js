@@ -25,7 +25,11 @@ const createBookObject = function (book) {
 export const state = {
   searchResult: [],
   currentBookshelf: null,
-  items: []
+  items: [],
+  transactionType: [
+    { index: 0, name: 'Temporary Lend', nameForCustomer: 'Borrow' },
+    { index: 1, name: 'Give Away', nameForCustomer: 'Get for Free' }
+  ]
 }
 
 // getters
