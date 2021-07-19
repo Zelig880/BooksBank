@@ -59,12 +59,12 @@ class GeolocationController extends Controller
     {
 
         $this->validate($request, [
-            'lat' => 'required',
-            'lon' => 'required'
+            'latitude' => 'required',
+            'longitude' => 'required'
         ]);
 
         $search = $this->nominatim->newReverse()
-                    ->latlon($request['lat'], $request['lon']);
+                    ->latlon($request['latitude'], $request['longitude']);
 
         $result = $this->nominatim->find($search);
 

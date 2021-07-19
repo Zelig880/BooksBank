@@ -77,7 +77,21 @@ export default {
         this.form.latitude = position.coords.latitude
         this.form.longitude = position.coords.longitude
       }
+    },
+    async getAddressFromGeolocationApi ({ coords }) {
+
+      this.form.latitude = coords.latitude
+      this.form.longitude = coords.longitude
+
+      const { data } = await this.form.post('/api/geolocation/getAddressFromGeolocation')
+
+      const address = data[0]
+      console.log(address)
     }
+  },
+
+  mounted () {
+    navigator.geolocation.getCurrentPosition(this.getAddressFromGeolocationApi)
   }
 }
 </script>

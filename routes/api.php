@@ -23,6 +23,7 @@ Route::get('library/{latitude}/{longitude}/{radius}', 'Library\SearchController@
 
 // Geolocation
 Route::post('geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
+Route::post('geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
 
 //Newsletter
 Route::post('newsletter/createContact', 'NewsletterController@createContact');
@@ -72,8 +73,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('bookshelf/{type}/{text}', 'Bookshelf\SearchController@index');
     Route::delete('bookshelf/remove/{id}', 'Bookshelf\LibraryController@remove');
-
-    Route::post('geolocation/getAddressFromGeolocation', 'Geolocation\GeolocationController@getAddressFromGeolocation');
 
     // User
     Route::get('user', 'Auth\UserController@current');
