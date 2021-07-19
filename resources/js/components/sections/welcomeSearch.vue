@@ -44,6 +44,12 @@ export default {
     })
   }),
 
+  mounted () {
+    if (navigator?.geolocation?.getCurrentPosition) {
+      navigator.geolocation.getCurrentPosition(this.getAddressFromGeolocationApi)
+    }
+  },
+
   methods: {
     ...mapActions('library', ['search']),
     async getGeolocation () {
@@ -85,13 +91,12 @@ export default {
 
       const { data } = await this.form.post('/api/geolocation/getAddressFromGeolocation')
 
-      const address = data[0]
-      console.log(address)
-    }
-  },
+      const address = data?.address
 
-  mounted () {
-    navigator.geolocation.getCurrentPosition(this.getAddressFromGeolocationApi)
+      if (address) {
+        this.postcode = address.suburb || address.postcode
+      }
+    }
   }
 }
 </script>
