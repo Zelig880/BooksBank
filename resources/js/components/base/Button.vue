@@ -1,5 +1,5 @@
 <template>
-  <div :class="themeClass" @click="$emit('click')">
+  <div :class="themeClass" role="button" @click="handleClick">
     <slot />
   </div>
 </template>
@@ -21,11 +21,25 @@ export default {
       type: String,
       default: 'primary',
       validator: value => colours.includes(value)
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   computed: {
     themeClass () {
-      return `button button-${this.theme} color-${this.color}`
+      let classes = `button button-${this.theme} color-${this.color}`
+      if (this.disabled) classes += ' button-disabled'
+
+      return classes
+    }
+  },
+  methods: {
+    handleClick () {
+      if (this.disabled) return
+      this.$emit('click')
     }
   }
 }
@@ -137,5 +151,9 @@ export default {
   &:hover{
     opacity:1;
   }
+}
+.button-disabled{
+  cursor:not-allowed;
+  background-color: var(--secondary-4) !important;
 }
 </style>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Ledge;
 use App\Models\Bookshelf_item;
 use App\Enums\LedgeStatus;
+use App\Enums\BookStatus;
 use App\Enums\BookshelfItemType;
 use App\Jobs\SendEmail;
 
@@ -302,6 +303,8 @@ class ManagementController extends BaseController
             'status' => LedgeStatus::GivenAway
         ]);
 
-        $ledge->bookshelf_item()->delete();
+        $ledge->bookshelf_item->update([
+            'status' => BookStatus::Deleted
+        ]);
     }
 }

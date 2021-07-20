@@ -50,6 +50,10 @@ export const mutations = {
   RESET_SEARCH_RESULT (state) {
     state.searchResult = []
   },
+  REMOVE_ITEM (state, id) {
+    const index = state.items.findIndex(item => item.id === id)
+    state.items.splice(index, 1)
+  },
   SET_CURRENT_BOOKSHELF (state, bookshelf) {
     state.currentBookshelf = bookshelf
   }
@@ -109,6 +113,23 @@ export const actions = {
       const { data } = await axios.post(`/api/bookshelf/create`, payload)
       dispatch('getCurrent')
       return data
+    }
+  },
+  async delete ({ commit }, bookshelfItemId) {
+    const { data } = await axios.delete(`/api/bookshelf_item/delete/${bookshelfItemId}`)
+    if (data.success) {
+      commit('REMOVE_ITEM', bookshelfItemId)
+      Swal.fire({
+        type: 'success',
+        title: 'Your book was succesfully removed',
+        text: 'Your book was succesfully removed from your bookshelf.'
+      })
+    } else {
+      Swal.fire({
+        type: 'error',
+        title: 'Your book could not be remove',
+        text: 'There was an error with your request, and your book could not be removed from your bookshelf.'
+      })
     }
   }
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="mt-14">
-    <h3 class="font-sans text-2xl font-bold mb-6">{{ $t('bookshelfAll-BooksYouAreReading') }}</h3>
+    <h3 class="font-sans text-2xl font-bold mb-6">
+      {{ $t('bookshelfAll-BooksYouAreReading') }}
+    </h3>
     <div class="grid grid-cols-4 gap-6">
       <div v-for="(item, index) in borrowedWithDetails" :key="index">
         <img :src="item.book.thumbnail" class="card-img-top" :alt="item.book.title">
@@ -14,7 +16,9 @@
         </div>
       </div>
     </div>
-    <h3 class="font-sans text-2xl font-bold mt-10 mb-6">{{ $t('bookshelfAll-BookYouOwn') }}</h3>
+    <h3 class="font-sans text-2xl font-bold mt-10 mb-6">
+      {{ $t('bookshelfAll-BookYouOwn') }}
+    </h3>
     <div class="grid grid-cols-4 gap-6">
       <div v-for="(item, index) in items" :key="index">
         <img :src="item.book.thumbnail" class="card-img-top" :alt="item.book.title">
@@ -26,6 +30,9 @@
             ISBN: {{ item.book.ISBN }}
           </p>
         </div>
+        <Button :disabled="item.ledge.length > 0" theme="secondary" @click="deleteBookshelfItem(item.id)">
+          Delete
+        </Button>
       </div>
     </div>
   </div>
@@ -54,7 +61,8 @@ export default {
   methods: {
     ...mapActions({
       getAllLedge: 'ledge/getAll',
-      getAllBookshelf: 'bookshelf/getAll'
+      getAllBookshelf: 'bookshelf/getAll',
+      deleteBookshelfItem: 'bookshelf/delete'
 
     })
   }

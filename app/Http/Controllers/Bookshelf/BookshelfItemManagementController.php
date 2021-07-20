@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Bookshelf;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bookshelf\CreateBookRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\BookStatus;
 use App\Models\Book;
 use App\Models\Bookshelf;
 use App\Models\Bookshelf_item;
@@ -56,18 +57,25 @@ class BookshelfItemManagementController extends Controller
 
         if(!$bookshelf) return;
 
-        return $bookshelf->bookshelf_items()->with('book')->get();
+        return $bookshelf
+                ->bookshelf_items()
+                ->with('book', 'ledge')
+                ->where('bookshelf_items.status', BookStatus::Available)
+                ->get();
     }
 
-//    public function removeBookShelfItem($id)
-//    {
-//        try {
-//            $userBookShelf = Auth::user()->bookshelf->bookshelf_items;
-//            return response()->json(["success" => true, 'message' => 'Bookshelf item deleted!']);
-//        }
-//        catch (\Throwable $th) {
-//            return response()->json(["success" => false, "message" => $th]);
-//        }
-//    }
+   public function removeBookShelfItem($id)
+   {
+       try {
+            $bookshelf_item = $this->bookshelf->bookshelf_items()->findOrFail($id);
+            $bookshelf_item->update([
+                'status' => BookStatus::Deleted
+            ]);
+           return response()->json(["success" => true, 'message' => 'Bookshelf item deleted!']);
+       }
+       catch (\Throwable $th) {
+           return response()->json(["success" => false, "message" => $th]);
+       }
+   }
 
 }

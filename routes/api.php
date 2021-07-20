@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('bookshelf_item', 'Bookshelf\BookshelfItemManagementController@index');
     Route::post('bookshelf_item/store', 'Bookshelf\BookshelfItemManagementController@store');
     Route::get('bookshelf_item/{id}', 'Bookshelf\BookshelfItemManagementController@getByBookshelfItemId');
+    Route::delete('bookshelf_item/delete/{id}', 'Bookshelf\BookshelfItemManagementController@removeBookShelfItem');
 
     Route::get('bookshelf', 'Bookshelf\BookshelfManagementController@current');
     Route::put('bookshelf/{id}/update', 'Bookshelf\BookshelfManagementController@update');

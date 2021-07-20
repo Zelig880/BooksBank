@@ -87,10 +87,10 @@ export default {
       return { weekdays: this.disabledDays }
     },
     submitDisabled () {
-      const dateSelected = !!this.DaySlot
-      const timeSelected = !!this.timeSlot
+      const dateSelected = this.DaySlot === null
+      const timeSelected = this.timeSlot === null
 
-      return !dateSelected || !timeSelected
+      return dateSelected || timeSelected
     },
     disabledDays () {
       const weekDays = [ 1, 2, 3, 4, 5, 6, 7 ]
