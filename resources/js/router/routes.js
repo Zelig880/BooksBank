@@ -10,6 +10,7 @@ export default [
   { path: '/terms', name: 'terms', component: page('terms.vue') },
   { path: '/safe', name: 'safe', component: page('safe.vue') },
   { path: '/about', name: 'about', component: page('about.vue') },
+  { path: '/faq', name: 'faq', component: page('faq.vue') },
 
   //Registration Process
   { path: '/login', name: 'login', component: page('auth/login.vue') },
