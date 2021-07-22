@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Mail\Welcome;
+use App\Jobs\SendEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -38,6 +40,7 @@ class RegisterController extends Controller
             return response()->json(['status' => trans('verification.sent')]);
         }
 
+        SendEmail::dispatch('App\Mail\Welcome', null, $user->email);
         return response()->json($user);
     }
 

@@ -32,9 +32,9 @@ class BookReturnRequestStatusMail extends Mailable
     public function build()
     {
         $status = $this->ledge->status === LedgeStatus::AwaitingReturn ? 'accepted' : 'rejected';
-        Config::set('mail.username', 'support@booksbank.com');
+        Config::set('mail.username', 'support@booksbank.co.uk');
         return $this->view('mail.book-return-request-status-mail')
-                    ->from('noreply@booksbank.com','BooksBank')
+                    ->from('noreply@booksbank.co.uk','BooksBank')
                     ->subject("Your Book return request has been $status");
     }
 }

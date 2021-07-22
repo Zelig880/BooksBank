@@ -31,9 +31,9 @@ class BookReturnRequestMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        Config::set('mail.username', 'support@booksbank.com');
+        Config::set('mail.username', 'support@booksbank.co.uk');
         return $this->view('mail.book-return-request-mail')
-                    ->from('noreply@booksbank.com','BooksBank')
+                    ->from('noreply@booksbank.co.uk','BooksBank')
                     ->subject('A Book return request has been received');
     }
 }

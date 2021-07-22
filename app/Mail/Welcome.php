@@ -8,20 +8,18 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Config;
 
-class BookRequestMail extends Mailable implements ShouldQueue
+class Welcome extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
-
-    public $ledge;
 
     /**
      * Create a new message instance.
      *
-     * @param $ledge
+     * @return void
      */
-    public function __construct($ledge)
+    public function __construct()
     {
-        $this->ledge = $ledge;
+        //
     }
 
     /**
@@ -32,8 +30,8 @@ class BookRequestMail extends Mailable implements ShouldQueue
     public function build()
     {
         Config::set('mail.username', 'support@booksbank.co.uk');
-        return $this->view('mail.book-request-mail')
-                    ->from('noreply@booksbank.co.uk','BooksBank')
-                    ->subject('A Book request has been received');
+        return $this->markdown('mail.Welcome')
+                    ->from('noreply@booksbank.co.uk', 'BooksBank')
+                    ->subject("Welcome!");
     }
 }

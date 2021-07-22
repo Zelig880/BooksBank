@@ -6,6 +6,8 @@ use App\Exceptions\EmailTakenException;
 use App\Http\Controllers\Controller;
 use App\OAuthProvider;
 use App\Models\User;
+use App\Mail\Welcome;
+use App\Jobs\SendEmail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -83,7 +85,9 @@ class OAuthController extends Controller
         if (User::where('email', $user->getEmail())->exists()) {
             return User::where('email', $user->getEmail())->first();
         } else {
-            return $this->createUser($provider, $user);
+            $newUser = $this->createUser($provider, $user);
+            SendEmail::dispatch('App\Mail\Welcome', null, $newUser->email);
+            return $newUser;
         }
 
     }

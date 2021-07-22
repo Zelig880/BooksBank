@@ -30,9 +30,9 @@ class BookReturnReminderMail extends Mailable
      */
     public function build()
     {
-        Config::set('mail.username', 'support@booksbank.com');
+        Config::set('mail.username', 'support@booksbank.co.uk');
         return $this->view('mail.book-return-reminder-mail')
-                    ->from('noreply@booksbank.com', 'BooksBank')
+                    ->from('noreply@booksbank.co.uk', 'BooksBank')
                     ->subject("Reminder to return book");
     }
 }
