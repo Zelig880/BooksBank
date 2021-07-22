@@ -47,14 +47,14 @@
             </Anchor>
           </li>
           <li>
-            <Anchor theme="none" route-name="bookshelf.add">
-              Add a Book
+            <Anchor theme="none" route-name="faq">
+              F.A.Q.
             </Anchor>
           </li>
         </ul>
       </div>
       <p class="col-span-full text-right my-8 text-gray-400">
-        	&copy;2021 Zelig880 LTD.
+        &copy;2021 Zelig880 LTD.
       </p>
     </div>
     <cookie-law />
