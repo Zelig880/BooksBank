@@ -89,8 +89,13 @@
                     </Button>
                   </template>
                   <template v-if="row.status === 'WaitingPickup'">
-                    <Button @click="handleCollection(row.id)">
+                    <Button @click="handleCollection(row.id, true)">
                       Collected
+                    </Button>
+                    <Button
+                      theme="secondary"
+                      @click="handleCollection(row.id, false)">
+                      Not collected
                     </Button>
                   </template>
                   <template v-if="row.status === 'AwaitingReturn'">
@@ -221,6 +226,7 @@ export default {
       getAll: 'ledge/getAll',
       respond: 'ledge/respond',
       collect: 'ledge/collect',
+      cancel: 'ledge/cancel',
       returnRespond: 'ledge/returnRespond',
       returned: 'ledge/returned'
     }),
@@ -325,13 +331,20 @@ export default {
         })
       }
     },
-    async handleCollection (ledgeId) {
+    async handleCollection (ledgeId, collected) {
       try {
-        await this.collect({ ledgeId })
         let message = {}
+        if (collected) {
+          await this.collect({ ledgeId })
 
-        message.title = 'Collection recorded'
-        message.text = 'Thank you for updating the book status.'
+          message.title = 'Collection recorded'
+          message.text = 'Thank you for updating the book status.'
+        } else {
+          await this.cancel({ ledgeId })
+
+          message.title = 'Collection cancelled'
+          message.text = 'We are sorry that the book was not collected. Thank you for updating its status.'
+        }
 
         Swal.fire({
           type: 'success',
@@ -341,6 +354,7 @@ export default {
           this.getAll()
         })
       } catch (error) {
+        console.error(error)
         Swal.fire({
           type: 'error',
           title: 'Server error',

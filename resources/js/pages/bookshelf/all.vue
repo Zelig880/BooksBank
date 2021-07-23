@@ -31,7 +31,7 @@
           </p>
         </div>
         <Button :disabled="item.ledge.length > 0" theme="secondary" @click="deleteBookshelfItem(item.id)">
-          Delete
+          Remove
         </Button>
       </div>
     </div>

@@ -26,7 +26,7 @@ class ManagementController extends BaseController
         $userId = Auth::id();
 
         $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
-                       ->whereNotIn('status', [LedgeStatus::GivenAway, LedgeStatus::Completed])
+                       ->whereNotIn('status', [LedgeStatus::GivenAway, LedgeStatus::Completed, LedgeStatus::Cancelled])
                        ->where('lender_id', $userId)
                        ->orWhere('borrower_id', $userId)
                        ->orderBy('id', 'DESC')
@@ -264,6 +264,42 @@ class ManagementController extends BaseController
             throw $e;
         }
     }
+    
+    /**
+     * Cancel a book request
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function cancel(Request $request, $id)
+    {
+        $ledge = Ledge::find($id);
+
+        // check if the user is the owner of the ledge
+        $userId = Auth::id();
+        if ($userId != $ledge->lender_id) {
+            return response()->json(['error' => 'Not authorized.'], 403);
+        }
+
+        if ($ledge->status !== LedgeStatus::WaitingPickup) {
+            return response()->json(['error' => 'Ledge is not awaiting pickup.'], 409);
+        }
+
+
+        try {
+            
+            $ledge->update([
+                'status' => LedgeStatus::Cancelled
+            ]);
+
+            return response()->json(['success' => $ledge]);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     /**
      * Complete book return
      *

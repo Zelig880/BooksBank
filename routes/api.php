@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('ledge/request/respond/{ledge_id}', 'Ledge\ManagementController@respond');
     Route::put('ledge/request/return/{id}', 'Ledge\ManagementController@return');
     Route::put('ledge/collect/{id}', 'Ledge\ManagementController@collect');
+    Route::put('ledge/cancel/{id}', 'Ledge\ManagementController@cancel');
     Route::put('ledge/returned/{id}', 'Ledge\ManagementController@returned');
     Route::post('ledge/return_request/', 'Ledge\ManagementController@returnRequest');
     Route::put('ledge/return_request/respond/{ledge_id}', 'Ledge\ManagementController@returnRespond');

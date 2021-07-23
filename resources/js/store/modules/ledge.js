@@ -20,7 +20,7 @@ export const getters = {
   borrowed: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2 || item.status !== 5) return
+      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
       const returnDate = DateTime.fromISO(item.return_date).toUTC().toFormat('cccc, d LLLL')
       const value = {
@@ -39,7 +39,7 @@ export const getters = {
   borrowedWithDetails: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2 || item.status !== 5) return
+      if (item.borrower_id !== rootGetter.auth.user.id || item.status !== 2) return
       items.push(item)
     })
 
@@ -48,7 +48,7 @@ export const getters = {
   lent: (state, getter, rootGetter) => {
     let items = []
     state.items.forEach(item => {
-      if (item.lender_id !== rootGetter.auth.user.id || item.status !== 2 || item.status !== 5) return
+      if (item.lender_id !== rootGetter.auth.user.id || item.status !== 2) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
       const returnDate = DateTime.fromISO(item.return_date).toUTC().toFormat('cccc, d LLLL')
       const value = {
@@ -130,27 +130,24 @@ export const actions = {
     }
   },
   async request ({ commit }, payload) {
-    const { data } = await axios.post(`/api/ledge/request`, payload)
-    console.log(data)
+    await axios.post(`/api/ledge/request`, payload)
   },
   async respond ({ commit }, { ledgeId, response }) {
-    const { data } = await axios.put(`/api/ledge/request/respond/${ledgeId}`, { response })
-    console.log(data)
+    await axios.put(`/api/ledge/request/respond/${ledgeId}`, { response })
   },
   async collect ({ commit }, { ledgeId }) {
-    const { data } = await axios.put(`/api/ledge/collect/${ledgeId}`)
-    console.log(data)
+    await axios.put(`/api/ledge/collect/${ledgeId}`)
+  },
+  async cancel ({ commit }, { ledgeId }) {
+    await axios.put(`/api/ledge/cancel/${ledgeId}`)
   },
   async returnRequest ({ commit }, payload) {
-    const { data } = await axios.post(`/api/ledge/return_request`, payload)
-    console.log(data)
+    await axios.post(`/api/ledge/return_request`, payload)
   },
   async returnRespond ({ commit }, { ledgeId, response }) {
-    const { data } = await axios.put(`/api/ledge/return_request/respond/${ledgeId}`, { response })
-    console.log(data)
+    await axios.put(`/api/ledge/return_request/respond/${ledgeId}`, { response })
   },
   async returned ({ commit }, { ledgeId }) {
-    const { data } = await axios.put(`/api/ledge/returned/${ledgeId}`)
-    console.log(data)
+    await axios.put(`/api/ledge/returned/${ledgeId}`)
   }
 }
