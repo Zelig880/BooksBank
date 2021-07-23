@@ -61,6 +61,7 @@ import { DateTime } from 'luxon'
 import Swal from 'sweetalert2'
 
 export default {
+  middleware: 'auth',
   props: {
     show: {
       type: Boolean,

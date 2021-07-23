@@ -24,8 +24,8 @@
         </p>
         <hr>
         <BorrowModal :show="showModal" :selected-book="selectedBook" @close="closeModal" />
-        <Button class="mt-3" @click="showModal = true">
-          Send request
+        <Button class="mt-3" @click="handleSendRequest">
+          {{ authenticated ? 'Send request' : 'Login and send request' }}
         </Button>
       </div>
     </div>
@@ -34,11 +34,10 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import BorrowModal from '../../components/sections/borrowModal'
 
 export default {
-  middleware: 'auth',
   components: {
     BorrowModal
   },
@@ -51,6 +50,9 @@ export default {
   },
   computed: {
     ...mapState('bookshelf', ['transactionType']),
+    ...mapGetters({
+      authenticated: 'auth/check'
+    }),
     authors () {
       const authorsArray = this.selectedBook.book.authors
       const authorsNames = authorsArray.map(author => author['name'])
@@ -79,6 +81,13 @@ export default {
     ...mapActions('bookshelf', ['fetchByBookshelfItemId']),
     closeModal () {
       this.showModal = false
+    },
+    handleSendRequest () {
+      if (!this.authenticated) {
+        this.$router.push({ name: 'login', query: { redirect: this.$route.path } })
+      } else {
+        this.showModal = true
+      }
     }
   }
 }

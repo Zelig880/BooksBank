@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 // Library
 Route::get('library/{latitude}/{longitude}/{radius}', 'Library\SearchController@index');
 
+// Bookshelf
+Route::get('bookshelf_item/{id}', 'Bookshelf\BookshelfItemManagementController@getByBookshelfItemId');
+
+
 // Geolocation
 Route::post('geolocation/getGeolocationByUserQuery', 'Geolocation\GeolocationController@getGeolocationByUserQuery');
 Route::post('geolocation/getGeolocationByPostcode', 'Geolocation\GeolocationController@getGeolocationByPostcode');
@@ -65,7 +69,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Bookshelf and Bookshelf Item
     Route::get('bookshelf_item', 'Bookshelf\BookshelfItemManagementController@index');
     Route::post('bookshelf_item/store', 'Bookshelf\BookshelfItemManagementController@store');
-    Route::get('bookshelf_item/{id}', 'Bookshelf\BookshelfItemManagementController@getByBookshelfItemId');
     Route::delete('bookshelf_item/delete/{id}', 'Bookshelf\BookshelfItemManagementController@removeBookShelfItem');
 
     Route::get('bookshelf', 'Bookshelf\BookshelfManagementController@current');
