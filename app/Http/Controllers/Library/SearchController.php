@@ -29,7 +29,7 @@ class SearchController extends Controller
                     $query->distance($latitude, $longitude)->orderBy('distance', 'ASC');
                 }, 'book'
             ])
-            ->where('Bookshelf_items.status', BookStatus::Available)
+            ->where('bookshelf_items.status', BookStatus::Available)
             ->whereDoesntHave('ledge', function ($query) {
                 return $query->whereIn('status', [LedgeStatus::WaitingPickup, LedgeStatus::InProgress, LedgeStatus::ReturnRequested, LedgeStatus::AwaitingReturn]);
             })
