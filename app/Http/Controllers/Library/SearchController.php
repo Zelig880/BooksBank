@@ -27,7 +27,7 @@ class SearchController extends Controller
         $query = Bookshelf_item::with([
                 'bookshelf' => function ($query) use ($latitude, $longitude) {
                     $query->distance($latitude, $longitude)->orderBy('distance', 'ASC');
-                }, 'book'
+                }, 'book', 'book.categories'
             ])
             ->where('bookshelf_items.status', BookStatus::Available)
             ->whereDoesntHave('ledge', function ($query) {

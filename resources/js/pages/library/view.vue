@@ -22,6 +22,35 @@
           <img class="mx-auto" src="/assets/img/loading.gif" alt="loading gif">
         </template>
         <template v-else>
+          <h2 class="text-2xl mb-3">
+            {{ $t('libraryBorrow-filterBy') }}
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-2">
+            <vSelect
+              :options="categories"
+              :get-option-key="value => filterValueForSelect(value, 'id')"
+              :get-option-label="value => filterValueForSelect(value, 'name')"
+              name="category"
+              placeholder="Category"
+              @input="value => updateFilter({ value, filter: 'category'})"
+            />
+            <vSelect
+              :options="conditions"
+              :get-option-key="value => filterValueForSelect(value, 'id')"
+              :get-option-label="value => filterValueForSelect(value, 'name')"
+              name="condition"
+              placeholder="Condition"
+              @input="value => updateFilter({ value, filter: 'condition'})"
+            />
+            <vSelect
+              :options="transactionType"
+              :get-option-key="value => filterValueForSelect(value, 'id')"
+              :get-option-label="value => filterValueForSelect(value, 'name')"
+              name="transaction"
+              placeholder="Load or Get Free"
+              @input="value => updateFilter({ value, filter: 'transaction'})"
+            />
+          </div>
           <h2 class="text-2xl mb-8">
             {{ $t('libraryBorrow-searchBooks') }}: {{ searchedBook.length }}
           </h2>
@@ -79,11 +108,13 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import LibraryViewCard from '../../components/sections/libraryViewCard.vue'
+import vSelect from 'vue-select'
 
 export default {
   components: {
     VueSlider,
-    LibraryViewCard
+    LibraryViewCard,
+    vSelect
   },
 
   data () {
@@ -102,7 +133,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('library', ['conditions']),
+    ...mapState('library', ['conditions', 'categories']),
     ...mapState('bookshelf', ['transactionType']),
     ...mapGetters('library', ['searchedBook', 'otherBooks', 'loading'])
   },
@@ -112,7 +143,7 @@ export default {
     await this.searchHandle()
   },
   methods: {
-    ...mapActions('library', ['search']),
+    ...mapActions('library', ['search', 'updateFilter']),
     goToBorrowPage (bookshelfItemId) {
       this.$router.push({ name: 'library.borrow', params: { bookshelfItemId } })
     },
@@ -124,6 +155,9 @@ export default {
         radius: this.radiusMiles
       }
       await this.search(query)
+    },
+    filterValueForSelect (value, key) {
+      return value[key]
     }
   }
 }
@@ -153,5 +187,8 @@ export default {
   .pinterest {
     background-color: #E60023
   }
+}
+.vs__dropdown-toggle{
+  padding:10px 5px;
 }
 </style>

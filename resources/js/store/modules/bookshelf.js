@@ -27,8 +27,8 @@ export const state = {
   currentBookshelf: null,
   items: [],
   transactionType: [
-    { index: 0, name: 'Temporary Lend', nameForCustomer: 'Borrow' },
-    { index: 1, name: 'Give Away', nameForCustomer: 'Get for Free' }
+    { id: 0, name: 'Temporary Lend', nameForCustomer: 'Borrow' },
+    { id: 1, name: 'Give Away', nameForCustomer: 'Get for Free' }
   ]
 }
 

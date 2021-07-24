@@ -118,6 +118,7 @@
   "libraryBorrow-noBooks": "Why not tweet this or invite your friends to join and start thier own library?",
   "libraryBorrow-noBooks-heading": "There are still not enough books in your searched area!",
   "libraryBorrow-searchBooks": "Search result",
+  "libraryBorrow-filterBy": "Filter by",
   "libraryBorrow-searchTitleLabel": "You searched for",
   "libraryBorrow-searchOtherBooks": "Other books available within your radius",
   "libraryBorrow-timeslot-title": "Available times to pick up. Please select at least 3 slots before continuing",
