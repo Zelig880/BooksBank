@@ -10,6 +10,6 @@ use BenSampo\Enum\Enum;
  */
 final class BookshelfItemType extends Enum
 {
-    const TemporaryLend = 0;
+    const TemporaryLoan = 0;
     const GiveAway = 1;
 }

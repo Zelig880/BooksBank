@@ -14,7 +14,7 @@ It is people like you that decide to provide a second life to their book, that w
 - Access the site 
 - Fill up the main form entering the loction and a book (or leave it blank to search for all books)
 - After a second, the application will show you all the available books within 5 miles radius of your location
-- If you have found the books that you need, select from the list by clicking the "borrow" (for temporary lent) or "Get it for free"
+- If you have found the books that you need, select from the list by clicking the "borrow" (for temporary Loan) or "Get it for free"
 - In the last step, you just need to select date and time that you are planning to pick the book up 
 - After the owner of the book respond to the request, you will receive full details of the book pickup information by exif_thumbnail
 

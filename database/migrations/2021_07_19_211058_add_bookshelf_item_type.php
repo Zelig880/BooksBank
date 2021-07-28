@@ -15,7 +15,7 @@ class AddBookshelfItemType extends Migration
     public function up()
     {
         Schema::table('bookshelf_items', function (Blueprint $table) {
-            $table->tinyInteger('type')->unsigned()->default(BookshelfItemType::TemporaryLend);
+            $table->tinyInteger('type')->unsigned()->default(BookshelfItemType::TemporaryLoan);
         });
     }
 
