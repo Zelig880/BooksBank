@@ -10,9 +10,9 @@
       <LoginWithOAuth provider="google">
         <img src="/assets/img/Google__G__Logo.png" class="inline mr-3" alt="google logo">{{ $t('continue-with-google') }}
       </LoginWithOAuth>
-      <LoginWithOAuth provider="facebook">
+      <!-- <LoginWithOAuth provider="facebook">
         <img src="/assets/img/facebook-logo.png" class="inline mr-3" alt="facebook logo">{{ $t('continue-with-facebook') }}
-      </LoginWithOAuth>
+      </LoginWithOAuth> -->
     </div>
     <div class="flex my-8">
       <span class="border-b-2 flex-grow mb-3" />
