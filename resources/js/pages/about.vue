@@ -4,7 +4,7 @@
 
     <p>Booksbank is a community driven project, aimed at allowing everyone to be able to enjoy a nice read, by borrowing books that would otherwise sit on a shelf collecting dust.</p>
 
-    <p>The heart of booksbank it's YOU! This project could not be possible, if it wasn't for the thousands of community memebers that are happy to lent their books.</p>
+    <p>The heart of booksbank it's YOU! This project could not be possible, if it wasn't for the thousands of community members that are happy to lent their books.</p>
 
     <h3>The Story</h3>
     <p>BooksBank is the result of a need that raised during the pandemic that took place in 2020. The main idea was pretty simple. Create a platform that would allow local communities to share books between each other without the need to spend money or lose time having to ship/deliver them.</p>
