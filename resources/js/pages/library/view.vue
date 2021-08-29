@@ -47,7 +47,7 @@
               :get-option-key="value => filterValueForSelect(value, 'id')"
               :get-option-label="value => filterValueForSelect(value, 'name')"
               name="transaction"
-              placeholder="Load or Get Free"
+              placeholder="Loan or Get Free"
               @input="value => updateFilter({ value, filter: 'transaction'})"
             />
           </div>
