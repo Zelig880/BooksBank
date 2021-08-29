@@ -71,19 +71,19 @@
   "register_password_placeholder": "***********",
   "register_cta": "Signup",
 
-  "welcomeSearch-title": "Get Started!",
-  "welcomeSearch-paragraph": "You are one click away, to borrow any books from a place near you, and its totally free!",
+  "welcomeSearch-title": "Books Search",
+  "welcomeSearch-paragraph": "Find books from a place near you in few clicks, and its totally free!",
 
   "welcomeHow-title": "How it works",
   "welcomeHow-subtitle": "Finding a book to borrow has never been easier.",
   "welcomeHow-step1": "Search for a specific book, or just browse available books near you",
-  "welcomeHow-step2": "Select a book from the list of available title near you",
-  "welcomeHow-step3": "Choose a date and time that suit you and send your request",
-  "welcomeHow-step4": "Pick up your book, after received confirmation of your request",
+  "welcomeHow-step2": "Select a book from the list of available titles near you",
+  "welcomeHow-step3": "Choose a date and time that suits you and send your request",
+  "welcomeHow-step4": "Pick up your book, after receiving confirmation of your request",
 
   "welcomeAdd-title": "Share your books",
   "welcomeAdd-subheading": "Give a second life to your books",
-  "welcomeAdd-paragraph": "Be part of the community, and quickly add your books to our selection and give them a second life. Adding a book is very simple, just click the button below to find out more.",
+  "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Adding a book is very simple, just click the button below to find out more.",
   "welcomeAdd-cta": "Add a book",
 
   "welcomeJoin-title": "Join the community",
@@ -91,7 +91,7 @@
 
   "welcomeAbout-title": "About Booksbank",
   "welcomeAbout-paragraph1": "Booksbank is a community driven project, aimed at allowing everyone to be able to enjoy a nice read, by borrowing books that would otherwise sit on a shelf collecting dust.",
-  "welcomeAbout-paragraph2": "The heart of booksbank it's YOU! This project could not be possible, if it wasn't for the thousands of community members that are happy to lent their books.",
+  "welcomeAbout-paragraph2": "The heart of booksbank it's YOU! This project would not be possible if it wasn't for the thousands of community members who are happy to lend their books.",
 
   "bookshelfAdd-title": "Add a book",
   "bookshelfAdd-paragraph": "Give your book a second life, by simply adding them to your virtual library following 3 easy steps.",
