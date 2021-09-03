@@ -61,18 +61,18 @@
   "continue-with-facebook": "Continue with facebook",
 
   "signin-title": "Login to your account",
-  "signin-description": "Sign in, using your preferred method, or quickly create an account.",
+  "signin-description": "Sign in using your preferred method, or quickly create an account.",
 
 
   "register_title": "Create your account",
-  "register_description": "Join the community by using one of the method below.",
+  "register_description": "Join the community by using one of the methods below.",
   "register_name_placeholder": "John Smith",
   "register_email_placeholder": "john@smith.com",
   "register_password_placeholder": "***********",
   "register_cta": "Signup",
 
   "welcomeSearch-title": "Books Search",
-  "welcomeSearch-paragraph": "Find books from a place near you in few clicks, and its totally free!",
+  "welcomeSearch-paragraph": "Find books from a place near you in a few clicks, and its totally free!",
 
   "welcomeHow-title": "How it works",
   "welcomeHow-subtitle": "Finding a book to borrow has never been easier.",
@@ -82,12 +82,12 @@
   "welcomeHow-step4": "Pick up your book, after receiving confirmation of your request",
 
   "welcomeAdd-title": "Add your books",
-  "welcomeAdd-subheading": "Loan or Give away your books",
+  "welcomeAdd-subheading": "Loan or give away your books",
   "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Adding a book is very simple, just click the button below to find out more.",
   "welcomeAdd-cta": "Add a book",
 
   "welcomeJoin-title": "Join the community",
-  "welcomeJoin-paragraph": "Stay up to speed, with BooksBank News, features announcement, and carefully selected offers.",
+  "welcomeJoin-paragraph": "Stay up to speed, with BooksBank News, feature announcements, and carefully selected offers.",
 
   "welcomeAbout-title": "About Booksbank",
   "welcomeAbout-paragraph1": "Booksbank is a community driven project, aimed at allowing everyone to be able to enjoy a nice read, by borrowing books that would otherwise sit on a shelf collecting dust.",
@@ -96,16 +96,16 @@
   "bookshelfAdd-title": "Add a book",
   "bookshelfAdd-paragraph": "Give your book a second life, by simply adding them to your virtual library following 3 easy steps.",
   "bookshelfAdd-steps-step1-title": "Find your book",
-  "bookshelfAdd-steps-step1-description": "Search out database with millions of books available",
+  "bookshelfAdd-steps-step1-description": "Search our database with millions of books available",
   "bookshelfAdd-steps-step2-title": "Set it's condition",
   "bookshelfAdd-steps-step2-description": "Provide some quick details for users to know",
   "bookshelfAdd-step1-search-label": "Enter Book Title and/or author",
   "bookshelfAdd-step2-title": "Set it's condition",
-  "bookshelfAdd-step2-description": "Select the condition that best describe our book",
+  "bookshelfAdd-step2-description": "Select the condition that best describes your book",
   "bookshelfAdd-step3-title": "Select what do you want to do with your book",
 
   "bookshelfAddNoBookshelfBanner-title": "Bookshelf registration required!",
-  "bookshelfAddNoBookshelfBanner-paragraph": "Your bookshelf need to be fully configured to be able to add books into it.<br/>Click the link below to quickly complete the registration of your bookshelf",
+  "bookshelfAddNoBookshelfBanner-paragraph": "Your bookshelf needs to be fully configured to be able to add books into it.<br/>Click the link below to quickly complete the registration of your bookshelf",
   "bookshelfAddNoBookshelfBanner-button": "Complete registration",
   
   "bookshelfAll-title": "Bookshelf info",
@@ -115,7 +115,7 @@
 
   "bookshelfSettings-timeslot-title": "Choose your preferred time for the book to be picked up",
 
-  "libraryBorrow-noBooks": "Why not tweet this or invite your friends to join and start thier own library?",
+  "libraryBorrow-noBooks": "Why not tweet this or invite your friends to join and start their own library?",
   "libraryBorrow-noBooks-heading": "There are still not enough books in your searched area!",
   "libraryBorrow-searchBooks": "Search result",
   "libraryBorrow-filterBy": "Filter by",
