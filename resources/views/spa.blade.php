@@ -41,6 +41,18 @@ $measurement_id = config('services.google.ga_measurament_id');
       gtag('config', m_id);
     </script>
   @endif
+  
+  <!-- Hotjar Tracking Code for www.booksbank.co.uk -->
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:2592613,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
 
   <title>{{ config('app.name') }}</title>
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
