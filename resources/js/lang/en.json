@@ -115,8 +115,9 @@
 
   "bookshelfSettings-timeslot-title": "Choose your preferred time for the book to be picked up",
 
-  "libraryBorrow-noBooks": "Why not tweet this or invite your friends to join and start thier own library?",
-  "libraryBorrow-noBooks-heading": "There are still not enough books in your searched area!",
+  "libraryBorrow-noBooks": "Please help the community by adding your own books! It is very easy, you just need an account and a title.",
+  "libraryBorrow-noBooks-heading": "No Books found in this area!",
+  "libraryBorrow-noBooks-add-cta": "Login and add your book",
   "libraryBorrow-searchBooks": "Search result",
   "libraryBorrow-filterBy": "Filter by",
   "libraryBorrow-searchTitleLabel": "You searched for",

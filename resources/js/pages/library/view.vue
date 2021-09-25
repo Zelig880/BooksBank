@@ -75,10 +75,10 @@
               <p class="Light-backgroundH1---h6H4">
                 {{ $t('libraryBorrow-noBooks') }}
               </p>
-              <div class="flex flex-col md:flex-row items-center justify-center mt-6 mb-3">
-                <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https://booksbank.co.uk&text=Come%20and%20join%20@BooksBank%20and%20give%20your%20books%20another%20life:">Share on twitter</a>
-                <a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://booksbank.co.uk">Share on facebook</a>
-                <a class="pinterest" target="_blank" href="https://pinterest.com/pin/create/button/?url=https://booksbank.co.uk&media=&description=Come%20and%20join%20@BooksBank%20and%20give%20your%20books%20another%20life:">Share on pinterest</a>
+              <div class="w-64 m-auto mt-6">
+                <Anchor route-name="bookshelf.add">
+                  {{ $t('libraryBorrow-noBooks-add-cta') }}
+                </Anchor>
               </div>
             </div>
           </div>
