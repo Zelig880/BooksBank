@@ -110,8 +110,8 @@
   "bookshelfAdd-how-to-step4": "Select what do you want to do with your book",
 
   "bookshelfAddNoBookshelfBanner-title": "Bookshelf registration required!",
-  "bookshelfAddNoBookshelfBanner-paragraph": "Your bookshelf need to be fully configured to be able to add books into it.<br/>Click the link below to quickly complete the registration of your bookshelf",
-  "bookshelfAddNoBookshelfBanner-button": "Complete registration",
+  "bookshelfAddNoBookshelfBanner-paragraph": "You need to set a location for your books!<br/>See the following video for info or just click the button below to get started! It is super easy!",
+  "bookshelfAddNoBookshelfBanner-button": "Set book location",
   
   "bookshelfAll-title": "Bookshelf info",
   "bookshelfAll-BooksYouAreReading": "The books you are reading",
