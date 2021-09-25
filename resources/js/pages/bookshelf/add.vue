@@ -1,7 +1,20 @@
 <template>
   <div class="add-component container mx-auto flex">
-    <div class="mr-8 hidden md:block add-component__image">
-      <img v-if="thumbnail" :src="thumbnail" :alt="thumbnail_alt">
+    <div class="mr-8 hidden md:block ">
+      <div class="add-component__image m-auto">
+        <img v-if="thumbnail" :src="thumbnail" :alt="thumbnail_alt">
+      </div>
+      <div class="">
+        <h2 class="font-black text-gray-700 text-4xl font-lora">
+          {{ $t('bookshelfAdd-how-to-add-heading') }}
+        </h2>
+        <ul class="list-disc pl-5 mt-3">
+          <li>{{ $t('bookshelfAdd-how-to-step1') }}</li>
+          <li>{{ $t('bookshelfAdd-how-to-step2') }}</li>
+          <li>{{ $t('bookshelfAdd-how-to-step3') }}</li>
+          <li>{{ $t('bookshelfAdd-how-to-step4') }}</li>
+        </ul>
+      </div>
     </div>
     <div class="add-form">
       <BookshelfAddNoBookshelfBanner v-if="!currentBookshelf" />

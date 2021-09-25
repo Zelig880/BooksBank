@@ -83,7 +83,7 @@
 
   "welcomeAdd-title": "Add your books",
   "welcomeAdd-subheading": "Loan or Give away your books",
-  "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Adding a book is very simple, just click the button below to find out more.",
+  "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Adding a book is very simple, start by searching the your book by title.",
   "welcomeAdd-cta": "Add a book",
 
   "welcomeJoin-title": "Join the community",
@@ -103,6 +103,11 @@
   "bookshelfAdd-step2-title": "Set it's condition",
   "bookshelfAdd-step2-description": "Select the condition that best describe our book",
   "bookshelfAdd-step3-title": "Select what do you want to do with your book",
+  "bookshelfAdd-how-to-add-heading": "How to add your Books",
+  "bookshelfAdd-how-to-step1": "Setup the location of your book (just on the first book)",
+  "bookshelfAdd-how-to-step2": "Search your book by its title and/or author",
+  "bookshelfAdd-how-to-step3": "Select the condition that best describe our book",
+  "bookshelfAdd-how-to-step4": "Select what do you want to do with your book",
 
   "bookshelfAddNoBookshelfBanner-title": "Bookshelf registration required!",
   "bookshelfAddNoBookshelfBanner-paragraph": "Your bookshelf need to be fully configured to be able to add books into it.<br/>Click the link below to quickly complete the registration of your bookshelf",
