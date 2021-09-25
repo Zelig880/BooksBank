@@ -21,6 +21,17 @@ const createBookObject = function (book) {
   }
 }
 
+const emptyBookshelf = {
+  longitude: null,
+  latitude: null,
+  opening_days: [ 0, 1, 2, 3, 4, 5, 6 ],
+  opening_hours: [ 0, 1, 2, 3, 4, 5 ],
+  address_line_1: '',
+  city: '',
+  postcode: '',
+  delivery: ''
+}
+
 // state
 export const state = {
   searchResult: [],
@@ -80,8 +91,12 @@ export const actions = {
 
     commit('UPDATE_SEARCH_RESULT', books)
   },
-  async addBook ({ commit, state }, selectedBook) {
-    const { data } = await axios.post(`/api/bookshelf_item/store`, { ...selectedBook, status: 0 })
+  async addBook ({ commit, dispatch, state }, payload) {
+    if (!state.currentBookshelf) {
+      const result = await dispatch('updateOrCreate', payload.bookshelf)
+      if (!result) return
+    }
+    const { data } = await axios.post(`/api/bookshelf_item/store`, { ...payload.selectedBook, status: 0 })
     commit('SET_ITEMS', data.result)
 
     return data
@@ -94,6 +109,7 @@ export const actions = {
   async getAll ({ commit }) {
     const { data } = await axios.get(`/api/bookshelf_item`)
 
+    if (!data) return
     commit('SET_ITEMS', data)
   },
   async getCurrent ({ commit }) {
@@ -107,10 +123,26 @@ export const actions = {
   },
   async updateOrCreate ({ dispatch, state }, payload) {
     if (state.currentBookshelf?.id) {
-      const { data } = await axios.put(`/api/bookshelf/${state.currentBookshelf.id}/update`, payload)
+      const updatedBookshelf = { ...state.currentBookshelf, ...payload }
+      const { data } = await axios.put(`/api/bookshelf/${state.currentBookshelf.id}/update`, updatedBookshelf)
       return data
     } else {
-      const { data } = await axios.post(`/api/bookshelf/create`, payload)
+      const bookshelf = { ...emptyBookshelf, ...payload }
+      if (!bookshelf.longitude || !bookshelf.latitude) {
+        const { data: location } = await axios.post('/api/geolocation/getGeolocationByUserQuery', payload)
+        if (!location[0]) {
+          Swal.fire({
+            type: 'error',
+            title: 'Location not found!',
+            text: 'The location could not be found. Please enter your city/town name, or your postcode without spaces (eg. sa49la).'
+          })
+          return
+        } else {
+          bookshelf.latitude = location[0].lat
+          bookshelf.longitude = location[0].lon
+        }
+      }
+      const { data } = await axios.post(`/api/bookshelf/create`, bookshelf)
       dispatch('getCurrent')
       return data
     }

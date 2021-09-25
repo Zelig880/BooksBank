@@ -83,7 +83,7 @@
 
   "welcomeAdd-title": "Add your books",
   "welcomeAdd-subheading": "Loan or Give away your books",
-  "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Adding a book is very simple, start by searching the your book by title.",
+  "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Fill the form below, or watch the video on the sidebar for more information",
   "welcomeAdd-cta": "Add a book",
 
   "welcomeJoin-title": "Join the community",
@@ -112,6 +112,10 @@
   "bookshelfAddNoBookshelfBanner-title": "Bookshelf registration required!",
   "bookshelfAddNoBookshelfBanner-paragraph": "You need to set a location for your books!<br/>See the following video for info or just click the button below to get started! It is super easy!",
   "bookshelfAddNoBookshelfBanner-button": "Set book location",
+
+  "bookshelfAddBookshelf-heading": "Set books location (needed for search distance)",
+  "bookshelfAddBookshelf-address": "First line of address",
+  "bookshelfAddBookshelf-postcode": "Postcode",
   
   "bookshelfAll-title": "Bookshelf info",
   "bookshelfAll-BooksYouAreReading": "The books you are reading",

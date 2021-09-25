@@ -37,7 +37,8 @@ export default {
     },
     description: {
       type: String,
-      required: true
+      required: false,
+      default: null
     },
     thumbnail: {
       type: String,
@@ -62,6 +63,7 @@ export default {
       return Math.round(this.distance * 10) / 10
     },
     formattedDescription () {
+      if (!this.description) return 'N/A'
       const truncatedDescription = this.description.substring(0, 112)
       return truncatedDescription + '...'
     }

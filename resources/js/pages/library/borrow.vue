@@ -70,6 +70,8 @@ export default {
       return `${this.formattedDescription.substring(0, 256)}...`
     },
     formattedDescription () {
+      if (!this.selectedBook.book.description) return 'N/A'
+
       return this.selectedBook.book.description.replace(/\.\s/g, '.<br>')
     }
   },

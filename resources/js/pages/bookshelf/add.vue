@@ -15,16 +15,17 @@
           <li>{{ $t('bookshelfAdd-how-to-step4') }}</li>
         </ul>
       </div>
+      <video class="add-component__video" controls src="/assets/video/how-to-add.mp4" />
     </div>
     <div class="add-form">
-      <BookshelfAddNoBookshelfBanner v-if="!currentBookshelf" />
       <h2 class="mb-4 font-black text-gray-700 text-6xl font-lora">
         {{ $t('bookshelfAdd-title') }}
       </h2>
       <p class="text-lg">
         {{ $t('welcomeAdd-paragraph') }}
       </p>
-      <BookshelfAddStep1 ref="bookSelection" :disabled="currentStep !== 1 || !currentBookshelf" @select="selectBook" />
+      <BookshelfAddBookshelf :address-line1.sync="address_line_1" :postcode.sync="postcode" />
+      <BookshelfAddStep1 ref="bookSelection" :disabled="currentStep !== 1" @select="selectBook" />
       <BookshelfAddStep2 v-if="currentStep === 2 || currentStep === 3 || currentStep === 4" @select="selectCondition" />
       <BookshelfAddStep3 v-if="currentStep === 3 || currentStep === 4" @select="selectType" />
       <Button v-if="currentStep === 4" class="float-right mt-6 ml-6" @click="addToBookshelf">
@@ -45,7 +46,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import BookshelfAddNoBookshelfBanner from '../../components/sections/bookshelfAddNoBookshelfBanner.vue'
+import BookshelfAddBookshelf from '../../components/sections/bookshelfAddBookshelf.vue'
 import BookshelfAddStep1 from '../../components/sections/bookshelfAddStep1.vue'
 import BookshelfAddStep2 from '../../components/sections/bookshelfAddStep2.vue'
 import BookshelfAddStep3 from '../../components/sections/bookshelfAddStep3.vue'
@@ -61,12 +62,14 @@ export default {
     BookshelfAddStep1,
     BookshelfAddStep2,
     BookshelfAddStep3,
-    BookshelfAddNoBookshelfBanner
+    BookshelfAddBookshelf
   },
   data () {
     return {
       selectedBook: null,
-      currentStep: 1
+      currentStep: 1,
+      address_line_1: '',
+      postcode: ''
     }
   },
   computed: {
@@ -81,15 +84,19 @@ export default {
       return this.selectedBook ? `cover for ${this.selectedBook.title}` : 'Empty book cover'
     }
   },
-  mounted () {
-    this.getCurrent()
+  async mounted () {
+    await this.getCurrent()
     this.getAll()
+    if (this.currentBookshelf) {
+      this.address_line_1 = this.currentBookshelf.address_line_1 || ''
+      this.postcode = this.currentBookshelf.postcode || ''
+    }
   },
   methods: {
     ...mapActions(
       'bookshelf', ['getCurrent', 'addBook', 'getAll']),
     async addToBookshelf () {
-      const { success } = await this.addBook(this.selectedBook)
+      const { success } = await this.addBook({ selectedBook: this.selectedBook, bookshelf: { address_line_1: this.address_line_1, postcode: this.postcode } })
       if (success) {
         Swal.fire({
           type: 'success',
@@ -108,7 +115,7 @@ export default {
     },
     selectBook (book) {
       // Check if book is already present on the user bookshelf
-      const bookAlreadyInBookshelf = this.bookshelf_items.some(bookshelfItem => bookshelfItem.book.title === book.title, book)
+      const bookAlreadyInBookshelf = this.bookshelf_items?.some(bookshelfItem => bookshelfItem.book.title === book.title, book)
       if (bookAlreadyInBookshelf) {
         Swal.fire({
           type: 'error',
@@ -128,14 +135,6 @@ export default {
     selectType (type) {
       this.$set(this.selectedBook, 'type', type)
       this.currentStep = 4
-    },
-    confirm (value) {
-      if (value === 'Reject') {
-        this.selectedBook = {}
-        this.currentStep = 1
-      } else {
-        this.addBook(this.selectedBook)
-      }
     },
     routetolib () {
       this.$router.push({ name: 'bookshelf.all' })
@@ -161,6 +160,10 @@ export default {
       height:100%;
       width: 100%;
     }
+  }
+  &__video{
+    max-width: 400px;
+    margin:10px auto;
   }
   .add-form{
     max-width: 624px;
