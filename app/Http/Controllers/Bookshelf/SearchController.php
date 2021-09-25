@@ -53,7 +53,9 @@ class SearchController extends Controller
     {
         $optParams = [
             'q' => "isbn:{$isbn}",
-            'maxResults'=> 2
+            'maxResults'=> 2,
+            'langRestrict' => 'en',
+            'printType' => 'books'
         ];
 
         return $this->API->volumes->listVolumes($optParams);
@@ -62,7 +64,9 @@ class SearchController extends Controller
     private function findByTitle($title)
     {
         $optParams = [
-            'maxResults'=> 40
+            'maxResults'=> 40,
+            'langRestrict' => 'en',
+            'printType' => 'books'
         ];
 
         return $this->API->volumes->listVolumes($title, $optParams);
