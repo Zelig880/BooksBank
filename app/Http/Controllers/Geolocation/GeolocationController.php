@@ -37,12 +37,17 @@ class GeolocationController extends Controller
 
         $result = $this->nominatim->find($search);
         
-        if( $request->input('city') && (!$result || !$result[0])){
+        if( $request->input('city') && (!$result || count($result) === 0)){
             
             $search->query($request->input('city'));
             
-            $result=$this->nominatim->find($search);
+            $result = $this->nominatim->find($search);
    
+        }
+
+        // If openMap api does not find the location we fallback to GCP
+        if( !$request || count($result) === 0 ){
+            $result = $this->getAddressWithGCPByUserQuery($request->input('postcode'));
         }
 
         return response()->json($result);
@@ -69,5 +74,23 @@ class GeolocationController extends Controller
         $result = $this->nominatim->find($search);
 
         return response()->json($result);
+    }
+
+    private function getAddressWithGCPByUserQuery($address)
+    {
+        $address   = urlencode($address);
+        $apiKey = config('services.google.api');
+        $url       = "https://maps.google.com/maps/api/geocode/json?sensor=false&address={$address}&key={$apiKey}";
+        $resp_json = file_get_contents($url);
+        $resp      = json_decode($resp_json, true);
+
+        if ($resp['status'] == 'OK') {
+            // get the important data
+            return [[ "lon" => $resp['results'][0]['geometry']['location']["lng"], "lat" => $resp['results'][0]['geometry']['location']["lat"] ]];
+
+        } else {
+            return [];
+        }
+
     }
 }
