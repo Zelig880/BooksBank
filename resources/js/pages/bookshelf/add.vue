@@ -4,25 +4,22 @@
       <div class="add-component__image m-auto">
         <img v-if="thumbnail" :src="thumbnail" :alt="thumbnail_alt">
       </div>
-      <div class="">
-        <h2 class="font-black text-gray-700 text-4xl font-lora">
-          {{ $t('bookshelfAdd-how-to-add-heading') }}
-        </h2>
-        <ul class="list-disc pl-5 mt-3">
-          <li>{{ $t('bookshelfAdd-how-to-step1') }}</li>
-          <li>{{ $t('bookshelfAdd-how-to-step2') }}</li>
-          <li>{{ $t('bookshelfAdd-how-to-step3') }}</li>
-          <li>{{ $t('bookshelfAdd-how-to-step4') }}</li>
-        </ul>
-      </div>
-      <video class="add-component__video" controls src="/assets/video/how-to-add.mp4" />
     </div>
-    <div class="add-form">
+    <div class="add-form mx-2 md:mx-0">
       <h2 class="mb-4 font-black text-gray-700 text-6xl font-lora">
         {{ $t('bookshelfAdd-title') }}
       </h2>
       <p class="text-lg">
-        {{ $t('welcomeAdd-paragraph') }}
+        {{ $t('bookshelfAdd-paragraph') }}
+      </p>
+      <ol class="list-decimal pl-5 mt-3">
+        <li>{{ $t('bookshelfAdd-how-to-step1') }}</li>
+        <li>{{ $t('bookshelfAdd-how-to-step2') }}</li>
+        <li>{{ $t('bookshelfAdd-how-to-step3') }}</li>
+        <li>{{ $t('bookshelfAdd-how-to-step4') }}</li>
+      </ol>
+      <p class="text-lg mt-3">
+        {{ $t('bookshelfAdd-paragraph2') }} <a href="/assets/video/how-to-add.mp4" class="underline text-blue-500" target="_blank">Video Tutorial</a>
       </p>
       <BookshelfAddBookshelf :address-line1.sync="address_line_1" :postcode.sync="postcode" />
       <BookshelfAddStep1 ref="bookSelection" :disabled="currentStep !== 1" @select="selectBook" />
@@ -162,7 +159,7 @@ export default {
     }
   }
   &__video{
-    max-width: 400px;
+    max-width: 350px;
     margin:10px auto;
   }
   .add-form{

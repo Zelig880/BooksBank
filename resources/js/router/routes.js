@@ -11,6 +11,7 @@ export default [
   { path: '/safe', name: 'safe', component: page('safe.vue') },
   { path: '/about', name: 'about', component: page('about.vue') },
   { path: '/faq', name: 'faq', component: page('faq.vue') },
+  { path: '/add', name: 'add', component: page('add.vue') },
 
   //Registration Process
   { path: '/login', name: 'login', component: page('auth/login.vue') },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="text-2xl font-semibold mb-3"> {{ $t( 'bookshelfAdd-step3-title' ) }} </h3>
-    <div class="grid grid-cols-2 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 ml-8">
       <Button v-for="(Type, index) in transactionType" :key="Type.name" @click="selectType(index)" theme="square" :color="(selectedTypeIndex === index) ? 'primary' : ''">{{ Type.name }} </Button>
     </div>
   </div>

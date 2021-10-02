@@ -1,10 +1,13 @@
 <template>
   <div class="mt-8 mb-11 bokshelfAddStep1">
     <label for="search" class="text-2xl font-semibold mb-3">{{ $t( 'bookshelfAdd-step1-search-label' ) }}</label>
-    <div class="bokshelfAddStep1-field rounded-md border-2 pl-8 pr-6 py-2 flex flex-col relative w-full">
-      <div>
-        <input id="search" v-model="searchText" class="font-bold text-lg w-4/5" type="text" placeholder="The Lord of the ring by Tolkien" :disabled="disabled" autocomplete="off" @keyup.enter="find(searchText)">
-        <fa icon="times" class="bokshelfAddStep1-icon mt-1" size="lg" @click="resetSearch" />
+    <div class="bokshelfAddStep1-field rounded-md border-2 mx-2 md:ml-7 mt-4 pl-8 pr-6 py-2 flex flex-col relative">
+      <div class="flex">
+        <input id="search" v-model="searchText" class="font-bold text-lg w-auto md:w-4/5" type="text" placeholder="Enter book name" :disabled="disabled" autocomplete="off" @keyup.enter="find(searchText)">
+        <fa v-if="searchText.length > 0" icon="times" class="bokshelfAddStep1-icon mt-1" size="lg" @click="resetSearch" />
+        <Button class="bokshelfAddStep1-button" @click="find(searchText)">
+          Search
+        </Button>
       </div>
       <perfect-scrollbar v-if="searchedBook.length > 0" class="bokshelfAddStep1-result">
         <bookshelf-add-card
@@ -34,11 +37,11 @@ export default {
       searchText: ''
     }
   },
-  beforeDestroy(){ 
-      this.resetSearch() 
-  },
   computed: {
     ...mapGetters('bookshelf', ['searchedBook'])
+  },
+  beforeDestroy () {
+    this.resetSearch()
   },
   methods: {
     ...mapActions({
@@ -46,6 +49,7 @@ export default {
       reset: 'bookshelf/reset'
     }),
     selectBook (book) {
+      this.searchText = book.title
       this.$emit('select', book)
       this.reset()
     },
@@ -68,14 +72,20 @@ export default {
   }
   &-result{
     position: absolute;
-    width: 704px;
+    max-width: 704px;
     top:64px;
     left: 0px;
     @apply border-2 rounded-md bg-white;
   }
   &-icon{
-    float:right;
+    // position:absolute;
+    // right:175px;
+    // top:13px;
+    @apply md:h-8;
     cursor: pointer;
+  }
+  &-button{
+    @apply absolute top-14 right-3 md:relative md:top-0 md:right-0 md:ml-4;
   }
 }
 //height of container for perfect scrollbar
