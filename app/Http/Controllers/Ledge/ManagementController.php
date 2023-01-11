@@ -37,7 +37,7 @@ class ManagementController extends BaseController
 
     public function return($id)
     {
-        $ledge = Ledge::find($id);
+        $ledge = Ledge::query()->find($id);
 
         // check if the user is the owner of the ledge
         $userId = Auth::id();
@@ -251,7 +251,7 @@ class ManagementController extends BaseController
                 case BookshelfItemType::GiveAway:
                     $this->handleGiveAway($ledge);
                     break;
-                
+
                 default:
                     $ledge->update([
                         'status' => LedgeStatus::InProgress
@@ -264,7 +264,7 @@ class ManagementController extends BaseController
             throw $e;
         }
     }
-    
+
     /**
      * Cancel a book request
      *
@@ -289,7 +289,7 @@ class ManagementController extends BaseController
 
 
         try {
-            
+
             $ledge->update([
                 'status' => LedgeStatus::Cancelled
             ]);
