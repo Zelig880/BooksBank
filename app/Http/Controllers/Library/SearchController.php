@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bookshelf_item;
+use App\Models\Bookshelf;
 use App\Enums\LedgeStatus;
 use App\Enums\BookStatus;
 use Illuminate\Support\Facades\Auth;
@@ -35,8 +36,9 @@ class SearchController extends Controller
             })
             ->whereHas('bookshelf', function ($query) use ($latitude, $longitude, $radius, $userId) {
                 return $query->distance($latitude, $longitude)
-                             ->having('distance', '<', $radius)
-                             ->where('user_id', '<>', $userId);
+                             ->having('distance', '<', intval($radius))
+                             ->where('user_id', '<>', $userId)
+                             ->groupBy( 'id' );
             })
             ->get();
 
