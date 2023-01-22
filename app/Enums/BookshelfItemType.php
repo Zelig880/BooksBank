@@ -12,4 +12,5 @@ final class BookshelfItemType extends Enum
 {
     const TemporaryLoan = 0;
     const GiveAway = 1;
+    const Sell = 2;
 }

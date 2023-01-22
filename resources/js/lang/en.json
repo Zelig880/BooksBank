@@ -83,7 +83,7 @@
   "welcomeHow-step4": "Pick up your book, after receiving confirmation of your request",
 
   "welcomeAdd-title": "Add your books",
-  "welcomeAdd-subheading": "Loan or Give away your books",
+  "welcomeAdd-subheading": "Give away or sell your books",
   "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Create an account and quickly add a book by simply using it's title",
   "welcomeAdd-cta": "Add a book",
   
@@ -113,6 +113,7 @@
   "bookshelfAdd-step2-title": "3. Book condition",
   "bookshelfAdd-step2-description": "Select the condition that best describe our book",
   "bookshelfAdd-step3-title": "4. What do you want to do with your book",
+  "bookshelfAdd-step3-price": "Price:",
   "bookshelfAdd-how-to-add-heading": "How to add your Books",
   "bookshelfAdd-how-to-step1": "Setup the location of your book (just on the first book)",
   "bookshelfAdd-how-to-step2": "Search your book by its title and/or author",
