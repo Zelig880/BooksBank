@@ -1,68 +1,52 @@
 <?php
 namespace Deployer;
-require './deployer/recipe/laravel.php';
+require './vendor/deployer/deployer/recipe/laravel.php';
 
-inventory('hosts.yaml');
+import('hosts.yaml');
 
 // Configuration
 set('default_stage', 'production');
-set('deploy_path', '~/');
 set('application', 'BooksBank');
 set('repository', 'https://github.com/Zelig880/BookSwap.git');
 set('http_user', 'booksban');
 set('writable_mode', 'chmod');
 set('keep_releases', 2);
+set('deploy_path', __DIR__ . '/.build');
 
+task('node', function() {
+    invoke('copy:node_modules');
+    invoke('install:node_modules');
+    invoke('backup:node_modules');
+} )->once();
 
-localhost()
-    ->stage('production')
-    ->roles('test', 'build');
-
-task('upload', function () {
-    upload(__DIR__ . "/.build/current/", '{{release_path}}');
+task('upload:node', function () {
+    upload(__DIR__ . "/public", '{{release_path}}');
 });
 
-task('remove:node_modules', function () {
-    run('cd {{release_path}} && rm -rf node_modules');
+task('copy:node_modules', function () {
+    run('cd {{release_path}}/.. && mv node_modules {{release_path}}');
 });
 
-task('build', function () {
-    set('deploy_path', __DIR__ . '/.build');
-    invoke('deploy:prepare');
-    invoke('deploy:release');
-    invoke('deploy:update_code');
-    invoke('deploy:vendors');
-    run('cd {{release_path}} && yarn install');
-    run('cd {{release_path}} && yarn production');
-    invoke('remove:node_modules');
-    invoke('deploy:symlink');
-})->local();
+task('install:node_modules', function () {
+    runLocally('cd ' . __DIR__ . ' && yarn install');
+    runLocally('cd ' . __DIR__ . ' && yarn production');
+});
 
-task('local:cleanup', function () {
-    set('deploy_path', __DIR__ . '/.build');
-    invoke('cleanup');
-})->local();
+task('backup:node_modules', function () {
+    run('cd {{release_path}} && mv node_modules ../');
+});
 
-task('release', [
+task('deploy:live', [
     'deploy:prepare',
-    'deploy:release',
-    'upload',
-    'deploy:shared',
-    'deploy:writable',
-    'deploy:symlink',
-    'artisan:optimize',
-    'artisan:view:cache',
+    'deploy:vendors',
+    'install:node_modules',
+    'upload:node',
+    'artisan:storage:link',
     'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:view:cache',
+    'artisan:event:cache',
     'artisan:migrate',
+    'deploy:publish'
 ]);
-
-// Tasks
-task('deploy', [
-    'build',
-    'release',
-    'cleanup',
-    'local:cleanup',
-    'success'
-])->desc('Deploy your project');
-// [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
