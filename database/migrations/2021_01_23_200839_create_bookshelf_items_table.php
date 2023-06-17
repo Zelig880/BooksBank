@@ -15,6 +15,7 @@ class CreateBookshelfItemsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('bookshelf_items');
         Schema::create('bookshelf_items', function (Blueprint $table) {
             $table->id();
             $table->integer("bookshelf_id");
