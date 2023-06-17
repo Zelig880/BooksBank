@@ -14,6 +14,7 @@ class CreateLedgeTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('ledges');
         Schema::create('ledges', function (Blueprint $table) {
             $table->id();
             $table->integer('lender_id');
