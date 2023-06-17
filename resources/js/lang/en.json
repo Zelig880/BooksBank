@@ -36,7 +36,7 @@
   "condition": "Condition",
   "settings_yourInfo": "Your preferred meeting point",
   "settings_beSafe": "Always be safe when meeting people online.",
-  "location_sharing": "Booksbank will only ever reveal your preferred location with another person once you have approved a request to loan them your book.",
+  "settings_location_sharing": "Booksbank will only ever reveal your preferred location with another person once you have approved a request to loan them your book.",
   "info_updated": "Your info has been updated!",
   "update": "Update",
   "your_password": "Your Password",

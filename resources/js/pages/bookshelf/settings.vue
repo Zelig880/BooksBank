@@ -4,7 +4,7 @@
       {{ $t("settings_yourInfo") }}
     </h2>
     <p class="bookshelf_settings__subhead Light-backgroundBody-textBody-small">
-      {{ $t("location_sharing") }} <br> {{ $t("settings_beSafe") }} <Anchor theme="none" route-name="safe">
+      {{ $t("settings_location_sharing") }} <br> {{ $t("settings_beSafe") }} <Anchor theme="none" route-name="safe">
         Read more
       </Anchor>
     </p>
