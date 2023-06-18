@@ -37,8 +37,7 @@ class SearchController extends Controller
             ->whereHas('bookshelf', function ($query) use ($latitude, $longitude, $radius, $userId) {
                 return $query->distance($latitude, $longitude)
                              ->having('distance', '<', intval($radius))
-                             ->where('user_id', '<>', $userId)
-                             ->groupBy( 'id' );
+                             ->where('user_id', '<>', $userId);
             })
             ->get();
 
