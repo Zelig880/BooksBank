@@ -40,7 +40,7 @@ export const state = {
   transactionType: [
     { id: 0, name: 'Temporary Loan', nameForCustomer: 'Borrow' },
     { id: 1, name: 'Give Away', nameForCustomer: 'Get for Free' },
-    { id: 2, name: 'Sell', nameForCustomer: 'Sell' }
+    { id: 2, name: 'Sell', nameForCustomer: 'Buy' }
   ]
 }
 
