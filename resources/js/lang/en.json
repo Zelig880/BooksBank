@@ -35,7 +35,8 @@
   "book_status": "Book availability",
   "condition": "Condition",
   "settings_yourInfo": "Your preferred meeting point",
-  "settings_beSafe": "Always try to be safe when meeting people online.",
+  "settings_beSafe": "Always be safe when meeting people online.",
+  "settings_location_sharing": "Booksbank will only ever reveal your preferred location with another person once you have approved a request to loan them your book.",
   "info_updated": "Your info has been updated!",
   "update": "Update",
   "your_password": "Your Password",
@@ -86,7 +87,7 @@
   "welcomeAdd-subheading": "Loan or Give away your books",
   "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Create an account and quickly add a book by simply using it's title",
   "welcomeAdd-cta": "Add a book",
-  
+
   "welcomeHowAdd-title": "Add your unwanted books",
   "welcomeHowAdd-subtitle": "Be part of the community and quickly add your books to our selection to give them a second life. Just follow these 4 steps.",
   "welcomeHowAdd-step1": "Search your books using a title or author",
@@ -126,7 +127,7 @@
   "bookshelfAddBookshelf-heading": "1. Books location (needed for search distance)",
   "bookshelfAddBookshelf-address": "First line of address",
   "bookshelfAddBookshelf-postcode": "Postcode",
-  
+
   "bookshelfAll-title": "Bookshelf info",
   "bookshelfAll-BooksYouAreReading": "The books you are reading",
   "bookshelfAll-BookYouOwn": "The books you own",
