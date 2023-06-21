@@ -17,7 +17,7 @@
     "axios": "^0.21.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "js-cookie": "^2.2.1",
-    "luxon": "^1.26.0",
+    "luxon": "^1.28.1",
     "sweetalert2": "^8.19.0",
     "v-calendar": "^2.3.0",
     "vform": "^1.0.1",
