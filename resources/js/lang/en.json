@@ -36,7 +36,7 @@
   "condition": "Condition",
   "settings_yourInfo": "Your preferred meeting point",
   "settings_beSafe": "Always be safe when meeting people online.",
-  "settings_location_sharing": "Booksbank will only ever reveal your preferred location with another person once you have approved a request to loan them your book.",
+  "settings_location_sharing": "Booksbank will only ever reveal your preferred location to another user once you have approved a request to loan them a book.",
   "info_updated": "Your info has been updated!",
   "update": "Update",
   "your_password": "Your Password",
@@ -73,19 +73,19 @@
   "register_password_placeholder": "***********",
   "register_cta": "Signup",
 
-  "welcomeSearch-title": "Books Search",
-  "welcomeSearch-paragraph": "Find books from a place near you in few clicks, and its totally free!",
+  "welcomeSearch-title": "Book Search",
+  "welcomeSearch-paragraph": "Find books near you in just few clicks, and its totally free!",
 
   "welcomeHow-title": "How it works",
-  "welcomeHow-subtitle": "Finding a book to borrow has never been easier.",
-  "welcomeHow-step1": "Search for a specific book, or just browse available books near you",
+  "welcomeHow-subtitle": "Finding a book to borrow or keep has never been easier.",
+  "welcomeHow-step1": "Search for a specific book, or browse available books near you",
   "welcomeHow-step2": "Select a book from the list of available titles near you",
   "welcomeHow-step3": "Choose a date and time that suits you and send your request",
-  "welcomeHow-step4": "Pick up your book, after receiving confirmation of your request",
+  "welcomeHow-step4": "Pick up your book, after receiving confirmation",
 
   "welcomeAdd-title": "Add your books",
   "welcomeAdd-subheading": "Loan or Give away your books",
-  "welcomeAdd-paragraph": "Be part of the community and quickly add your books to our selection to give them a second life. Create an account and quickly add a book by simply using it's title",
+  "welcomeAdd-paragraph": "Be a part of the Booksbank community and effortlessly add your books to our selection. Give them a second life!",
   "welcomeAdd-cta": "Add a book",
 
   "welcomeHowAdd-title": "Add your unwanted books",
@@ -124,7 +124,8 @@
   "bookshelfAddNoBookshelfBanner-paragraph": "You need to set a location for your books!<br/>See the following video for info or just click the button below to get started! It is super easy!",
   "bookshelfAddNoBookshelfBanner-button": "Set book location",
 
-  "bookshelfAddBookshelf-heading": "1. Books location (needed for search distance)",
+  "bookshelfAddBookshelf-heading": "1. Book location (needed for search distance)",
+  "bookshelfAddBookshelf-location-sharing": "Booksbank will only ever reveal your book location to another user once you have approved a request to loan them a book.",
   "bookshelfAddBookshelf-address": "First line of address",
   "bookshelfAddBookshelf-postcode": "Postcode",
 
