@@ -60,6 +60,11 @@
                     {{ value }}
                   </td>
                 </template>
+                <td v-if="(view === 'incoming' || view === 'outgoing' )">
+                  <Button theme="icon" class="mr-3" @click="onMessageClick(row.id)">
+                    <fa icon="envelope" aria-label="messages" />
+                  </Button>
+                </td>
                 <td v-if="view === 'borrowed'">
                   <Button @click="handleReturnRequest(row)">
                     Return
@@ -105,7 +110,7 @@
                   </template>
                 </td>
                 <td v-else>
-&nbsp;
+                  &nbsp;
                 </td>
               </tr>
             </tbody>
@@ -114,8 +119,13 @@
       </div>
     </div>
     <ReturnModal
-      :show="showModal"
+      :show="showReturnModal"
       :selected-book="selectedBook"
+      @close="closeModal"
+    />
+    <MessageModal
+      :show="showMessageModal"
+      :ledge-id="messageModalLedgeId"
       @close="closeModal"
     />
   </div>
@@ -124,6 +134,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import ReturnModal from '../../components/sections/returnModal'
+import MessageModal from '../../components/sections/messageModal'
 import Swal from 'sweetalert2'
 
 export default {
@@ -132,7 +143,8 @@ export default {
     return { title: this.$t('bookshelfInfo-title') }
   },
   components: {
-    ReturnModal
+    ReturnModal,
+    MessageModal
   },
   data () {
     return {
@@ -146,7 +158,8 @@ export default {
           'Condition',
           'Proposed Collection',
           'Time slot',
-          'status'
+          'Status',
+          'Messages'
         ],
         outgoing: [
           'User',
@@ -154,10 +167,12 @@ export default {
           'Condition',
           'Proposed Collection',
           'Time slot',
-          'status'
+          'Status',
+          'Messages'
         ]
       },
-      showModal: false,
+      showReturnModal: false,
+      messageModalLedgeId: null,
       selectedBook: null
     }
   },
@@ -209,6 +224,9 @@ export default {
       }
 
       return value
+    },
+    showMessageModal () {
+      return this.messageModalLedgeId !== null
     }
   },
   mounted () {
@@ -242,7 +260,7 @@ export default {
       // we add the ledgeId to the returned object
       data.result.ledgeId = book.id
       this.selectedBook = data.result
-      this.showModal = true
+      this.showReturnModal = true
     },
     async handleResponse (ledgeId, response) {
       try {
@@ -363,7 +381,11 @@ export default {
       }
     },
     closeModal () {
-      this.showModal = false
+      this.showReturnModal = false
+      this.messageModalLedgeId = null
+    },
+    onMessageClick (ledgeId) {
+      this.messageModalLedgeId = ledgeId
     }
   }
 }

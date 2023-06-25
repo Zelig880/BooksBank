@@ -69,17 +69,13 @@ export const getters = {
     state.items.forEach(item => {
       if (item.status === 2 || item.lender_id !== rootGetter.auth.user.id) return
       const conditionIndex = item.book.bookshelf_item.find(bookshelfItem => bookshelfItem.id === item.bookshelf_item_id).condition
-      const pickDateTime = DateTime.fromISO(item.pickup_date).toUTC()
-      const proposedCollection = pickDateTime.toFormat('cccc, d LLLL')
-      const timeSlot = pickDateTime.toFormat('t') + ' - ' + pickDateTime.plus({ hours: 2 }).toFormat('t')
       const value = {
         id: item.id,
         borrower: item.borrower.name,
-        lender: item.lender.name,
         book: item.book.title,
         condition: rootGetter.library.conditions[conditionIndex].name,
-        proposed_collection: proposedCollection,
-        time_slot: timeSlot,
+        proposed_day: item.pickup_day,
+        proposed_time: item.pickup_time,
         status: state.status[item.status]
       }
       items.push(value)
@@ -149,5 +145,9 @@ export const actions = {
   },
   async returned ({ commit }, { ledgeId }) {
     await axios.put(`/api/ledge/returned/${ledgeId}`)
+  },
+  async sendMessage ({ dispatch }, payload) {
+    await axios.post(`/api/ledge/message`, payload)
+    await dispatch('getAll')
   }
 }
