@@ -3,6 +3,9 @@
     <h2 for="search" class="text-2xl font-semibold mb-3">
       {{ $t( 'bookshelfAddBookshelf-heading' ) }}
     </h2>
+    <p class="mb-3" :style="{'font-style': 'italic'}">
+      {{ $t('bookshelfAddBookshelf-location-sharing') }}
+    </p>
     <div class="pl-7 relative">
       <label>
         {{ $t( 'bookshelfAddBookshelf-address' ) }}

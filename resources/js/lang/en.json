@@ -36,7 +36,7 @@
   "condition": "Condition",
   "settings_yourInfo": "Your preferred meeting point",
   "settings_beSafe": "Always be safe when meeting people online.",
-  "settings_location_sharing": "Booksbank will only ever reveal your preferred location with another person once you have approved a request to loan them your book.",
+  "settings_location_sharing": "Booksbank will only ever reveal your preferred location to another user once you have approved a request to loan them a book.",
   "info_updated": "Your info has been updated!",
   "update": "Update",
   "your_password": "Your Password",
@@ -124,7 +124,8 @@
   "bookshelfAddNoBookshelfBanner-paragraph": "You need to set a location for your books!<br/>See the following video for info or just click the button below to get started! It is super easy!",
   "bookshelfAddNoBookshelfBanner-button": "Set book location",
 
-  "bookshelfAddBookshelf-heading": "1. Books location (needed for search distance)",
+  "bookshelfAddBookshelf-heading": "1. Book location (needed for search distance)",
+  "bookshelfAddBookshelf-location-sharing": "Booksbank will only ever reveal your book location to another user once you have approved a request to loan them a book.",
   "bookshelfAddBookshelf-address": "First line of address",
   "bookshelfAddBookshelf-postcode": "Postcode",
 
