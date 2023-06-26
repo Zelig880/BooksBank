@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('bookshelf_items', function (Blueprint $table) {
-            $table->integer('price')->after('type')->nullable();
+            $table->decimal('price', 8, 2)->after('type')->nullable();
         });
     }
 

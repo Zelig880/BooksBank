@@ -141,7 +141,7 @@ export default {
       }
     },
     selectPrice (value) {
-      const price = parseInt(value)
+      const price = parseFloat(value)
       if (!price) return
       this.$set(this.selectedBook, 'price', price)
       this.currentStep = 4

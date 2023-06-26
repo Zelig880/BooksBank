@@ -7,7 +7,7 @@
         <label>
           {{ $t( 'bookshelfAdd-step3-price' ) }}
         </label>
-        <input type="number" :value="price" @keyup="$emit('update:price', $event.target.value)" @change="$emit('update:price', $event.target.value)" class="BookshelfAddBookshelf-field rounded-md border-2 pl-8 pr-6 py-2 block mb-4 mt-1">
+        <input type="number" step="0.01" :value="price" class="BookshelfAddBookshelf-field rounded-md border-2 pl-8 pr-6 py-2 block mb-4 mt-1" @keyup="$emit('update:price', $event.target.value)" @change="$emit('update:price', $event.target.value)">
       </div>
     </div>
   </div>
