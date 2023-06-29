@@ -35,10 +35,10 @@
       <div class="relative">
         <div>
           <h3 class="text-xl font-semibold">
-            My Library Opening type
+            My Library Opening Time
           </h3>
-          <sub>What times are you most likely to be at your preferred meeting point for books collection and
-            dropoff?</sub>
+          <sub>What times suit you best for collections and
+            drop offs at your preferred location?</sub>
           <LendTimeSlot
             type="times"
             :selected-slots.sync="form.opening_hours"
@@ -46,9 +46,9 @@
         </div>
         <div>
           <h3 class="text-xl font-semibold">
-            My Library Opening days
+            My Library Opening Days
           </h3>
-          <sub>What days suit you best for collection and dropoff</sub>
+          <sub>What days are best for collections and drop offs?</sub>
           <LendTimeSlot type="days" :selected-slots.sync="form.opening_days" />
         </div>
         <Button :loading="form.busy" class="mx-auto" @click="update">
