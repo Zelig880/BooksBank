@@ -24,8 +24,16 @@ $APP_URL = config('app.url')
           Borrower name: {{ $ledge->borrower->name }}
         </p>
         <p>
-          Pick up date/time: {{ date('d F Y, h:i:s A', strtotime($ledge->pickup_date)) }}
+          Preferred Days: {{ $ledge->pickup_day }}
         </p>
+        <p>
+          Preferred Times: {{ $ledge->pickup_time }}
+        </p>
+        @if(count($ledge->ledge_message) > 0)
+          <p>
+            Additional Message: {{ $ledge->ledge_message[ 0 ]->message }}
+          </p>
+        @endif
       </h4>
     </td>
   </tr>
