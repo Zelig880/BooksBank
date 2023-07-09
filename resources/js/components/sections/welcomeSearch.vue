@@ -1,7 +1,7 @@
 <template>
-  <main class="welcomeSearch py-10">
-    <div class="container mx-auto md:pl-24 h-auto">
-      <div class="inline-block mx-3 pb-4 md:pb-16 md:w-3/6 align-text-bottom">
+  <main class="welcomeSearch py-10 flex justify-center">
+    <div class="container h-auto">
+      <div class="inline-block mx-3 pb-4 md:pb-16 md:w-3/6 md:mr-6 align-text-bottom">
         <h2 class="Light-backgroundH1---h6H1">
           {{ $t('welcomeSearch-title') }}
         </h2>
@@ -10,21 +10,24 @@
       <div class="hidden md:inline-block md:w-2/6">
         <img class="welcomeSearch_illustration" src="/assets/img/search-for-books.svg" alt="Illustration of lady reading a book">
       </div>
-      <form class="md:bg-white md:w-4/5 md:rounded-full md:pl-10 md:flex h-auto md:h-18 mt-10" @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
-        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow py-2 px-10 md:px-0 md:mr-4 w-10/12 md:w-auto mx-auto">
+      <form class="md:bg-white md:rounded-full md:pl-10 md:flex h-auto md:h-18 mt-10" @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
+        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow py-2 px-10 md:px-0 md:mr-4 w-10/12 mx-auto">
           <label>Books title or All</label>
-          <input v-model="form.searchTitle" :class="{ 'is-invalid': form.errors.has('searchTitle') }" type="text" placeholder="The lord of the ring">
+          <input class="mt-1" v-model="form.searchTitle" :class="{ 'is-invalid': form.errors.has('searchTitle') }" type="text" placeholder="The lord of the ring">
         </div>
-        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 border-l-2 w-10/12 md:w-auto mx-auto">
+        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 md:border-l-2 w-10/12 mx-auto">
           <label>Location</label>
-          <input v-model="form.postcode" type="text" @keydown="handleChange" placeholder="city or postcode">
+          <input class="mt-1" v-model="form.postcode" type="text" @keydown="handleChange" placeholder="city or postcode">
+        </div>
+        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:px-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 md:border-l-2 w-10/12 mx-auto">
+          <label>Country</label>
+          <CountryDropdown />
         </div>
         <button id="search-button" class="block text-white font-bold rounded-full md:rounded-l-none flex-grow mt-6 md:mt-0 w-10/12 md:w-1/4 mx-auto py-4">
           {{ $t('search') }}
         </button>
       </form>
     </div>
-    <CountryDropdown />
   </main>
 </template>
 

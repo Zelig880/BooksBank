@@ -305,8 +305,5 @@ h1,
   /*background-color: #fff;*/
 }
 
-#countries {
-  max-width: 30em;
-  margin: 1em auto;
-  }
+
 </style>
