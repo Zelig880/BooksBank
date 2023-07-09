@@ -5,6 +5,7 @@ import Button from './Button'
 import Anchor from './Anchor'
 import LendTimeslot from './LendTimeSlot'
 import Modal from './Modal'
+import CountryDropdown from './CountryDropdown'
 
 // Components that are registered globaly.
 [
@@ -13,7 +14,8 @@ import Modal from './Modal'
   Button,
   Anchor,
   LendTimeslot,
-  Modal
+  Modal,
+  CountryDropdown
 ].forEach(Component => {
   Vue.component(Component.name, Component)
 })

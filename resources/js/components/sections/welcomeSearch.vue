@@ -24,6 +24,7 @@
         </button>
       </form>
     </div>
+    <CountryDropdown />
   </main>
 </template>
 

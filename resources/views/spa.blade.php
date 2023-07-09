@@ -22,13 +22,14 @@ $measurement_id = config('services.google.ga_measurament_id');
 	<link rel="icon" href="favicon/favicon.ico">
 	<link rel="manifest" href="favicon/site.webmanifest">
 	<link rel="mask-icon" href="favicon/safari-pinned-tab.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 	<meta name="msapplication-config" content="favicon/browserconfig.xml" />
-  
-  <!-- Global site tag (gtag.js) - Google Analytics --> 
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- This block only runs if the measurement_id is provided -->
-  @if($measurement_id !== "None") 
+  @if($measurement_id !== "None")
     <script>
       var m_id = '{{ $measurement_id }}';
     </script>
@@ -41,7 +42,7 @@ $measurement_id = config('services.google.ga_measurament_id');
       gtag('config', m_id);
     </script>
   @endif
-  
+
   <!-- Hotjar Tracking Code for www.booksbank.co.uk -->
   <script>
       (function(h,o,t,j,a,r){
