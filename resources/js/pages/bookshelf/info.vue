@@ -60,7 +60,7 @@
                     {{ value }}
                   </td>
                 </template>
-                <td v-if="(view === 'incoming' || view === 'outgoing' )">
+                <td v-if="(view === 'incoming' || view === 'outgoing' ) && ledgeActive(row)">
                   <Button theme="icon" class="mr-3" @click="onMessageClick(row.id)">
                     <fa icon="envelope" aria-label="messages" />
                   </Button>
@@ -386,6 +386,9 @@ export default {
     },
     onMessageClick (ledgeId) {
       this.messageModalLedgeId = ledgeId
+    },
+    ledgeActive (ledge) {
+      return ledge.status !== 'Completed' && ledge.status !== 'Rejected'
     }
   }
 }
