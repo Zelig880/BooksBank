@@ -44,7 +44,6 @@
           <p class="font-semibold">
             <fa icon="map-marker-alt" class="mr-1" />{{ selectedBook.bookshelf.city}}, {{ selectedBook.bookshelf.postcode}}
           </p>
-          <sub>The full address will be received by email on approval</sub>
           <hr>
           <template v-if="selectedBook.type === 0">
             <h2>Book return date:</h2>

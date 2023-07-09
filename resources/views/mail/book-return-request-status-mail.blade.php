@@ -25,7 +25,6 @@
         <p>
           Great News, your book return request has been accepted! Plese make sure to drop off the book at the proposed time:<br/><br/>
           <b>Return date/time:</b> {{ date('d F Y, h:i:s A', strtotime($ledge->return_date)) }}<br/>
-          <b>Address:</b> {{ $ledge->lender->bookshelf->address_line_1 }}, {{ $ledge->lender->bookshelf->city }}, {{ $ledge->lender->bookshelf->postcode }}
         </p>
         </p>
         @endif
