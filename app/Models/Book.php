@@ -71,6 +71,7 @@ class Book extends Model
             'condition' => $item['condition'],
             'status' => $item['status'],
             'type' => $item['type'],
+            'price' => isset($item['price']) ? $item['price'] : null,
             'bookshelf_id' => $bookshelf_id,
             'book_id' => $book->id
         ]);

@@ -24,7 +24,7 @@
       <BookshelfAddBookshelf :address-line1.sync="address_line_1" :postcode.sync="postcode" />
       <BookshelfAddStep1 ref="bookSelection" :disabled="currentStep !== 1" @select="selectBook" />
       <BookshelfAddStep2 v-if="currentStep === 2 || currentStep === 3 || currentStep === 4" @select="selectCondition" />
-      <BookshelfAddStep3 v-if="currentStep === 3 || currentStep === 4" @select="selectType" />
+      <BookshelfAddStep3 v-if="currentStep === 3 || currentStep === 4" @update:type="selectType" @update:price="selectPrice" />
       <Button v-if="currentStep === 4" class="float-right mt-6 ml-6" @click="addToBookshelf">
         Add to your Bookshelf
       </Button>
@@ -131,6 +131,19 @@ export default {
     },
     selectType (type) {
       this.$set(this.selectedBook, 'type', type)
+
+      // SC88: Refactor this. The 2 is hardcoded for "sell" type, but this should be defined dynamically
+      // We just change the step if it is NOT a type "sell"
+      if (type === 2) {
+        this.currentStep = 3
+      } else {
+        this.currentStep = 4
+      }
+    },
+    selectPrice (value) {
+      const price = parseFloat(value)
+      if (!price) return
+      this.$set(this.selectedBook, 'price', price)
       this.currentStep = 4
     },
     routetolib () {

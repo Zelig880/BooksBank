@@ -249,6 +249,7 @@ class ManagementController extends BaseController
             $transactionType = $ledge->bookshelf_item->type;
             switch ($transactionType) {
                 case BookshelfItemType::GiveAway:
+                case BookshelfItemType::Sell:
                     $this->handleGiveAway($ledge);
                     break;
 

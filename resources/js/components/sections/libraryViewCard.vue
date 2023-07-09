@@ -16,6 +16,9 @@
         <fa icon="map-marker-alt" />
         {{ formattedDistance }} Miles from your location</div>
 
+      <div v-if="price" class="mb-3 font-bold">
+        Price: {{ price }}
+      </div>
       <div class="flex justify-between items-baseline flex-col-reverse md:flex-row">
         <button class="flex items-center w- text-xs uppercase font-bold text-gray-800 hover:opacity-75 rounded-full py-3 px-8 bg-gray-200" @click="$emit('click')">
           {{ transactionType }}
@@ -56,6 +59,11 @@ export default {
     distance: {
       type: Number,
       required: true
+    },
+    price: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
   computed: {
