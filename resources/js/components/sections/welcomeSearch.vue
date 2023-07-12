@@ -21,7 +21,7 @@
         </div>
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:px-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 md:border-l-2 w-10/12 mx-auto">
           <label>Country</label>
-          <CountryDropdown />
+          <CountryDropdown v-model="form.country" />
         </div>
         <button id="search-button" class="block text-white font-bold rounded-full md:rounded-l-none flex-grow mt-6 md:mt-0 w-10/12 md:w-1/4 mx-auto py-4">
           {{ $t('search') }}
@@ -42,6 +42,7 @@ export default {
     form: new Form({
       searchTitle: 'All',
       postcode: '',
+      country: '',
       latitude: null,
       longitude: null,
       radius: 15
@@ -65,7 +66,6 @@ export default {
     async handleForm () {
       if (!this.form.latitude || !this.form.longitude) {
         const position = await this.getGeolocation(this.postcode)
-
         if (!position) {
           Swal.fire({
             type: 'error',
