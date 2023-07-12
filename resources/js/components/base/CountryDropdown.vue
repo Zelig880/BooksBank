@@ -1,6 +1,6 @@
 <template>
   <div id="countries">
-    <v-select :value="country" :options="options" @input="updateCountry">
+    <v-select :value="option" :options="options" @input="updateCountry">
       <template slot="option" slot-scope="option">
         <span class="flag-icon flag-icon-squared" :class="['flag-icon-' + option.value.toLowerCase()]" />
         <span class="flag-text">{{ option.label }}</span>
@@ -16,13 +16,6 @@ export default {
   name: 'CountryDropdown',
   components: {
     vSelect
-  },
-  props: {
-    // eslint-disable-next-line vue/require-default-prop
-    country: {
-      type: String,
-      required: false
-    }
   },
   data () {
     return {
@@ -279,8 +272,8 @@ export default {
     // Your computed properties
   },
   methods: {
-    updateCountry (value) {
-      this.$emit('input', value)
+    updateCountry (val) {
+      this.$emit('input', val.label)
     }
   }
 }
