@@ -15,6 +15,8 @@ class Ledge extends Model
         'book_id',
         'bookshelf_item_id',
         'pickup_date',
+        'pickup_day',
+        'pickup_time',
         'return_date',
         'status'
     ];
@@ -54,5 +56,10 @@ class Ledge extends Model
     public function bookshelf_item()
     {
         return $this->belongsTo(Bookshelf_item::class);
+    }
+
+    public function ledge_message()
+    {
+        return $this->hasMany(Ledge_message::class, 'ledge_id');
     }
 }

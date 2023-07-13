@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LedgeMessage extends Model
+class Ledge_message extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'lender_id',
+        'ledge_id',
         'user_id',
         'message'
     ];

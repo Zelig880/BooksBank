@@ -42,7 +42,7 @@ class LenderRemindersJob implements ShouldQueue
                 Mail::to($ledge->lender->email)->queue(new BookReturnRequestMail($ledge));
             }
 
-            if ($ledge->status === LedgeStatus::WaitingApproval && Carbon::parse($ledge->updated_at)->isYesterday() && $ledge->pickup_date->format('H:i:s') <= now()->toTimeString())
+            if ($ledge->status === LedgeStatus::WaitingApproval && Carbon::parse($ledge->updated_at)->isYesterday() && Carbon::parse($ledge->pickup_date)->isYesterday())
             {
                 Mail::to($ledge->lender->email)->queue(new BookRequestMail($ledge));
             }

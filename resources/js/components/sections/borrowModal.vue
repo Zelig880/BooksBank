@@ -3,28 +3,38 @@
     <template v-slot:body>
       <div class="borrowModal grid grid-cols-4">
         <div class="col-span-4 md:col-span-3 p-9 flex flex-wrap">
-          <div class="flex-grow">
+          <div class="flex-grow md:w-full">
             <h2 class="text-2xl text-gray-700 font-bold">
-              Collection time available
+              Get in touch
             </h2>
             <p class="text-gray-500 mb-12">
-              Find the time that suit you best, from the available list
+              Find the time that suit both parties to meet.
             </p>
           </div>
-          <div class="w-full md:w-4/6 pr-8">
-            <h3 class="text-xl text-gray-700 font-semibold">Select a pickup date</h3>
-            <date-picker :disabled-dates="formattedDisableDays" :is-expanded="true" title-position="left" :value="selectedDate" :min-date="minDate" :max-date="maxDate" @dayclick="onDayClick" />
-          </div>
-          <div v-if="selectedDate" class="w-full md:w-2/6 pr-4">
-            <h3 class="text-xl text-gray-700 font-semibold">Select a pickup time</h3>
-            <p class="mb-3">
-              Selected Date: {{ selectedDate }}
-            </p>
-            <template v-for="(time, index) in times">
-              <div v-if="selectedBook.bookshelf.opening_hours.includes(index)" :key="index" class="time" :class="{ selected: timeSlot === (index) }" @click="onTimeClick(index)">
-                {{ time }}
+          <div class="w-full md:w-3/6 pr-8">
+            <h3 class="text-xl text-gray-700 font-semibold">When would you like to meet:</h3>
+            <template v-for="(day, index) in days">
+              <div :key="index" class="items" :class="{ selected: daySlot === (index) }" @click="onDayClick(index)">
+                {{ day }}
               </div>
             </template>
+          </div>
+          <div v-if="daySlot !== null" class="w-full md:w-3/6 pr-4">
+            <h3 class="text-xl text-gray-700 font-semibold">Select a pickup time</h3>
+            <div class="flex flex-wrap">
+              <template v-for="(time, index) in times">
+                <div :key="index" class="items m-2 flex-grow" :class="{ selected: timeSlot === (index) }" @click="onTimeClick(index)">
+                  {{ time }}
+                </div>
+              </template>
+            </div>
+          </div>
+          <div v-if="timeSlot !== null" class="w-full pr-4">
+            <h3 class="text-xl text-gray-700 font-semibold mt-8">Send a message</h3>
+            <textarea
+              v-model="message"
+              class="textarea"
+            />
           </div>
         </div>
         <div class="col-span-4 md:col-span-1 bg-gray-300 p-9">
@@ -34,17 +44,10 @@
           <p class="font-semibold">
             <fa icon="map-marker-alt" class="mr-1" />{{ selectedBook.bookshelf.city}}, {{ selectedBook.bookshelf.postcode}}
           </p>
-          <sub>The full address will be received by email on approval</sub>
-          <hr>
-          <h2>Collection date:</h2>
-          <p class="font-semibold">{{ selectedDate }}</p>
-          <h2>Collection time:</h2>
-          <p class="font-semibold">{{ times[timeSlot] }}</p>
-          <!-- We just show the return date if the book is of type borrow -->
           <hr>
           <template v-if="selectedBook.type === 0">
             <h2>Book return date:</h2>
-            <p class="font-semibold">{{ returnDate.toFormat('yyyy-LL-dd') }}</p>
+            <p class="font-semibold">{{ returnDate }}</p>
           </template>
           <Button :disabled="submitDisabled" @click="onSendRequest">
             Send Request
@@ -74,53 +77,40 @@ export default {
   },
   data () {
     return {
-      minDate: DateTime.now().plus({ days: 1 }),
-      maxDate: DateTime.now().plus({ weeks: 2 }),
-      returnDate: DateTime.now().plus({ months: 1 }),
-      selectedDate: null,
-      times: ['8:00 - 10:00', '10:00 - 12:00', '12:00 - 14:00', '14:00 - 16:00', '16:00 - 18:00', '18:00 - 20:00'],
+      today: DateTime.now().toFormat('yyyy-LL-dd T'),
+      returnDate: DateTime.now().plus({ months: 1 }).toFormat('yyyy-LL-dd T'),
+      times: ['Morning', 'Afternoon', 'Evenings', 'I am flexible'],
+      days: [ 'During week days', 'During Weekends', 'I am flexible' ],
       timeSlot: null,
-      DaySlot: null
+      daySlot: null,
+      message: ''
     }
   },
   computed: {
-    formattedDisableDays () {
-      return { weekdays: this.disabledDays }
-    },
     submitDisabled () {
-      const dateSelected = this.DaySlot === null
+      const dateSelected = this.daySlot === null
       const timeSelected = this.timeSlot === null
+      const message = this.message === ''
 
-      return dateSelected || timeSelected
-    },
-    disabledDays () {
-      const weekDays = [ 1, 2, 3, 4, 5, 6, 7 ]
-      return weekDays.filter(day => {
-        // We just return the value that are NOT included in the bookshelf
-        // we also remove 1 to the weekDay value, as the calendar plugin starts from 1 and the value saved start from 0
-        const currentDay = day - 1
-        return !this.selectedBook.bookshelf.opening_days.includes(currentDay)
-      })
+      return dateSelected || timeSelected || message
     }
   },
   methods: {
     ...mapActions('ledge', ['request']),
-    onDayClick ({ day, month, year, weekdayPosition }) {
-      const dateObject = DateTime.fromObject({ day, month, year })
-      this.selectedDate = dateObject.toFormat('cccc, d LLLL')
-      this.returnDate = dateObject.plus({ months: 1 })
-      this.DaySlot = weekdayPosition
+    onDayClick (dayIndex) {
+      this.daySlot = dayIndex
     },
     onTimeClick (timeIndex) {
       this.timeSlot = timeIndex
     },
     async onSendRequest () {
-      // we need to get the initial hour of the timeslot
-      const timeslotHour = this.times[this.timeSlot].split(':')[0]
       const payload = {
         bookshelfItemId: this.selectedBook.id,
-        pickup_date: DateTime.fromFormat(this.selectedDate, 'cccc, d LLLL').set({ hour: timeslotHour }).toFormat('yyyy-LL-dd T'),
-        return_date: this.returnDate.toFormat('yyyy-LL-dd T')
+        pickup_date: this.today,
+        pickup_day: this.days[ this.daySlot ],
+        pickup_time: this.times[ this.timeSlot ],
+        return_date: this.returnDate,
+        message: this.message
       }
 
       try {
@@ -141,16 +131,25 @@ export default {
 
 <style lang="scss">
 .borrowModal{
- hr{
-   @apply my-6 bg-gray-600;
-   height: 2px;
- }
-  .time{
+  hr{
+    @apply my-6 bg-gray-600;
+    height: 2px;
+  }
+  .items{
     @apply rounded-lg border-2 border-gray-500 mt-2 w-auto px-7 py-4 text-center font-bold;
 
     &.selected, &:hover{
       @apply bg-gray-500 text-white cursor-pointer;
     }
+  }
+  .textarea {
+    @extend .items;
+    width: 100%;
+  }
+  .button {
+    position: absolute;
+    bottom: 36px;
+    right: 36px;
   }
 }
 
