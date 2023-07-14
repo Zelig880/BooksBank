@@ -1,6 +1,6 @@
 <template>
   <div id="countries">
-    <v-select :value="option" :options="options" @input="updateCountry">
+    <v-select :value="country" :options="options" @input="updateCountry">
       <template slot="option" slot-scope="option">
         <span class="flag-icon flag-icon-squared" :class="['flag-icon-' + option.value.toLowerCase()]" />
         <span class="flag-text">{{ option.label }}</span>
@@ -16,6 +16,12 @@ export default {
   name: 'CountryDropdown',
   components: {
     vSelect
+  },
+  props: {
+    country: {
+      type: String,
+      default: ''
+    }
   },
   data () {
     return {
@@ -307,6 +313,4 @@ h1,
 .v-select input[type=search] {
   /*background-color: #fff;*/
 }
-
-
 </style>

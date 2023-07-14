@@ -13,15 +13,15 @@
       <form class="md:bg-white md:rounded-full md:pl-10 md:flex h-auto md:h-18 mt-10" @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow py-2 px-10 md:px-0 md:mr-4 w-10/12 mx-auto">
           <label>Books title or All</label>
-          <input class="mt-1" v-model="form.searchTitle" :class="{ 'is-invalid': form.errors.has('searchTitle') }" type="text" placeholder="The lord of the ring">
+          <input v-model="form.searchTitle" class="mt-1" :class="{ 'is-invalid': form.errors.has('searchTitle') }" type="text" placeholder="The lord of the ring">
         </div>
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 md:border-l-2 w-10/12 mx-auto">
           <label>Location</label>
-          <input class="mt-1" v-model="form.postcode" type="text" @keydown="handleChange" placeholder="city or postcode">
+          <input v-model="form.postcode" required class="mt-1" type="text" placeholder="city or postcode" @keydown="handleChange">
         </div>
         <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:px-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 md:border-l-2 w-10/12 mx-auto">
           <label>Country</label>
-          <CountryDropdown v-model="form.country" />
+          <CountryDropdown v-model="form.country" :country="form.country" />
         </div>
         <button id="search-button" class="block text-white font-bold rounded-full md:rounded-l-none flex-grow mt-6 md:mt-0 w-10/12 md:w-1/4 mx-auto py-4">
           {{ $t('search') }}
@@ -65,7 +65,7 @@ export default {
     },
     async handleForm () {
       if (!this.form.latitude || !this.form.longitude) {
-        const position = await this.getGeolocation(this.postcode)
+        const position = await this.getGeolocation()
         if (!position) {
           Swal.fire({
             type: 'error',
