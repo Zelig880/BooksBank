@@ -34,6 +34,7 @@ class CreateBookRequest extends FormRequest
             'type' => ['required', new EnumValue(BookshelfItemType::class)],
             'status' => ['required', new EnumValue(BookStatus::class)],
             'authors' => ['nullable'],
+            'price' => ['nullable'],
             'description' => ['nullable', 'string'],
             'categories' => ['nullable'],
             'thumbnail' => ['nullable', 'string'],

@@ -64,6 +64,7 @@
                 :condition="conditions[result.condition].name"
                 :transaction-type="transactionType[result.type].nameForCustomer"
                 :distance="result.bookshelf.distance"
+                :price="parseFloat(result.price)"
                 @click="goToBorrowPage(result.id)"
               />
             </template>

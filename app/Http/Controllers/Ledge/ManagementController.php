@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ledge;
+use App\Models\Ledge_message;
 use App\Models\Bookshelf_item;
 use App\Enums\LedgeStatus;
 use App\Enums\BookStatus;
@@ -25,7 +26,7 @@ class ManagementController extends BaseController
     {
         $userId = Auth::id();
 
-        $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item'])
+        $result = Ledge::with(['book', 'lender', 'borrower', 'book.bookshelf_item', 'ledge_message'])
                        ->whereNotIn('status', [LedgeStatus::GivenAway, LedgeStatus::Completed, LedgeStatus::Cancelled])
                        ->where('lender_id', $userId)
                        ->orWhere('borrower_id', $userId)
@@ -77,7 +78,9 @@ class ManagementController extends BaseController
 
         $this->validate($request, [
             'bookshelfItemId' => 'required',
-            'pickup_date' => 'required',
+            'pickup_day' => 'required',
+            'pickup_time' => 'required',
+            'message' => 'required',
             'return_date' => 'required'
         ]);
 
@@ -91,8 +94,16 @@ class ManagementController extends BaseController
             'borrower_id' => $userId,
             'book_id' => $bookshelf_item->book_id,
             'bookshelf_item_id' => $request->input('bookshelfItemId'),
-            'pickup_date' => $request->input('pickup_date'),
+            'pickup_date' => $request->input('pickup_date'), // This is leftover from previous implememtation
+            'pickup_day' => $request->input('pickup_day'),
+            'pickup_time' => $request->input('pickup_time'),
             'return_date' => $request->input('return_date')
+        ]);
+
+        Ledge_Message::create([
+            'ledge_id' => $result->id,
+            'user_id' => $userId,
+            'message' => $request->input('message')
         ]);
 
         SendEmail::dispatch('App\Mail\BookRequestMail', $result, $result->lender->email);
@@ -249,6 +260,7 @@ class ManagementController extends BaseController
             $transactionType = $ledge->bookshelf_item->type;
             switch ($transactionType) {
                 case BookshelfItemType::GiveAway:
+                case BookshelfItemType::Sell:
                     $this->handleGiveAway($ledge);
                     break;
 

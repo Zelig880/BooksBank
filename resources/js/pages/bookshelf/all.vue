@@ -29,6 +29,9 @@
           <p class="card-text short_text">
             ISBN: {{ item.book.ISBN }}
           </p>
+          <p v-if="item.price" class="card-text short_text">
+            Price: {{ item.price }}
+          </p>
         </div>
         <Button :disabled="item.ledge.length > 0" theme="secondary" @click="deleteBookshelfItem(item.id)">
           Remove
@@ -69,6 +72,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

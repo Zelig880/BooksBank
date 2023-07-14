@@ -1,13 +1,14 @@
 @php
-$APP_URL = config('app.url')
+  $APP_URL = config('app.url')
 @endphp
+
 @extends('layouts.email')
 @section('body')
   <tr>
     <td valign="top" style="padding-bottom:5px;padding-left:40px;padding-right:30px;" class="mainTitle">
       <!-- Main Title Text // -->
       <h2 class="text" style="color:#000000; font-family:'Open Sans', Helvetica, Arial, sans-serif; font-size:28px; font-weight:500; font-style:normal; font-stretch: expanded; letter-spacing:normal; line-height:36px; text-transform:none; padding:0; margin:0;">
-        Hey {{ $ledge->lender->name }}!
+        Hey,
       </h2>
     </td>
   </tr>
@@ -18,22 +19,8 @@ $APP_URL = config('app.url')
 
       <h4 class="text" style="color:#333333; font-family:'Open Sans', Helvetica, Arial, sans-serif; font-size:14px; font-weight:300; font-style:normal; letter-spacing:normal; line-height:25px; text-transform:none; padding:0; margin:0; text-align: left;">
         <p>
-          Book name: {{ $ledge->book->title }}
+          You have just received a new message from an active request on BooksBank. Please access your account to reply to this message.
         </p>
-        <p>
-          Borrower name: {{ $ledge->borrower->name }}
-        </p>
-        <p>
-          Preferred Days: {{ $ledge->pickup_day }}
-        </p>
-        <p>
-          Preferred Times: {{ $ledge->pickup_time }}
-        </p>
-        @if(count($ledge->ledge_message) > 0)
-          <p>
-            Additional Message: {{ $ledge->ledge_message[ 0 ]->message }}
-          </p>
-        @endif
       </h4>
     </td>
   </tr>
@@ -46,8 +33,8 @@ $APP_URL = config('app.url')
         <tr>
           <td class="ctaButton" style="background-color:#003CE5;padding-top:12px;padding-bottom:12px;padding-left:35px;padding-right:35px;border-radius:50px">
             <!-- Button Link // -->
-            <a class="text" href="{{ $APP_URL }}/bookshelf/info/incoming" target="_blank" style="color:#FFFFFF; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:13px; font-weight:600; font-style:normal;letter-spacing:1px; line-height:20px; text-transform:uppercase; text-decoration:none; display:block">
-              Respond
+            <a class="text" href="{{ $APP_URL }}/bookshelf/info" target="_blank" style="color:#FFFFFF; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:13px; font-weight:600; font-style:normal;letter-spacing:1px; line-height:20px; text-transform:uppercase; text-decoration:none; display:block">
+              Respond to message
             </a>
           </td>
         </tr>

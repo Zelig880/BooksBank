@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="text-2xl font-semibold mb-3"> {{ $t( 'bookshelfAdd-step2-title' ) }} </h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 ml-8"> 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 ml-8">
       <Button v-for="(condition, index) in conditions" :key="condition.name" @click="selectCondition(index)" theme="square" :color="(selectedConditionIndex === index) ? 'primary' : ''">{{ condition.name }} </Button>
     </div>
   </div>
