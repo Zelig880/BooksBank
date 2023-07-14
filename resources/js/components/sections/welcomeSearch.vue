@@ -99,6 +99,7 @@ export default {
 
       if (address) {
         this.form.postcode = address.suburb || address.postcode
+        this.form.country = address.country
         this.autoAddress = true
       }
     },
