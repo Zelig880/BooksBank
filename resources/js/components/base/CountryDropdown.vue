@@ -288,11 +288,7 @@ export default {
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css')
-
-* {
-  font-family: 'Montserrat';
-}
+@import url('https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css');
 
 body {
   background-color: #f1f1f1;
@@ -310,7 +306,4 @@ h1,
   margin-left: 10px;
 }
 
-.v-select input[type=search] {
-  /*background-color: #fff;*/
-}
 </style>
