@@ -29,20 +29,21 @@ class GeolocationController extends Controller
     {
         $this->validate($request, [
             'postcode' => 'required',
+            'country' => 'required'
         ]);
 
         $search = $this->nominatim->newSearch();
-        
-        $search->query($request->input('postcode'));
+
+        $search->query($request->input('postcode', 'country'));
 
         $result = $this->nominatim->find($search);
-        
+
         if( $request->input('city') && (!$result || count($result) === 0)){
-            
+
             $search->query($request->input('city'));
-            
+
             $result = $this->nominatim->find($search);
-   
+
         }
 
         // If openMap api does not find the location we fallback to GCP
