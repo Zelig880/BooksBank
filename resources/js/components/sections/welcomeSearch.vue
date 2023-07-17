@@ -11,11 +11,7 @@
         <img class="welcomeSearch_illustration" src="/assets/img/search-for-books.svg" alt="Illustration of lady reading a book">
       </div>
       <form class="md:bg-white md:rounded-full md:pl-10 md:flex h-auto md:h-18 mt-10" @submit.prevent="handleForm" @keydown="form.onKeydown($event)">
-        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow py-2 px-10 md:px-0 md:mr-4 w-10/12 mx-auto">
-          <label>Books title or All</label>
-          <input v-model="form.searchTitle" class="mt-1" :class="{ 'is-invalid': form.errors.has('searchTitle') }" type="text" placeholder="The lord of the ring">
-        </div>
-        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 md:border-l-2 w-10/12 mx-auto">
+        <div class="bg-white md:bg-none rounded-full md:rounded-none flex flex-col md:flex-grow md:pl-4 py-2 px-10 md:px-0 mr-x mt-6 md:mt-0 w-10/12 mx-auto">
           <label>Location</label>
           <input v-model="form.postcode" required class="mt-1" type="text" placeholder="city or postcode" @keydown="handleChange">
         </div>
