@@ -1,5 +1,5 @@
 <template>
-  <div id="countries">
+  <div id="countries" class="w-full">
     <v-select :value="country" :options="options" @input="updateCountry">
       <template slot="option" slot-scope="option">
         <span class="flag-icon flag-icon-squared" :class="['flag-icon-' + option.value.toLowerCase()]" />

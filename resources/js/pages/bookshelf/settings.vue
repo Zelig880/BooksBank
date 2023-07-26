@@ -31,6 +31,12 @@
             </div>
           </div>
         </template>
+        <div :key="country">
+          <label>country:</label>
+          <div class="w-full border-b-2 py-4 px-4 mb-8 flex items-center">
+            <CountryDropdown v-model="form.country" :country="form.country" />
+          </div>
+        </div>
       </div>
       <div class="relative">
         <div>
@@ -76,6 +82,7 @@ export default {
       address_line_1: '',
       city: '',
       postcode: '',
+      country: '',
       opening_days: [],
       opening_hours: [],
       longitude: null,
@@ -105,7 +112,6 @@ export default {
       var { data: result } = await this.form.post(
         '/api/geolocation/getGeolocationByUserQuery'
       )
-
       if (!result || !result[0]) {
         Swal.fire({
           type: 'error',
@@ -139,6 +145,8 @@ export default {
           return 'map-marker-alt'
         case 'name':
           return 'user'
+        case 'country':
+          return 'map-marker-alt'
       }
     }
   }
