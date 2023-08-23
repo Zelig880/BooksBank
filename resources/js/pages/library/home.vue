@@ -9,7 +9,7 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(result, index) in borrowed" :key="`br-${index}`">
+        <tr v-for="(result, index) in borrowed" :key="index">
           <td>{{ result.book.title }}</td>
           <td>{{ result.lend_duration }}</td>
           <td>{{ status[result.status] }}</td>
@@ -26,7 +26,7 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(result, index) in lent" :key="`ld-${index}`">
+        <tr v-for="(result, index) in lent" :key="index">
           <td>{{ result.book.title }}</td>
           <td>{{ result.lend_duration }}</td>
           <td>{{ status[result.status] }}</td>
